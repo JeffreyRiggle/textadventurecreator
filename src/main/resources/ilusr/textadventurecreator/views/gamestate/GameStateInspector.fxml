@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.canvas.Canvas?>
+
+<fx:root type="javafx.scene.layout.AnchorPane" xmlns:fx="http://javafx.com/fxml">
+<ScrollPane
+		AnchorPane.topAnchor="0.0" 
+		AnchorPane.leftAnchor="0.0" 
+		AnchorPane.rightAnchor="0.0"
+		AnchorPane.bottomAnchor="0.0"
+		fitToHeight="true" 
+		fitToWidth="true">
+	<content>
+		<GridPane fx:id="pane">
+			<columnConstraints>
+        		<ColumnConstraints hgrow="ALWAYS" prefWidth="150"/>
+        		<ColumnConstraints hgrow="ALWAYS" prefWidth="200"/>
+    		</columnConstraints>
+    		<rowConstraints>
+    			<RowConstraints minHeight="25.0" prefHeight="30.0" vgrow="ALWAYS" />
+    			<RowConstraints minHeight="25.0" prefHeight="30.0" vgrow="ALWAYS" />
+    			<RowConstraints minHeight="25.0" prefHeight="100.0" vgrow="ALWAYS" />
+    			<RowConstraints minHeight="25.0" prefHeight="30.0" vgrow="ALWAYS" />
+    			<RowConstraints minHeight="25.0" prefHeight="100.0" vgrow="ALWAYS" />
+    			<RowConstraints minHeight="0" prefHeight="0" vgrow="ALWAYS" />
+    			<RowConstraints minHeight="0" prefHeight="0" vgrow="ALWAYS" />
+    			<RowConstraints minHeight="25.0" prefHeight="30.0" vgrow="ALWAYS" />
+    			<RowConstraints minHeight="25.0" prefHeight="100.0" vgrow="ALWAYS" />
+    			<RowConstraints minHeight="25.0" prefHeight="30.0" vgrow="ALWAYS" />
+    			<RowConstraints minHeight="25.0" prefHeight="100.0" vgrow="ALWAYS" />
+    			<RowConstraints minHeight="25.0" prefHeight="30.0" vgrow="ALWAYS" />
+    			<RowConstraints minHeight="25.0" prefHeight="100.0" vgrow="ALWAYS" />
+    		</rowConstraints>
+    		<Label fx:id="idLabel" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+			<Label fx:id="id" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+			
+			<Label fx:id="textLabel" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="2"/>
+			<TextArea fx:id="textLog" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.columnSpan="2" />
+			
+			<Label fx:id="layoutLabel" GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.columnSpan="2"/>
+			<ComboBox fx:id="layout" GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.columnSpan="2"/>
+			<Label fx:id="contentLabel" GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.columnSpan="2" />
+			<Label fx:id="content" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+			
+			<Label fx:id="optionLabel" GridPane.columnIndex="0" GridPane.rowIndex="7" GridPane.columnSpan="2"/>
+			<ListView fx:id="options" GridPane.columnIndex="0" GridPane.rowIndex="8" GridPane.columnSpan="2"/>
+			
+			<Label fx:id="timerLabel" GridPane.columnIndex="0" GridPane.rowIndex="9" GridPane.columnSpan="2"/>
+			<ListView fx:id="timers" GridPane.columnIndex="0" GridPane.rowIndex="10" GridPane.columnSpan="2"/>
+		</GridPane>
+	</content>
+</ScrollPane>
+</fx:root>

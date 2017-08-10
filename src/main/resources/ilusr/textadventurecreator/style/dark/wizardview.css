@@ -1,0 +1,16 @@
+.root {
+	-fx-background-color: darkslategrey;
+}
+.root .button:hover {
+	-fx-background-color: #b274cc;
+	-fx-text-fill: white;
+}
+
+.root .button {
+	-fx-background-color: #45484c;
+	-fx-text-fill: white;
+}
+
+.root .radio-button {
+	-fx-text-fill: white;
+}

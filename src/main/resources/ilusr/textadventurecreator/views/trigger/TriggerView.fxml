@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import ilusr.iroshell.core.ViewSwitcher?>
+
+<fx:root type="javafx.scene.layout.AnchorPane" xmlns:fx="http://javafx.com/fxml">
+	<GridPane AnchorPane.topAnchor="0.0" 
+			  AnchorPane.leftAnchor="0.0" 
+			  AnchorPane.rightAnchor="0.0"
+			  AnchorPane.bottomAnchor="0.0">
+			<columnConstraints>
+        		<ColumnConstraints hgrow="ALWAYS" prefWidth="350"/>
+    		</columnConstraints>
+    		<rowConstraints>
+    			<RowConstraints minHeight="25.0" prefHeight="30.0" vgrow="NEVER" />
+    			<RowConstraints minHeight="25.0" prefHeight="30.0" vgrow="NEVER" />
+    			<RowConstraints minHeight="25.0" prefHeight="400.0" vgrow="ALWAYS" />
+    		</rowConstraints>
+    		<padding><Insets top="25" right="25" bottom="25" left="25"/></padding>
+    		<Label fx:id="typeLabel" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+			<ComboBox fx:id="types" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+			<ViewSwitcher fx:id="switcher" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+	</GridPane>
+</fx:root>

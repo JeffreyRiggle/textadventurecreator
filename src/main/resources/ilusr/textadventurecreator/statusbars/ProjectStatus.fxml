@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+
+<fx:root type="javafx.scene.layout.AnchorPane" xmlns:fx="http://javafx.com/fxml">
+	<StackPane
+		AnchorPane.topAnchor="0.0" 
+		AnchorPane.leftAnchor="0.0" 
+		AnchorPane.rightAnchor="0.0"
+		AnchorPane.bottomAnchor="0.0"
+		minWidth="50"
+		prefWidth="400">
+		<AnchorPane>
+			<ProgressBar fx:id="progress" AnchorPane.topAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.bottomAnchor="0.0"/>
+		</AnchorPane>
+		<AnchorPane>
+				<Label fx:id="statusText" AnchorPane.topAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="0.0" AnchorPane.bottomAnchor="5.0"/>
+		</AnchorPane>
+	</StackPane>
+</fx:root>

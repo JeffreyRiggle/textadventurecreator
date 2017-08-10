@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.CheckBox?>
+
+<fx:root type="javafx.scene.layout.AnchorPane" xmlns:fx="http://javafx.com/fxml">
+	<GridPane
+		AnchorPane.topAnchor="0.0" 
+		AnchorPane.leftAnchor="0.0" 
+		AnchorPane.rightAnchor="0.0"
+		AnchorPane.bottomAnchor="0.0">
+		<columnConstraints>
+        	<ColumnConstraints hgrow="ALWAYS" prefWidth="200"/>
+        	<ColumnConstraints hgrow="ALWAYS" prefWidth="275"/>
+    	</columnConstraints>
+    	<rowConstraints>
+    		<RowConstraints minHeight="30.0" prefHeight="50.0" vgrow="NEVER" />
+    		<RowConstraints minHeight="30.0" prefHeight="50.0" vgrow="NEVER" />
+    		<RowConstraints minHeight="50.0" prefHeight="250.0" vgrow="ALWAYS" />
+    		<RowConstraints minHeight="30.0" prefHeight="50.0" vgrow="NEVER" />	
+    		<RowConstraints minHeight="50.0" prefHeight="150.0" vgrow="ALWAYS" />
+    		<RowConstraints minHeight="30.0" prefHeight="50.0" vgrow="NEVER" />
+    		<RowConstraints minHeight="30.0" prefHeight="50.0" vgrow="NEVER" />
+    	</rowConstraints>
+    	<padding>
+        	<Insets bottom="5.0" left="10.0" right ="10.0" top="5.0"/>
+     	</padding>
+    	<Label fx:id="typeLabel" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+    	<ComboBox fx:id="type" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+    	
+    	<Label fx:id="descriptionLabel" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="2"/>
+    	<TextArea fx:id="description" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.columnSpan="2"/>
+    	
+    	<Label fx:id="attachmentLabel" GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.columnSpan="2"/>
+    	<ListView fx:id="attachments" GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.columnSpan="2"/>
+    	
+    	<Label fx:id="replyLabel" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+    	<CheckBox fx:id="replyEnabled" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+    	<Label fx:id="replyToLabel" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+    	<TextField fx:id="replyAddress" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+	</GridPane>
+</fx:root>

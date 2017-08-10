@@ -1,0 +1,11 @@
+.tool-bar {
+	-fx-background-color: #45484c;
+}
+
+.tool-bar .button {
+	-fx-background-color: transparent;
+}
+
+.tool-bar .button:hover {
+	-fx-background-color: #6f5c77;
+}

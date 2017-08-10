@@ -1,0 +1,87 @@
+.root {
+	-fx-background-color: darkslategrey;
+}
+
+.split-pane {
+	-fx-background-color: darkslategrey;
+	-fx-border-color: darkslategrey;
+}
+
+.split-pane:vertical {
+	-fx-background-color: darkslategrey;
+	-fx-border-color: darkslategrey;
+}
+
+.split-pane:horizontal {
+	-fx-background-color: darkslategrey;
+	-fx-border-color: darkslategrey;
+}
+
+.split-pane *.split-pane-divider {
+	-fx-padding: 0 1 0 1;
+	-fx-background-color: purple;
+	-fx-border-color: purple;
+}
+
+.split-pane *.split-pane-divider:hover {
+	-fx-background-color: orchid;
+	-fx-border-color: orchid;
+}
+
+.split-pane .label {
+	-fx-text-fill: white;
+}
+
+.split-pane .button:hover {
+	-fx-background-color: #b274cc;
+	-fx-text-fill: white;
+}
+
+.split-pane .button {
+	-fx-background-color: #45484c;
+	-fx-text-fill: white;
+}
+
+.split-pane .radio-button {
+	-fx-text-fill: white;
+}
+
+.split-pane .list-view .list-cell {
+	-fx-background-color: #45484c;
+	-fx-text-fill: white;
+}
+
+.list-cell:filled:selected, .split-pane .list-view .list-cell:filled:focused {
+	-fx-background-color: #b274cc;
+	-fx-text-fill: white;
+}
+
+#tree .tree-cell {
+	-fx-background-color: darkslategrey;
+	-fx-text-fill: white;
+}
+
+#tree .tree-cell:filled:selected, #tree .tree-cell:filled:focused {
+	-fx-background-color: #b274cc;
+	-fx-text-fill: white;
+}
+
+.combo-box {
+	-fx-background-color: #45484c;
+	-fx-text-fill: white;
+}
+
+.combo-box-popup .list-view .list-cell:hover {
+	-fx-background-color: #b274cc;
+	-fx-text-fill: white;
+}
+
+.combo-box-popup .list-view .list-cell {
+	-fx-background-color: #45484c;
+	-fx-text-fill: white;
+}
+
+.combo-box .cell:selected {
+	-fx-background-color: #45484c;
+	-fx-text-fill: white;
+}

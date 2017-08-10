@@ -1,0 +1,40 @@
+.tab-pane {
+	-fx-border-color:  darkslategrey;
+	-fx-background-color: #606266;
+} 
+.tab-pane *.tab-header-background {
+	-fx-background-color: darkslategrey;	
+}
+
+.tab {
+	-fx-focus-color: purple;
+    -fx-background-insets: 0 1 0 1,0,0;
+}
+
+.tab-pane .tab {
+    -fx-background-color: #606266;
+    -fx-border-color: #606266;
+    -fx-text-fill: white;
+}
+
+.tab-pane .tab:selected {
+    -fx-background-color: purple;
+    -fx-border-color: purple;
+    -fx-text-fill: white;
+}
+
+.tab .tab-label { 
+    -fx-text-fill: white;
+}
+
+.tab:selected .tab-label {
+    -fx-text-fill: white;
+}
+
+.tab .label {
+	-fx-text-fill: white;
+}
+
+.tab:selected .label {
+	-fx-text-fill: white;
+}

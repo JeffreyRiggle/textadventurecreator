@@ -1,0 +1,89 @@
+#tree {
+	-fx-background-color: transparent;
+}
+
+#tree:focused {
+	-fx-background-color: transparent;
+}
+
+#tree .tree-cell {
+	-fx-background-color: darkslategrey;
+	-fx-text-fill: white;
+}
+
+#tree .tree-cell:empty {
+	-fx-background-color: transparent;
+}
+
+#tree .tree-cell:filled:selected, #tree .tree-cell:filled:focused {
+	-fx-background-color: #b274cc;
+	-fx-text-fill: white;
+}
+
+.scroll-bar {
+	-fx-background-color: transparent;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+    -fx-border-color:transparent;
+    -fx-background-radius: 0em; 
+}
+.scroll-bar:vertical .track-background,
+.scroll-bar:horizontal .track-background {
+    -fx-background-color: transparent;
+    -fx-background-insets:  0;
+    -fx-background-radius: 0em;
+}
+.scroll-bar:horizontal .thumb {
+    -fx-background-color: purple;
+    -fx-background-insets: 2 0 2 0;
+    -fx-background-radius: 0em;
+}
+.scroll-bar:vertical .thumb {
+    -fx-background-color: purple;
+    -fx-background-insets: 0 2 0 2;
+    -fx-background-radius: 0em;
+}
+.scroll-bar:horizontal .thumb:hover,
+.scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #b274cc; 
+}
+.scroll-bar:horizontal .thumb:pressed,
+.scroll-bar:vertical .thumb:pressed {
+    -fx-background-color: purple;    
+}
+.scroll-bar:vertical .increment-button, .scroll-bar:vertical .decrement-button {
+    -fx-background-color:transparent;  
+    -fx-background-radius: 0em;
+    -fx-padding: 5 5 5 5;
+}
+.scroll-bar:horizontal .increment-button, .scroll-bar:horizontal .decrement-button {    
+     -fx-background-color:transparent; 
+     -fx-background-radius: 0em;
+     -fx-padding: 5 5 5 5;    
+}
+.scroll-bar:horizontal .increment-arrow {   
+    -fx-shape: "M4,17v-2.889l4.124-3.86l4.125,3.86V17l-4.125-3.375L4,17z";
+    -fx-padding: 0.25em;
+    -fx-rotate: 90;
+}
+.scroll-bar:vertical .increment-arrow {
+    -fx-shape: "M4,17v-2.889l4.124-3.86l4.125,3.86V17l-4.125-3.375L4,17z";
+    -fx-padding: 0.25em;
+    -fx-rotate: 180;
+}
+.scroll-bar:horizontal .decrement-arrow {   
+    -fx-shape: "M4,17v-2.889l4.124-3.86l4.125,3.86V17l-4.125-3.375L4,17z";
+    -fx-padding: 0.25em;
+    -fx-rotate: -90;
+}
+.scroll-bar:vertical .decrement-arrow {
+    -fx-shape: "M4,17v-2.889l4.124-3.86l4.125,3.86V17l-4.125-3.375L4,17z";
+    -fx-padding: 0.25em;
+}
+.scroll-bar:vertical:focused,
+.scroll-bar:horizontal:focused {
+    -fx-background-color: -fx-box-border,-fx-box-border,transparent;    
+}

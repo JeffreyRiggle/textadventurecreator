@@ -1,0 +1,28 @@
+#root {
+	-fx-background-color: #00bfff;
+}
+
+#titleArea {
+	-fx-background-color: linear-gradient(to bottom, #00ffff, #7FFFd4)
+}
+
+#titleArea .label {
+	-fx-font-size: 18pt;
+	-fx-font-weight: bold;
+	-fx-text-fill: White;
+	-fx-background-color: transparent;
+	-fx-text-alignment: center;
+	-fx-padding: 10px;
+}
+
+.hyperlink {
+	-fx-background-color: transparent;
+	-fx-font-weight: bold;
+	-fx-text-fill: #f0f8ff;
+	-fx-font-size: 12pt;
+}
+
+.check-box {
+	-fx-background-color: transparent;
+	-fx-text-fill: #f0f8ff;
+}

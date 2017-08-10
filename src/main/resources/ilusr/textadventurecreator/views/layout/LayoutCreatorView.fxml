@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import ilusr.iroshell.core.ViewSwitcher?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tab?>
+<?import ilusr.textadventurecreator.views.layout.*?>
+<?import javafx.scene.layout.StackPane?>
+
+<fx:root type="javafx.scene.layout.AnchorPane" xmlns:fx="http://javafx.com/fxml">
+	<GridPane AnchorPane.topAnchor="0.0" 
+			  AnchorPane.leftAnchor="0.0" 
+			  AnchorPane.rightAnchor="0.0"
+			  AnchorPane.bottomAnchor="0.0">
+			<columnConstraints>
+        		<ColumnConstraints hgrow="ALWAYS" prefWidth="100"/>
+        		<ColumnConstraints hgrow="ALWAYS" prefWidth="150"/>
+    		</columnConstraints>
+    		<rowConstraints>
+    			<RowConstraints minHeight="50.0" prefHeight="75.0" vgrow="NEVER" />
+    			<RowConstraints prefHeight="300.0" vgrow="ALWAYS" />
+    			<RowConstraints minHeight="25.0" prefHeight="25.0" vgrow="NEVER" />
+    		</rowConstraints>
+    		<padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
+    		<Label fx:id="idLabel" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+    		<TextField fx:id="id" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+    		<SplitPane fx:id="designPane" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="2" >
+    			<items>
+    				<StackPane fx:id="layoutArea">
+    					<LayoutDesignArea fx:id="layout" />
+    				</StackPane>
+    				<TabPane side="BOTTOM">
+						<tabs>
+							<Tab fx:id="toolkit">
+								<content><ToolKitView /></content>
+							</Tab>
+							<Tab fx:id="properties">
+								<content><LayoutPropertiesView fx:id="props"/></content>
+							</Tab>
+						</tabs>
+					</TabPane>
+    			</items>
+    		</SplitPane>
+    		<Button fx:id="compile" GridPane.columnIndex="0" GridPane.rowIndex="2" /> 
+	</GridPane>
+</fx:root>

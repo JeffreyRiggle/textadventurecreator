@@ -1,0 +1,33 @@
+._stackPane {
+	-fx-background-color: darkslategrey;
+}
+
+._dockPanel {
+	-fx-background-color: darkslategrey;
+}
+
+.split-pane {
+	-fx-background-color: darkslategrey;
+	-fx-border-color: darkslategrey;
+}
+
+.split-pane:vertical {
+	-fx-background-color: darkslategrey;
+	-fx-border-color: darkslategrey;
+}
+
+.split-pane:horizontal {
+	-fx-background-color: darkslategrey;
+	-fx-border-color: darkslategrey;
+}
+
+.split-pane *.split-pane-divider {
+	-fx-padding: 0 1 0 1;
+	-fx-background-color: darkslategrey;
+	-fx-border-color: darkslategrey;
+}
+
+.split-pane *.split-pane-divider:hover {
+	-fx-background-color: purple;
+	-fx-border-color: purple;
+}

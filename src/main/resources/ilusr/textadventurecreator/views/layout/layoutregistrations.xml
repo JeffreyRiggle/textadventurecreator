@@ -1,0 +1,34 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	
+	<bean id="LayoutComponentProvider"
+		  class="ilusr.textadventurecreator.views.layout.LayoutComponentProvider"
+		  scope="singleton" />
+		  
+	<bean id="LayoutCreatorModel"
+		  class="ilusr.textadventurecreator.views.layout.LayoutCreatorModel"
+		  scope="prototype">
+		  <constructor-arg ref="Layout"/>
+		  <constructor-arg ref="LanguageService"/>
+		  <constructor-arg ref="IDialogService"/>
+		  <constructor-arg ref="InternalURLProvider"/>
+		  <constructor-arg ref="InstanceSelectionManager"/>
+	</bean>
+	
+	<bean id="LayoutCreatorView"
+		  class="ilusr.textadventurecreator.views.layout.LayoutCreatorView"
+		  scope="prototype">
+		  <constructor-arg ref="LayoutCreatorModel"/>
+		  <constructor-arg ref="IStyleContainerService"/>
+		  <constructor-arg ref="InternalURLProvider"/>
+	</bean>
+	
+	<bean id="LayoutCreatorContentTab"
+		  class="ilusr.textadventurecreator.views.layout.LayoutCreatorContentTab"
+		  scope="prototype">
+		  <constructor-arg ref="LayoutCreatorView"/>
+		  <constructor-arg ref="LanguageService"/>
+	</bean>
+</beans>

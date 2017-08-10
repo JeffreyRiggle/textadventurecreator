@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+
+<fx:root type="javafx.scene.layout.AnchorPane" xmlns:fx="http://javafx.com/fxml">
+	<GridPane AnchorPane.topAnchor="0.0" 
+			  AnchorPane.leftAnchor="0.0" 
+			  AnchorPane.rightAnchor="0.0"
+			  AnchorPane.bottomAnchor="0.0">
+			<columnConstraints>
+        		<ColumnConstraints hgrow="ALWAYS" prefWidth="250"/>
+    		</columnConstraints>
+    		<rowConstraints>
+    			<RowConstraints minHeight="25.0" prefHeight="30.0" vgrow="NEVER" />
+    			<RowConstraints minHeight="25.0" prefHeight="100.0" vgrow="ALWAYS" />
+    		</rowConstraints>
+    		<Label fx:id="triggersLabel" text="Triggers" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+			<ListView fx:id="triggers" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+	</GridPane>
+</fx:root>

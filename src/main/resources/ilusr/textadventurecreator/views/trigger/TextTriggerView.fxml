@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.RadioButton?>
+
+<fx:root type="javafx.scene.layout.AnchorPane" xmlns:fx="http://javafx.com/fxml">
+	<GridPane AnchorPane.topAnchor="0.0" 
+			  AnchorPane.leftAnchor="0.0" 
+			  AnchorPane.rightAnchor="0.0"
+			  AnchorPane.bottomAnchor="0.0">
+			<columnConstraints>
+        		<ColumnConstraints hgrow="ALWAYS" prefWidth="150"/>
+        		<ColumnConstraints hgrow="ALWAYS" prefWidth="150"/>
+    		</columnConstraints>
+    		<rowConstraints>
+    			<RowConstraints minHeight="25.0" prefHeight="50.0" vgrow="NEVER" />
+    			<RowConstraints minHeight="25.0" prefHeight="50.0" vgrow="NEVER" />
+    			<RowConstraints minHeight="25.0" prefHeight="50.0" vgrow="NEVER" />
+    		</rowConstraints>
+    		<Label fx:id="textLabel" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+			<TextField fx:id="textValue" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+    		<Label fx:id="caseLabel" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+			<HBox spacing="15" alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="1">
+				<fx:define>
+					<ToggleGroup fx:id="casing" />
+				</fx:define>
+				<children>
+					<RadioButton fx:id="yes" toggleGroup="$casing" />
+					<RadioButton fx:id="no" toggleGroup="$casing" />
+				</children>
+			</HBox>
+			<Label fx:id="typeLabel" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+			<ComboBox fx:id="matchTypes" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+	</GridPane>
+</fx:root>

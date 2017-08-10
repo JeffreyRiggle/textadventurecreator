@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import ilusr.iroshell.core.ViewSwitcher?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.layout.GridPane?>
+
+<fx:root type="javafx.scene.layout.AnchorPane" xmlns:fx="http://javafx.com/fxml">
+	<GridPane AnchorPane.topAnchor="0.0" 
+			  AnchorPane.leftAnchor="0.0" 
+			  AnchorPane.rightAnchor="0.0"
+			  AnchorPane.bottomAnchor="0.0">
+		<columnConstraints>
+        	<ColumnConstraints hgrow="ALWAYS" prefWidth="100"/>
+        	<ColumnConstraints hgrow="ALWAYS" prefWidth="10" maxWidth="10"/>
+        	<ColumnConstraints hgrow="ALWAYS" prefWidth="100"/>
+    	</columnConstraints>
+    	<rowConstraints>
+    		<RowConstraints minHeight="50.0" prefHeight="75.0" vgrow="NEVER" />
+    		<RowConstraints minHeight="50.0" prefHeight="75.0" vgrow="NEVER" />
+    		<RowConstraints minHeight="50.0" prefHeight="75.0" vgrow="ALWAYS" />
+    	</rowConstraints>
+		<padding><Insets top="5" right="5" bottom="5" left="5"/></padding>
+		<Label fx:id="rowLabel" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+		<Label fx:id="colLabel" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+		<TextField fx:id="rows" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+		<Label text="x" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+		<TextField fx:id="columns" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+		<GridPane fx:id="additionalProperties" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.columnSpan="3">
+			<columnConstraints>
+        		<ColumnConstraints hgrow="ALWAYS" prefWidth="100"/>
+        		<ColumnConstraints hgrow="ALWAYS" prefWidth="10" maxWidth="10"/>
+        		<ColumnConstraints hgrow="ALWAYS" prefWidth="100"/>
+    		</columnConstraints>
+		</GridPane>  
+	</GridPane>
+</fx:root>

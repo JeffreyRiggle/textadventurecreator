@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.RadioButton?>
+<?import ilusr.iroshell.core.ViewSwitcher?>
+
+<fx:root type="javafx.scene.layout.AnchorPane" xmlns:fx="http://javafx.com/fxml">
+	<GridPane fx:id="pane"
+			  AnchorPane.topAnchor="0.0" 
+			  AnchorPane.leftAnchor="0.0" 
+			  AnchorPane.rightAnchor="0.0"
+			  AnchorPane.bottomAnchor="0.0">
+			<columnConstraints>
+        		<ColumnConstraints hgrow="ALWAYS" prefWidth="150"/>
+        		<ColumnConstraints hgrow="ALWAYS" prefWidth="150"/>
+    		</columnConstraints>
+    		<rowConstraints>
+    			<RowConstraints minHeight="25.0" prefHeight="50.0" vgrow="NEVER" />
+    			<RowConstraints minHeight="25.0" prefHeight="50.0" vgrow="NEVER" />
+    			<RowConstraints minHeight="0" prefHeight="0" maxHeight="0" vgrow="NEVER" />
+    			<RowConstraints minHeight="0" prefHeight="0" maxHeight="0" vgrow="NEVER" />
+    			<RowConstraints minHeight="25.0" prefHeight="50.0" vgrow="NEVER" />
+    			<RowConstraints minHeight="0" prefHeight="0" maxHeight="0" vgrow="NEVER" />
+    			<RowConstraints minHeight="25.0" prefHeight="50.0" vgrow="NEVER" />
+    			<RowConstraints minHeight="50.0" prefHeight="150.0" vgrow="NEVER" />
+    		</rowConstraints>
+    		<Label fx:id="playerLabel" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+			<ComboBox fx:id="player" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+    		<Label fx:id="propertyLabel" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+			<ComboBox fx:id="property" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+			<Label fx:id="idLabel" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+			<ComboBox fx:id="id" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+			<Label fx:id="dataMemberLabel" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+			<ComboBox fx:id="dataMember" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+			<Label fx:id="modTypeLabel" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+			<ComboBox fx:id="modificationType" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+			<Label fx:id="changeTypeLabel" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+			<ComboBox fx:id="changeType" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+			<Label fx:id="modDataLabel" GridPane.columnIndex="0" GridPane.rowIndex="6" GridPane.columnSpan="2"/>
+			<ViewSwitcher fx:id="modificationData" GridPane.columnIndex="0" GridPane.rowIndex="7" GridPane.columnSpan="2"/>
+	</GridPane>
+</fx:root>

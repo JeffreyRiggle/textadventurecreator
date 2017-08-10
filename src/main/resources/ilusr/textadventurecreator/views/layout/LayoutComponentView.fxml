@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import ilusr.iroshell.core.ViewSwitcher?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.Node?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.Pane?>
+
+<fx:root type="javafx.scene.layout.GridPane" 
+		 xmlns:fx="http://javafx.com/fxml" 
+		 AnchorPane.topAnchor="0.0" 
+		 AnchorPane.leftAnchor="0.0" 
+		 AnchorPane.rightAnchor="0.0"
+		 AnchorPane.bottomAnchor="0.0">
+	<rowConstraints>
+		 <RowConstraints prefHeight="10" vgrow="NEVER"/>
+		 <RowConstraints prefHeight="100" vgrow="ALWAYS" />
+		 <RowConstraints prefHeight="10" vgrow="NEVER"/>
+	</rowConstraints>
+	<columnConstraints>
+		 <ColumnConstraints prefWidth="10" hgrow="NEVER"/>
+		 <ColumnConstraints prefWidth="100" hgrow="ALWAYS" halignment="CENTER"/>
+	 	 <ColumnConstraints prefWidth="10" hgrow="NEVER"/>
+	</columnConstraints>
+	<Rectangle height="5" width="5" GridPane.columnIndex="0" GridPane.rowIndex="0" fx:id="rect1"/>
+	<Rectangle height="5" width="5" GridPane.columnIndex="1" GridPane.rowIndex="0" fx:id="rect2"/>
+	<Rectangle height="5" width="5" GridPane.columnIndex="2" GridPane.rowIndex="0" fx:id="rect3"/>
+	<Rectangle height="5" width="5" GridPane.columnIndex="0" GridPane.rowIndex="1" fx:id="rect4"/>
+	<Rectangle height="5" width="5" GridPane.columnIndex="2" GridPane.rowIndex="1" fx:id="rect5"/>
+	<Rectangle height="5" width="5" GridPane.columnIndex="0" GridPane.rowIndex="2" fx:id="rect6"/>
+	<Rectangle height="5" width="5" GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="rect7"/>
+	<Rectangle height="5" width="5" GridPane.columnIndex="2" GridPane.rowIndex="2" fx:id="rect8"/>
+	<StackPane fx:id="pane" GridPane.columnIndex="1" GridPane.rowIndex="1">
+		<ImageView fx:id="componentImage" />
+		<Label fx:id="componentLabel" />
+		<Pane fx:id="componentNode" />
+		<BorderPane fx:id="styleArea">
+			<top>
+				<HBox fx:id="buttonArea" spacing="10">
+					<Button fx:id="closeBtn" />
+					<Button fx:id="styleBtn" />
+				</HBox>
+			</top>
+		</BorderPane>
+		<Rectangle height="5" width="5" GridPane.columnIndex="2" GridPane.rowIndex="2" fx:id="rect9"/>
+	</StackPane>
+</fx:root>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+
+<fx:root type="javafx.scene.layout.AnchorPane" xmlns:fx="http://javafx.com/fxml">
+	<GridPane>
+			<columnConstraints>
+        		<ColumnConstraints hgrow="ALWAYS" prefWidth="250"/>
+        		<ColumnConstraints hgrow="ALWAYS" prefWidth="150"/>
+        		<ColumnConstraints hgrow="ALWAYS" prefWidth="150"/>
+    		</columnConstraints>
+    		<rowConstraints>
+    			<RowConstraints minHeight="25.0" prefHeight="150.0" vgrow="ALWAYS" />
+    			<RowConstraints minHeight="25.0" prefHeight="150.0" vgrow="ALWAYS" />
+    		</rowConstraints>
+    		<padding><Insets top="25" right="25" bottom="25" left="25"/></padding>
+    		<Label fx:id="transitionType" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+    		<ComboBox fx:id="type" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.columnSpan="2" />
+			<Label fx:id="media" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+			<TextField fx:id="mediaLocation" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+			<Button fx:id="mediaButton" GridPane.columnIndex="2" GridPane.rowIndex="1" />		
+	</GridPane>
+</fx:root>

@@ -1,0 +1,21 @@
+.button:hover {
+	-fx-background-color: #b274cc;
+	-fx-text-fill: white;
+}
+
+.button {
+	-fx-background-color: #45484c;
+	-fx-text-fill: white;
+}
+
+.label {
+	-fx-text-fill: white;
+}
+
+.text-field {
+	-fx-background-color: linear-gradient(to bottom, derive(white, -10%), white),
+    linear-gradient(from 0px 0px to 0px 5px, derive(#45484c, -9%), #45484c);
+	-fx-background-insets: 0, 1;
+	-fx-background-radius: 3, 2;
+	-fx-text-fill: white;
+}

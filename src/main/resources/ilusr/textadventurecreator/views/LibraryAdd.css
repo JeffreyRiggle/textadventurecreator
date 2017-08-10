@@ -1,0 +1,11 @@
+.button {
+	-fx-background-color: transparent;
+	-fx-background-image: url("./assets/LibraryAdd.png");
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: 16 16;
+	-fx-background-position: center;
+}
+
+.button:hover {
+	-fx-background-color: rgba(5, 255, 150, .3);
+}

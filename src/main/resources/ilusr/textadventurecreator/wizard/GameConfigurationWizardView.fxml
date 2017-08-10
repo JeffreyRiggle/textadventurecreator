@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+
+<fx:root type="javafx.scene.layout.AnchorPane" xmlns:fx="http://javafx.com/fxml">
+	<GridPane>
+			<columnConstraints>
+        		<ColumnConstraints hgrow="ALWAYS" prefWidth="250"/>
+        		<ColumnConstraints hgrow="ALWAYS" prefWidth="150"/>
+    		</columnConstraints>
+    		<rowConstraints>
+    			<RowConstraints minHeight="25.0" prefHeight="25.0" vgrow="ALWAYS" />
+    			<RowConstraints minHeight="25.0" prefHeight="75.0" vgrow="ALWAYS" />
+    			<RowConstraints minHeight="25.0" prefHeight="25.0" vgrow="ALWAYS" />
+    			<RowConstraints minHeight="25.0" prefHeight="75.0" vgrow="ALWAYS" />
+    			<RowConstraints minHeight="25.0" prefHeight="25.0" vgrow="ALWAYS" />
+    			<RowConstraints minHeight="25.0" prefHeight="75.0" vgrow="ALWAYS" />
+    			<RowConstraints minHeight="25.0" prefHeight="25.0" vgrow="ALWAYS" />
+    			<RowConstraints minHeight="25.0" prefHeight="75.0" vgrow="ALWAYS" />
+    		</rowConstraints>
+    		<padding><Insets top="25" right="25" bottom="25" left="25"/></padding>
+    		<CheckBox fx:id="inlinePlayer" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
+    		<TextField fx:id="playersLocation" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+    		<Button fx:id="browsePlayer" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+    		<CheckBox fx:id="inlineGame" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.columnSpan="2" />
+    		<TextField fx:id="gameStateLocation" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+    		<Button fx:id="browseGameState" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+    		<CheckBox fx:id="inlineLayout" GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.columnSpan="2" />
+    		<TextField fx:id="layoutLocation" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+    		<Button fx:id="browseLayout" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+			<CheckBox fx:id="buffer" GridPane.columnIndex="0" GridPane.rowIndex="6" GridPane.columnSpan="2"/>
+			<Label fx:id="sizeLabel" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+			<TextField fx:id="bufferSize" GridPane.columnIndex="1" GridPane.rowIndex="7" />	
+	</GridPane>
+</fx:root>

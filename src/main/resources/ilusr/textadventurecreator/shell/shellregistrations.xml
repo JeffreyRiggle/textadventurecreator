@@ -1,0 +1,159 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="ServiceManager"
+		class="ilusr.core.ioc.ServiceManager"
+		factory-method="getInstance"
+		scope="singleton" />
+
+	<bean id="LayoutApplicationService"
+		  class="ilusr.textadventurecreator.shell.LayoutApplicationService"
+		  scope="singleton" />
+
+	<bean id="SonaIssueReporter"
+		  class="ilusr.textadventurecreator.error.SonaIssueReporter"
+		  scope="singleton" />
+
+	<bean id="XmlManager"
+		  class="ilusr.core.datamanager.xml.XmlManager"
+		  scope="prototype">
+		  <constructor-arg type="java.lang.String" value=""/>
+	</bean>
+	
+	<bean id="ProjectStatusService"
+		  class="ilusr.textadventurecreator.statusbars.ProjectStatusService"
+		  scope="singleton" />
+		  
+	<bean id="ProjectPersistenceManager"
+		  class="ilusr.textadventurecreator.shell.ProjectPersistenceManager"
+		  scope="singleton">
+		  <constructor-arg ref="XmlManager"/>
+		  <constructor-arg ref="ProjectStatusService"/>
+		  <constructor-arg ref="LayoutService"/>
+		  <constructor-arg ref="SettingsManager"/>
+	</bean>
+	
+	<bean id="MediaFinder"
+		  class="ilusr.textadventurecreator.views.MediaFinder"
+		  scope="singleton">
+		  <constructor-arg ref="IDialogService"/>
+		  <constructor-arg ref="LanguageService"/>
+		  <constructor-arg ref="IDialogProvider"/>
+	</bean>
+	
+	<bean id="TextAdventureProjectManager"
+		  class="ilusr.textadventurecreator.wizard.TextAdventureProjectManager"
+		  scope="singleton">
+		  <constructor-arg ref="TextAdventureProvider"/>
+		  <constructor-arg ref="IDialogService"/>
+		  <constructor-arg ref="MediaFinder"/>
+		  <constructor-arg ref="ProjectPersistenceManager"/>
+		  <constructor-arg ref="ProjectStatusService"/>
+		  <constructor-arg ref="LanguageService"/>
+		  <constructor-arg ref="LayoutService"/>
+		  <constructor-arg ref="SettingsManager"/>
+		  <constructor-arg ref="LayoutApplicationService"/>
+		  <constructor-arg ref="IStyleContainerService"/>
+		  <constructor-arg ref="InternalURLProvider"/>
+	</bean>
+	
+	<bean id="Player"
+		  class="textadventurelib.persistence.player.PlayerPersistenceObject"
+		  scope="prototype" />
+		  
+	<bean id="GameStatePersistence"
+		  class="textadventurelib.persistence.GameStatePersistenceObject"
+		  scope="prototype">
+		  <constructor-arg type="java.lang.String" value=""/>
+	</bean>
+		  
+	<bean id="TextTrigger"
+		  class="textadventurelib.persistence.TextTriggerPersistenceObject"
+		  scope="prototype" />
+	
+	<bean id="ScriptedTrigger"
+		  class="textadventurelib.persistence.ScriptedTriggerPersistenceObject"
+		  scope="prototype" />
+		  
+	<bean id="PlayerTrigger"
+		  class="textadventurelib.persistence.PlayerTriggerPersistenceObject"
+		  scope="prototype" />
+		  
+	<bean id="MultiTrigger"
+		  class="textadventurelib.persistence.MultiPartTriggerPersistenceObject"
+		  scope="prototype" />
+	
+	<bean id="TextAdventureProvider"
+		  class="ilusr.textadventurecreator.shell.TextAdventureProvider"
+		  scope="singleton" />
+		  
+	<bean id="AppendTextAction"
+		  class="textadventurelib.persistence.AppendTextActionPersistence"
+		  scope="prototype" />
+		  
+	<bean id="CompletionAction"
+		  class="textadventurelib.persistence.CompletionActionPersistence"
+		  scope="prototype" />
+		  
+	<bean id="ExecutionAction"
+		  class="textadventurelib.persistence.ExecutionActionPersistence"
+		  scope="prototype" />
+		  
+	<bean id="SaveAction"
+		  class="textadventurelib.persistence.SaveActionPersistenceObject"
+		  scope="prototype" />
+	
+	<bean id="PlayerModificationAction"
+		  class="textadventurelib.persistence.ModifyPlayerActionPersistence"
+		  scope="prototype" />
+		  
+	<bean id="PlayerAttribute"
+		  class="textadventurelib.persistence.player.AttributePersistenceObject"
+		  scope="prototype" />
+		  
+	<bean id="PlayerCharacteristic"
+		  class="textadventurelib.persistence.player.CharacteristicPersistenceObject"
+		  scope="prototype" />
+		  
+	<bean id="PlayerBodyPart"
+		  class="textadventurelib.persistence.player.BodyPartPersistenceObject"
+		  scope="prototype" />
+	
+	<bean id="PlayerItem"
+		  class="textadventurelib.persistence.player.ItemPersistenceObject"
+		  scope="prototype" />
+		  
+	<bean id="PlayerInventory"
+		  class="textadventurelib.persistence.player.InventoryPersistenceObject"
+		  scope="prototype" />
+		  
+	<bean id="ScriptAction"
+		  class="textadventurelib.persistence.ScriptedActionPersistenceObject"
+		  scope="prototype" />
+		  
+	<bean id="FinishAction"
+		  class="textadventurelib.persistence.FinishActionPersistenceObject"
+		  scope="prototype" />
+	
+	<bean id="Layout"
+		  class="textadventurelib.persistence.LayoutPersistenceObject"
+		  scope="prototype" />
+	
+	<bean id="DebugPlayerFactory"
+		  class="ilusr.textadventurecreator.debug.DebugPlayerFactory"
+		  scope="singleton">
+		  <constructor-arg ref="LanguageService"/>
+	</bean>
+	
+	<bean id="DebugService"
+		  class="ilusr.textadventurecreator.debug.DebugService"
+		  scope="singleton">
+		  <constructor-arg ref="IDialogService"/>
+		  <constructor-arg ref="LanguageService"/>
+		  <constructor-arg ref="DebugPlayerFactory"/>
+		  <constructor-arg ref="IStyleContainerService"/>
+		  <constructor-arg ref="InternalURLProvider"/>
+	</bean>
+</beans>

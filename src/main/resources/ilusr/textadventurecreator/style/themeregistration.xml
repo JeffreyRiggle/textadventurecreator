@@ -1,0 +1,18 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	
+	<bean id="ThemeService"
+		  class="ilusr.textadventurecreator.style.ThemeService"
+		  scope="singleton">
+		  <constructor-arg ref="IStyleContainerService"/>
+		  <constructor-arg ref="SettingsManager"/>
+	</bean>
+	
+	<bean id="LocalThemeFinder"
+		  class="ilusr.textadventurecreator.style.LocalThemeFinder"
+		  scope="singleton">
+		  <constructor-arg ref="ThemeService"/>
+	</bean>
+</beans>

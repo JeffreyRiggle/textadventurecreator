@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+
+<fx:root type="javafx.scene.layout.AnchorPane" xmlns:fx="http://javafx.com/fxml">
+	<GridPane
+		AnchorPane.topAnchor="0.0" 
+		AnchorPane.leftAnchor="0.0" 
+		AnchorPane.rightAnchor="0.0"
+		AnchorPane.bottomAnchor="0.0">
+		<columnConstraints>
+        	<ColumnConstraints hgrow="ALWAYS" prefWidth="150"/>
+        	<ColumnConstraints hgrow="ALWAYS" prefWidth="100"/>
+        	<ColumnConstraints hgrow="ALWAYS" prefWidth="100"/>
+    	</columnConstraints>
+    	<rowConstraints>
+    		<RowConstraints minHeight="25.0" prefHeight="30.0" vgrow="ALWAYS" />
+    		<RowConstraints minHeight="25.0" prefHeight="30.0" vgrow="ALWAYS" />
+    		<RowConstraints minHeight="25.0" prefHeight="30.0" vgrow="ALWAYS" />
+    	</rowConstraints>
+    	<Label fx:id="nameLabel" text="Characteristic Name" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+    	<TextField fx:id="name" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
+    	
+    	<Label fx:id="descriptionLabel" text="Characteristic Description" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+    	<TextField fx:id="description" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.columnSpan="2"/>
+    	
+    	<Label fx:id="valueLabel" text="Characteristic Value" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+    	<ComboBox fx:id="type" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+    	<TextField fx:id="value" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+	</GridPane>
+</fx:root>

@@ -1,0 +1,72 @@
+.root {
+	-fx-background-color: darkslategrey;
+}
+
+.root .label {
+	-fx-text-fill: white;
+}
+
+.root .text-field {
+	-fx-background-color: linear-gradient(to bottom, derive(white, -10%), white),
+    linear-gradient(from 0px 0px to 0px 5px, derive(#45484c, -9%), #45484c);
+	-fx-background-insets: 0, 1;
+	-fx-background-radius: 3, 2;
+	-fx-text-fill: white;
+}
+
+.root .text-field:focused {
+	-fx-background-color: linear-gradient(to bottom, derive(#b274cc, -10%), #b274cc),
+    linear-gradient(from 0px 0px to 0px 5px, derive(#45484c, -9%), #45484c);
+	-fx-background-insets: 0, 1;
+	-fx-background-radius: 3, 2;
+	-fx-text-fill: white;
+}
+
+.root .text-area {
+	text-area-background: #45484c;
+	-fx-text-fill: white;
+	-fx-text-box-border: white;
+	-fx-focus-color: #b274cc;
+}
+
+.root .text-area .content {
+	-fx-background-color: text-area-background;
+}
+
+.root .button:hover {
+	-fx-background-color: #b274cc;
+	-fx-text-fill: white;
+}
+
+.root .button {
+	-fx-background-color: #45484c;
+	-fx-text-fill: white;
+}
+
+.root .radio-button {
+	-fx-text-fill: white;
+}
+
+.root *.check-box {
+	-fx-text-fill: white;
+}
+
+.root .combo-box {
+	-fx-background-color: #45484c;
+	-fx-text-fill: white;
+}
+
+.root .combo-box-popup .list-view .list-cell:hover {
+	-fx-background-color: #b274cc;
+	-fx-text-fill: white;
+}
+
+.root .combo-box-popup .list-view .list-cell {
+	-fx-background-color: #45484c;
+	-fx-text-fill: white;
+}
+
+.root .combo-box .cell:selected {
+	-fx-background-color: #45484c;
+	-fx-text-fill: white;
+}

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.CheckBox?>
+
+<fx:root type="javafx.scene.layout.AnchorPane" xmlns:fx="http://javafx.com/fxml">
+	<GridPane
+		AnchorPane.topAnchor="0.0" 
+		AnchorPane.leftAnchor="0.0" 
+		AnchorPane.rightAnchor="0.0"
+		AnchorPane.bottomAnchor="0.0"
+		fx:id="root">
+		<padding><Insets top="25" right="25" bottom="25" left="25"/></padding>
+		<columnConstraints>
+        	<ColumnConstraints hgrow="ALWAYS" minWidth="350" prefWidth="350"/>
+        	<ColumnConstraints hgrow="NEVER" minWidth="200" prefWidth="200"/>
+    	</columnConstraints>
+    	<rowConstraints>
+    		<RowConstraints minHeight="100.0" prefHeight="100.0" vgrow="NEVER" />
+    		<RowConstraints minHeight="300.0" prefHeight="300.0" vgrow="ALWAYS" />	
+    		<RowConstraints minHeight="25.0" prefHeight="25.0" vgrow="NEVER" />	
+    	</rowConstraints>
+    	<GridPane fx:id="titleArea" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2">
+    	    <columnConstraints>
+        		<ColumnConstraints hgrow="NEVER" minWidth="275"/>
+        		<ColumnConstraints hgrow="ALWAYS" minWidth="375"/>
+    		</columnConstraints>
+    		<rowConstraints>
+    			<RowConstraints minHeight="75.0" vgrow="ALWAYS" />
+    		</rowConstraints>
+    		<Label fx:id="title" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+    		<Label fx:id="tagLine" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+    	</GridPane>
+    	<GridPane GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="2">
+    		<columnConstraints>
+        		<ColumnConstraints hgrow="ALWAYS" minWidth="175"/>
+        		<ColumnConstraints hgrow="ALWAYS" minWidth="175"/>
+    		</columnConstraints>
+    		<rowConstraints>
+    			<RowConstraints minHeight="75.0" vgrow="ALWAYS" />
+    			<RowConstraints minHeight="75.0" vgrow="ALWAYS" />
+    			<RowConstraints minHeight="75.0" vgrow="ALWAYS" />
+    			<RowConstraints minHeight="75.0" vgrow="ALWAYS" />
+    		</rowConstraints>
+    		<Hyperlink fx:id="createProject" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+    		<Hyperlink fx:id="openProject" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+    		<Hyperlink fx:id="tutorial" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+    		<Hyperlink fx:id="findMore" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+    	</GridPane>
+    	<CheckBox fx:id="hideLanding" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+	</GridPane>
+</fx:root>

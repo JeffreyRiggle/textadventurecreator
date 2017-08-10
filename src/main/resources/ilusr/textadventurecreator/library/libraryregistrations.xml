@@ -1,0 +1,79 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	
+	<bean id="LibraryItem"
+		  class="ilusr.textadventurecreator.library.LibraryItem"
+		  scope="prototype" />
+		  
+	<bean id="LibraryService"
+		  class="ilusr.textadventurecreator.library.LibraryService"
+		  scope="singleton">
+		  <constructor-arg ref="ProjectStatusService"/>
+		  <constructor-arg ref="SettingsManager"/>
+		  <constructor-arg ref="IApplicationClosingManager"/>
+		  <constructor-arg ref="TextAdventureProvider"/>
+		  <constructor-arg ref="LanguageService"/>
+	</bean>
+	
+	<bean id="LibraryItemModel"
+		  class="ilusr.textadventurecreator.library.LibraryItemModel"
+		  scope="prototype">
+		  <constructor-arg ref="IDialogService"/>
+		  <constructor-arg ref="LibraryItem"/>
+		  <constructor-arg ref="TriggerViewFactory"/>
+		  <constructor-arg ref="ActionViewFactory"/>
+		  <constructor-arg ref="PlayerModProviderFactory"/>
+		  <constructor-arg ref="LanguageService"/>
+		  <constructor-arg ref="InternalURLProvider"/>
+		  <constructor-arg ref="ServiceManager"/>
+		  <constructor-arg ref="IDialogProvider"/>
+		  <constructor-arg ref="IStyleContainerService"/>
+	</bean>
+	
+	<bean id="LibraryItemView"
+		  class="ilusr.textadventurecreator.library.LibraryItemView"
+		  scope="prototype">
+		  <constructor-arg ref="LibraryItemModel"/>
+		  <constructor-arg ref="IStyleContainerService"/>
+		  <constructor-arg ref="InternalURLProvider"/>
+	</bean>
+	
+	<bean id="LibraryItemContentTab"
+		  class="ilusr.textadventurecreator.library.LibraryItemContentTab"
+		  scope="prototype">
+		  <constructor-arg ref="LibraryItemView"/>
+		  <constructor-arg ref="LanguageService"/>
+	</bean>
+	
+	<bean id="LibraryViewModel"
+		  class="ilusr.textadventurecreator.library.LibraryViewModel"
+		  scope="prototype">
+		  <constructor-arg ref="LibraryService"/>
+		  <constructor-arg ref="LayoutService"/>
+		  <constructor-arg ref="IDialogService"/>
+		  <constructor-arg ref="TriggerViewFactory"/>
+		  <constructor-arg ref="ActionViewFactory"/>
+		  <constructor-arg ref="PlayerModProviderFactory"/>
+		  <constructor-arg ref="LanguageService"/>
+		  <constructor-arg ref="InternalURLProvider"/>
+		  <constructor-arg ref="IDialogProvider"/>
+		  <constructor-arg ref="IStyleContainerService"/>
+	</bean>
+	
+	<bean id="LibraryView"
+		  class="ilusr.textadventurecreator.library.LibraryView"
+		  scope="prototype">
+		  <constructor-arg ref="LibraryViewModel"/>
+		  <constructor-arg ref="IStyleContainerService"/>
+		  <constructor-arg ref="InternalURLProvider"/>
+	</bean>
+	
+	<bean id="LibraryContentTab"
+		  class="ilusr.textadventurecreator.library.LibraryContentTab"
+		  scope="prototype">
+		  <constructor-arg ref="LibraryView"/>
+		  <constructor-arg ref="LanguageService"/>
+	</bean>
+</beans>

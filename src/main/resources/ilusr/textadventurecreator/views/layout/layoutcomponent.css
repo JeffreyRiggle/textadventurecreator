@@ -1,0 +1,23 @@
+#closeBtn {
+	-fx-background-color: transparent;
+	-fx-background-image: url("../assets/RemoveIconsmall.png");
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: 16 16;
+	-fx-background-position: center;
+}
+
+#closeBtn:hover {
+	-fx-background-color: rgba(255, 5, 5, .3);
+}
+
+#styleBtn {
+	-fx-background-color: transparent;
+	-fx-background-image: url("../assets/style.png");
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: 16 16;
+	-fx-background-position: center;
+}
+
+#styleBtn:hover {
+	-fx-background-color: rgba(5, 5, 255, .3);
+}

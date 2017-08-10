@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import ilusr.iroshell.documentinterfaces.sdi.*?>
+
+<fx:root type="ilusr.iroshell.documentinterfaces.sdi.SelectorNode" xmlns:fx="http://javafx.com/fxml">
+	<TreeView 
+		fx:id="tree"
+		AnchorPane.topAnchor="0.0" 
+		AnchorPane.leftAnchor="0.0" 
+		AnchorPane.rightAnchor="0.0"
+		AnchorPane.bottomAnchor="0.0" />
+</fx:root>

@@ -1,0 +1,379 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	
+	<bean id="IDialogProvider"
+		  class="ilusr.textadventurecreator.views.DialogProvider"
+		  scope="singleton">
+		  <constructor-arg ref="LanguageService"/>
+		  <constructor-arg ref="IStyleContainerService"/>
+		  <constructor-arg ref="InternalURLProvider"/>
+	</bean>
+	
+	<bean id="LandingPageModel"
+		  class="ilusr.textadventurecreator.views.LandingPageModel"
+		  scope="prototype">
+		  <constructor-arg ref="TextAdventureProjectManager"/>
+		  <constructor-arg ref="SettingsManager"/>
+		  <constructor-arg ref="LanguageService"/>
+	</bean>
+	
+	<bean id="LandingPageView"
+		  class="ilusr.textadventurecreator.views.LandingPageView"
+		  scope="prototype">
+		  <constructor-arg ref="LandingPageModel"/>
+	</bean>
+	
+	<bean id="LandingPageContentTab"
+		  class="ilusr.textadventurecreator.views.LandingPageContentTab"
+		  scope="prototype">
+		  <constructor-arg ref="LandingPageView"/>
+		  <constructor-arg ref="LanguageService"/>
+	</bean>
+	
+	<bean id="MacroBuilderViewFactory"
+		  class="ilusr.textadventurecreator.views.macro.MacroBuilderViewFactory"
+		  scope="singleton">
+		  <constructor-arg ref="TextAdventureProvider" />
+		  <constructor-arg ref="LanguageService"/>
+		  <constructor-arg ref="IStyleContainerService"/>
+		  <constructor-arg ref="InternalURLProvider"/>
+	</bean>
+	
+	<bean id="GameExplorerModel"
+		  class="ilusr.textadventurecreator.views.GameExplorerModel"
+		  scope="prototype">
+		  <constructor-arg ref="IDialogService"/>
+		  <constructor-arg ref="LibraryService"/>
+		  <constructor-arg ref="MacroBuilderViewFactory"/>
+		  <constructor-arg ref="MediaFinder"/>
+		  <constructor-arg ref="LayoutService" />
+		  <constructor-arg ref="TextAdventureProvider" />
+		  <constructor-arg ref="TriggerViewFactory"/>
+		  <constructor-arg ref="PlayerModProviderFactory"/>
+		  <constructor-arg ref="LanguageService"/>
+		  <constructor-arg ref="ActionViewFactory"/>
+		  <constructor-arg ref="InternalURLProvider"/>
+		  <constructor-arg ref="IDialogProvider"/>
+		  <constructor-arg ref="IStyleContainerService"/>
+	</bean>
+	
+	<bean id="GameExplorerView" 
+		  class="ilusr.textadventurecreator.views.GameExplorerView" 
+		  scope="prototype">
+		  <constructor-arg ref="GameExplorerModel"/>
+		  <constructor-arg ref="LayoutService"/>
+		  <constructor-arg ref="IStyleContainerService"/>
+		  <constructor-arg ref="InternalURLProvider"/>
+	</bean>
+		  
+	<bean id="GameExplorerContentTab"
+		  class="ilusr.textadventurecreator.views.GameExplorerContentTab"
+		  scope="prototype">
+		  <constructor-arg ref="GameExplorerView"/>
+		  <constructor-arg ref="LanguageService"/>
+	</bean>
+	
+	<bean id="GameStateModel"
+		  class="ilusr.textadventurecreator.views.gamestate.GameStateModel"
+		  scope="prototype">
+		  <constructor-arg ref="GameStatePersistence" />
+		  <constructor-arg ref="IDialogService"/>
+		  <constructor-arg ref="LibraryService"/>
+		  <constructor-arg ref="MacroBuilderViewFactory"/>
+		  <constructor-arg ref="MediaFinder"/>
+		  <constructor-arg ref="TriggerViewFactory"/>
+		  <constructor-arg ref="PlayerModProviderFactory"/>
+		  <constructor-arg ref="TextAdventureProvider" />
+		  <constructor-arg ref="LanguageService"/>
+		  <constructor-arg ref="ActionViewFactory"/>
+		  <constructor-arg ref="IDialogProvider"/>
+		  <constructor-arg ref="IStyleContainerService"/>
+		  <constructor-arg ref="InternalURLProvider"/>
+	</bean>
+		  
+	<bean id="GameStateView"
+		  class="ilusr.textadventurecreator.views.gamestate.GameStateView"
+		  scope="prototype">
+		  <constructor-arg ref="GameStateModel"/>
+		  <constructor-arg ref="LanguageService"/>
+		  <constructor-arg ref="IStyleContainerService"/>
+		  <constructor-arg ref="InternalURLProvider"/>
+	</bean>
+	
+	<bean id="GameStateContentTab"
+		  class="ilusr.textadventurecreator.views.gamestate.GameStateContentTab"
+		  scope="prototype">
+		  <constructor-arg ref="GameStateView"/>
+		  <constructor-arg ref="LanguageService"/>
+	</bean>
+	
+	<bean id="PlayerModel"
+		  class="ilusr.textadventurecreator.views.player.PlayerModel"
+		  scope="prototype">
+		  <constructor-arg ref="IDialogService"/>
+		  <constructor-arg ref="LibraryService"/>
+		  <constructor-arg ref="Player"/>
+		  <constructor-arg ref="LanguageService"/>
+		  <constructor-arg ref="IDialogProvider"/>
+		  <constructor-arg ref="IStyleContainerService"/>
+		  <constructor-arg ref="InternalURLProvider"/>
+	</bean>
+	
+	<bean id="PlayerView" 
+		  class="ilusr.textadventurecreator.views.player.PlayerView" 
+		  scope="prototype">
+		  <constructor-arg ref="PlayerModel" />
+		  <constructor-arg ref="LanguageService"/>
+		  <constructor-arg ref="IStyleContainerService"/>
+		  <constructor-arg ref="InternalURLProvider"/>
+	</bean>
+		  
+	<bean id="PlayerContentTab"
+		  class="ilusr.textadventurecreator.views.player.PlayerContentTab"
+		  scope="prototype">
+		  <constructor-arg ref="PlayerView"/>
+	</bean>
+	
+	<bean id="AttributeViewProvider"
+		  class="ilusr.textadventurecreator.views.player.AttributeViewProvider"
+		  scope="prototype">
+		  <constructor-arg ref="PlayerAttribute"/>
+		  <constructor-arg ref="LanguageService"/>
+	</bean>
+	
+	<bean id="CharacteristicViewProvider"
+		  class="ilusr.textadventurecreator.views.player.CharacteristicViewProvider"
+		  scope="prototype">
+		  <constructor-arg ref="PlayerCharacteristic"/>
+		  <constructor-arg ref="LanguageService"/>
+	</bean>
+	
+	<bean id="BodyPartViewProvider"
+		  class="ilusr.textadventurecreator.views.player.BodyPartViewProvider"
+		  scope="prototype">
+		  <constructor-arg ref="PlayerBodyPart"/>
+		  <constructor-arg ref="IDialogService"/>
+		  <constructor-arg ref="LanguageService"/>
+		  <constructor-arg ref="IDialogProvider"/>
+		  <constructor-arg ref="IStyleContainerService"/>
+		  <constructor-arg ref="InternalURLProvider"/>
+	</bean>
+	
+	<bean id="InventoryItem"
+		  class="ilusr.textadventurecreator.views.player.InventoryItem"
+		  scope="prototype">
+		  <constructor-arg ref="PlayerItem"/>
+		  <constructor-arg value="0"/>
+	</bean>
+	
+	<bean id="InventoryItemViewProvider"
+		  class="ilusr.textadventurecreator.views.player.InventoryItemViewProvider"
+		  scope="prototype">
+	      <constructor-arg ref="IDialogService"/>
+	      <constructor-arg ref="InventoryItem"/>
+	      <constructor-arg ref="LanguageService"/>
+	      <constructor-arg ref="IDialogProvider"/>
+	      <constructor-arg ref="IStyleContainerService"/>
+		  <constructor-arg ref="InternalURLProvider"/>
+	</bean>
+	
+	<bean id="TextTriggerModel"
+	      class="ilusr.textadventurecreator.views.trigger.TextTriggerModel"
+	      scope="prototype">
+		  <constructor-arg ref="TextTrigger"/>
+		  <constructor-arg ref="LanguageService"/>
+	</bean>
+	
+	<bean id="TextTriggerViewProvider"
+		  class="ilusr.textadventurecreator.views.trigger.TextTriggerViewProvider"
+		  scope="prototype">
+		  <constructor-arg ref="TextTriggerModel"/>
+	</bean>
+	
+	<bean id="PlayerTriggerViewProvider"
+		  class="ilusr.textadventurecreator.views.trigger.PlayerTriggerViewProvider"
+		  scope="prototype">
+		  <constructor-arg ref="PlayerTrigger"/>
+		  <constructor-arg ref="TextAdventureProvider"/>
+		  <constructor-arg ref="LanguageService"/>
+	</bean>
+	
+	<bean id="ScriptedTriggerModel"
+		  class="ilusr.textadventurecreator.views.trigger.ScriptedTriggerModel"
+		  scope="prototype">
+		  <constructor-arg ref="ScriptedTrigger" />
+		  <constructor-arg ref="LanguageService"/>
+	</bean>
+	
+	<bean id="ScriptTriggerViewProvider"
+		  class="ilusr.textadventurecreator.views.trigger.ScriptTriggerViewProvider"
+		  scope="prototype">
+		  <constructor-arg ref="ScriptedTriggerModel"/>
+	</bean>
+	
+	<bean id="MultiTriggerModel"
+		  class="ilusr.textadventurecreator.views.trigger.MultiTriggerModel"
+		  scope="prototype">
+		  <constructor-arg ref="MultiTrigger"/>
+		  <constructor-arg ref="IDialogService"/>
+		  <constructor-arg ref="IDialogProvider"/>
+		  <constructor-arg ref="TriggerViewFactory"/>
+		  <constructor-arg ref="LanguageService"/>
+	</bean>
+	
+	<bean id="MultiTriggerViewProvider"
+		  class="ilusr.textadventurecreator.views.trigger.MultiTriggerViewProvider"
+		  scope="prototype">
+		  <constructor-arg ref="MultiTriggerModel"/>
+	</bean>
+	
+	<bean id="TriggerViewFactory"
+		  class="ilusr.textadventurecreator.views.trigger.TriggerViewFactory"
+		  scope="singleton">
+		  <constructor-arg ref="TextAdventureProvider"/>
+		  <constructor-arg ref="IDialogService"/>
+		  <constructor-arg ref="IDialogProvider"/>
+		  <constructor-arg ref="LanguageService"/>
+		  <constructor-arg ref="IStyleContainerService"/>
+		  <constructor-arg ref="InternalURLProvider"/>
+	</bean>
+		  
+	<bean id="AppendTextModel"
+		  class="ilusr.textadventurecreator.views.action.AppendTextModel"
+		  scope="prototype">
+		  <constructor-arg ref="AppendTextAction" />
+		  <constructor-arg ref="LanguageService"/>
+	</bean>
+	
+	<bean id="AppendTextViewProvider"
+		  class="ilusr.textadventurecreator.views.action.AppendTextViewProvider"
+		  scope="prototype">
+		  <constructor-arg ref="AppendTextModel"/>
+	</bean>
+	
+	<bean id="CompletionActionModel"
+		  class="ilusr.textadventurecreator.views.action.CompletionActionModel"
+		  scope="prototype">
+		  <constructor-arg ref="CompletionAction"/>
+		  <constructor-arg ref="LanguageService"/>
+	</bean>
+	
+	<bean id="CompletionActionViewProvider"
+	      class="ilusr.textadventurecreator.views.action.CompletionActionViewProvider"
+	      scope="prototype">
+		  <constructor-arg ref="CompletionActionModel"/>
+	</bean>
+	
+	<bean id="ExecutionActionModel"
+		  class="ilusr.textadventurecreator.views.action.ExecutionActionModel"
+		  scope="prototype">
+		  <constructor-arg ref="ExecutionAction"/>
+		  <constructor-arg ref="LanguageService"/>
+	</bean>
+	
+	<bean id="ExecutableActionViewProvider"
+	      class="ilusr.textadventurecreator.views.action.ExecutableActionViewProvider"
+	      scope="prototype">
+		  <constructor-arg ref="ExecutionActionModel"/>
+	</bean>
+	
+	<bean id="SaveActionModel"
+		  class="ilusr.textadventurecreator.views.action.SaveActionModel"
+		  scope="prototype">
+		  <constructor-arg ref="SaveAction"/>
+		  <constructor-arg ref="LanguageService"/>
+	</bean>
+	
+	<bean id="SaveActionViewProvider"
+	      class="ilusr.textadventurecreator.views.action.SaveActionViewProvider"
+	      scope="prototype">
+		  <constructor-arg ref="SaveActionModel"/>
+	</bean>
+	
+	<bean id="ChangePlayerPropertyViewProvider"
+		  class="ilusr.textadventurecreator.views.action.ChangePlayerPropertyViewProvider"
+		  scope="prototype">
+		  <constructor-arg type="java.lang.String" value=""/>
+	</bean>
+	
+	<bean id="RemovePlayerPropertyViewProvider"
+		  class="ilusr.textadventurecreator.views.action.RemovePlayerPropertyViewProvider"
+		  scope="prototype">
+		  <constructor-arg ref="LanguageService"/>
+	</bean>
+	
+	<bean id="RemoveCharacteristicViewProvider"
+		  class="ilusr.textadventurecreator.views.player.RemoveCharacteristicViewProvider"
+		  scope="prototype">
+		  <constructor-arg ref="PlayerBodyPart"/>
+		  <constructor-arg ref="LanguageService"/>
+	</bean>
+	
+	<bean id="InventorySelectorViewProvider"
+		  class="ilusr.textadventurecreator.views.player.InventorySelectorViewProvider"
+		  scope="prototype">
+		  <constructor-arg ref="PlayerInventory"/>
+		  <constructor-arg ref="LanguageService"/>
+	</bean>
+	
+	<bean id="PlayerModificationActionViewProvider"
+	      class="ilusr.textadventurecreator.views.action.PlayerModificationActionViewProvider"
+	      scope="prototype">
+		  <constructor-arg ref="PlayerModificationAction"/>
+		  <constructor-arg ref="TextAdventureProvider"/>
+		  <constructor-arg ref="ChangePlayerPropertyViewProvider"/>
+		  <constructor-arg ref="RemovePlayerPropertyViewProvider"/>
+		  <constructor-arg ref="AttributeViewProvider"/>
+		  <constructor-arg ref="CharacteristicViewProvider"/>
+		  <constructor-arg ref="BodyPartViewProvider"/>
+		  <constructor-arg ref="InventoryItemViewProvider"/>
+		  <constructor-arg ref="RemoveCharacteristicViewProvider"/>
+		  <constructor-arg ref="InventorySelectorViewProvider"/>
+		  <constructor-arg ref="LanguageService"/>
+	</bean>
+	
+	<bean id="PlayerModProviderFactory"
+		  class="ilusr.textadventurecreator.views.action.PlayerModProviderFactory"
+		  scope="singleton">
+		  <constructor-arg ref="IDialogService"/>
+		  <constructor-arg ref="LanguageService"/>
+		  <constructor-arg ref="IDialogProvider"/>
+		  <constructor-arg ref="IStyleContainerService"/>
+		  <constructor-arg ref="InternalURLProvider"/>
+	</bean>
+		  
+	<bean id="ScriptedActionModel"
+		  class="ilusr.textadventurecreator.views.action.ScriptedActionModel"
+		  scope="prototype">
+		  <constructor-arg ref="ScriptAction" />
+		  <constructor-arg ref="LanguageService"/>	  
+	</bean>
+	
+	<bean id="ScriptedActionViewProvider"
+		  class="ilusr.textadventurecreator.views.action.ScriptedActionViewProvider"
+		  scope="prototype">
+		  <constructor-arg ref="ScriptedActionModel" />
+	</bean>
+	
+	<bean id="FinishActionModel"
+		  class="ilusr.textadventurecreator.views.action.FinishActionModel"
+		  scope="prototype">
+		  <constructor-arg ref="FinishAction"/>
+		  <constructor-arg ref="LanguageService"/>
+	</bean>
+	
+	<bean id="FinishActionViewProvider"
+		  class="ilusr.textadventurecreator.views.action.FinishActionViewProvider"
+		  scope="prototype">
+		  <constructor-arg ref="FinishActionModel"/>
+	</bean>
+	
+	<bean id="ActionViewFactory"
+		  class="ilusr.textadventurecreator.views.action.ActionViewFactory"
+		  scope="singleton">
+		  <constructor-arg ref="PlayerModProviderFactory"/>
+		  <constructor-arg ref="LanguageService"/>
+	</bean>
+</beans>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import ilusr.textadventurecreator.debug.*?>
+
+<fx:root type="javafx.scene.layout.AnchorPane" xmlns:fx="http://javafx.com/fxml">
+	<GridPane AnchorPane.topAnchor="0.0" 
+			  AnchorPane.leftAnchor="0.0" 
+			  AnchorPane.rightAnchor="0.0"
+			  AnchorPane.bottomAnchor="0.0"
+			  fx:id="root">
+			<columnConstraints>
+        		<ColumnConstraints hgrow="ALWAYS" prefWidth="550"/>
+        		<ColumnConstraints hgrow="ALWAYS" prefWidth="250"/>
+    		</columnConstraints>
+    		<rowConstraints>
+    			<RowConstraints minHeight="25.0" prefHeight="50.0" vgrow="NEVER" />
+    			<RowConstraints minHeight="250.0" prefHeight="550.0" vgrow="ALWAYS" />
+    		</rowConstraints>
+    		<Label fx:id="currentGameState" GridPane.columnIndex="0" GridPane.rowIndex="0"  GridPane.columnSpan="2" />
+    		<AnchorPane fx:id="gameArea" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+    		<ScrollPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+    			<PlayersDebugView fx:id="debugLocals" />
+    		</ScrollPane>
+	</GridPane>
+</fx:root>

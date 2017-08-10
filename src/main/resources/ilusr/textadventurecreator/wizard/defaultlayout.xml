@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<MDI>
+	<DockArea>
+		<Width ValueType="double">1430.0</Width>
+		<Height ValueType="double">712.0</Height>
+		<Index ValueType="int">1</Index>
+		<Orientation ValueType="object">HORIZONTAL</Orientation>
+		<TabPanel>
+			<SelectedTab ValueType="int">0</SelectedTab>
+			<Tabs>
+				<ContentTab>
+					<ID ValueType="string">1018f567-6ceb-4bcf-9fab-883b206e7397</ID>
+					<CustomData ValueType="string"/>
+					<BluePrintName ValueType="string">Explorer</BluePrintName>
+				</ContentTab>
+			</Tabs>
+		</TabPanel>
+		<DockArea>
+			<Width ValueType="double">1197.0</Width>
+			<Height ValueType="double">710.0</Height>
+			<Index ValueType="int">0</Index>
+			<Orientation ValueType="object">HORIZONTAL</Orientation>
+			<TabPanel>
+				<SelectedTab ValueType="int">0</SelectedTab>
+				<Tabs>
+					<ContentTab>
+						<ID ValueType="string">5e2ca97e-d832-46ca-a430-038245bcabad</ID>
+						<CustomData ValueType="string">R2FtZVN0YXRlTmFtZTogU3RhcnQ=</CustomData>
+						<BluePrintName ValueType="string">GameState</BluePrintName>
+					</ContentTab>
+				</Tabs>
+			</TabPanel>
+		</DockArea>
+	</DockArea>
+</MDI>

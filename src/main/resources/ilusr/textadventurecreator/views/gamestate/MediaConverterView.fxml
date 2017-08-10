@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import ilusr.iroshell.core.ViewSwitcher?>
+
+<fx:root type="javafx.scene.layout.AnchorPane" xmlns:fx="http://javafx.com/fxml">
+	<GridPane>
+			<columnConstraints>
+        		<ColumnConstraints hgrow="ALWAYS" prefWidth="100"/>
+        		<ColumnConstraints hgrow="ALWAYS" prefWidth="150"/>
+    		</columnConstraints>
+    		<rowConstraints>
+    			<RowConstraints minHeight="25.0" prefHeight="30.0" vgrow="ALWAYS" />
+    			<RowConstraints minHeight="25.0" prefHeight="50.0" vgrow="ALWAYS" />
+    			<RowConstraints minHeight="25.0" prefHeight="50.0" vgrow="ALWAYS" />
+    			<RowConstraints minHeight="25.0" prefHeight="75.0" vgrow="ALWAYS" />
+    		</rowConstraints>
+    		<padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
+    		<Label fx:id="mediaTitle" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
+    		<Label fx:id="typeLabel" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+    		<ComboBox fx:id="type" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+    		<Label fx:id="newNameLabel" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+    		<TextField fx:id="newFile" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+    		<Button fx:id="convert" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+    		<StackPane  GridPane.columnIndex="1" GridPane.rowIndex="3">
+    			<Label fx:id="result" />
+    			<ProgressBar fx:id="convertingBar"/>
+    		</StackPane>
+	</GridPane>
+</fx:root>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import ilusr.iroshell.core.ViewSwitcher?>
+
+<fx:root type="javafx.scene.layout.AnchorPane" xmlns:fx="http://javafx.com/fxml">
+	<GridPane AnchorPane.topAnchor="0.0" 
+			  AnchorPane.leftAnchor="0.0" 
+			  AnchorPane.rightAnchor="0.0"
+			  AnchorPane.bottomAnchor="0.0">
+			<columnConstraints>
+        		<ColumnConstraints hgrow="ALWAYS" prefWidth="250"/>
+        		<ColumnConstraints hgrow="ALWAYS" prefWidth="150"/>
+    		</columnConstraints>
+    		<rowConstraints>
+    			<RowConstraints minHeight="25.0" prefHeight="30.0" vgrow="NEVER" />
+    			<RowConstraints minHeight="25.0" prefHeight="250.0" vgrow="ALWAYS" />
+    		</rowConstraints>
+			<Label fx:id="actionLabel" text="Action" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+			<ComboBox fx:id="actionType" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+			<ViewSwitcher fx:id="action" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="2"/>
+	</GridPane>
+</fx:root>

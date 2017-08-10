@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.HBox?>
+
+<fx:root type="javafx.scene.layout.AnchorPane" xmlns:fx="http://javafx.com/fxml">
+	<TreeView 
+		fx:id="tree"
+		AnchorPane.topAnchor="0.0" 
+		AnchorPane.leftAnchor="0.0" 
+		AnchorPane.rightAnchor="0.0"
+		AnchorPane.bottomAnchor="0.0">
+		<TreeItem fx:id="root" expanded="true">
+			<children>
+					<TreeItem fx:id="players">
+						<children>
+							<TreeItem value=" ">
+								<graphic>
+									<HBox spacing="10">
+										<Button fx:id="addPlayer" />
+										<Button fx:id="addPlayerFromLibrary" />
+									</HBox>
+								</graphic>
+							</TreeItem>
+						</children>
+					</TreeItem>
+					<TreeItem fx:id="gameStates">
+						<children>
+							<TreeItem value=" ">
+								<graphic>
+									<HBox spacing="5">
+										<Button fx:id="addGameState" />
+										<Button fx:id="addGameStateFromLibrary" />
+									</HBox>
+								</graphic>
+							</TreeItem>
+						</children>
+					</TreeItem>
+					<TreeItem fx:id="layouts">
+						<children>
+							<TreeItem value=" ">
+								<graphic>
+									<HBox spacing="5">
+										<Button fx:id="addLayout" />
+										<Button fx:id="addLayoutFromLibrary" />
+									</HBox>
+								</graphic>
+							</TreeItem>
+						</children>
+					</TreeItem>
+			</children>
+		</TreeItem>
+	</TreeView>
+</fx:root>

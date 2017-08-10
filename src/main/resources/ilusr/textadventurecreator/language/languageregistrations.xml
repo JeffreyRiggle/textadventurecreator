@@ -1,0 +1,17 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	
+	<bean id="LanguageManager"
+		class="ilusr.core.i18n.LanguageManager"
+		factory-method="getInstance"
+		scope="singleton" />
+		
+	<bean id="LanguageService"
+		  class="ilusr.textadventurecreator.language.LanguageService"
+		  scope="singleton">
+		  <constructor-arg ref="SettingsManager"/>
+		  <constructor-arg ref="LanguageManager"/>
+	</bean>
+</beans>

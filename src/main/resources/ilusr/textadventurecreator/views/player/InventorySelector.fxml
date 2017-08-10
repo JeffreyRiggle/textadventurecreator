@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+
+<fx:root type="javafx.scene.layout.AnchorPane" xmlns:fx="http://javafx.com/fxml">
+	<GridPane
+		AnchorPane.topAnchor="0.0" 
+		AnchorPane.leftAnchor="0.0" 
+		AnchorPane.rightAnchor="0.0"
+		AnchorPane.bottomAnchor="0.0">
+		<columnConstraints>
+        	<ColumnConstraints hgrow="ALWAYS" prefWidth="100"/>
+        	<ColumnConstraints hgrow="ALWAYS" prefWidth="100"/>
+    	</columnConstraints>
+    	<rowConstraints>
+    		<RowConstraints minHeight="50.0" prefHeight="150.0" vgrow="ALWAYS" />
+    	</rowConstraints>
+    	<Label fx:id="itemLabel" text="Item to use" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+    	<ComboBox fx:id="items" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+	</GridPane>
+</fx:root>

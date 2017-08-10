@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+
+<fx:root type="javafx.scene.layout.AnchorPane" xmlns:fx="http://javafx.com/fxml">
+	<GridPane AnchorPane.topAnchor="0.0" 
+			  AnchorPane.leftAnchor="0.0" 
+			  AnchorPane.rightAnchor="0.0"
+			  AnchorPane.bottomAnchor="0.0">
+			<columnConstraints>
+        		<ColumnConstraints hgrow="NEVER" prefWidth="125"/>
+        		<ColumnConstraints hgrow="ALWAYS" prefWidth="125"/>
+    		</columnConstraints>
+    		<rowConstraints>
+    		    <RowConstraints minHeight="35.0" vgrow="NEVER" />
+    			<RowConstraints minHeight="35.0" vgrow="NEVER" />
+    			<RowConstraints minHeight="25.0" vgrow="ALWAYS" />
+    			<RowConstraints minHeight="25.0" vgrow="ALWAYS" /> 			
+    			<RowConstraints minHeight="25.0" vgrow="ALWAYS" />
+    			<RowConstraints minHeight="25.0" vgrow="ALWAYS" />
+    			<RowConstraints minHeight="25.0" vgrow="ALWAYS" />
+    			<RowConstraints minHeight="25.0" vgrow="ALWAYS" />
+    			<RowConstraints minHeight="25.0" vgrow="ALWAYS" />
+    			<RowConstraints minHeight="25.0" vgrow="ALWAYS" />
+    			<RowConstraints minHeight="25.0" vgrow="ALWAYS" />
+    			<RowConstraints minHeight="25.0" vgrow="ALWAYS" />
+    			<RowConstraints minHeight="25.0" vgrow="ALWAYS" />
+    			<RowConstraints minHeight="25.0" vgrow="ALWAYS" />
+    		</rowConstraints>
+    		<Label fx:id="nameLabel" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+    		<TextField fx:id="name" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+    		<Label fx:id="authorLabel" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+    		<TextField fx:id="author" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+    		<TitledPane GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.columnSpan="2" fx:id="attributePane">
+    			<content>
+    				<ListView fx:id="attributes"/>
+    			</content>
+    		</TitledPane>
+    		<TitledPane GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.columnSpan="2" fx:id="characteristicPane">
+    			<content>
+    				<ListView fx:id="characteristics"/>
+    			</content>
+    		</TitledPane>
+    		<TitledPane GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.columnSpan="2" fx:id="bodyPartPane">
+    			<content>
+					<ListView fx:id="bodyParts"/>
+    			</content>
+    		</TitledPane>
+    		<TitledPane GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.columnSpan="2" fx:id="propertyPane">
+    			<content>
+					<ListView fx:id="properties"/>
+    			</content>
+    		</TitledPane>
+    		<TitledPane GridPane.columnIndex="0" GridPane.rowIndex="6" GridPane.columnSpan="2" fx:id="itemPane">
+    			<content>
+					<ListView fx:id="items"/>
+    			</content>
+    		</TitledPane>
+    		<TitledPane GridPane.columnIndex="0" GridPane.rowIndex="7" GridPane.columnSpan="2" fx:id="playerPane">
+    			<content>
+					<ListView fx:id="players"/>
+    			</content>
+    		</TitledPane>
+    		<TitledPane GridPane.columnIndex="0" GridPane.rowIndex="8" GridPane.columnSpan="2" fx:id="triggerPane">
+    			<content>
+					<ListView fx:id="triggers"/>
+    			</content>
+    		</TitledPane>
+    		<TitledPane GridPane.columnIndex="0" GridPane.rowIndex="9" GridPane.columnSpan="2" fx:id="actionPane">
+    			<content>
+					<ListView fx:id="actions"/>
+    			</content>
+    		</TitledPane>
+    		<TitledPane GridPane.columnIndex="0" GridPane.rowIndex="10" GridPane.columnSpan="2" fx:id="optionPane">
+    			<content>
+					<ListView fx:id="options"/>
+    			</content>
+    		</TitledPane>
+    		<TitledPane GridPane.columnIndex="0" GridPane.rowIndex="11" GridPane.columnSpan="2" fx:id="timerPane">
+    			<content>
+					<ListView fx:id="timers"/>
+    			</content>
+    		</TitledPane>
+    		<TitledPane GridPane.columnIndex="0" GridPane.rowIndex="12" GridPane.columnSpan="2" fx:id="gameStatePane">
+    			<content>
+					<ListView fx:id="gameStates"/>
+    			</content>
+    		</TitledPane>
+    		<TitledPane GridPane.columnIndex="0" GridPane.rowIndex="13" GridPane.columnSpan="2" fx:id="layoutPane">
+    			<content>
+					<ListView fx:id="layouts"/>
+    			</content>
+    		</TitledPane>
+	</GridPane>
+</fx:root>

@@ -1,0 +1,23 @@
+.label {
+	-fx-text-fill: white;
+}
+
+.button:hover {
+	-fx-background-color: #b274cc;
+	-fx-text-fill: white;
+}
+
+.button {
+	-fx-background-color: #45484c;
+	-fx-text-fill: white;
+}
+
+.list-view .list-cell {
+	-fx-background-color: #45484c;
+	-fx-text-fill: white;
+}
+
+.list-cell:filled:selected, .split-pane .list-view .list-cell:filled:focused {
+	-fx-background-color: #b274cc;
+	-fx-text-fill: white;
+}

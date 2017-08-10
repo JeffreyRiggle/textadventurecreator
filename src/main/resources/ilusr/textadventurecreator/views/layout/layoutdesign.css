@@ -1,0 +1,8 @@
+#root {
+    -fx-background-color: white;
+    -fx-margin: 1;
+}
+#root > * {
+    -fx-border-color: #d3d3d3;
+    -fx-border-width: 1;
+}

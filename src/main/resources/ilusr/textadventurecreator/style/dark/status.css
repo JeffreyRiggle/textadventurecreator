@@ -1,0 +1,23 @@
+.pane {
+	-fx-background-color: darkslategrey;
+	-fx-text-fill: white;
+}
+
+.separator {
+	-fx-background-color: purple;
+	-fx-background-radius: 2;
+}
+
+.separator:horizontal .line {
+	-fx-border-color: purple transparent transparent transparent;
+}
+
+.separator:vertical .line {
+	-fx-border-color: purple transparent transparent transparent;
+}
+
+/* Custom classes for my controls */
+.label {
+	-fx-background-color: darkslategrey;
+	-fx-text-fill: white;
+}
