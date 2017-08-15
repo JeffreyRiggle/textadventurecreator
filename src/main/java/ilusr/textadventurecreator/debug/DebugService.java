@@ -2,7 +2,6 @@ package ilusr.textadventurecreator.debug;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 
 import ilusr.core.url.InternalURLProvider;
 import ilusr.gamestatemanager.GameStateManager;
@@ -58,7 +57,7 @@ public class DebugService implements IDebugService {
 	
 	@Override
 	public void runGame(TextAdventurePersistenceObject game) {
-		LogRunner.logger().log(Level.INFO, String.format("Running Game: %s", game.gameName()));
+		LogRunner.logger().info(String.format("Running Game: %s", game.gameName()));
 		ITextAdventureGameStateManager tavGame = game.convertToGameStateManager();
 		Stage stage = new Stage();
 		AnchorPane debug = new AnchorPane();
@@ -68,7 +67,7 @@ public class DebugService implements IDebugService {
 		
 		tavGame.addFinishListener(() -> {
 			Platform.runLater(() -> {
-				LogRunner.logger().log(Level.INFO, String.format("Game: %s finished closing stage.", game.gameName()));
+				LogRunner.logger().info(String.format("Game: %s finished closing stage.", game.gameName()));
 				stage.close();
 			});
 		});
@@ -78,7 +77,7 @@ public class DebugService implements IDebugService {
 	
 	@Override
 	public void debugGame(TextAdventurePersistenceObject game) {
-		LogRunner.logger().log(Level.INFO, String.format("Debugging Game: %s", game.gameName()));
+		LogRunner.logger().info(String.format("Debugging Game: %s", game.gameName()));
 		ITextAdventureGameStateManager tavGame = game.convertToGameStateManager();
 		Stage stage = new Stage();
 		GameDebuggerView debug = new GameDebuggerView(new GameDebuggerModel(tavGame, languageService, playerFactory), languageService, styleService, urlProvider);
@@ -88,7 +87,7 @@ public class DebugService implements IDebugService {
 		
 		tavGame.addFinishListener(() -> {
 			Platform.runLater(() -> {
-				LogRunner.logger().log(Level.INFO, String.format("Debugged Game: %s, finished closing stage.", game.gameName()));
+				LogRunner.logger().info(String.format("Debugged Game: %s, finished closing stage.", game.gameName()));
 				stage.close();
 			});
 		});
@@ -98,7 +97,7 @@ public class DebugService implements IDebugService {
 	
 	@Override
 	public void debugGameState(GameStatePersistenceObject gameState) {
-		LogRunner.logger().log(Level.INFO, String.format("Debugging GameState: %s", gameState.stateId()));
+		LogRunner.logger().info(String.format("Debugging GameState: %s", gameState.stateId()));
 		Stage stage = new Stage();
 		AnchorPane pane = new AnchorPane();
 		stage.setScene(new Scene(pane, 800, 600));
@@ -111,7 +110,7 @@ public class DebugService implements IDebugService {
 		
 		manager.addFinishListener(() -> {
 			Platform.runLater(() -> {
-				LogRunner.logger().log(Level.INFO, String.format("Finished debugging GameState: %s, closing stage.", gameState.stateId()));
+				LogRunner.logger().info(String.format("Finished debugging GameState: %s, closing stage.", gameState.stateId()));
 				stage.close();
 			});
 		});

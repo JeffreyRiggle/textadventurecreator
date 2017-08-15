@@ -3,7 +3,6 @@ package ilusr.textadventurecreator.search;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
 
 import ilusr.iroshell.services.IDialogService;
 import ilusr.logrunner.LogRunner;
@@ -108,7 +107,7 @@ public class ActionFinderModel extends BaseFinderModel<ActionPersistenceObject> 
 
 	@Override
 	protected void inspect(ActionPersistenceObject item) {
-		LogRunner.logger().log(Level.INFO, "Inspecting action.");
+		LogRunner.logger().info("Inspecting action.");
 		ActionView view = actionViewFactory.create(new ActionModel(item, languageService), getPlayers());
 		view.setDisable(true);
 		dialogService.displayModal(view);

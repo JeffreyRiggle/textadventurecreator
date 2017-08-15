@@ -3,7 +3,6 @@ package ilusr.textadventurecreator.views.trigger;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.util.logging.Level;
 
 import ilusr.core.io.FileUtilities;
 import ilusr.logrunner.LogRunner;
@@ -74,7 +73,7 @@ public class ScriptedTriggerModel {
 			bWriter.write(script.get());
 			bWriter.close();
 			
-			LogRunner.logger().log(Level.INFO, "Opening editor for scripted trigger");
+			LogRunner.logger().info("Opening editor for scripted trigger");
 			Process proc = Runtime.getRuntime().exec(new String[] {"cmd", "/c", "start", "/wait",  temp.getAbsolutePath()});
 			proc.waitFor();
 		    

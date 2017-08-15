@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import ilusr.core.javafx.ObservableListBinder;
 import ilusr.iroshell.services.IDialogService;
+import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.language.DisplayStrings;
 import ilusr.textadventurecreator.language.ILanguageService;
 import ilusr.textadventurecreator.search.SearchListCellFactory;
@@ -69,7 +70,7 @@ public class OptionInspector extends AnchorPane implements Initializable {
 		try {
 			loader.load();
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogRunner.logger().severe(e);
 		}
 	}
 	

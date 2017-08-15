@@ -1,7 +1,5 @@
 package ilusr.textadventurecreator.settings;
 
-import java.util.logging.Level;
-
 import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.language.DisplayStrings;
 import ilusr.textadventurecreator.language.ILanguageService;
@@ -53,7 +51,7 @@ public class GameSettingsModel {
 				return;
 			}
 			
-			LogRunner.logger().log(Level.INFO, String.format("Updating first game state to %s", n));
+			LogRunner.logger().info(String.format("Updating first game state to %s", n));
 			provider.getTextAdventureProject().getTextAdventure().currentGameState(n);
 		});
 		
@@ -64,7 +62,7 @@ public class GameSettingsModel {
 	}
 	
 	private void applyProject() {
-		LogRunner.logger().log(Level.INFO, "Found game applying project");
+		LogRunner.logger().info("Found game applying project");
 		gameLoaded.set(true);
 		TextAdventurePersistenceObject tav = provider.getTextAdventureProject().getTextAdventure();
 		
@@ -75,7 +73,7 @@ public class GameSettingsModel {
 			firstGameState.list().add(gameState.stateId());
 		}
 		
-		LogRunner.logger().log(Level.INFO, String.format("Setting first game state to %s", tav.currentGameState()));
+		LogRunner.logger().info(String.format("Setting first game state to %s", tav.currentGameState()));
 		firstGameState.selected().set(tav.currentGameState());
 	}
 	

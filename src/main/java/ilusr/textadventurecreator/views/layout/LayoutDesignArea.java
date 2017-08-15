@@ -12,6 +12,7 @@ import ilusr.iroshell.dockarea.SelectionManager;
 import ilusr.iroshell.services.IDialogService;
 import ilusr.iroshell.services.IStyleContainerService;
 import ilusr.iroshell.services.RegisteredServices;
+import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.views.IDialogProvider;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
@@ -69,7 +70,7 @@ public class LayoutDesignArea extends AnchorPane implements Initializable {
 		try {
 			loader.load();
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogRunner.logger().severe(e);
 		}
 	}
 	

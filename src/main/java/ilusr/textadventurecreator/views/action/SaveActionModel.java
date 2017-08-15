@@ -1,7 +1,5 @@
 package ilusr.textadventurecreator.views.action;
 
-import java.util.logging.Level;
-
 import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.language.DisplayStrings;
 import ilusr.textadventurecreator.language.ILanguageService;
@@ -51,12 +49,12 @@ public class SaveActionModel {
 		});
 		
 		if (saveLocation.get() == null || saveLocation.get().isEmpty()) {
-			LogRunner.logger().log(Level.INFO, "No save location set. Using default location.");
+			LogRunner.logger().info("No save location set. Using default location.");
 			saveLocation.set(DEFAULT_SAVE_FILE);
 		}
 		
 		blocking.addListener((v, o, n) -> {
-			LogRunner.logger().log(Level.INFO, String.format("Updating blocking to %s", n));
+			LogRunner.logger().info(String.format("Updating blocking to %s", n));
 			action.blocking(n);
 		});
 	}

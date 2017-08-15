@@ -1,7 +1,6 @@
 package ilusr.textadventurecreator.toolbars;
 
 import java.util.List;
-import java.util.logging.Level;
 
 import ilusr.core.url.InternalURLProvider;
 import ilusr.iroshell.services.IDialogService;
@@ -63,11 +62,11 @@ public class DebugSingleToolBarCommand extends GameStateAwareButton {
 		super.tooltipProperty().set(new Tooltip(languageService.getValue(DisplayStrings.DEBUG_SINGLE)));
 		
 		super.setOnAction((e) -> {
-			LogRunner.logger().log(Level.INFO, "Pressed Debug single toolbar item.");
+			LogRunner.logger().info("Pressed Debug single toolbar item.");
 			List<GameStatePersistenceObject> states = provider.getTextAdventureProject().getTextAdventure().gameStates();
 			ItemSelector<GameStatePersistenceObject> selector = new ItemSelector<GameStatePersistenceObject>(states, languageService, styleService, urlProvider);
 			selector.setSelectedAction((ev) -> {
-				LogRunner.logger().log(Level.INFO, String.format("Debugging game state %s", selector.selectedItem().stateId()));
+				LogRunner.logger().info(String.format("Debugging game state %s", selector.selectedItem().stateId()));
 				debugService.debugGameState(selector.selectedItem());
 			});
 			
@@ -78,7 +77,7 @@ public class DebugSingleToolBarCommand extends GameStateAwareButton {
 			Image debugIco = new Image(AssetLoader.getResourceURL("DebugIcon.png").toExternalForm(), 16, 16, true, true);
 			super.setGraphic(new ImageView(debugIco));
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogRunner.logger().severe(e);
 		}
 		
 		languageService.addListener(() -> {

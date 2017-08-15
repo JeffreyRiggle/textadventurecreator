@@ -3,7 +3,6 @@ package ilusr.textadventurecreator.search;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
 
 import ilusr.iroshell.services.IDialogService;
 import ilusr.logrunner.LogRunner;
@@ -107,7 +106,7 @@ public class TriggerFinderModel extends BaseFinderModel<TriggerPersistenceObject
 
 	@Override
 	protected void inspect(TriggerPersistenceObject item) {
-		LogRunner.logger().log(Level.INFO, "Inspecting trigger.");
+		LogRunner.logger().info("Inspecting trigger.");
 		TriggerModel model = new TriggerModel(item, languageService);
 		TriggerView view = viewFactory.create(model);
 		view.setDisable(true);

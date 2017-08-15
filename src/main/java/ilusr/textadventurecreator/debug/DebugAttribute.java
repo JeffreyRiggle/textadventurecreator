@@ -1,7 +1,5 @@
 package ilusr.textadventurecreator.debug;
 
-import java.util.logging.Level;
-
 import ilusr.logrunner.LogRunner;
 import playerlib.attributes.IAttribute;
 import playerlib.core.ValueListener;
@@ -65,7 +63,7 @@ public class DebugAttribute implements INamedObject, ValueListener<IAttribute> {
 
 	@Override
 	public <T> void changed(IAttribute source, T value) {
-		LogRunner.logger().log(Level.INFO, String.format("Attribute: %s changed to: %s", source.name(), source.value()));
+		LogRunner.logger().info(String.format("Attribute: %s changed to: %s", source.name(), source.value()));
 		if (updateListener != null) {
 			updateListener.run();
 		}

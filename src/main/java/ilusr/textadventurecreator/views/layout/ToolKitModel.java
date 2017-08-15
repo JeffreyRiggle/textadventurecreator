@@ -1,7 +1,5 @@
 package ilusr.textadventurecreator.views.layout;
 
-import java.util.logging.Level;
-
 import ilusr.logrunner.LogRunner;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,7 +27,7 @@ public class ToolKitModel {
 	}
 	
 	private void initialize() {
-		LogRunner.logger().log(Level.INFO, "Adding components to toolkit.");
+		LogRunner.logger().info("Adding components to toolkit.");
 		components.addAll(provider.getComponents());
 	}
 	

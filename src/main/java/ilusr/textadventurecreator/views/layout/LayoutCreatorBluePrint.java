@@ -4,7 +4,6 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.logging.Level;
 
 import ilusr.core.datamanager.xml.XmlGenerator;
 import ilusr.core.datamanager.xml.XmlInputReader;
@@ -60,7 +59,7 @@ public class LayoutCreatorBluePrint implements ITabContentBluePrint {
 	
 	@Override
 	public ITabContent create() {
-		LogRunner.logger().log(Level.INFO, "Creating new layout tab.");
+		LogRunner.logger().info("Creating new layout tab.");
 		return ServiceManager.getInstance().<LayoutCreatorContentTab>get("LayoutCreatorContentTab");
 	}
 
@@ -69,12 +68,12 @@ public class LayoutCreatorBluePrint implements ITabContentBluePrint {
 		LayoutCreatorContentTab tab = null;
 		
 		if (customData.startsWith(LAYOUT_NAME_PERSISTENCE)) {
-			LogRunner.logger().log(Level.INFO, String.format("Creating new layout tab with data.", customData));
+			LogRunner.logger().info(String.format("Creating new layout tab with data.", customData));
 			return findLayoutTab(customData.substring(LAYOUT_NAME_PERSISTENCE.length()));
 		}
 		
 		try {
-			LogRunner.logger().log(Level.INFO, "Creating new layout tab from persistence.");
+			LogRunner.logger().info("Creating new layout tab from persistence.");
 			InputStream stream = new ByteArrayInputStream(customData.getBytes(StandardCharsets.UTF_8));
 			XmlInputReader reader = new XmlInputReader(stream);
 			XmlManager manager = new XmlManager(new String(), new XmlGenerator(), reader);
@@ -95,7 +94,7 @@ public class LayoutCreatorBluePrint implements ITabContentBluePrint {
 			LayoutCreatorModel model = new LayoutCreatorModel(layout, languageService, dialogService, urlProvider, new SelectionManager());
 			tab = new LayoutCreatorContentTab(new LayoutCreatorView(model, styleService, urlProvider), languageService);
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogRunner.logger().severe(e);
 		}
 
 		return tab;
@@ -112,7 +111,7 @@ public class LayoutCreatorBluePrint implements ITabContentBluePrint {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogRunner.logger().severe(e);
 		}
 		
 		LayoutCreatorModel model = new LayoutCreatorModel(retVal, languageService, dialogService, urlProvider, new SelectionManager());

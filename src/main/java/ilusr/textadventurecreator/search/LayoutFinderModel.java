@@ -3,7 +3,6 @@ package ilusr.textadventurecreator.search;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
 
 import ilusr.core.url.InternalURLProvider;
 import ilusr.iroshell.dockarea.SelectionManager;
@@ -107,7 +106,7 @@ public class LayoutFinderModel extends BaseFinderModel<LayoutPersistenceObject> 
 
 	@Override
 	protected void inspect(LayoutPersistenceObject item) {
-		LogRunner.logger().log(Level.INFO, String.format("Inspecting layout %s", item.id()));
+		LogRunner.logger().info(String.format("Inspecting layout %s", item.id()));
 		LayoutCreatorModel model = new LayoutCreatorModel(item, languageService, dialogService, urlProvider, new SelectionManager());
 		model.compile();
 	}

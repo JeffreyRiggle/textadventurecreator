@@ -9,6 +9,7 @@ import ilusr.core.url.InternalURLProvider;
 import ilusr.iroshell.core.StyleUpdater;
 import ilusr.iroshell.services.IStyleContainerService;
 import ilusr.iroshell.services.IStyleWatcher;
+import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.language.ILanguageService;
 import ilusr.textadventurecreator.style.StyledComponents;
 import ilusr.textadventurecreator.views.RemoveListCellFactory;
@@ -80,7 +81,7 @@ public class BodyPartViewer extends PlayerDataView implements Initializable, ISt
 		try {
 			loader.load();
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogRunner.logger().severe(e);
 		}
 	}
 

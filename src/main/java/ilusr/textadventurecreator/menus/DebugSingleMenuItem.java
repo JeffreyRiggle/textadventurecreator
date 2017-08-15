@@ -1,7 +1,6 @@
 package ilusr.textadventurecreator.menus;
 
 import java.util.List;
-import java.util.logging.Level;
 
 import ilusr.core.url.InternalURLProvider;
 import ilusr.iroshell.services.IDialogService;
@@ -59,11 +58,11 @@ public class DebugSingleMenuItem extends GameAwareMenuItem {
 	
 	private void initialize() {
 		super.setOnAction((e) -> {
-			LogRunner.logger().log(Level.INFO, "Run -> Debug Single Pressed.");
+			LogRunner.logger().info("Run -> Debug Single Pressed.");
 			List<GameStatePersistenceObject> states = provider.getTextAdventureProject().getTextAdventure().gameStates();
 			ItemSelector<GameStatePersistenceObject> selector = new ItemSelector<GameStatePersistenceObject>(states, languageService, styleService, urlProvider);
 			selector.setSelectedAction((ev) -> {
-				LogRunner.logger().log(Level.INFO, String.format("%s selected for debug.", selector.selectedItem().stateId()));
+				LogRunner.logger().info(String.format("%s selected for debug.", selector.selectedItem().stateId()));
 				debugService.debugGameState(selector.selectedItem());
 			});
 			
@@ -78,7 +77,7 @@ public class DebugSingleMenuItem extends GameAwareMenuItem {
 			Image debugIco = new Image(AssetLoader.getResourceURL("DebugIcon.png").toExternalForm(), 16, 16, true, true);
 			super.setGraphic(new ImageView(debugIco));
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogRunner.logger().severe(e);
 		}
 	}
 }

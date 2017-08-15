@@ -1,7 +1,5 @@
 package ilusr.textadventurecreator.debug;
 
-import java.util.logging.Level;
-
 import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.language.DisplayStrings;
 import ilusr.textadventurecreator.language.ILanguageService;
@@ -104,7 +102,7 @@ public class DebugItemModel {
 	 * Resets the added, updated and removed notifications associated with this model.
 	 */
 	public void resetChangeNotifications() {
-		LogRunner.logger().log(Level.INFO, String.format("Reseting notifications for item: %s", item.name()));
+		LogRunner.logger().info(String.format("Reseting notifications for item: %s", item.name()));
 		if (added.get()) {
 			added.set(false);
 		}

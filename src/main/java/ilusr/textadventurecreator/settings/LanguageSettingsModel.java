@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.logging.Level;
 
 import ilusr.iroshell.services.IDialogService;
 import ilusr.logrunner.LogRunner;
@@ -62,7 +61,7 @@ public class LanguageSettingsModel {
 
 	private void initialize() {
 		for (Entry<String, String> entry : languageService.getLanguages().entrySet()) {
-			LogRunner.logger().log(Level.INFO, String.format("Adding %s(%s) to language list", entry.getValue(), entry.getKey()));
+			LogRunner.logger().info(String.format("Adding %s(%s) to language list", entry.getValue(), entry.getKey()));
 			languages.list().add(entry.getValue());
 			languageMap.put(entry.getValue(), entry.getKey());
 		}
@@ -120,7 +119,7 @@ public class LanguageSettingsModel {
 	 * Applies the selected language.
 	 */
 	public void apply() {
-		LogRunner.logger().log(Level.INFO, String.format("Applying language %s", languages.selected().get()));
+		LogRunner.logger().info(String.format("Applying language %s", languages.selected().get()));
 		languageService.setLanguage(languageMap.get(languages.selected().get()));
 	}
 
@@ -128,12 +127,12 @@ public class LanguageSettingsModel {
 	 * Adds a new language.
 	 */
 	public void add() {
-		LogRunner.logger().log(Level.INFO, "Adding new language.");
+		LogRunner.logger().info("Adding new language.");
 		LanguageMakerModel maker = new LanguageMakerModel(languageService);
 		Dialog dialog = dialogProvider.create(new LanguageMakerView(maker));
 
 		dialog.setOnComplete(() -> {
-			LogRunner.logger().log(Level.INFO, String.format("Creating new language %s", maker.name().get()));
+			LogRunner.logger().info(String.format("Creating new language %s", maker.name().get()));
 			maker.buildFile(System.getProperty("user.home") + "/ilusr/languages/" + maker.code().get() + "language.txt");
 		});
 
@@ -147,22 +146,22 @@ public class LanguageSettingsModel {
 		String languageCode = languageMap.get(languages.selected().get());
 
 		if (languageCode == null || languageCode.equals("en-US")) {
-			LogRunner.logger().log(Level.INFO, "Unable to edit language since it was null or en-US");
+			LogRunner.logger().info("Unable to edit language since it was null or en-US");
 			return;
 		}
 
 		File file = new File(System.getProperty("user.home") + "/ilusr/languages/" + languageCode + "language.txt");
 		if (!file.exists()) {
-			LogRunner.logger().log(Level.INFO, String.format("Unable to edit language since %s does not exist", file.getAbsolutePath()));
+			LogRunner.logger().info(String.format("Unable to edit language since %s does not exist", file.getAbsolutePath()));
 			return;
 		}
 
-		LogRunner.logger().log(Level.INFO, String.format("Editing language %s", languageCode));
+		LogRunner.logger().info(String.format("Editing language %s", languageCode));
 		LanguageMakerModel maker = new LanguageMakerModel(file, languageService);
 		Dialog dialog = dialogProvider.create(new LanguageMakerView(maker));
 
 		dialog.setOnComplete(() -> {
-			LogRunner.logger().log(Level.INFO, String.format("Finished editing language %s. Saving file.", languageCode));
+			LogRunner.logger().info(String.format("Finished editing language %s. Saving file.", languageCode));
 			maker.buildFile(System.getProperty("user.home") + "/ilusr/languages/" + maker.code().get() + "language.txt");
 		});
 

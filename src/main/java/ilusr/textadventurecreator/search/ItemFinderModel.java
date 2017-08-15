@@ -3,7 +3,6 @@ package ilusr.textadventurecreator.search;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
 
 import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.language.DisplayStrings;
@@ -146,7 +145,6 @@ public class ItemFinderModel extends BaseFinderModel<ItemPersistenceObject> {
 
 	@Override
 	protected void inspect(ItemPersistenceObject item) {
-		// TODO Auto-generated method stub
-		LogRunner.logger().log(Level.INFO, String.format("Inspecting item %s", item.itemName()));
+		LogRunner.logger().info(String.format("Inspecting item %s", item.itemName()));
 	}
 }

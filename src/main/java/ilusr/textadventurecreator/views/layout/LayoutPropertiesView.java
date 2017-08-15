@@ -2,6 +2,9 @@ package ilusr.textadventurecreator.views.layout;
 
 import java.net.URL;
 import java.util.Map.Entry;
+
+import ilusr.logrunner.LogRunner;
+
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
@@ -49,7 +52,7 @@ public class LayoutPropertiesView extends AnchorPane implements Initializable {
 		try {
 			loader.load();
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogRunner.logger().severe(e);
 		}
 	}
 

@@ -1,7 +1,5 @@
 package ilusr.textadventurecreator.views.trigger;
 
-import java.util.logging.Level;
-
 import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.language.DisplayStrings;
 import ilusr.textadventurecreator.language.ILanguageService;
@@ -65,22 +63,22 @@ public class TriggerModel {
 	
 	private void initialize() {
 		if (trigger.get() == null) {
-			LogRunner.logger().log(Level.INFO, "No trigger associated yet.");
+			LogRunner.logger().info("No trigger associated yet.");
 			return;
 		}
 		
 		TriggerPersistenceObject trig = trigger.get();
 		if (trig instanceof TextTriggerPersistenceObject) {
-			LogRunner.logger().log(Level.INFO, "Current trigger is text.");
+			LogRunner.logger().info("Current trigger is text.");
 			types.selected().set(TEXT);
 		} else if (trig instanceof PlayerTriggerPersistenceObject) {
-			LogRunner.logger().log(Level.INFO, "Current trigger is player.");
+			LogRunner.logger().info("Current trigger is player.");
 			types.selected().set(PLAYER);
 		} else if (trig instanceof ScriptedTriggerPersistenceObject) {
-			LogRunner.logger().log(Level.INFO, "Current trigger is script.");
+			LogRunner.logger().info("Current trigger is script.");
 			types.selected().set(SCRIPT);
 		} else if (trig instanceof MultiPartTriggerPersistenceObject) {
-			LogRunner.logger().log(Level.INFO, "Current trigger is multipart.");
+			LogRunner.logger().info("Current trigger is multipart.");
 			types.selected().set(MULTI_PART);
 		}
 	}

@@ -3,7 +3,6 @@ package ilusr.textadventurecreator.views.action;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
 
 import ilusr.iroshell.core.ViewSwitcher;
 import ilusr.logrunner.LogRunner;
@@ -125,7 +124,7 @@ public class ActionView extends AnchorPane implements Initializable {
 		try {
 			loader.load();
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogRunner.logger().severe(e);
 		}
 	}
 	
@@ -135,7 +134,7 @@ public class ActionView extends AnchorPane implements Initializable {
 		
 		actionType.setItems(model.types().list());
 		actionType.valueProperty().addListener((v, o, n) -> {
-			LogRunner.logger().log(Level.INFO, String.format("Switching action view to %s", n));
+			LogRunner.logger().info(String.format("Switching action view to %s", n));
 			action.switchView(n);
 			model.types().selected().set(n);
 			updateModel(n);

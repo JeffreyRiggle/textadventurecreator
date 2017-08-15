@@ -2,7 +2,6 @@ package ilusr.textadventurecreator.menus;
 
 import java.io.File;
 import java.util.List;
-import java.util.logging.Level;
 
 import ilusr.core.url.InternalURLProvider;
 import ilusr.iroshell.services.IDialogService;
@@ -55,7 +54,7 @@ public class ExportMenuItem extends MenuItem {
 	
 	private void initialize() {
 		super.setOnAction((e) -> {
-			LogRunner.logger().log(Level.INFO, "File -> Export Pressed.");
+			LogRunner.logger().info("File -> Export Pressed.");
 			exportLibrary();
 		});
 		
@@ -71,14 +70,14 @@ public class ExportMenuItem extends MenuItem {
 			LibraryItem selectedItem = selector.selectedItem();
 			
 			if (selectedItem == null) {
-				LogRunner.logger().log(Level.INFO, "Not exporting item since none was selected.");
+				LogRunner.logger().info("Not exporting item since none was selected.");
 				return;
 			}
 			
 			File path = getExportPath();
 			
 			if (path == null) {
-				LogRunner.logger().log(Level.INFO, "Not exporting item since no path was selected.");
+				LogRunner.logger().info("Not exporting item since no path was selected.");
 				return;
 			}
 			

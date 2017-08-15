@@ -1,7 +1,5 @@
 package ilusr.textadventurecreator.toolbars;
 
-import java.util.logging.Level;
-
 import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.language.DisplayStrings;
 import ilusr.textadventurecreator.language.ILanguageService;
@@ -39,7 +37,7 @@ public class OpenCommand extends Button {
 		super.tooltipProperty().set(new Tooltip(languageService.getValue(DisplayStrings.OPEN)));
 		
 		super.setOnAction((e) -> {
-			LogRunner.logger().log(Level.INFO, "Open Toolbar item pressed.");
+			LogRunner.logger().info("Open Toolbar item pressed.");
 			open();
 		});
 		

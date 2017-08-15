@@ -1,7 +1,6 @@
 package ilusr.textadventurecreator.error;
 
 import java.util.Properties;
-import java.util.logging.Level;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
@@ -82,7 +81,7 @@ public class EmailService implements IEmailService {
 			
 			message.setContent(multi);
 			
-			LogRunner.logger().log(Level.INFO, String.format("Sending email with subject %s", parameters.getSubject()));
+			LogRunner.logger().info(String.format("Sending email with subject %s", parameters.getSubject()));
 			
 			Transport.send(message);
 		} catch (Exception e) {

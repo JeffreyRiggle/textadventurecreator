@@ -1,7 +1,5 @@
 package ilusr.textadventurecreator.menus;
 
-import java.util.logging.Level;
-
 import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.debug.IDebugService;
 import ilusr.textadventurecreator.language.DisplayStrings;
@@ -41,7 +39,7 @@ public class DebugMenuItem extends GameAwareMenuItem {
 	
 	private void initialize() {
 		super.setOnAction((e) -> {
-			LogRunner.logger().log(Level.INFO, "Run -> Debug Pressed.");
+			LogRunner.logger().info("Run -> Debug Pressed.");
 			service.debugGame(provider.getTextAdventureProject().getTextAdventure());
 		});
 		
@@ -53,7 +51,7 @@ public class DebugMenuItem extends GameAwareMenuItem {
 			Image debugIco = new Image(AssetLoader.getResourceURL("DebugManyIcon.png").toExternalForm(), 16, 16, true, true);
 			super.setGraphic(new ImageView(debugIco));
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogRunner.logger().severe(e);
 		}
 	}
 }

@@ -1,7 +1,5 @@
 package ilusr.textadventurecreator.menus;
 
-import java.util.logging.Level;
-
 import ilusr.core.url.InternalURLProvider;
 import ilusr.iroshell.services.IDialogService;
 import ilusr.iroshell.services.IStyleContainerService;
@@ -52,7 +50,7 @@ public class SettingsMenuItem extends MenuItem {
 	
 	private void initialize() {
 		super.setOnAction((e) -> {
-			LogRunner.logger().log(Level.INFO, "Options -> Settings Pressed.");
+			LogRunner.logger().info("Options -> Settings Pressed.");
 			showSettings();
 		});
 		

@@ -1,7 +1,5 @@
 package ilusr.textadventurecreator.menus;
 
-import java.util.logging.Level;
-
 import ilusr.core.url.InternalURLProvider;
 import ilusr.iroshell.services.IDialogService;
 import ilusr.iroshell.services.IStyleContainerService;
@@ -49,7 +47,7 @@ public class AboutMenuItem extends MenuItem {
 		});
 		
 		super.setOnAction((e) -> {
-			LogRunner.logger().log(Level.INFO, "Help -> About pressed.");
+			LogRunner.logger().info("Help -> About pressed.");
 			dialogService.displayModal(new AboutView(languageService, styleService, urlProvider), languageService.getValue(DisplayStrings.ABOUT));
 		});
 	}

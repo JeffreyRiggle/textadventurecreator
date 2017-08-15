@@ -1,7 +1,6 @@
 package ilusr.textadventurecreator.menus;
 
 import java.io.File;
-import java.util.logging.Level;
 
 import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.language.DisplayStrings;
@@ -36,7 +35,7 @@ public class ImportMenuItem extends MenuItem {
 	
 	private void initialize() {
 		super.setOnAction((e) -> {
-			LogRunner.logger().log(Level.INFO, "File -> Import Pressed.");
+			LogRunner.logger().info("File -> Import Pressed.");
 			importLibrary();
 		});
 		
@@ -54,7 +53,7 @@ public class ImportMenuItem extends MenuItem {
 		File loadFile = chooser.showOpenDialog(super.parentPopupProperty().get().getOwnerWindow());
 		
 		if (loadFile == null) {
-			LogRunner.logger().log(Level.INFO, "Not importing library since no path was selected.");
+			LogRunner.logger().info("Not importing library since no path was selected.");
 			return;
 		}
 		

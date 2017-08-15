@@ -1,7 +1,5 @@
 package ilusr.textadventurecreator.debug;
 
-import java.util.logging.Level;
-
 import ilusr.logrunner.LogRunner;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -41,7 +39,7 @@ public class DebugNamedObjectModel {
 	private void initialize() {
 		namedObject.updated(() -> {
 			Platform.runLater(() -> {
-				LogRunner.logger().log(Level.INFO, String.format("Object %s, updated setting changed to true.", namedObject.name()));
+				LogRunner.logger().info(String.format("Object %s, updated setting changed to true.", namedObject.name()));
 				value.set(namedObject.value());
 				changed.set(true);
 			});

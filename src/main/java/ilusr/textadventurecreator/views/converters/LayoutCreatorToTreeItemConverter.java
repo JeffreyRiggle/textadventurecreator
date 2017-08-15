@@ -3,7 +3,6 @@ package ilusr.textadventurecreator.views.converters;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
 
 import ilusr.core.datamanager.xml.XmlManager;
 import ilusr.core.io.XMLDocumentUtilities;
@@ -67,14 +66,14 @@ public class LayoutCreatorToTreeItemConverter implements ListItemConverter<Layou
 		removeButton.getStylesheets().add(getClass().getResource("TreeItemRemove.css").toExternalForm());
 		
 		removeButton.setOnAction((e) -> {
-			LogRunner.logger().log(Level.INFO, String.format("Removing layout %s", model.id().get()));
+			LogRunner.logger().info(String.format("Removing layout %s", model.id().get()));
 			treeItem.getParent().getChildren().remove(treeItem);
 			this.model.layouts().remove(model);
 		});
 		
 		editButton.getStylesheets().add(getClass().getResource("TreeItemEdit.css").toExternalForm());
 		editButton.setOnAction((e) -> {
-			LogRunner.logger().log(Level.INFO, String.format("Editing layout %s", model.id().get()));
+			LogRunner.logger().info(String.format("Editing layout %s", model.id().get()));
 			addLayoutView(model);
 		});
 		

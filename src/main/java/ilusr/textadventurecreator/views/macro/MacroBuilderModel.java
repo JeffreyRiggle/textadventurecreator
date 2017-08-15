@@ -2,7 +2,6 @@ package ilusr.textadventurecreator.views.macro;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 
 import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.language.DisplayStrings;
@@ -260,17 +259,17 @@ public class MacroBuilderModel {
 	 * @return The macro built off of the selected player and properties.
 	 */
 	public String createMacro() {
-		LogRunner.logger().log(Level.INFO, "Building macro");
+		LogRunner.logger().info("Building macro");
 		StringBuilder builder = new StringBuilder();
 		PlayerPersistenceObject player = findPlayer(selectedPlayer.get());
 		
 		if (player == null) {
-			LogRunner.logger().log(Level.INFO, String.format("Unable to find player %s", selectedPlayer.get()));
+			LogRunner.logger().info(String.format("Unable to find player %s", selectedPlayer.get()));
 			valid.set(false);
 			return "Unable to find player";
 		}
 		
-		LogRunner.logger().log(Level.INFO, String.format("Building macro for player %s", selectedPlayer.get()));
+		LogRunner.logger().info(String.format("Building macro for player %s", selectedPlayer.get()));
 		builder.append("{[");
 		builder.append("player");
 		builder.append("<<");
@@ -316,11 +315,11 @@ public class MacroBuilderModel {
 		AttributePersistenceObject attribute = findAttribute(player, attributes.selected().get());
 		
 		if (attribute == null) {
-			LogRunner.logger().log(Level.INFO, String.format("Unable to find attribute %s", attributes.selected().get()));
+			LogRunner.logger().info(String.format("Unable to find attribute %s", attributes.selected().get()));
 			return;
 		}
 
-		LogRunner.logger().log(Level.INFO, String.format("Building attribute %s", attributes.selected().get()));
+		LogRunner.logger().info(String.format("Building attribute %s", attributes.selected().get()));
 		builder.append("attribute");
 		builder.append("<<");
 		builder.append(attribute.objectName());
@@ -344,11 +343,11 @@ public class MacroBuilderModel {
 		ItemPersistenceObject item = findItem(player, items.selected().get());
 		
 		if (item == null) {
-			LogRunner.logger().log(Level.INFO, String.format("Unable to find item %s", items.selected().get()));
+			LogRunner.logger().info(String.format("Unable to find item %s", items.selected().get()));
 			return;
 		}
 		
-		LogRunner.logger().log(Level.INFO, String.format("Building item %s", items.selected().get()));
+		LogRunner.logger().info(String.format("Building item %s", items.selected().get()));
 		builder.append("inventory");
 		builder.append("<<");
 		builder.append(item.itemName());
@@ -366,11 +365,11 @@ public class MacroBuilderModel {
 		PropertyPersistenceObject prop = findProperty(item, properties.selected().get());
 		
 		if (prop == null) {
-			LogRunner.logger().log(Level.INFO, String.format("Unable to find property %s", properties.selected().get()));
+			LogRunner.logger().info(String.format("Unable to find property %s", properties.selected().get()));
 			return;
 		}
 		
-		LogRunner.logger().log(Level.INFO, String.format("Building property %s", properties.selected().get()));
+		LogRunner.logger().info(String.format("Building property %s", properties.selected().get()));
 		builder.append("@");
 		builder.append("property");
 		builder.append("<<");
@@ -384,11 +383,11 @@ public class MacroBuilderModel {
 		BodyPartPersistenceObject bPart = findBodyPart(player, bodyParts.selected().get());
 		
 		if (bPart == null) {
-			LogRunner.logger().log(Level.INFO, String.format("Unable to find body part %s", bodyParts.selected().get()));
+			LogRunner.logger().info(String.format("Unable to find body part %s", bodyParts.selected().get()));
 			return;
 		}
 		
-		LogRunner.logger().log(Level.INFO, String.format("Building body part %s", attributes.selected().get()));
+		LogRunner.logger().info(String.format("Building body part %s", attributes.selected().get()));
 		builder.append("bodyPart");
 		builder.append("<<");
 		builder.append(bPart.objectName());
@@ -424,7 +423,7 @@ public class MacroBuilderModel {
 				continue;
 			}
 			
-			LogRunner.logger().log(Level.INFO, String.format("Player changed to %s", p.playerName()));
+			LogRunner.logger().info(String.format("Player changed to %s", p.playerName()));
 			updateAttributes(p);
 			updateCharacteristics(p);
 			updateBodyParts(p);

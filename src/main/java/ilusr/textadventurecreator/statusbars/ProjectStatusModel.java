@@ -1,7 +1,5 @@
 package ilusr.textadventurecreator.statusbars;
 
-import java.util.logging.Level;
-
 import ilusr.logrunner.LogRunner;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -46,7 +44,7 @@ public class ProjectStatusModel {
 	}
 	
 	private void setupBindings(StatusItem item) {
-		LogRunner.logger().log(Level.INFO, "Setting up bindings for status item.");
+		LogRunner.logger().info("Setting up bindings for status item.");
 		statusText.set(item.displayText().get());
 		item.displayText().addListener((v, o, n) -> {
 			Platform.runLater(() -> {
@@ -70,7 +68,7 @@ public class ProjectStatusModel {
 	}
 	
 	private void tearDownBindings() {
-		LogRunner.logger().log(Level.INFO, "Tearing down bindings for status item.");
+		LogRunner.logger().info("Tearing down bindings for status item.");
 		statusText.unbind();
 		progressAmount.unbind();
 		statusText.set(null);

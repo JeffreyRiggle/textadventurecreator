@@ -1,7 +1,5 @@
 package ilusr.textadventurecreator.menus;
 
-import java.util.logging.Level;
-
 import ilusr.iroshell.services.ILayoutService;
 import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.language.DisplayStrings;
@@ -34,7 +32,7 @@ public class LibrariesMenuItem extends MenuItem {
 	
 	private void initialize() {
 		super.setOnAction((e) -> {
-			LogRunner.logger().log(Level.INFO, "View -> Libraries Pressed.");
+			LogRunner.logger().info("View -> Libraries Pressed.");
 			layoutService.addTab(BluePrintNames.Library);
 		});
 		

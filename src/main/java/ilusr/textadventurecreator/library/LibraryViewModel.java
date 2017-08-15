@@ -1,7 +1,6 @@
 package ilusr.textadventurecreator.library;
 
 import java.util.UUID;
-import java.util.logging.Level;
 
 import ilusr.core.interfaces.Callback;
 import ilusr.core.ioc.ServiceManager;
@@ -97,12 +96,12 @@ public class LibraryViewModel {
 	}
 	
 	private void initialize() {
-		LogRunner.logger().log(Level.INFO, "Initializing the library view model.");
+		LogRunner.logger().info("Initializing the library view model.");
 		items.addAll(libraryService.getItems());
 		
 		libraryService.addLibraryChangedListener(() -> {
 			Platform.runLater(() -> {
-				LogRunner.logger().log(Level.INFO, "Library Service changed updating items.");
+				LogRunner.logger().info("Library Service changed updating items.");
 				items.clear();
 				items.addAll(libraryService.getItems());
 			});
@@ -117,7 +116,7 @@ public class LibraryViewModel {
 	 * @param item The @see LibraryItem to remove from the view and service.
 	 */
 	public void removeLibraryItem(LibraryItem item) {
-		LogRunner.logger().log(Level.INFO, String.format("Removing library item %s from model and service.", item.getLibraryName()));
+		LogRunner.logger().info(String.format("Removing library item %s from model and service.", item.getLibraryName()));
 		libraryService.removeLibraryItem(item);
 		items.remove(item);
 	}
@@ -128,7 +127,7 @@ public class LibraryViewModel {
 	 */
 	public void importLibrary(String path) {
 		libraryService.importLibrary(path, (l) -> {
-			LogRunner.logger().log(Level.INFO, String.format("Imported library item %s", l.getLibraryName()));
+			LogRunner.logger().info(String.format("Imported library item %s", l.getLibraryName()));
 			Platform.runLater(() -> { items.add(l); });
 		});
 	}
@@ -165,7 +164,7 @@ public class LibraryViewModel {
 	public Callback<LibraryItem> getEditAction() {
 		return (libraryItem) -> {
 			try {
-				LogRunner.logger().log(Level.INFO, String.format("Editing library item %s.", libraryItem.getLibraryName()));
+				LogRunner.logger().info(String.format("Editing library item %s.", libraryItem.getLibraryName()));
 				layoutService.addTab(BluePrintNames.LibraryItem, LIBRARY_ITEM_PERSISTENCE + libraryItem.getLibraryName() + ";=;" + libraryItem.getAuthor());
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -182,7 +181,7 @@ public class LibraryViewModel {
 	}
 	
 	private void addLibraryItem() {
-		LogRunner.logger().log(Level.INFO, "Adding library item to model and service.");
+		LogRunner.logger().info("Adding library item to model and service.");
 		LibraryItem item = new LibraryItem();
 		libraryService.importLibrary(item);
 		LibraryItemModel model = new LibraryItemModel(dialogService, item, triggerViewFactory, actionViewFactory, playerModFactory, languageService, urlProvider, ServiceManager.getInstance(), dialogProvider, styleService);

@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
 
 import ilusr.core.data.Tuple;
 import ilusr.core.i18n.LanguageManager;
@@ -47,7 +46,7 @@ public class LanguageService implements ILanguageService {
 
 	private void initialize() {
 		try {
-			LogRunner.logger().log(Level.INFO, "Loading data from English Language definition.");
+			LogRunner.logger().info("Loading data from English Language definition.");
 			String stream = StreamUtilities.getStreamContents(getClass().getResourceAsStream("enLanguage.txt"));
 			addLanguage(stream);
 		} catch (Exception e) {
@@ -65,13 +64,13 @@ public class LanguageService implements ILanguageService {
 			folder.mkdirs();
 		}
 
-		LogRunner.logger().log(Level.INFO, String.format("Looking for languages in path: %s", folder.getAbsolutePath()));
+		LogRunner.logger().info(String.format("Looking for languages in path: %s", folder.getAbsolutePath()));
 		for (File file : folder.listFiles()) {
 			if (!file.getAbsolutePath().endsWith(".txt")) {
 				continue;
 			}
 
-			LogRunner.logger().log(Level.INFO, String.format("Found language file: %s", file.getAbsolutePath()));
+			LogRunner.logger().info(String.format("Found language file: %s", file.getAbsolutePath()));
 			addLanguage(file);
 		}
 	}
@@ -85,14 +84,14 @@ public class LanguageService implements ILanguageService {
 				return;
 			}
 
-			LogRunner.logger().log(Level.INFO, String.format("Adding Language: %s (%s)", lang.key(), lang.value()));
+			LogRunner.logger().info(String.format("Adding Language: %s (%s)", lang.key(), lang.value()));
 			languages.put(lang.key(), lang.value());
 		}
 
 		try {
 			languageManager.addLanguagePack(language);
 		} catch (IOException e) {
-			e.printStackTrace();
+			LogRunner.logger().severe(e);
 		}
 	}
 
@@ -119,7 +118,7 @@ public class LanguageService implements ILanguageService {
 				return;
 			}
 
-			LogRunner.logger().log(Level.INFO, String.format("Removing Language: %s (%s)", lang.key(), lang.value()));
+			LogRunner.logger().info(String.format("Removing Language: %s (%s)", lang.key(), lang.value()));
 			languages.remove(lang.key());
 		}
 
@@ -135,7 +134,7 @@ public class LanguageService implements ILanguageService {
 
 	@Override
 	public void setLanguage(String code) {
-		LogRunner.logger().log(Level.INFO, String.format("Setting Language to: %s", code));
+		LogRunner.logger().info(String.format("Setting Language to: %s", code));
 		languageManager.setLanguage(code);
 		settingsManager.setStringSetting(SettingNames.LANGUAGE, code);
 		notifyListeners();
@@ -168,7 +167,7 @@ public class LanguageService implements ILanguageService {
 		try {
 			retVal = getLanguageCode(FileUtilities.getFileContentWithReturns(language));
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogRunner.logger().severe(e);
 		}
 
 		return retVal;

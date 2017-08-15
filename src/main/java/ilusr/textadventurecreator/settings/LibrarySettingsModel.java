@@ -1,7 +1,5 @@
 package ilusr.textadventurecreator.settings;
 
-import java.util.logging.Level;
-
 import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.language.DisplayStrings;
 import ilusr.textadventurecreator.language.ILanguageService;
@@ -42,12 +40,12 @@ public class LibrarySettingsModel {
 	
 	private void initialize() {
 		globalLibrary.addListener((v, o, n) -> {
-			LogRunner.logger().log(Level.INFO, String.format("Updating global library setting to %s", n));
+			LogRunner.logger().info(String.format("Updating global library setting to %s", n));
 			manager.setBooleanValue(SettingNames.GLOBAL_LIBRARY, n);
 		});
 		
 		gameLibrary.addListener((v, o, n) -> {
-			LogRunner.logger().log(Level.INFO, String.format("Updating game library setting to %s", n));
+			LogRunner.logger().info(String.format("Updating game library setting to %s", n));
 			manager.setBooleanValue(SettingNames.GAME_LIBRARY, n);
 		});
 	}

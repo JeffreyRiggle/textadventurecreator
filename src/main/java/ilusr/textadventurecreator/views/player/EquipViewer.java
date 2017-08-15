@@ -9,6 +9,7 @@ import ilusr.iroshell.core.StyleUpdater;
 import ilusr.iroshell.services.IDialogService;
 import ilusr.iroshell.services.IStyleContainerService;
 import ilusr.iroshell.services.IStyleWatcher;
+import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.language.DisplayStrings;
 import ilusr.textadventurecreator.language.ILanguageService;
 import ilusr.textadventurecreator.library.LibraryService;
@@ -116,7 +117,7 @@ public class EquipViewer extends AnchorPane implements Initializable, IStyleWatc
 		try {
 			loader.load();
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogRunner.logger().severe(e);
 		}
 	}
 	

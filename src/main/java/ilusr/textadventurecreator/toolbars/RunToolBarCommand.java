@@ -1,7 +1,5 @@
 package ilusr.textadventurecreator.toolbars;
 
-import java.util.logging.Level;
-
 import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.debug.IDebugService;
 import ilusr.textadventurecreator.language.DisplayStrings;
@@ -42,7 +40,7 @@ public class RunToolBarCommand extends GameStateAwareButton {
 		super.tooltipProperty().set(new Tooltip(languageService.getValue(DisplayStrings.RUN)));
 		
 		super.setOnAction((e) -> {
-			LogRunner.logger().log(Level.INFO, "Run game toolbar item pressed.");
+			LogRunner.logger().info("Run game toolbar item pressed.");
 			service.runGame(provider.getTextAdventureProject().getTextAdventure());
 		});
 		

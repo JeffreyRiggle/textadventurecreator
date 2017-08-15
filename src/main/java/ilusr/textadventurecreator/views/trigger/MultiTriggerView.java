@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import ilusr.core.javafx.ObservableListBinder;
+import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.views.EditRemoveListCellFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -40,7 +41,7 @@ public class MultiTriggerView extends BaseTriggerView implements Initializable {
 		try {
 			loader.load();
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogRunner.logger().severe(e);
 		}
 	}
 	

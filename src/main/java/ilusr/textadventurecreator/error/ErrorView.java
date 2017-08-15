@@ -11,6 +11,7 @@ import ilusr.iroshell.core.StyleArea;
 import ilusr.iroshell.core.StyleUpdater;
 import ilusr.iroshell.services.IStyleWatcher;
 import ilusr.iroshell.services.StyleContainerService;
+import ilusr.logrunner.LogRunner;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -81,7 +82,7 @@ public class ErrorView extends GridPane implements Initializable, IStyleWatcher{
 		try {
 			errorLoader.load();
 		} catch (Exception exception) {
-			exception.printStackTrace();
+			LogRunner.logger().severe(exception);
 		}
 	}
 

@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import ilusr.iroshell.core.IViewProvider;
 import ilusr.iroshell.core.ViewSwitcher;
+import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.views.player.InventorySelector;
 import ilusr.textadventurecreator.views.player.RemoveCharacteristicView;
 import javafx.fxml.FXML;
@@ -89,7 +90,7 @@ public class PlayerModificationActionView extends BaseActionView implements Init
 		try {
 			loader.load();
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogRunner.logger().severe(e);
 		}
 	}
 	

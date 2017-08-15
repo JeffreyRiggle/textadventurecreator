@@ -4,7 +4,6 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.logging.Level;
 
 import ilusr.core.datamanager.xml.XmlGenerator;
 import ilusr.core.datamanager.xml.XmlInputReader;
@@ -95,7 +94,7 @@ public class GameStateBluePrint implements ITabContentBluePrint {
 	
 	@Override
 	public ITabContent create() {
-		LogRunner.logger().log(Level.INFO, "Creating game state tab.");
+		LogRunner.logger().info("Creating game state tab.");
 		return ServiceManager.getInstance().<GameStateContentTab>get("GameStateContentTab");
 	}
 
@@ -104,12 +103,12 @@ public class GameStateBluePrint implements ITabContentBluePrint {
 		GameStateContentTab tab = null;
 		
 		if (customData.startsWith(GAME_STATE_NAME_PERSISTENCE)) {
-			LogRunner.logger().log(Level.INFO, String.format("Creating game state tab from: %s", customData));
+			LogRunner.logger().info(String.format("Creating game state tab from: %s", customData));
 			return findGameStateInfoTab(customData.substring(GAME_STATE_NAME_PERSISTENCE.length()));
 		}
 		
 		try {
-			LogRunner.logger().log(Level.INFO, "Creating game state tab from xml");
+			LogRunner.logger().info("Creating game state tab from xml");
 			InputStream stream = new ByteArrayInputStream(customData.getBytes(StandardCharsets.UTF_8));
 			XmlInputReader reader = new XmlInputReader(stream);
 			XmlManager manager = new XmlManager(new String(), new XmlGenerator(), reader);

@@ -9,6 +9,7 @@ import ilusr.core.url.InternalURLProvider;
 import ilusr.iroshell.core.StyleUpdater;
 import ilusr.iroshell.services.IStyleContainerService;
 import ilusr.iroshell.services.IStyleWatcher;
+import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.language.ILanguageService;
 import ilusr.textadventurecreator.style.StyledComponents;
 import ilusr.textadventurecreator.views.EditRemoveListCellFactory;
@@ -101,7 +102,7 @@ public class PlayerView extends AnchorPane implements Initializable, IStyleWatch
 		try {
 			playerLoader.load();
 		} catch (Exception exception) {
-			exception.printStackTrace();
+			LogRunner.logger().severe(exception);
 		}
 	}
 	

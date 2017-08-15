@@ -2,7 +2,6 @@ package ilusr.textadventurecreator.views.gamestate;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 
 import ilusr.core.interfaces.Callback;
 import ilusr.core.ioc.ServiceManager;
@@ -271,7 +270,7 @@ public class GameStateModel {
 	
 	private void initialize() {
 		for (OptionPersistenceObject option : gameState.options()) {
-			LogRunner.logger().log(Level.INFO, String.format("Adding Option with action type %s.", option.action().type()));
+			LogRunner.logger().info(String.format("Adding Option with action type %s.", option.action().type()));
 			options.add(option);
 		}
 		
@@ -280,21 +279,21 @@ public class GameStateModel {
 				continue;
 			}
 			
-			LogRunner.logger().log(Level.INFO, "Adding Timer.");
+			LogRunner.logger().info("Adding Timer.");
 			timers.add((CompletionTimerPersistenceObject)timer);
 		}
 		
 		if (gameState.layout() != null) {
-			LogRunner.logger().log(Level.INFO, String.format("Setting content location to %s.", gameState.layout().getLayoutContent()));
+			LogRunner.logger().info(String.format("Setting content location to %s.", gameState.layout().getLayoutContent()));
 			contentLocation.set(gameState.layout().getLayoutContent());
 		}
 		
 		LayoutType type = gameState.layout().getLayoutType();
 		if (type != null && type != LayoutType.Custom) {
-			LogRunner.logger().log(Level.INFO, String.format("Setting layout type to %s.", gameState.layout().getLayoutType().toString()));
+			LogRunner.logger().info(String.format("Setting layout type to %s.", gameState.layout().getLayoutType().toString()));
 			layouts.selected().set(gameState.layout().getLayoutType().toString());
 		} else if (type != null && type == LayoutType.Custom) {
-			LogRunner.logger().log(Level.INFO, String.format("Setting layout type to %s.", gameState.layout().getLayoutId()));
+			LogRunner.logger().info(String.format("Setting layout type to %s.", gameState.layout().getLayoutId()));
 			layouts.selected().set(gameState.layout().getLayoutId());
 		}
 	}
@@ -355,7 +354,7 @@ public class GameStateModel {
 			addOptionKey = new OptionPersistenceObject();
 			addTimerKey = new CompletionTimerPersistenceObject();
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogRunner.logger().severe(e);
 		}
 	}
 	
@@ -493,7 +492,7 @@ public class GameStateModel {
 	 */
 	public Callback<OptionPersistenceObject> getEditOptionAction() {
 		return (opt) -> {
-			LogRunner.logger().log(Level.INFO, String.format("Editing option with action type %s.", opt.action().type()));
+			LogRunner.logger().info(String.format("Editing option with action type %s.", opt.action().type()));
 			OptionModel model = new OptionModel(dialogService, libraryService, opt, triggerFactory, players,
 					languageService, actionViewFactory, dialogProvider, styleService, urlProvider);
 			Dialog dialog = dialogProvider.create(buildEditOptionView(model));
@@ -566,14 +565,14 @@ public class GameStateModel {
 					styleService, urlProvider));
 			dialog.isValid().bind(model.valid());
 			dialog.setOnComplete(() -> {
-				LogRunner.logger().log(Level.INFO, String.format("Adding option with action type %s.", opt.action().type()));
+				LogRunner.logger().info(String.format("Adding option with action type %s.", opt.action().type()));
 				gameState.addOption(opt);
 				options.add(opt);
 			});
 			
 			dialogService.displayModal(dialog, languageService.getValue(DisplayStrings.OPTION));
 		} catch (Exception ex) {
-			ex.printStackTrace();
+			LogRunner.logger().severe(ex);
 		}
 	}
 	
@@ -586,7 +585,7 @@ public class GameStateModel {
 		Dialog dialog = dialogProvider.create(new OptionFinder(finder, styleService, urlProvider));
 		
 		dialog.setOnComplete(() -> {
-			LogRunner.logger().log(Level.INFO, String.format("Adding option with action type %s.", finder.foundValue().action().type()));
+			LogRunner.logger().info(String.format("Adding option with action type %s.", finder.foundValue().action().type()));
 			gameState.addOption(finder.foundValue());
 			options.add(finder.foundValue());
 		});
@@ -607,12 +606,12 @@ public class GameStateModel {
 	 */
 	public void addTimer() {
 		try {
-			LogRunner.logger().log(Level.INFO, "Adding timer to game state.");
+			LogRunner.logger().info("Adding timer to game state.");
 			CompletionTimerPersistenceObject timer = new CompletionTimerPersistenceObject();
 			timers.add(timer);
 			gameState.addTimer(timer);
 		} catch (Exception ex) {
-			ex.printStackTrace();
+			LogRunner.logger().severe(ex);
 		}
 	}
 	
@@ -628,7 +627,7 @@ public class GameStateModel {
 				return;
 			}
 			
-			LogRunner.logger().log(Level.INFO, "Adding timer to game state from library.");
+			LogRunner.logger().info("Adding timer to game state from library.");
 			CompletionTimerPersistenceObject timer = (CompletionTimerPersistenceObject)finder.foundValue();
 			timers.add(timer);
 			gameState.addTimer(timer);
@@ -700,7 +699,7 @@ public class GameStateModel {
 		dialog.isValid().bind(view.model().valid());
 		dialog.setOnComplete(() -> {
 			String log = textLog.get();
-			LogRunner.logger().log(Level.INFO, String.format("Inserting macro %s into text log.", view.model().currentMacro()));
+			LogRunner.logger().info(String.format("Inserting macro %s into text log.", view.model().currentMacro()));
 			if (log == null || log.isEmpty()) {
 				textLog.set(view.model().currentMacro());
 				return;

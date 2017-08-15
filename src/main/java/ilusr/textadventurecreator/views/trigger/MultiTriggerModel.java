@@ -1,7 +1,6 @@
 package ilusr.textadventurecreator.views.trigger;
 
 import java.util.List;
-import java.util.logging.Level;
 
 import ilusr.core.interfaces.Callback;
 import ilusr.iroshell.services.IDialogService;
@@ -116,7 +115,7 @@ public class MultiTriggerModel {
 		return (trig) -> {
 			Dialog dialog = dialogProvider.create(factory.create(new TriggerModel(trig, languageService)));
 			
-			LogRunner.logger().log(Level.INFO, "Editing trigger.");
+			LogRunner.logger().info("Editing trigger.");
 			dialogService.displayModal(dialog);
 		};
 	}
@@ -132,12 +131,12 @@ public class MultiTriggerModel {
 			
 			dialog.setOnComplete(() -> {
 				TriggerPersistenceObject trig = model.persistenceObject().get();
-				LogRunner.logger().log(Level.INFO, "Adding trigger.");
+				LogRunner.logger().info("Adding trigger.");
 				triggers.add(trig);
 				trigger.addTrigger(trig);
 			});
 			
-			LogRunner.logger().log(Level.INFO, "Attempting to add a trigger.");
+			LogRunner.logger().info("Attempting to add a trigger.");
 			dialogService.displayModal(dialog);
 		};
 	}

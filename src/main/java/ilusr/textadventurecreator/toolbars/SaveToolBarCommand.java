@@ -1,7 +1,5 @@
 package ilusr.textadventurecreator.toolbars;
 
-import java.util.logging.Level;
-
 import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.language.DisplayStrings;
 import ilusr.textadventurecreator.language.ILanguageService;
@@ -41,7 +39,7 @@ public class SaveToolBarCommand extends GameStateAwareButton {
 		super.getStylesheets().add(getClass().getResource("SaveCommand.css").toExternalForm());
 		super.tooltipProperty().set(new Tooltip(languageService.getValue(DisplayStrings.SAVE)));
 		super.setOnAction((e) -> {
-			LogRunner.logger().log(Level.INFO, "Save toolbar item pressed.");
+			LogRunner.logger().info("Save toolbar item pressed.");
 			persistenceManager.saveAsync(provider.getTextAdventureProject());
 		});
 		

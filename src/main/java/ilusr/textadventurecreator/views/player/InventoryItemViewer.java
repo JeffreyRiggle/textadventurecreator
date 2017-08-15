@@ -9,6 +9,7 @@ import ilusr.iroshell.core.StyleUpdater;
 import ilusr.iroshell.services.IDialogService;
 import ilusr.iroshell.services.IStyleContainerService;
 import ilusr.iroshell.services.IStyleWatcher;
+import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.language.DisplayStrings;
 import ilusr.textadventurecreator.language.ILanguageService;
 import ilusr.textadventurecreator.library.LibraryService;
@@ -130,7 +131,7 @@ public class InventoryItemViewer extends PlayerDataView implements Initializable
 		try {
 			loader.load();
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogRunner.logger().severe(e);
 		}
 	}
 	
@@ -174,7 +175,7 @@ public class InventoryItemViewer extends PlayerDataView implements Initializable
 				
 				dialogService.displayModal(dialog, languageService.getValue(DisplayStrings.ITEM));
 			} catch (Exception ex) {
-				ex.printStackTrace();
+				LogRunner.logger().severe(ex);
 			}
 		});
 		
@@ -213,7 +214,7 @@ public class InventoryItemViewer extends PlayerDataView implements Initializable
 				
 				dialogService.displayModal(dialog);
 			} catch (Exception ex) {
-				ex.printStackTrace();
+				LogRunner.logger().severe(ex);
 			}
 		});
 	}

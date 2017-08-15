@@ -10,6 +10,7 @@ import ilusr.iroshell.core.StyleUpdater;
 import ilusr.iroshell.services.IStyleContainerService;
 import ilusr.iroshell.services.IStyleWatcher;
 import ilusr.iroshell.services.LayoutService;
+import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.style.StyledComponents;
 import ilusr.textadventurecreator.views.converters.GameStateToTreeItemConverter;
 import ilusr.textadventurecreator.views.converters.LayoutCreatorToTreeItemConverter;
@@ -87,7 +88,7 @@ public class GameExplorerView extends AnchorPane implements Initializable, IStyl
 		try {
 			explorerLoader.load();
 		} catch (Exception exception) {
-			exception.printStackTrace();
+			LogRunner.logger().severe(exception);
 		}
 	}
 

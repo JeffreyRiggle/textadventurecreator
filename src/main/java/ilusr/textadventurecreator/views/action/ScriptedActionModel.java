@@ -3,7 +3,6 @@ package ilusr.textadventurecreator.views.action;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.util.logging.Level;
 
 import ilusr.core.io.FileUtilities;
 import ilusr.logrunner.LogRunner;
@@ -50,10 +49,11 @@ public class ScriptedActionModel {
 			return;
 		}
 		
-		LogRunner.logger().log(Level.INFO, "No script found. Using default script.");
+		LogRunner.logger().info("No script found. Using default script.");
 		try {
 			script.set(FileUtilities.getFileContentWithReturns(new File(getClass().getResource("DefaultActionScript.js").toURI().getSchemeSpecificPart())));
 		} catch (Exception e) {
+			LogRunner.logger().severe(e);
 			script.set(new String());
 		}
 	}
@@ -93,15 +93,15 @@ public class ScriptedActionModel {
 			bWriter.write(script.get());
 			bWriter.close();
 			
-			LogRunner.logger().log(Level.INFO, "Opening script file.");
+			LogRunner.logger().info("Opening script file.");
 			Process proc = Runtime.getRuntime().exec(new String[] {"cmd", "/c", "start", "/wait",  temp.getAbsolutePath()});
 			proc.waitFor();
 		    
-			LogRunner.logger().log(Level.INFO, "Script file closed.");
+			LogRunner.logger().info("Script file closed.");
 			script.set(FileUtilities.getFileContentWithReturns(temp));
 			temp.delete();
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogRunner.logger().severe(e);
 		}
 		
 	}

@@ -1,7 +1,5 @@
 package ilusr.textadventurecreator.shell;
 
-import java.util.logging.Level;
-
 import ilusr.iroshell.core.LocationProvider;
 import ilusr.iroshell.statusbar.IStatusBarService;
 import ilusr.logrunner.LogRunner;
@@ -31,7 +29,7 @@ public class StatusBarInitializer implements IInitialize {
 	
 	@Override
 	public void initialize() {
-		LogRunner.logger().log(Level.INFO, "Initializing status bars.");
+		LogRunner.logger().info("Initializing status bars.");
 		statusBarService.addStatusBar(new ProjectStatus(new ProjectStatusModel(statusService)), LocationProvider.first());
 	}
 }

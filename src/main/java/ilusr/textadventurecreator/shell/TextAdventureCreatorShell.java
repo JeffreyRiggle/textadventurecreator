@@ -37,6 +37,7 @@ public class TextAdventureCreatorShell extends MainShell {
 		
 		super.applicationSettings.exceptionOptions().displayType(ExceptionDisplay.Custom);
 		super.applicationSettings.exceptionOptions().errorDialogCreator(new ErrorProvider());
+		LogRunner.logger().setLevel(Level.ALL);
 	}
 	
 	@Override
@@ -50,7 +51,7 @@ public class TextAdventureCreatorShell extends MainShell {
 		
 		for (String parameter : super.getParameters().getUnnamed()) {
 			if (parameter.matches("(?i).*\\.txaml")) {
-				LogRunner.logger().log(Level.INFO, String.format("Found file %s", parameter));
+				LogRunner.logger().info(String.format("Found file %s", parameter));
 				retVal = parameter;
 				break;
 			}
