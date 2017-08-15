@@ -1,7 +1,5 @@
 package ilusr.textadventurecreator.views.trigger;
 
-import java.util.logging.Level;
-
 import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.language.DisplayStrings;
 import ilusr.textadventurecreator.language.ILanguageService;
@@ -62,7 +60,7 @@ public class TextTriggerModel {
 	
 	private void initialize() {
 		if (trigger.matchType() == null) {
-			LogRunner.logger().log(Level.INFO, "Match type not yet set for trigger.");
+			LogRunner.logger().info("Match type not yet set for trigger.");
 			return;
 		}
 		

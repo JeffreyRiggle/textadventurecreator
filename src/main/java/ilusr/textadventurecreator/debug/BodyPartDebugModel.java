@@ -2,7 +2,6 @@ package ilusr.textadventurecreator.debug;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 
 import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.language.DisplayStrings;
@@ -77,7 +76,7 @@ public class BodyPartDebugModel {
 	
 	private void updateCharacteristics(List<ICharacteristic> a, List<ICharacteristic>r) {
 		for (ICharacteristic characteristic : a) {
-			LogRunner.logger().log(Level.INFO, String.format("Characteristic %s added to body part %s", characteristic.name(), bodyPart.name()));
+			LogRunner.logger().info(String.format("Characteristic %s added to body part %s", characteristic.name(), bodyPart.name()));
 			DebugNamedObjectModel model = new DebugNamedObjectModel(new DebugCharacteristic(characteristic));
 			model.added().set(true);
 			characteristics.add(model);
@@ -86,7 +85,7 @@ public class BodyPartDebugModel {
 		for (ICharacteristic characteristic : r) {
 			for (DebugNamedObjectModel model : characteristics) {
 				if (characteristic.name().equals(model.name().get())) {
-					LogRunner.logger().log(Level.INFO, String.format("Characteristic %s removed from body part %s", characteristic.name(), bodyPart.name()));
+					LogRunner.logger().info(String.format("Characteristic %s removed from body part %s", characteristic.name(), bodyPart.name()));
 					model.removed().set(true);
 					break;
 				}
@@ -156,7 +155,7 @@ public class BodyPartDebugModel {
 	 * Resets the added, removed and changed states.
 	 */
 	public void resetChangeNotifications() {
-		LogRunner.logger().log(Level.INFO, String.format("Reseting notifications for body part %s", bodyPart.name()));
+		LogRunner.logger().info(String.format("Reseting notifications for body part %s", bodyPart.name()));
 		
 		if (changed.get()) {
 			changed.set(false);

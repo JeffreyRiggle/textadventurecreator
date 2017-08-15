@@ -3,7 +3,6 @@ package ilusr.textadventurecreator.search;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
 
 import ilusr.core.url.InternalURLProvider;
 import ilusr.iroshell.services.IDialogService;
@@ -127,7 +126,7 @@ public class GameStateFinderModel extends BaseFinderModel<GameStatePersistenceOb
 	@Override
 	protected void inspect(GameStatePersistenceObject item) {
 		//TODO: Create gamestate inspector view.
-		LogRunner.logger().log(Level.INFO, String.format("Inspecting game state %s", item.stateId()));
+		LogRunner.logger().info(String.format("Inspecting game state %s", item.stateId()));
 		GameStateModel model = new GameStateModel(item, dialogService, null, null, null, null,
 				languageService, null, dialogProvider, styleService, urlProvider);
 		dialogService.displayModal(new GameStateInspector(model, languageService, dialogService, actionViewFactory, triggerViewFactory, dialogProvider, styleService, urlProvider), item.stateId());

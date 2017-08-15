@@ -1,7 +1,5 @@
 package ilusr.textadventurecreator.settings;
 
-import java.util.logging.Level;
-
 import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.language.DisplayStrings;
 import ilusr.textadventurecreator.language.ILanguageService;
@@ -52,12 +50,12 @@ public class ModSettingsModel {
 	
 	private void initialize() {
 		enableMods.addListener((v, o, n) -> {
-			LogRunner.logger().log(Level.INFO, String.format("Updating enable mods to %s", n));
+			LogRunner.logger().info(String.format("Updating enable mods to %s", n));
 			settingsManager.setBooleanValue(SettingNames.ALLOW_MODS, n);
 		});
 		
 		for (IMod mod : modManager.mods()) {
-			LogRunner.logger().log(Level.INFO, String.format("Adding mod to list %s(%s)", mod.name(), mod.id()));
+			LogRunner.logger().info(String.format("Adding mod to list %s(%s)", mod.name(), mod.id()));
 			ModSetting modSetting = new ModSetting(settingsManager, mod.name(), mod.id(), modManager.getActivation(mod.id()));
 			modSettings.add(modSetting);
 		}

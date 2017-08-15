@@ -3,7 +3,6 @@ package ilusr.textadventurecreator.search;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
 
 import ilusr.iroshell.services.IDialogService;
 import ilusr.logrunner.LogRunner;
@@ -107,7 +106,7 @@ public class AttributeFinderModel extends BaseFinderModel<AttributePersistenceOb
 
 	@Override
 	protected void inspect(AttributePersistenceObject item) {
-		LogRunner.logger().log(Level.INFO, String.format("Inspecting attribute %s", item.objectName()));
+		LogRunner.logger().info(String.format("Inspecting attribute %s", item.objectName()));
 		AttributeViewer view = new AttributeViewer(new NamedPersistenceObjectModel(item), languageService);
 		view.setDisable(true);
 		dialogService.displayModal(view, item.objectName());

@@ -3,7 +3,6 @@ package ilusr.textadventurecreator.views;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
 
 import ilusr.core.url.InternalURLProvider;
 import ilusr.iroshell.core.StyleUpdater;
@@ -90,7 +89,7 @@ public class Dialog extends AnchorPane implements Initializable, IStyleWatcher {
 		try {
 			loader.load();
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogRunner.logger().severe(e);
 		}
 	}
 	
@@ -174,10 +173,10 @@ public class Dialog extends AnchorPane implements Initializable, IStyleWatcher {
 	}
 	
 	private void okPressed() {
-		LogRunner.logger().log(Level.INFO, "Ok Button Pressed.");
+		LogRunner.logger().info("Ok Button Pressed.");
 		
 		if (complete != null) {
-			LogRunner.logger().log(Level.INFO, "Running complete action.");
+			LogRunner.logger().info("Running complete action.");
 			complete.run();
 		}
 		
@@ -186,10 +185,10 @@ public class Dialog extends AnchorPane implements Initializable, IStyleWatcher {
 	}
 	
 	private void closePressed() {
-		LogRunner.logger().log(Level.INFO, "Cancel Button Pressed.");
+		LogRunner.logger().info("Cancel Button Pressed.");
 		
 		if (cancel != null) {
-			LogRunner.logger().log(Level.INFO, "Running cancel action.");
+			LogRunner.logger().info("Running cancel action.");
 			cancel.run();
 		}
 		

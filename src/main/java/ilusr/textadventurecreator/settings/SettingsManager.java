@@ -3,7 +3,6 @@ package ilusr.textadventurecreator.settings;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.logging.Level;
 
 import ilusr.iroshell.core.ApplicationClosingListener;
 import ilusr.iroshell.services.IApplicationClosingManager;
@@ -49,7 +48,7 @@ public class SettingsManager implements ISettingsManager, ApplicationClosingList
 				}
 				
 				XmlConfigurationObject childC = (XmlConfigurationObject)child;
-				LogRunner.logger().log(Level.INFO, String.format("Initializing setting %s with value %s", childC.name(), childC.value()));
+				LogRunner.logger().info(String.format("Initializing setting %s with value %s", childC.name(), childC.value()));
 				settings.put(childC.name(), childC.value());
 			}
 			
@@ -123,7 +122,7 @@ public class SettingsManager implements ISettingsManager, ApplicationClosingList
 	@Override
 	public void save() {
 		try {
-			LogRunner.logger().log(Level.INFO, "Saving settings.");
+			LogRunner.logger().info("Saving settings.");
 			configurationManager.clearConfigurationObjects();
 			XmlConfigurationObject root = new XmlConfigurationObject("Settings");
 			for (Entry<String, Object> setting : settings.entrySet()) {

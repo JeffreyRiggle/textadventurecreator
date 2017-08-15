@@ -3,7 +3,6 @@ package ilusr.textadventurecreator.search;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
 
 import ilusr.iroshell.services.IDialogService;
 import ilusr.logrunner.LogRunner;
@@ -94,7 +93,7 @@ public class TimerFinderModel extends BaseFinderModel<TimerPersistenceObject> {
 
 	@Override
 	protected void inspect(TimerPersistenceObject item) {
-		LogRunner.logger().log(Level.INFO, "Inspecting timer.");
+		LogRunner.logger().info("Inspecting timer.");
 		CompletionTimerView view = new CompletionTimerView(new CompletionTimerModel((CompletionTimerPersistenceObject)item, languageService));
 		view.setDisable(true);
 		dialogService.displayModal(view);

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import ilusr.logrunner.LogRunner;
 import textadventurelib.persistence.StylePropertyPersistenceObject;
 import textadventurelib.persistence.StyleSelectorPersistenceObject;
 
@@ -45,7 +46,7 @@ public class LayoutStyle {
 				children.add(new LayoutStyle(child));
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogRunner.logger().severe(e);
 		}
 	}
 	

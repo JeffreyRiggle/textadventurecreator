@@ -1,7 +1,6 @@
 package ilusr.textadventurecreator.toolbars;
 
 import java.io.File;
-import java.util.logging.Level;
 
 import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.language.DisplayStrings;
@@ -53,7 +52,7 @@ public class SaveAsToolBarCommand extends GameStateAwareButton {
 	}
 	
 	private void saveFile() {
-		LogRunner.logger().log(Level.INFO, "Save As toolbar item pressed.");
+		LogRunner.logger().info("Save As toolbar item pressed.");
 		FileChooser chooser = new FileChooser();
 		ExtensionFilter ext = new ExtensionFilter("Text Adventure", new String[] { "*.txaml" });
 		chooser.getExtensionFilters().add(ext);
@@ -62,7 +61,7 @@ public class SaveAsToolBarCommand extends GameStateAwareButton {
 		File saveFile = chooser.showSaveDialog(super.getScene().getWindow());
 		
 		if (saveFile == null) {
-			LogRunner.logger().log(Level.INFO, "No file selected not saving project");
+			LogRunner.logger().info("No file selected not saving project");
 			return;
 		}
 		

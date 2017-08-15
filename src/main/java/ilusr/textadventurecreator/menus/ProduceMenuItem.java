@@ -1,7 +1,5 @@
 package ilusr.textadventurecreator.menus;
 
-import java.util.logging.Level;
-
 import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.language.DisplayStrings;
 import ilusr.textadventurecreator.language.ILanguageService;
@@ -48,7 +46,7 @@ public class ProduceMenuItem extends GameAwareMenuItem {
 		});
 		
 		super.setOnAction((e) -> {
-			LogRunner.logger().log(Level.INFO, "File -> Publish|Build|Generate Pressed.");
+			LogRunner.logger().info("File -> Publish|Build|Generate Pressed.");
 			publish();
 		});
 		

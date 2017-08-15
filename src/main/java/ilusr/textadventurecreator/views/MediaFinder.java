@@ -1,7 +1,6 @@
 package ilusr.textadventurecreator.views;
 
 import java.io.File;
-import java.util.logging.Level;
 
 import ilusr.iroshell.services.IDialogService;
 import ilusr.logrunner.LogRunner;
@@ -58,7 +57,7 @@ public class MediaFinder {
 		File content = chooser.showOpenDialog(window);
 				
 		if (content == null) {
-			LogRunner.logger().log(Level.INFO, "No media selected not updating location.");
+			LogRunner.logger().info("No media selected not updating location.");
 			return;
 		}
 				
@@ -66,18 +65,18 @@ public class MediaFinder {
 		String extension = fileName.substring(fileName.indexOf('.')+1);
 		
 		if (supportedExtension(extension)) {
-			LogRunner.logger().log(Level.INFO, String.format("Setting location to %s", content.getAbsolutePath()));
+			LogRunner.logger().info(String.format("Setting location to %s", content.getAbsolutePath()));
 			location.set(content.getAbsolutePath());
 			return;
 		}
 		
-		LogRunner.logger().log(Level.INFO, String.format("Extension %s is not a java supported extension showing conversion dialog.", extension));
+		LogRunner.logger().info(String.format("Extension %s is not a java supported extension showing conversion dialog.", extension));
 		MediaConverterModel model = new MediaConverterModel(content, languageService);
 		
 		Dialog dialog = dialogProvider.create(new MediaConverterView(model));
 		dialog.isValid().bind(model.valid());
 		dialog.setOnComplete(() -> {
-			LogRunner.logger().log(Level.INFO, String.format("Setting location to %s", model.newFileLocation()));
+			LogRunner.logger().info(String.format("Setting location to %s", model.newFileLocation()));
 			location.set(model.newFileLocation());
 		});
 				

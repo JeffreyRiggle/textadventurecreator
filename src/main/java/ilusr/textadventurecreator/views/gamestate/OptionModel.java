@@ -1,7 +1,6 @@
 package ilusr.textadventurecreator.views.gamestate;
 
 import java.util.List;
-import java.util.logging.Level;
 
 import ilusr.core.interfaces.Callback;
 import ilusr.core.url.InternalURLProvider;
@@ -184,37 +183,37 @@ public class OptionModel {
 	
 	private void selectType() {
 		if (option.action() == null) {
-			LogRunner.logger().log(Level.INFO, "Not setting type since there is no action yet.");
+			LogRunner.logger().info("Not setting type since there is no action yet.");
 			return;
 		}
 		
 		if (option.action() instanceof AppendTextActionPersistence) {
-			LogRunner.logger().log(Level.INFO, "Setting type to append.");
+			LogRunner.logger().info("Setting type to append.");
 			types.selected().set(APPEND_ACTION);
 		} else if (option.action() instanceof CompletionActionPersistence) {
-			LogRunner.logger().log(Level.INFO, "Setting type to completion.");
+			LogRunner.logger().info("Setting type to completion.");
 			types.selected().set(COMPLETION_ACTION);
 		} else if (option.action() instanceof ExecutionActionPersistence) {
-			LogRunner.logger().log(Level.INFO, "Setting type to execution.");
+			LogRunner.logger().info("Setting type to execution.");
 			types.selected().set(EXECUTION_ACTION);
 		} else if (option.action() instanceof ModifyPlayerActionPersistence) {
-			LogRunner.logger().log(Level.INFO, "Setting type to player mod.");
+			LogRunner.logger().info("Setting type to player mod.");
 			types.selected().set(MOD_PLAYER_ACTION);
 		} else if (option.action() instanceof SaveActionPersistenceObject) {
-			LogRunner.logger().log(Level.INFO, "Setting type to save.");
+			LogRunner.logger().info("Setting type to save.");
 			types.selected().set(SAVE_ACTION);
 		} else if (option.action() instanceof ScriptedActionPersistenceObject) {
-			LogRunner.logger().log(Level.INFO, "Setting type to script.");
+			LogRunner.logger().info("Setting type to script.");
 			types.selected().set(SCRIPT_ACTION);
 		} else if (option.action() instanceof FinishActionPersistenceObject) {
-			LogRunner.logger().log(Level.INFO, "Setting type to finish.");
+			LogRunner.logger().info("Setting type to finish.");
 			types.selected().set(FINISH_ACTION);
 		}
 	}
 	
 	private void bind() {
 		for (TriggerPersistenceObject trig : option.triggers()) {
-			LogRunner.logger().log(Level.INFO, String.format("Adding trigger with type %s", trig.type()));
+			LogRunner.logger().info(String.format("Adding trigger with type %s", trig.type()));
 			triggers.add(trig);
 		}
 		
@@ -271,7 +270,7 @@ public class OptionModel {
 	 */
 	public Callback<TriggerPersistenceObject> getEditTriggerAction() {
 		return (trig) -> {
-			LogRunner.logger().log(Level.INFO, String.format("Editing trigger with type %s", trig.type()));
+			LogRunner.logger().info(String.format("Editing trigger with type %s", trig.type()));
 			TriggerModel model = new TriggerModel(trig, languageService);
 			
 			Dialog dialog = dialogProvider.create(createView(model));
@@ -291,7 +290,7 @@ public class OptionModel {
 		dialog.isValid().bind(model.valid());
 		dialog.setOnComplete(() -> {
 			TriggerPersistenceObject trig = model.persistenceObject().get();
-			LogRunner.logger().log(Level.INFO, String.format("Adding trigger with type %s", trig.type()));
+			LogRunner.logger().info(String.format("Adding trigger with type %s", trig.type()));
 			option.addTrigger(trig);
 			triggers.add(trig);
 			valid.set(option.action() != null && option.triggers().size() > 0);
@@ -309,7 +308,7 @@ public class OptionModel {
 		
 		dialog.setOnComplete(() -> {
 			option.addTrigger(finder.foundValue());
-			LogRunner.logger().log(Level.INFO, String.format("Adding trigger with type %s from library", finder.foundValue().type()));
+			LogRunner.logger().info(String.format("Adding trigger with type %s from library", finder.foundValue().type()));
 			triggers.add(finder.foundValue());
 			valid.set(option.action() != null && option.triggers().size() > 0);
 		});
@@ -341,7 +340,7 @@ public class OptionModel {
 		ActionFinderModel finder = new ActionFinderModel(libraryService, languageService, dialogService, actionViewFactory);
 		Dialog dialog = dialogProvider.create(new ActionFinder(finder, styleService, urlProvider));
 		dialog.setOnComplete(() -> {
-			LogRunner.logger().log(Level.INFO, String.format("Adding action with type %s from library", finder.foundValue().type()));
+			LogRunner.logger().info(String.format("Adding action with type %s from library", finder.foundValue().type()));
 			callback.execute(finder.foundValue());
 		});
 		

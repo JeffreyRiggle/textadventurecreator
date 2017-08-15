@@ -2,7 +2,6 @@ package ilusr.textadventurecreator.views.action;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.logging.Level;
 import java.util.stream.Collectors;
 
 import ilusr.logrunner.LogRunner;
@@ -84,7 +83,7 @@ public class PlayerModificationActionModel {
 	private void initialize() {
 		itemChangeListener = (v, o, n) -> {
 			try {
-				LogRunner.logger().log(Level.INFO, String.format("Setting id to item %s", n.itemName()));
+				LogRunner.logger().info(String.format("Setting id to item %s", n.itemName()));
 				action.id(new ItemPersistenceObject(n));
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -121,7 +120,7 @@ public class PlayerModificationActionModel {
 		}
 		
 		selectedPlayers.selected().addListener((v, o, n) -> {
-			LogRunner.logger().log(Level.INFO, String.format("Updating selected player to %s", n));
+			LogRunner.logger().info(String.format("Updating selected player to %s", n));
 			action.playerName(n);
 		});
 		
@@ -139,7 +138,7 @@ public class PlayerModificationActionModel {
 		}
 		
 		modifications.selected().addListener((v, o, n) -> {
-			LogRunner.logger().log(Level.INFO, String.format("Updating modification to %s", n));
+			LogRunner.logger().info(String.format("Updating modification to %s", n));
 			action.modificationType(ModificationType.valueOf(n));
 			if (isRemove()) {
 				updateDataToId();
@@ -406,7 +405,7 @@ public class PlayerModificationActionModel {
 	}
 	
 	private void updateIds(ModificationObject type) {
-		LogRunner.logger().log(Level.INFO, "Updating id list");
+		LogRunner.logger().info("Updating id list");
 		id.list().clear();
 		
 		switch (type) {
@@ -436,7 +435,7 @@ public class PlayerModificationActionModel {
 			return;
 		}
 		
-		LogRunner.logger().log(Level.INFO, String.format("Updating ids with attributes for player %s", player.get().playerName()));
+		LogRunner.logger().info(String.format("Updating ids with attributes for player %s", player.get().playerName()));
 		id.list().addAll(player.get().attributes().stream().map(AttributePersistenceObject::objectName).collect(Collectors.toList()));
 	}
 	
@@ -446,7 +445,7 @@ public class PlayerModificationActionModel {
 			return;
 		}
 		
-		LogRunner.logger().log(Level.INFO, String.format("Updating ids with body parts for player %s", player.get().playerName()));
+		LogRunner.logger().info(String.format("Updating ids with body parts for player %s", player.get().playerName()));
 		id.list().addAll(player.get().bodyParts().stream().map(BodyPartPersistenceObject::objectName).collect(Collectors.toList()));
 	}
 	
@@ -456,7 +455,7 @@ public class PlayerModificationActionModel {
 			return;
 		}
 		
-		LogRunner.logger().log(Level.INFO, String.format("Updating ids with characteristics for player %s", player.get().playerName()));
+		LogRunner.logger().info(String.format("Updating ids with characteristics for player %s", player.get().playerName()));
 		id.list().addAll(player.get().characteristics().stream().map(CharacteristicPersistenceObject::objectName).collect(Collectors.toList()));
 	}
 	
@@ -466,7 +465,7 @@ public class PlayerModificationActionModel {
 			return;
 		}
 		
-		LogRunner.logger().log(Level.INFO, String.format("Updating ids with equipment for player %s", player.get().playerName()));
+		LogRunner.logger().info(String.format("Updating ids with equipment for player %s", player.get().playerName()));
 		id.list().addAll(player.get().bodyParts().stream().map(BodyPartPersistenceObject::objectName).collect(Collectors.toList()));
 	}
 	
@@ -476,7 +475,7 @@ public class PlayerModificationActionModel {
 			return;
 		}
 		
-		LogRunner.logger().log(Level.INFO, String.format("Updating ids with items for player %s", player.get().playerName()));
+		LogRunner.logger().info(String.format("Updating ids with items for player %s", player.get().playerName()));
 		id.list().addAll(player.get().inventory().items().stream().map(ItemPersistenceObject::itemName).collect(Collectors.toList()));
 	}
 	
@@ -542,7 +541,7 @@ public class PlayerModificationActionModel {
 	}
 	
 	private void updateModificationData(Object o, Object n) {
-		LogRunner.logger().log(Level.INFO, "Updating modification data.");
+		LogRunner.logger().info("Updating modification data.");
 		
 		if (o instanceof InventoryItem) {
 			removeItemBindings((InventoryItem)o);
@@ -576,18 +575,18 @@ public class PlayerModificationActionModel {
 			action.id(new ItemPersistenceObject(item.getItem()));
 			setupItemBindings(item);
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogRunner.logger().severe(e);
 		}
 	}
 	
 	private void removeItemBindings(InventoryItem item) {
-		LogRunner.logger().log(Level.INFO, String.format("Removing bindings for item %s", item.getItem().itemName()));
+		LogRunner.logger().info(String.format("Removing bindings for item %s", item.getItem().itemName()));
 		item.amount().removeListener(amountChangeListener);
 		item.item().removeListener(itemChangeListener);
 	}
 	
 	private void setupItemBindings(InventoryItem item) {
-		LogRunner.logger().log(Level.INFO, String.format("Setting up bindings for item %s", item.getItem().itemName()));
+		LogRunner.logger().info(String.format("Setting up bindings for item %s", item.getItem().itemName()));
 		item.amount().addListener(amountChangeListener);
 		item.item().addListener(itemChangeListener);
 	}

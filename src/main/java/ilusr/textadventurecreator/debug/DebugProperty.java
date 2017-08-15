@@ -1,7 +1,5 @@
 package ilusr.textadventurecreator.debug;
 
-import java.util.logging.Level;
-
 import ilusr.logrunner.LogRunner;
 import playerlib.core.ValueListener;
 import playerlib.items.IProperty;
@@ -65,7 +63,7 @@ public class DebugProperty implements INamedObject, ValueListener<IProperty> {
 
 	@Override
 	public <T> void changed(IProperty source, T value) {
-		LogRunner.logger().log(Level.INFO, String.format("Property: %s, updated to %s", source.name(), value));
+		LogRunner.logger().info(String.format("Property: %s, updated to %s", source.name(), value));
 		if (updateListener != null) {
 			updateListener.run();
 		}

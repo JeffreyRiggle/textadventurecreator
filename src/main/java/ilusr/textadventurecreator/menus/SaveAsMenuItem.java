@@ -1,7 +1,6 @@
 package ilusr.textadventurecreator.menus;
 
 import java.io.File;
-import java.util.logging.Level;
 
 import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.language.DisplayStrings;
@@ -41,7 +40,7 @@ public class SaveAsMenuItem extends GameAwareMenuItem {
 	
 	private void initialize() {
 		super.setOnAction((e) -> {
-			LogRunner.logger().log(Level.INFO, "File -> Save As Pressed.");
+			LogRunner.logger().info("File -> Save As Pressed.");
 			saveFile();
 		});
 		
@@ -59,7 +58,7 @@ public class SaveAsMenuItem extends GameAwareMenuItem {
 		File saveFile = chooser.showSaveDialog(super.parentPopupProperty().get().getOwnerWindow());
 		
 		if (saveFile == null) {
-			LogRunner.logger().log(Level.INFO, "Not saving since no path was selected.");
+			LogRunner.logger().info("Not saving since no path was selected.");
 			return;
 		}
 		

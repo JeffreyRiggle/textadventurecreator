@@ -6,7 +6,6 @@ import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ServiceLoader;
-import java.util.logging.Level;
 
 import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.shell.IInitialize;
@@ -53,7 +52,7 @@ public class ModLoader implements IInitialize {
 		ServiceLoader<IMod> loader = ServiceLoader.load(IMod.class, classLoader);
 		
 		loader.forEach((m) -> {
-			LogRunner.logger().log(Level.INFO, String.format("Found Mod %s", m.name()));
+			LogRunner.logger().info(String.format("Found Mod %s", m.name()));
 			mods.add(m);
 		});
 	}

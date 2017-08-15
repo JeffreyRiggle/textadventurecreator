@@ -2,7 +2,6 @@ package ilusr.textadventurecreator.views.layout;
 
 import java.awt.GridLayout;
 import java.util.UUID;
-import java.util.logging.Level;
 
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -223,7 +222,7 @@ public class LayoutCreatorModel {
 	 * Compiles and displays the layout.
 	 */
 	public void compile() {
-		LogRunner.logger().log(Level.INFO, String.format("Compiling layout %s", id.get()));
+		LogRunner.logger().info(String.format("Compiling layout %s", id.get()));
 		
 		TextAdventureLayoutModel model = new TextAdventureLayoutModel("Text Log Area!");
 		model.resource().set("https://www.google.com/");
@@ -249,7 +248,7 @@ public class LayoutCreatorModel {
 		StackPane pane = new StackPane();
 		pane.getChildren().add(node);
 		
-		LogRunner.logger().log(Level.INFO, String.format("Displaying layout %s", id.get()));
+		LogRunner.logger().info(String.format("Displaying layout %s", id.get()));
 		dialogService.displayModal(pane);
 	}
 }

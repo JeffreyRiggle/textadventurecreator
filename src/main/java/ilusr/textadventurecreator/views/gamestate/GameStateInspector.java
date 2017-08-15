@@ -7,6 +7,7 @@ import ilusr.core.javafx.ObservableListBinder;
 import ilusr.core.url.InternalURLProvider;
 import ilusr.iroshell.services.IDialogService;
 import ilusr.iroshell.services.IStyleContainerService;
+import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.language.DisplayStrings;
 import ilusr.textadventurecreator.language.ILanguageService;
 import ilusr.textadventurecreator.search.SearchListCellFactory;
@@ -121,7 +122,7 @@ public class GameStateInspector extends AnchorPane implements Initializable{
 		try {
 			loader.load();
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogRunner.logger().severe(e);
 		}
 	}
 

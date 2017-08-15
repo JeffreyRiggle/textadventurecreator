@@ -1,7 +1,5 @@
 package ilusr.textadventurecreator.menus;
 
-import java.util.logging.Level;
-
 import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.language.DisplayStrings;
 import ilusr.textadventurecreator.language.ILanguageService;
@@ -37,7 +35,7 @@ public class NewProjectMenuItem extends MenuItem {
 		setupIcon();
 
 		super.setOnAction((e) -> {
-			LogRunner.logger().log(Level.INFO, "File -> New Pressed.");
+			LogRunner.logger().info("File -> New Pressed.");
 			try {
 				projectManager.createNewProject();
 			} catch (Exception ex) {

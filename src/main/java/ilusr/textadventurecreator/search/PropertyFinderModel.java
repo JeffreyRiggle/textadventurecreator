@@ -3,7 +3,6 @@ package ilusr.textadventurecreator.search;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
 
 import ilusr.iroshell.services.IDialogService;
 import ilusr.logrunner.LogRunner;
@@ -107,7 +106,7 @@ public class PropertyFinderModel extends BaseFinderModel<PropertyPersistenceObje
 
 	@Override
 	protected void inspect(PropertyPersistenceObject item) {
-		LogRunner.logger().log(Level.INFO, String.format("Inspecting property %s", item.objectName()));
+		LogRunner.logger().info(String.format("Inspecting property %s", item.objectName()));
 		PropertyViewer view = new PropertyViewer(new NamedPersistenceObjectModel(item), languageService);
 		view.setDisable(true);
 		dialogService.displayModal(view, item.objectName());

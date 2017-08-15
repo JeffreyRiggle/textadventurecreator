@@ -4,7 +4,6 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.logging.Level;
 
 import ilusr.core.datamanager.xml.XmlGenerator;
 import ilusr.core.datamanager.xml.XmlInputReader;
@@ -70,7 +69,7 @@ public class PlayerBluePrint implements ITabContentBluePrint{
 	
 	@Override
 	public ITabContent create() {
-		LogRunner.logger().log(Level.INFO, "Creating player tab.");
+		LogRunner.logger().info("Creating player tab.");
 		return ServiceManager.getInstance().<PlayerContentTab>get("PlayerContentTab");
 	}
 
@@ -79,12 +78,12 @@ public class PlayerBluePrint implements ITabContentBluePrint{
 		PlayerContentTab tab = null;
 		
 		if (customData.startsWith(PLAYER_NAME_PERSISTENCE)) {
-			LogRunner.logger().log(Level.INFO, String.format("Creating player tab with player data %s.", customData));
+			LogRunner.logger().info(String.format("Creating player tab with player data %s.", customData));
 			return findPlayerInfoTab(customData.substring(PLAYER_NAME_PERSISTENCE.length()));
 		}
 		
 		try {
-			LogRunner.logger().log(Level.INFO, "Creating player tab from persistence object.");
+			LogRunner.logger().info("Creating player tab from persistence object.");
 			InputStream stream = new ByteArrayInputStream(customData.getBytes(StandardCharsets.UTF_8));
 			XmlInputReader reader = new XmlInputReader(stream);
 			XmlManager manager = new XmlManager(new String(), new XmlGenerator(), reader);
@@ -106,7 +105,7 @@ public class PlayerBluePrint implements ITabContentBluePrint{
 			tab = new PlayerContentTab(new PlayerView(new PlayerModel(dialogService, libraryService, player, languageService,
 					dialogProvider, styleService, urlProvider), languageService, styleService, urlProvider));
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogRunner.logger().severe(e);
 		}
 
 		return tab;
@@ -124,7 +123,7 @@ public class PlayerBluePrint implements ITabContentBluePrint{
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogRunner.logger().severe(e);
 		}
 		
 		return new PlayerContentTab(new PlayerView(new PlayerModel(dialogService, libraryService, player, languageService,

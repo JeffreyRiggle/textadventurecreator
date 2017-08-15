@@ -1,7 +1,5 @@
 package ilusr.textadventurecreator.error;
 
-import java.util.logging.Level;
-
 import javax.mail.Message.RecipientType;
 
 import ilusr.logrunner.LogRunner;
@@ -90,7 +88,7 @@ public class ErrorModel {
 	}
 	
 	private void sendReportImpl(Runnable callback) {
-		LogRunner.logger().log(Level.INFO, "Creating report for error.");
+		LogRunner.logger().info("Creating report for error.");
 		EmailParameters parameters = new EmailParameters();
 		parameters.setFromAddress("illusionedrealmsbugs@gmail.com");
 		parameters.recipients().add(new EmailRecipient("illusionedrealmsbugs@gmail.com", RecipientType.TO));

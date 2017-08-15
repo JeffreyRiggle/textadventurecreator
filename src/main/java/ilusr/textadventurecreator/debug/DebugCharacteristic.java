@@ -1,7 +1,5 @@
 package ilusr.textadventurecreator.debug;
 
-import java.util.logging.Level;
-
 import ilusr.logrunner.LogRunner;
 import playerlib.characteristics.ICharacteristic;
 import playerlib.core.ValueListener;
@@ -65,7 +63,7 @@ public class DebugCharacteristic implements INamedObject, ValueListener<ICharact
 
 	@Override
 	public <T> void changed(ICharacteristic source, T value) {
-		LogRunner.logger().log(Level.INFO, String.format("Characteristic: %s changed to: %s", source.name(), source.value()));
+		LogRunner.logger().info(String.format("Characteristic: %s changed to: %s", source.name(), source.value()));
 		if (updateListener != null) {
 			updateListener.run();
 		}

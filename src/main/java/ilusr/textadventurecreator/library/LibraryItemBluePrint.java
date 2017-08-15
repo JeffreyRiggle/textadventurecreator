@@ -4,7 +4,6 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.logging.Level;
 
 import ilusr.core.datamanager.xml.XmlGenerator;
 import ilusr.core.datamanager.xml.XmlInputReader;
@@ -78,13 +77,13 @@ public class LibraryItemBluePrint implements ITabContentBluePrint {
 	
 	@Override
 	public ITabContent create() {
-		LogRunner.logger().log(Level.INFO, "Creating new library item view.");
+		LogRunner.logger().info("Creating new library item view.");
 		return ServiceManager.getInstance().<LibraryItemContentTab>get("LibraryItemContentTab");
 	}
 
 	@Override
 	public ITabContent create(String customData) {
-		LogRunner.logger().log(Level.INFO, String.format("Creating new library item view with data: %s", customData));
+		LogRunner.logger().info(String.format("Creating new library item view with data: %s", customData));
 		LibraryItemContentTab tab = null;
 		
 		if (customData.startsWith(LIBRARY_ITEM_PERSISTENCE)) {

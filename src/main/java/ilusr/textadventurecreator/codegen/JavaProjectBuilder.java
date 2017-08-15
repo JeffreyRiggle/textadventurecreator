@@ -5,7 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
-import java.util.logging.Level;
 
 import ilusr.core.environment.EnvironmentUtilities;
 import ilusr.core.io.FileUtilities;
@@ -45,7 +44,7 @@ public class JavaProjectBuilder implements IProjectBuilder {
 	
 	@Override
 	public void build(StatusItem item) {
-		LogRunner.logger().log(Level.INFO, String.format("Building java project for %s", persistence.getGameInfo().gameName()));
+		LogRunner.logger().info(String.format("Building java project for %s", persistence.getGameInfo().gameName()));
 		
 		String sanitizedGameName = persistence.getGameInfo().gameName();
 		String projectLocation = new String();
@@ -59,7 +58,7 @@ public class JavaProjectBuilder implements IProjectBuilder {
 		buildProject(projectLocation, item);
 		
 		if (persistence.getIsDev()) {
-			LogRunner.logger().log(Level.INFO, "Determined game was a dev game. Not compiling project.");
+			LogRunner.logger().info("Determined game was a dev game. Not compiling project.");
 			item.finished().set(true);
 			return;
 		}
@@ -81,7 +80,7 @@ public class JavaProjectBuilder implements IProjectBuilder {
 	}
 	
 	private void compile(String projectLocation, StatusItem item) {
-		LogRunner.logger().log(Level.INFO, "Compiling java project.");
+		LogRunner.logger().info("Compiling java project.");
 		
 		item.indicator().set(StatusIndicator.Normal);
 		item.displayText().set(languageService.getValue(DisplayStrings.COMPLILING));
@@ -91,14 +90,14 @@ public class JavaProjectBuilder implements IProjectBuilder {
 			Process proc = getCompileProcess(projectLocation);
 			
 			if (proc == null) {
-				LogRunner.logger().log(Level.INFO, "Unable to build compile process!");
+				LogRunner.logger().info("Unable to build compile process!");
 				return;
 			}
 			
 			ProcessHelpers.handleProcessStreams(proc);
 			proc.waitFor();
 			
-			LogRunner.logger().log(Level.INFO, "Finished compiling project.");
+			LogRunner.logger().info("Finished compiling project.");
 			item.progressAmount().set(1.0);
 			item.indicator().set(StatusIndicator.Good);
 		} catch (Exception e) {
@@ -111,13 +110,13 @@ public class JavaProjectBuilder implements IProjectBuilder {
 		Process retVal = null;
 		
 		if (EnvironmentUtilities.isWindows()) {
-			LogRunner.logger().log(Level.INFO, "Determined environment was windows. Building windows compile process");
+			LogRunner.logger().info("Determined environment was windows. Building windows compile process");
 			retVal = Runtime.getRuntime().exec(new String[] {"cmd", "/c", "start", "/wait", "mvnlnk.lnk", "clean", "install", "-f",  projectLocation});
 		} else if (EnvironmentUtilities.isUnix()) {
-			LogRunner.logger().log(Level.INFO, "Determined environment was linux. Building linux compile process");
+			LogRunner.logger().info("Determined environment was linux. Building linux compile process");
 			retVal = Runtime.getRuntime().exec(new String[] {"mvn", "clean", "install", "-f", projectLocation});
 		} else if (EnvironmentUtilities.isMac()) {
-			LogRunner.logger().log(Level.INFO, "Determined environment was mac. Building mac compile process");
+			LogRunner.logger().info("Determined environment was mac. Building mac compile process");
 			retVal = Runtime.getRuntime().exec(new String[] {"mvn", "clean", "install", "-f", projectLocation});
 		}
 		
@@ -137,7 +136,7 @@ public class JavaProjectBuilder implements IProjectBuilder {
 				target.mkdirs();
 			}
 			
-			LogRunner.logger().log(Level.INFO, String.format("Shipping compiled project to %s", target.getAbsolutePath().toString()));
+			LogRunner.logger().info(String.format("Shipping compiled project to %s", target.getAbsolutePath().toString()));
 			Files.copy(app.toPath(), new File(target.getAbsolutePath() + "/" + appName).toPath());
 			item.progressAmount().set(1.0);
 			item.indicator().set(StatusIndicator.Good);
@@ -148,7 +147,7 @@ public class JavaProjectBuilder implements IProjectBuilder {
 	}
 	
 	private void cleanTemp(String project, StatusItem item) {
-		LogRunner.logger().log(Level.INFO, "Cleaning up temp directory.");
+		LogRunner.logger().info("Cleaning up temp directory.");
 		item.displayText().set(languageService.getValue(DisplayStrings.CLEANING_UP));
 		item.indicator().set(StatusIndicator.Normal);
 		item.progressAmount().set(.0);
@@ -180,7 +179,7 @@ public class JavaProjectBuilder implements IProjectBuilder {
 	}
 	
 	private void firstBuild(File project, StatusItem item) {
-		LogRunner.logger().log(Level.INFO, String.format("Building project in location %s", project.getAbsoluteFile().toString()));
+		LogRunner.logger().info(String.format("Building project in location %s", project.getAbsoluteFile().toString()));
 		
 		item.displayText().set(languageService.getValue(DisplayStrings.BUILDING));
 		item.progressAmount().set(.2);
@@ -264,7 +263,7 @@ public class JavaProjectBuilder implements IProjectBuilder {
 		File saveitem = new File(src + "/" + sanitizedGameName + "/SaveItem.java");
 		writeFileContent(saveitem, String.format(JavaProjectFileHelper.SAVEITEM, PROJECT_TITLE, sanitizedGameName).getBytes(Charset.forName("UTF-8")));
 		
-		LogRunner.logger().log(Level.INFO, "Finished building project");
+		LogRunner.logger().info("Finished building project");
 		item.progressAmount().set(1.0);
 		item.indicator().set(StatusIndicator.Good);
 	}
@@ -294,7 +293,7 @@ public class JavaProjectBuilder implements IProjectBuilder {
 	
 	private void buildGameFile(File src, String sanitizedGameName) {
 		try {
-			LogRunner.logger().log(Level.INFO, "Building game assets.");
+			LogRunner.logger().info("Building game assets.");
 			File gameAssets = new File(src.getAbsolutePath() + "/assets/");
 			if (!gameAssets.exists()) {
 				gameAssets.mkdirs();
@@ -315,7 +314,7 @@ public class JavaProjectBuilder implements IProjectBuilder {
 	private String buildGameIcon(File src) {
 		String retVal = new String();
 		try {
-			LogRunner.logger().log(Level.INFO, "Moving game icon.");
+			LogRunner.logger().info("Moving game icon.");
 			File gameAssets = new File(src.getAbsolutePath() + "/assets/");
 			if (!gameAssets.exists()) {
 				gameAssets.mkdirs();
@@ -362,7 +361,7 @@ public class JavaProjectBuilder implements IProjectBuilder {
 			
 			String newFile = tryCopyToAssets(gameState.layout().getLayoutContent(), assets);
 			if (!newFile.isEmpty()) {
-				LogRunner.logger().log(Level.INFO, String.format("Moving layout file %s to %s", gameState.layout().getLayoutContent(), newFile));
+				LogRunner.logger().info(String.format("Moving layout file %s to %s", gameState.layout().getLayoutContent(), newFile));
 				gameState.layout().setLayoutContent(newFile);
 			}
 		}
@@ -403,7 +402,7 @@ public class JavaProjectBuilder implements IProjectBuilder {
 		}
 		
 		if (!shouldExport) {
-			LogRunner.logger().log(Level.INFO, "Not exporting game states.");
+			LogRunner.logger().info("Not exporting game states.");
 			return;
 		}
 		
@@ -430,6 +429,6 @@ public class JavaProjectBuilder implements IProjectBuilder {
 	}
 	
 	private void updateBuild() {
-		LogRunner.logger().log(Level.INFO, "Updating project.");
+		LogRunner.logger().info("Updating project.");
 	}
 }

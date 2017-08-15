@@ -1,7 +1,5 @@
 package ilusr.textadventurecreator.menus;
 
-import java.util.logging.Level;
-
 import ilusr.core.url.InternalURLProvider;
 import ilusr.iroshell.services.IDialogService;
 import ilusr.iroshell.services.IStyleContainerService;
@@ -61,9 +59,8 @@ public class ReportIssueMenuItem extends MenuItem {
 	private void initialize() {
 		super.textProperty().bind(report);
 		super.setOnAction((e) -> {
-			LogRunner.logger().log(Level.INFO, "Help -> Report an Issue Pressed.");
+			LogRunner.logger().info("Help -> Report an Issue Pressed.");
 			ReportIssueModel model = new ReportIssueModel(langauageService, reportIssueService);
-			//TODO Fix
 			Dialog dialog = dialogProvider.create(new ReportIssueView(model, styleService, urlProvider));
 			
 			dialog.isValid().bind(model.valid());

@@ -3,7 +3,6 @@ package ilusr.textadventurecreator.search;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
 
 import ilusr.iroshell.services.IDialogService;
 import ilusr.logrunner.LogRunner;
@@ -163,7 +162,7 @@ public class CharacteristicFinderModel extends BaseFinderModel<CharacteristicPer
 
 	@Override
 	protected void inspect(CharacteristicPersistenceObject item) {
-		LogRunner.logger().log(Level.INFO, String.format("Inspecting characteristic %s", item.objectName()));
+		LogRunner.logger().info(String.format("Inspecting characteristic %s", item.objectName()));
 		CharacteristicViewer view = new CharacteristicViewer(new NamedPersistenceObjectModel(item), languageService);
 		view.setDisable(true);
 		dialogService.displayModal(view, item.objectName());

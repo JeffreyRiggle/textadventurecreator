@@ -2,7 +2,6 @@ package ilusr.textadventurecreator.views;
 
 import java.awt.Desktop;
 import java.net.URI;
-import java.util.logging.Level;
 
 import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.language.DisplayStrings;
@@ -163,10 +162,10 @@ public class LandingPageModel {
 	private void openWebPage(String url) {
 		try {
 			if (Desktop.isDesktopSupported()) {
-				LogRunner.logger().log(Level.INFO, String.format("Showing web page %s", url));
+				LogRunner.logger().info(String.format("Showing web page %s", url));
 				Desktop.getDesktop().browse(new URI(url));
 			} else {
-				LogRunner.logger().log(Level.INFO, "Unable to show page");
+				LogRunner.logger().info("Unable to show page");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

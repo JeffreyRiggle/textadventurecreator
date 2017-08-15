@@ -2,7 +2,6 @@ package ilusr.textadventurecreator.shell;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 
 import ilusr.logrunner.LogRunner;
 
@@ -44,7 +43,7 @@ public class TextAdventureProvider {
 	 * @param textAdventure The new @see TextAdventureProjectPersistence to provide.
 	 */
 	public void setTextAdventure(TextAdventureProjectPersistence textAdventure) {
-		LogRunner.logger().log(Level.INFO, "Got a new text adventure notifying listeners");
+		LogRunner.logger().info("Got a new text adventure notifying listeners");
 		this.textAdventure = textAdventure;
 		
 		for (IProviderListener listener : listeners) {

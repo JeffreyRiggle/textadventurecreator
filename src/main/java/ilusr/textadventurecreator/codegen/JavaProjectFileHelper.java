@@ -28,7 +28,7 @@ public class JavaProjectFileHelper {
 			+ "\t<dependency>\r\n"
 			+ "\t\t<groupId>com.ilusr</groupId>\r\n"
 			+ "\t\t<artifactId>TextAdventureLib</artifactId>\r\n"
-			+ "\t\t<version>1.2.0-SNAPSHOT</version>\r\n"
+			+ "\t\t<version>1.3.0-SNAPSHOT</version>\r\n"
 			+ "\t\t<scope>compile</scope>\r\n"
 			+ "\t</dependency>\r\n"
 			+ "\t<dependency>\r\n"

@@ -3,7 +3,6 @@ package ilusr.textadventurecreator.search;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
 
 import ilusr.core.url.InternalURLProvider;
 import ilusr.iroshell.services.IDialogService;
@@ -116,7 +115,7 @@ public class PlayerFinderModel extends BaseFinderModel<PlayerPersistenceObject> 
 
 	@Override
 	protected void inspect(PlayerPersistenceObject item) {
-		LogRunner.logger().log(Level.INFO, String.format("Inspecting player %s", item.playerName()));
+		LogRunner.logger().info(String.format("Inspecting player %s", item.playerName()));
 		PlayerView view = new PlayerView(new PlayerModel(dialogService, null, item, languageService, dialogProvider, styleService, urlProvider),
 				languageService, styleService, urlProvider);
 		view.setDisable(true);

@@ -8,6 +8,7 @@ import ilusr.core.url.InternalURLProvider;
 import ilusr.iroshell.core.StyleUpdater;
 import ilusr.iroshell.services.IStyleContainerService;
 import ilusr.iroshell.services.IStyleWatcher;
+import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.language.ILanguageService;
 import ilusr.textadventurecreator.style.StyledComponents;
 import javafx.fxml.FXML;
@@ -62,7 +63,7 @@ public class GameDebuggerView extends AnchorPane implements Initializable, IStyl
 		try {
 			loader.load();
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogRunner.logger().severe(e);
 		}
 	}
 

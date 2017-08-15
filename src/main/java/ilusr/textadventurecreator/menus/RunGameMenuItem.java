@@ -1,7 +1,5 @@
 package ilusr.textadventurecreator.menus;
 
-import java.util.logging.Level;
-
 import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.debug.IDebugService;
 import ilusr.textadventurecreator.language.DisplayStrings;
@@ -41,7 +39,7 @@ public class RunGameMenuItem extends GameAwareMenuItem{
 	
 	private void initialize() {
 		super.setOnAction((e) -> {
-			LogRunner.logger().log(Level.INFO, "Run -> Run Pressed.");
+			LogRunner.logger().info("Run -> Run Pressed.");
 			service.runGame(provider.getTextAdventureProject().getTextAdventure());
 		});
 		

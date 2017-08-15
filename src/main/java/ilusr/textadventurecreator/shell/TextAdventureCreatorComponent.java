@@ -1,7 +1,5 @@
 package ilusr.textadventurecreator.shell;
 
-import java.util.logging.Level;
-
 import org.springframework.beans.factory.config.ConstructorArgumentValues;
 import org.springframework.beans.factory.support.RootBeanDefinition;
 
@@ -88,7 +86,7 @@ public class TextAdventureCreatorComponent implements IComponent{
 			LayoutRegistration.register(data.serviceManager());
 			ThemeRegistration.register(data.serviceManager());
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogRunner.logger().severe(e);
 		}
 
 		IMenuService menuService = data.serviceManager().<IMenuService>get(RegisteredServices.MenuService);
@@ -144,25 +142,25 @@ public class TextAdventureCreatorComponent implements IComponent{
 		themeFinder.initialize();
 
 		if (initialFile == null && settingsManager.getBooleanSetting(SettingNames.LANDING, true)) {
-			LogRunner.logger().log(Level.INFO, "Adding landing tab since file is null or landing settings is true");
+			LogRunner.logger().info("Adding landing tab since file is null or landing settings is true");
 			layoutService.addTab(BluePrintNames.Landing);
 		}
 
 		if (initialFile == null) {
-			LogRunner.logger().log(Level.INFO, "Initial file is null not loading any project");
+			LogRunner.logger().info("Initial file is null not loading any project");
 			modManager.initialize();
 			repository.initialize();
 			return;
 		}
 
 		try {
-			LogRunner.logger().log(Level.INFO, "Initial file is %s loading project", initialFile);
+			LogRunner.logger().info(String.format("Initial file is %s loading project", initialFile));
 			TextAdventureProjectPersistence project = persistenceManager.load(initialFile);
 			provider.setTextAdventure(project);
 			modManager.initialize();
 			repository.initialize();
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogRunner.logger().severe(e);
 		}
 	}
 }

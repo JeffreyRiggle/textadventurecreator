@@ -4,7 +4,6 @@ import java.io.File;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerConfigurationException;
@@ -100,7 +99,7 @@ public class TextAdventureProjectManager {
 	 * @throws ParserConfigurationException
 	 */
 	public void createNewProject() throws TransformerConfigurationException, ParserConfigurationException {
-		LogRunner.logger().log(Level.INFO, "Creating new project.");
+		LogRunner.logger().info("Creating new project.");
 
 		TextAdventureProjectPersistence project = new TextAdventureProjectPersistence(layoutService, settingsManager);
 
@@ -113,17 +112,17 @@ public class TextAdventureProjectManager {
 		Wizard<GameSettingsModel> wizard = new Wizard<GameSettingsModel>(pages, model, languageService, styleService, urlProvider);
 
 		wizard.setOnCancel(() -> {
-			LogRunner.logger().log(Level.INFO, "New project has been cancelled.");
+			LogRunner.logger().info("New project has been cancelled.");
 		});
 
 		wizard.setOnFinish((m) -> {
-			LogRunner.logger().log(Level.INFO, "New project has been created.");
+			LogRunner.logger().info("New project has been created.");
 			tryAddInitialGameState(m.persistenceObject().getTextAdventure());
 			provider.setTextAdventure(m.persistenceObject());
 			tryApplyDefaultLayout();
 		});
 
-		LogRunner.logger().log(Level.INFO, "Attempting to create new project.");
+		LogRunner.logger().info("Attempting to create new project.");
 		dialogService.displayModal(wizard);
 	}
 
@@ -131,18 +130,18 @@ public class TextAdventureProjectManager {
 		try {
 			tav.addGameState(new GameStatePersistenceObject(languageService.getValue(DisplayStrings.START_STATE)));
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogRunner.logger().severe(e);
 		}
 	}
 
 	private void tryApplyDefaultLayout() {
 		Platform.runLater(() -> {
 			try {
-				LogRunner.logger().log(Level.INFO, "Applying default layout for new project.");
+				LogRunner.logger().info("Applying default layout for new project.");
 				layoutService.loadLayout(StreamUtilities.getStreamContents(getClass().getResourceAsStream("defaultlayout.xml")));
 				layoutApplicationService.applyLayout();
 			} catch (Exception e) {
-				e.printStackTrace();
+				LogRunner.logger().severe(e);
 			}
 		});
 	}
@@ -164,13 +163,13 @@ public class TextAdventureProjectManager {
 			return;
 		}
 
-		LogRunner.logger().log(Level.INFO, String.format("Attempting to open project from %s", loadFile.getAbsolutePath()));
+		LogRunner.logger().info(String.format("Attempting to open project from %s", loadFile.getAbsolutePath()));
 		tryOpenFile(loadFile);
 	}
 
 	private void tryOpenFile(File file) {
 		persistenceManager.loadAsync(file.getAbsolutePath(), (c) -> {
-			LogRunner.logger().log(Level.INFO, "Successfully opened project.");
+			LogRunner.logger().info("Successfully opened project.");
 			provider.setTextAdventure(c);
 
 			if (c.layout() == null || c.layout().isEmpty()) {
@@ -178,7 +177,7 @@ public class TextAdventureProjectManager {
 			}
 
 			Platform.runLater(() -> {
-				LogRunner.logger().log(Level.INFO, "Applying layout for project.");
+				LogRunner.logger().info("Applying layout for project.");
 				layoutService.loadLayout(c.layout());
 				layoutApplicationService.applyLayout();
 			});
@@ -201,7 +200,7 @@ public class TextAdventureProjectManager {
 	}
 
 	private void publishHosted(TextAdventureProjectPersistence project, Window window) {
-		LogRunner.logger().log(Level.INFO, "Preparing to publish hosted project.");
+		LogRunner.logger().info("Preparing to publish hosted project.");
 
 		File customGameDir = new File(System.getProperty("user.home") + "/ilusr/CustomGames");
 		if (!customGameDir.exists()) {
@@ -228,7 +227,7 @@ public class TextAdventureProjectManager {
 
 	private void publishHostedAction(TextAdventureProjectPersistence project, File dir, StatusItem item) {
 		try {
-			LogRunner.logger().log(Level.INFO, "Publishing hosted project.");
+			LogRunner.logger().info("Publishing hosted project.");
 
 			item.displayText().set(languageService.getValue(DisplayStrings.SETUP_GAME_INFO));
 			item.progressAmount().set(.2);
@@ -271,7 +270,7 @@ public class TextAdventureProjectManager {
 			item.progressAmount().set(1.0);
 			item.indicator().set(StatusIndicator.Good);
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogRunner.logger().severe(e);
 			item.indicator().set(StatusIndicator.Error);
 		}
 
@@ -302,14 +301,14 @@ public class TextAdventureProjectManager {
 			Files.copy(originalFile.toPath(), newMedia.toPath());
 			retVal = newMedia.getAbsolutePath();
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogRunner.logger().severe(e);
 		}
 
 		return retVal;
 	}
 
 	private void publishStandAlone() {
-		LogRunner.logger().log(Level.INFO, "Preparing to publish stand alone project.");
+		LogRunner.logger().info("Preparing to publish stand alone project.");
 
 		final StatusItem item = new StatusItem(languageService.getValue(DisplayStrings.BUILDING), null, 10000);
 		item.setOnStart(() -> {

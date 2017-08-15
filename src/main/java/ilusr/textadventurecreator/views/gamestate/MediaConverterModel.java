@@ -2,7 +2,6 @@ package ilusr.textadventurecreator.views.gamestate;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
 
 import ilusr.core.interfaces.Callback;
 import ilusr.core.io.ProcessHelpers;
@@ -156,7 +155,7 @@ public class MediaConverterModel {
 	 */
 	public void convert(Callback<Boolean> callback) {
 		if (converting.get()) {
-			LogRunner.logger().log(Level.INFO, "Not converting since we are in the process of a conversion.");
+			LogRunner.logger().info("Not converting since we are in the process of a conversion.");
 			return;
 		}
 		
@@ -165,7 +164,7 @@ public class MediaConverterModel {
 			String original = originalFile.getAbsolutePath();
 			String newF = original.substring(0, original.lastIndexOf("\\")+1) + newFile.get();
 			Boolean retVal = false;
-			LogRunner.logger().log(Level.INFO, String.format("Converting %s to %s\n", original, newF));
+			LogRunner.logger().info(String.format("Converting %s to %s\n", original, newF));
 			try {
 				retVal = convertImpl(original, newF);
 			} catch (Exception e) {
@@ -193,7 +192,7 @@ public class MediaConverterModel {
 		}
 		
 		if (command == null) {
-			LogRunner.logger().log(Level.INFO, "Unable to determine type for conversion");
+			LogRunner.logger().info("Unable to determine type for conversion");
 			return false;
 		}
 		

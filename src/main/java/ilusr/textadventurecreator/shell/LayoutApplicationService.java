@@ -2,7 +2,6 @@ package ilusr.textadventurecreator.shell;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 
 import ilusr.logrunner.LogRunner;
 
@@ -42,7 +41,7 @@ public class LayoutApplicationService {
 	 * Notifies listeners of an applied layout.
 	 */
 	public void applyLayout() {
-		LogRunner.logger().log(Level.INFO, "Layout has been applied notifying listeners");
+		LogRunner.logger().info("Layout has been applied notifying listeners");
 		notifyListeners();
 	}
 	

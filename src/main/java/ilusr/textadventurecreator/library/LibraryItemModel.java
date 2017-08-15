@@ -1,7 +1,6 @@
 package ilusr.textadventurecreator.library;
 
 import java.util.UUID;
-import java.util.logging.Level;
 
 import ilusr.core.interfaces.Callback;
 import ilusr.core.ioc.ServiceManager;
@@ -203,7 +202,7 @@ public class LibraryItemModel {
 	}
 	
 	private void setupLibrary() {
-		LogRunner.logger().log(Level.INFO, "Setting up library item");
+		LogRunner.logger().info("Setting up library item");
 		attributes.addAll(item.attributes());
 		characteristics.addAll(item.characteristics());
 		bodyParts.addAll(item.bodyParts());
@@ -225,7 +224,7 @@ public class LibraryItemModel {
 	
 	private void setupKeys() {
 		try {
-			LogRunner.logger().log(Level.INFO, "Creating library item keys");
+			LogRunner.logger().info("Creating library item keys");
 			addAttributeKey = new AttributePersistenceObject();
 			addAttributeKey.objectName(UUID.randomUUID().toString());
 			
@@ -256,7 +255,7 @@ public class LibraryItemModel {
 	}
 	
 	private void bind() {
-		LogRunner.logger().log(Level.INFO, "Binding library item");
+		LogRunner.logger().info("Binding library item");
 		name.addListener((v, o, n) -> {
 			item.setLibraryName(n);
 		});
@@ -284,7 +283,7 @@ public class LibraryItemModel {
 	
 	private void addAttribute() {
 		try {
-			LogRunner.logger().log(Level.INFO, String.format("Adding new attribute to %s", name.get()));
+			LogRunner.logger().info(String.format("Adding new attribute to %s", name.get()));
 			AttributePersistenceObject attribute = new AttributePersistenceObject();
 			item.attributes().add(attribute);
 			attributes.add(attribute);
@@ -319,7 +318,7 @@ public class LibraryItemModel {
 	
 	private void addCharacteristic() {
 		try {
-			LogRunner.logger().log(Level.INFO, String.format("Adding new characteristic to %s", name.get()));
+			LogRunner.logger().info(String.format("Adding new characteristic to %s", name.get()));
 			CharacteristicPersistenceObject character = new CharacteristicPersistenceObject();
 			item.characteristics().add(character);
 			characteristics.add(character);
@@ -358,7 +357,7 @@ public class LibraryItemModel {
 	 */
 	public Callback<BodyPartPersistenceObject> getEditBodyPartAction() {
 		return bodyPart -> {
-			LogRunner.logger().log(Level.INFO, String.format("Editing body part %s for %s", bodyPart.objectName(), name.get()));
+			LogRunner.logger().info(String.format("Editing body part %s for %s", bodyPart.objectName(), name.get()));
 			BodyPartModel model = new BodyPartModel(bodyPart, null, dialogService, languageService, dialogProvider, styleService, urlProvider);
 			Dialog dialog = dialogProvider.create(new BodyPartViewer(model, languageService, styleService, urlProvider));
 			dialog.isValid().bind(model.valid());
@@ -376,12 +375,12 @@ public class LibraryItemModel {
 	
 	private void addBodyPart() {
 		try {
-			LogRunner.logger().log(Level.INFO, String.format("Creating new body part for %s", name.get()));
+			LogRunner.logger().info(String.format("Creating new body part for %s", name.get()));
 			BodyPartPersistenceObject bodyPart = new BodyPartPersistenceObject();
 			BodyPartModel model = new BodyPartModel(bodyPart, null, dialogService, languageService, dialogProvider, styleService, urlProvider);
 			
 			Dialog dialog = dialogProvider.create(new BodyPartViewer(model, languageService, styleService, urlProvider), () -> {
-													  LogRunner.logger().log(Level.INFO, String.format("Adding body part %s to %s", bodyPart.objectName(), name.get()));
+													  LogRunner.logger().info(String.format("Adding body part %s to %s", bodyPart.objectName(), name.get()));
 													  item.bodyParts().add(bodyPart);
 													  bodyParts.add(bodyPart);
 												  });
@@ -410,7 +409,7 @@ public class LibraryItemModel {
 	
 	private void addProperty() {
 		try {
-			LogRunner.logger().log(Level.INFO, String.format("Adding property to %s", name.get()));
+			LogRunner.logger().info(String.format("Adding property to %s", name.get()));
 			PropertyPersistenceObject prop = new PropertyPersistenceObject();
 			item.properties().add(prop);
 			properties.add(prop);
@@ -449,7 +448,7 @@ public class LibraryItemModel {
 	 */
 	public Callback<ItemPersistenceObject> getEditItemAction() {
 		return item -> {
-			LogRunner.logger().log(Level.INFO, String.format("Editing item %s for %s", item.itemName(), name.get()));
+			LogRunner.logger().info(String.format("Editing item %s for %s", item.itemName(), name.get()));
 			ItemModel model = new ItemModel(item, null, dialogService, languageService, dialogProvider, styleService, urlProvider);
 			
 			Dialog dialog = dialogProvider.create(new ItemViewer(model, styleService, urlProvider));
@@ -473,7 +472,7 @@ public class LibraryItemModel {
 			ItemModel model = new ItemModel(item, null, dialogService, languageService, dialogProvider, styleService, urlProvider);
 			
 			Dialog dialog = dialogProvider.create(new ItemViewer(model, styleService, urlProvider), () -> {
-				LogRunner.logger().log(Level.INFO, String.format("Adding item %s to %s", item.itemName(), name.get()));
+				LogRunner.logger().info(String.format("Adding item %s to %s", item.itemName(), name.get()));
 				this.item.items().add(item);
 				items.add(item);
 			});
@@ -507,7 +506,7 @@ public class LibraryItemModel {
 	 */
 	public Callback<PlayerPersistenceObject> getEditPlayerAction() {
 		return (player) -> {
-			LogRunner.logger().log(Level.INFO, String.format("Editing player %s for %s", player.playerName(), name.get()));
+			LogRunner.logger().info(String.format("Editing player %s for %s", player.playerName(), name.get()));
 			PlayerModel model = new PlayerModel(dialogService, null, player, languageService, dialogProvider, styleService, urlProvider);
 			
 			Dialog dialog = dialogProvider.create(new PlayerView(model, languageService, styleService, urlProvider));
@@ -531,7 +530,7 @@ public class LibraryItemModel {
 			PlayerModel model = new PlayerModel(dialogService, null, player, languageService, dialogProvider, styleService, urlProvider);
 			
 			Dialog dialog = dialogProvider.create(new PlayerView(model, languageService, styleService, urlProvider), () -> {
-				LogRunner.logger().log(Level.INFO, String.format("Adding player %s to %s", player.playerName(), name.get()));
+				LogRunner.logger().info(String.format("Adding player %s to %s", player.playerName(), name.get()));
 				item.players().add(player);
 				players.add(player);
 			});
@@ -566,7 +565,7 @@ public class LibraryItemModel {
 	 */
 	public Callback<TriggerPersistenceObject> getEditTriggerAction() {
 		return (trigger) -> {
-			LogRunner.logger().log(Level.INFO, String.format("Editing trigger %s for %s", trigger.type(), name.get()));
+			LogRunner.logger().info(String.format("Editing trigger %s for %s", trigger.type(), name.get()));
 			TriggerModel model = new TriggerModel(trigger, languageService);
 			
 			Dialog dialog = dialogProvider.create(triggerViewFactory.create(model, item.players()));
@@ -590,10 +589,10 @@ public class LibraryItemModel {
 		Dialog dialog = dialogProvider.create(triggerViewFactory.create(model, item.players()), () -> {
 			TriggerPersistenceObject trigger = model.persistenceObject().get();
 			if (trigger == null) {
-				LogRunner.logger().log(Level.INFO, "Not adding trigger since trigger is null");
+				LogRunner.logger().info("Not adding trigger since trigger is null");
 			}
 			
-			LogRunner.logger().log(Level.INFO, String.format("Adding trigger %s to %s", trigger.type(), name.get()));
+			LogRunner.logger().info(String.format("Adding trigger %s to %s", trigger.type(), name.get()));
 			item.triggers().add(model.persistenceObject().get());
 			triggers.add(model.persistenceObject().get());
 		});
@@ -625,11 +624,11 @@ public class LibraryItemModel {
 	 */
 	public Callback<ActionPersistenceObject> getEditActionAction() {
 		return (action) -> {
-			LogRunner.logger().log(Level.INFO, String.format("Editing action for %s", name.get()));
+			LogRunner.logger().info(String.format("Editing action for %s", name.get()));
 			ActionModel model = new ActionModel(action, languageService);
 			
 			Dialog dialog = dialogProvider.create(actionViewFactory.create(model, item.players()), () -> {
-				LogRunner.logger().log(Level.INFO, String.format("Finished editing action for %s", name.get()));
+				LogRunner.logger().info(String.format("Finished editing action for %s", name.get()));
 				item.actions().add(model.persistenceObject().get());
 				actions.add(model.persistenceObject().get());
 			});
@@ -650,7 +649,7 @@ public class LibraryItemModel {
 		ActionModel model = new ActionModel(languageService);
 		
 		Dialog dialog = dialogProvider.create(actionViewFactory.create(model, item.players()), () -> {
-			LogRunner.logger().log(Level.INFO, String.format("Adding action to %s", name.get()));
+			LogRunner.logger().info(String.format("Adding action to %s", name.get()));
 			item.actions().add(model.persistenceObject().get());
 			actions.add(model.persistenceObject().get());
 		});
@@ -680,7 +679,7 @@ public class LibraryItemModel {
 	 */
 	public Callback<OptionPersistenceObject> getEditOptionAction() {
 		return (option) -> {
-			LogRunner.logger().log(Level.INFO, String.format("Editing option for %s", name.get()));
+			LogRunner.logger().info(String.format("Editing option for %s", name.get()));
 			OptionModel model = new OptionModel(dialogService, option, triggerViewFactory, item.players(), languageService, actionViewFactory, dialogProvider, styleService, urlProvider);
 			
 			Dialog dialog = dialogProvider.create(buildEditOptionView(model));
@@ -752,7 +751,7 @@ public class LibraryItemModel {
 					playerProvider, scriptProvider, finishProvider, playerModFactory, languageService, styleService, urlProvider));
 			dialog.isValid().bind(model.valid());
 			dialog.setOnComplete(() -> {
-				LogRunner.logger().log(Level.INFO, String.format("Adding option to %s", name.get()));
+				LogRunner.logger().info(String.format("Adding option to %s", name.get()));
 				item.options().add(opt);
 				options.add(opt);
 			});
@@ -787,7 +786,7 @@ public class LibraryItemModel {
 		return (e) -> {
 			try {
 				CompletionTimerPersistenceObject timer = new CompletionTimerPersistenceObject();
-				LogRunner.logger().log(Level.INFO, String.format("Adding timer to %s", name.get()));
+				LogRunner.logger().info(String.format("Adding timer to %s", name.get()));
 				
 				item.timers().add(timer);
 				timers.add(timer);
@@ -818,7 +817,7 @@ public class LibraryItemModel {
 			LayoutCreatorModel model = new LayoutCreatorModel(layout, languageService, dialogService, urlProvider, new SelectionManager());
 				
 			Dialog dialog = dialogProvider.create(new LayoutCreatorView(model, styleService, urlProvider), () -> {
-				LogRunner.logger().log(Level.INFO, String.format("Editing layout %s for %s", layout.id(), name.get()));
+				LogRunner.logger().info(String.format("Editing layout %s for %s", layout.id(), name.get()));
 				item.layouts().add(model.persistableLayout());
 				layouts.add(model.persistableLayout());
 			});
@@ -840,7 +839,7 @@ public class LibraryItemModel {
 			LayoutCreatorModel model = new LayoutCreatorModel(new LayoutPersistenceObject(), languageService, dialogService, urlProvider, new SelectionManager());
 			
 			Dialog dialog = dialogProvider.create(new LayoutCreatorView(model, styleService, urlProvider), () -> {
-				LogRunner.logger().log(Level.INFO, String.format("Adding layout %s to %s", model.persistableLayout().id(), name.get()));
+				LogRunner.logger().info(String.format("Adding layout %s to %s", model.persistableLayout().id(), name.get()));
 				item.layouts().add(model.persistableLayout());
 				layouts.add(model.persistableLayout());
 			});
@@ -874,7 +873,7 @@ public class LibraryItemModel {
 	public Callback<GameStatePersistenceObject> getEditGameStateAction() {
 		return (gameState) -> {
 			try {
-				LogRunner.logger().log(Level.INFO, String.format("Editing game state %s for %s", gameState.stateId(), name.get()));
+				LogRunner.logger().info(String.format("Editing game state %s for %s", gameState.stateId(), name.get()));
 				MacroBuilderViewFactory macroBuilder = serviceManager.<MacroBuilderViewFactory>get("MacroBuilderViewFactory");
 				MediaFinder finder = serviceManager.<MediaFinder>get("MediaFinder");
 				
@@ -884,7 +883,7 @@ public class LibraryItemModel {
 				GameStateView view = new GameStateView(model, languageService, styleService, urlProvider);
 				
 				Dialog dialog = dialogProvider.create(view, () -> {
-					LogRunner.logger().log(Level.INFO, String.format("Finished editing game state %s for %s", gameState.stateId(), name.get()));
+					LogRunner.logger().info(String.format("Finished editing game state %s for %s", gameState.stateId(), name.get()));
 					item.gameStates().add(model.persistableGameState());
 					gameStates.add(model.persistableGameState());
 				});
@@ -917,7 +916,7 @@ public class LibraryItemModel {
 			GameStateView view = new GameStateView(model, languageService, styleService, urlProvider);
 			
 			Dialog dialog = dialogProvider.create(view, () -> {
-				LogRunner.logger().log(Level.INFO, String.format("Adding game state %s to %s", model.persistableGameState().stateId(), name.get()));
+				LogRunner.logger().info(String.format("Adding game state %s to %s", model.persistableGameState().stateId(), name.get()));
 				item.gameStates().add(model.persistableGameState());
 				gameStates.add(model.persistableGameState());
 			});

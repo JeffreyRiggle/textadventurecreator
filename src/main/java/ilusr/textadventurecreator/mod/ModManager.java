@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
 
 import ilusr.core.ioc.ServiceManager;
 import ilusr.iroshell.services.IApplicationClosingManager;
@@ -44,7 +43,7 @@ public class ModManager implements IInitialize {
 	@Override
 	public void initialize() {
 		if (!settingsManager.getBooleanSetting(SettingNames.ALLOW_MODS, true)) {
-			LogRunner.logger().log(Level.INFO, "No loading mods since mods have been turned off.");
+			LogRunner.logger().info("Not loading mods since mods have been turned off.");
 			return;
 		}
 		
@@ -71,19 +70,19 @@ public class ModManager implements IInitialize {
 	
 	private void loadMod(IMod mod) {
 		try {
-			LogRunner.logger().log(Level.INFO, String.format("Loading mod: %s(%s)", mod.name(), mod.id()));
+			LogRunner.logger().info(String.format("Loading mod: %s(%s)", mod.name(), mod.id()));
 			mod.load(ServiceManager.getInstance());
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogRunner.logger().severe(e);
 		}
 	}
 	
 	private void unloadMod(IMod mod) {
 		try {
-			LogRunner.logger().log(Level.INFO, String.format("Unloading mod: %s(%s)", mod.name(), mod.id()));
+			LogRunner.logger().info(String.format("Unloading mod: %s(%s)", mod.name(), mod.id()));
 			mod.unload();
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogRunner.logger().severe(e);
 		}
 	}
 	

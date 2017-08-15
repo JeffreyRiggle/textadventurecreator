@@ -1,7 +1,5 @@
 package ilusr.textadventurecreator.settings;
 
-import java.util.logging.Level;
-
 import ilusr.logrunner.LogRunner;
 import javafx.beans.property.SimpleBooleanProperty;
 
@@ -35,7 +33,7 @@ public class ModSetting {
 	
 	private void initialize() {
 		active.addListener((v, o, n) -> {
-			LogRunner.logger().log(Level.INFO, String.format("Updating activation state of %s to %s", id, n));
+			LogRunner.logger().info(String.format("Updating activation state of %s to %s", id, n));
 			settingsManager.setBooleanValue(id + "Active", n);
 		});
 	}

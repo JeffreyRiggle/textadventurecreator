@@ -3,7 +3,6 @@ package ilusr.textadventurecreator.search;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
 
 import ilusr.core.url.InternalURLProvider;
 import ilusr.iroshell.services.IDialogService;
@@ -187,7 +186,7 @@ public class BodyPartFinderModel extends BaseFinderModel<BodyPartPersistenceObje
 
 	@Override
 	protected void inspect(BodyPartPersistenceObject item) {
-		LogRunner.logger().log(Level.INFO, String.format("Inspecting body part %s", item.objectName()));
+		LogRunner.logger().info(String.format("Inspecting body part %s", item.objectName()));
 		BodyPartViewer view = new BodyPartViewer(new BodyPartModel(item, null, dialogService, languageService, dialogProvider, styleService, urlProvider),
 				languageService, styleService, urlProvider);
 		view.setDisable(true);

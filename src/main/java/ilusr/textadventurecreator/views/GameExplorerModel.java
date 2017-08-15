@@ -1,7 +1,6 @@
 package ilusr.textadventurecreator.views;
 
 import java.util.List;
-import java.util.logging.Level;
 
 import ilusr.core.url.InternalURLProvider;
 import ilusr.iroshell.dockarea.SelectionManager;
@@ -123,18 +122,18 @@ public class GameExplorerModel {
 	
 	private void initialize() {
 		for (PlayerPersistenceObject player : tavPersistence.players()) {
-			LogRunner.logger().log(Level.INFO, String.format("Adding player %s to explorer.", player.playerName()));
+			LogRunner.logger().info(String.format("Adding player %s to explorer.", player.playerName()));
 			players.add(new PlayerModel(dialogService, libraryService, player, languageService, dialogProvider, styleService, urlProvider));
 		}
 		
 		for (GameStatePersistenceObject gameState : tavPersistence.gameStates()) {
-			LogRunner.logger().log(Level.INFO, String.format("Adding game state %s to explorer.", gameState.stateId()));
+			LogRunner.logger().info(String.format("Adding game state %s to explorer.", gameState.stateId()));
 			gameStates.add(new GameStateModel(gameState, dialogService, macroFactory, mediaFinder, triggerFactory,
 					playerModFactory, languageService, actionViewFactory, dialogProvider, styleService, urlProvider));
 		}
 		
 		for (LayoutPersistenceObject pLayout : tavPersistence.getLayouts()) {
-			LogRunner.logger().log(Level.INFO, String.format("Adding layout %s to explorer.", pLayout.id()));
+			LogRunner.logger().info(String.format("Adding layout %s to explorer.", pLayout.id()));
 			layouts.add(new LayoutCreatorModel(pLayout, languageService, dialogService, urlProvider, new SelectionManager()));
 		}
 		
@@ -151,7 +150,7 @@ public class GameExplorerModel {
 					return;
 				}
 				
-				LogRunner.logger().log(Level.INFO, String.format("Removing player %s from game.", model.persistablePlayer().playerName()));
+				LogRunner.logger().info(String.format("Removing player %s from game.", model.persistablePlayer().playerName()));
 				tavPersistence.removePlayer(model.persistablePlayer());
 			}
 		});
@@ -169,7 +168,7 @@ public class GameExplorerModel {
 					return;
 				}
 				
-				LogRunner.logger().log(Level.INFO, String.format("Removing game state %s from game.", model.persistableGameState().stateId()));
+				LogRunner.logger().info(String.format("Removing game state %s from game.", model.persistableGameState().stateId()));
 				tavPersistence.removeGameState(model.persistableGameState());
 			}
 		});
@@ -187,7 +186,7 @@ public class GameExplorerModel {
 					return;
 				}
 				
-				LogRunner.logger().log(Level.INFO, String.format("Removing layout %s from game.", model.persistableLayout().id()));
+				LogRunner.logger().info(String.format("Removing layout %s from game.", model.persistableLayout().id()));
 				tavPersistence.removeLayout(model.persistableLayout());
 			}
 		});
@@ -201,7 +200,7 @@ public class GameExplorerModel {
 		ITabContent tab = layoutService.getTabContent(id);
 		PlayerView view = (PlayerView)tab.content().get();
 		
-		LogRunner.logger().log(Level.INFO, "Adding player to game.");
+		LogRunner.logger().info("Adding player to game.");
 		tavPersistence.addPlayer(view.model().persistablePlayer());
 		players.add(0, view.model());
 	}
@@ -214,7 +213,7 @@ public class GameExplorerModel {
 		Dialog dialog = dialogProvider.create(new PlayerFinder(finder, styleService, urlProvider));
 		
 		dialog.setOnComplete(() -> {
-			LogRunner.logger().log(Level.INFO, String.format("Adding player %s to game.", finder.foundValue().playerName()));
+			LogRunner.logger().info(String.format("Adding player %s to game.", finder.foundValue().playerName()));
 			tavPersistence.addPlayer(finder.foundValue());
 			players.add(0, new PlayerModel(dialogService, libraryService, finder.foundValue(), languageService, dialogProvider, styleService, urlProvider));
 		});
@@ -238,7 +237,7 @@ public class GameExplorerModel {
 		ITabContent tab = layoutService.getTabContent(id);
 		GameStateView view = (GameStateView)tab.content().get();
 		
-		LogRunner.logger().log(Level.INFO, "Adding game state to game.");
+		LogRunner.logger().info("Adding game state to game.");
 		tavPersistence.addGameState(view.model().persistableGameState());
 		gameStates.add(0, view.model());
 	}
@@ -252,7 +251,7 @@ public class GameExplorerModel {
 		Dialog dialog = dialogProvider.create(new GameStateFinder(finder, styleService, urlProvider));
 		
 		dialog.setOnComplete(() -> {
-			LogRunner.logger().log(Level.INFO, String.format("Adding game state %s to game.", finder.foundValue().stateId()));
+			LogRunner.logger().info(String.format("Adding game state %s to game.", finder.foundValue().stateId()));
 			tavPersistence.addGameState(finder.foundValue());
 			gameStates.add(0, new GameStateModel(finder.foundValue(), dialogService, macroFactory, mediaFinder, triggerFactory,
 					playerModFactory, languageService, actionViewFactory, dialogProvider, styleService, urlProvider));
@@ -277,7 +276,7 @@ public class GameExplorerModel {
 		ITabContent tab = layoutService.getTabContent(id);
 		LayoutCreatorView view = (LayoutCreatorView)tab.content().get();
 		
-		LogRunner.logger().log(Level.INFO, "Adding layout to game.");
+		LogRunner.logger().info("Adding layout to game.");
 		tavPersistence.addLayout(view.model().persistableLayout());
 		layouts.add(0, view.model());
 	}
@@ -290,7 +289,7 @@ public class GameExplorerModel {
 		Dialog dialog = dialogProvider.create(new LayoutFinder(finder, styleService, urlProvider));
 		
 		dialog.setOnComplete(() -> {
-			LogRunner.logger().log(Level.INFO, String.format("Adding layout %s to game.", finder.foundValue().id()));
+			LogRunner.logger().info(String.format("Adding layout %s to game.", finder.foundValue().id()));
 			tavPersistence.addLayout(finder.foundValue());
 			layouts.add(0, new LayoutCreatorModel(finder.foundValue(), languageService, dialogService, urlProvider, new SelectionManager()));
 		});

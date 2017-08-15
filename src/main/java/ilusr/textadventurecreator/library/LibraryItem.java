@@ -2,7 +2,6 @@ package ilusr.textadventurecreator.library;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerConfigurationException;
@@ -252,7 +251,7 @@ public class LibraryItem {
 	 * @throws ParserConfigurationException
 	 */
 	public XmlConfigurationObject toConfigurationObject() throws TransformerConfigurationException, ParserConfigurationException {
-		LogRunner.logger().log(Level.INFO, String.format("Converting Libary Item: %s to a configuration object", name));
+		LogRunner.logger().info(String.format("Converting Libary Item: %s to a configuration object", name));
 		XmlConfigurationObject retVal = new XmlConfigurationObject("LibraryItem");
 		XmlConfigurationObject libName = new XmlConfigurationObject("LibraryName", name);
 		retVal.addChild(libName);
@@ -275,7 +274,7 @@ public class LibraryItem {
 	}
 	
 	private void convertFromPersistence(XmlConfigurationObject config) {
-		LogRunner.logger().log(Level.INFO, "Converting persistence object to library item");
+		LogRunner.logger().info("Converting persistence object to library item");
 		for (PersistXml child : config.children()) {
 			XmlConfigurationObject cChild = (XmlConfigurationObject)child;
 			switch (cChild.name()) {

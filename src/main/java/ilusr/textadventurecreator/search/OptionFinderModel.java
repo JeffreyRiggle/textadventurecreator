@@ -3,7 +3,6 @@ package ilusr.textadventurecreator.search;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
 
 import ilusr.core.url.InternalURLProvider;
 import ilusr.iroshell.services.IDialogService;
@@ -118,7 +117,7 @@ public class OptionFinderModel extends BaseFinderModel<OptionPersistenceObject> 
 
 	@Override
 	protected void inspect(OptionPersistenceObject item) {
-		LogRunner.logger().log(Level.INFO, "Inspecting option.");
+		LogRunner.logger().info("Inspecting option.");
 		OptionModel model = new OptionModel(dialogService, item, null, languageService, null, dialogProvider, styleService, urlProvider);
 		ActionModel actionModel = new ActionModel(model.action().get(), languageService);												
 		OptionInspector view = new OptionInspector(model, actionViewFactory.create(actionModel), triggerViewFactory, languageService, dialogService);

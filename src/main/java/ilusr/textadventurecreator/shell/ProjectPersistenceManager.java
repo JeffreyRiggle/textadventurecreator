@@ -2,7 +2,6 @@ package ilusr.textadventurecreator.shell;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerConfigurationException;
@@ -63,7 +62,7 @@ public class ProjectPersistenceManager {
 	 * @throws ParserConfigurationException
 	 */
 	public TextAdventureProjectPersistence load(String path) throws TransformerConfigurationException, SAXException, IOException, ParserConfigurationException {
-		LogRunner.logger().log(Level.INFO, String.format("Loading project from %s", path));
+		LogRunner.logger().info(String.format("Loading project from %s", path));
 		TextAdventureProjectPersistence retVal = new TextAdventureProjectPersistence(layoutService, settingsManager);
 		
 		manager.saveLocation(path);
@@ -78,7 +77,7 @@ public class ProjectPersistenceManager {
 	 * @param callback A @see Callback to run when the project is loaded.
 	 */
 	public void loadAsync(String path, Callback<TextAdventureProjectPersistence> callback) {
-		LogRunner.logger().log(Level.INFO, String.format("Queuing up load of %s", path));
+		LogRunner.logger().info(String.format("Queuing up load of %s", path));
 		final StatusItem loadItem = new StatusItem("Opening...");
 		
 		loadItem.setOnStart(() -> {
@@ -99,7 +98,7 @@ public class ProjectPersistenceManager {
 		TextAdventureProjectPersistence retVal = null;
 		
 		try {
-			LogRunner.logger().log(Level.INFO, String.format("Loading project from %s", path));
+			LogRunner.logger().info(String.format("Loading project from %s", path));
 			retVal = new TextAdventureProjectPersistence(layoutService, settingsManager);
 			item.progressAmount().set(.2);
 			manager.saveLocation(path);
@@ -110,7 +109,7 @@ public class ProjectPersistenceManager {
 			item.progressAmount().set(1.0);
 			item.indicator().set(StatusIndicator.Good);
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogRunner.logger().severe(e);
 			item.indicator().set(StatusIndicator.Error);
 		}
 		
@@ -153,7 +152,7 @@ public class ProjectPersistenceManager {
 	}
 	
 	private void saveImpl(TextAdventureProjectPersistence project, String path, boolean async) {
-		LogRunner.logger().log(Level.INFO, String.format("Saving project %s to path %s", path, async ? "Async" : "Sync"));
+		LogRunner.logger().info(String.format("Saving project %s to path %s", path, async ? "Async" : "Sync"));
 		final StatusItem saveItem = new StatusItem("Saving...");
 		
 		saveItem.setOnStart(() -> {
@@ -177,7 +176,7 @@ public class ProjectPersistenceManager {
 	
 	private void saveAction(TextAdventureProjectPersistence project, String path, StatusItem saveItem) {
 		try {
-			LogRunner.logger().log(Level.INFO, String.format("Saving project to path %s", path));
+			LogRunner.logger().info(String.format("Saving project to path %s", path));
 			saveItem.progressAmount().set(.2);
 			if (path != null) {
 				manager.saveLocation(path);
@@ -193,7 +192,7 @@ public class ProjectPersistenceManager {
 			saveItem.indicator().set(StatusIndicator.Good);
 			saveItem.finished().set(true);
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogRunner.logger().severe(e);
 			saveItem.indicator().set(StatusIndicator.Error);
 			saveItem.finished().set(true);
 		}

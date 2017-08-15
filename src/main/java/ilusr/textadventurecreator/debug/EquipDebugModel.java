@@ -1,7 +1,5 @@
 package ilusr.textadventurecreator.debug;
 
-import java.util.logging.Level;
-
 import ilusr.logrunner.LogRunner;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -95,7 +93,7 @@ public class EquipDebugModel {
 	 * Resets all of the added, changed and removed states associated with this equipment.
 	 */
 	public void resetChangeNotifications() {
-		LogRunner.logger().log(Level.INFO, String.format("Reseting notifications for equipment on %s", bodyPart.name().get()));
+		LogRunner.logger().info(String.format("Reseting notifications for equipment on %s", bodyPart.name().get()));
 		if (changed.get()) {
 			changed.set(false);
 		}

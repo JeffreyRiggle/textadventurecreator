@@ -1,7 +1,5 @@
 package ilusr.textadventurecreator.toolbars;
 
-import java.util.logging.Level;
-
 import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.language.DisplayStrings;
 import ilusr.textadventurecreator.language.ILanguageService;
@@ -37,10 +35,10 @@ public class NewProjectCommand extends Button {
 		
 		super.setOnAction((e) -> {
 			try {
-				LogRunner.logger().log(Level.INFO, "New project toolbar item pressed.");
+				LogRunner.logger().info("New project toolbar item pressed.");
 				projectManager.createNewProject();
 			} catch (Exception ex) {
-				ex.printStackTrace();
+				LogRunner.logger().severe(ex);
 			}
 		});
 		

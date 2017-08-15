@@ -1,7 +1,5 @@
 package ilusr.textadventurecreator.views.action;
 
-import java.util.logging.Level;
-
 import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.language.DisplayStrings;
 import ilusr.textadventurecreator.language.ILanguageService;
@@ -77,30 +75,30 @@ public class ActionModel {
 	
 	private void selectType() {
 		if (action.get() == null) {
-			LogRunner.logger().log(Level.INFO, "Action does not yet exist not selecting a type.");
+			LogRunner.logger().info("Action does not yet exist not selecting a type.");
 			return;
 		}
 		
 		if (action.get() instanceof AppendTextActionPersistence) {
-			LogRunner.logger().log(Level.INFO, "Setting selected type to append.");
+			LogRunner.logger().info("Setting selected type to append.");
 			types.selected().set(APPEND_ACTION);
 		} else if (action.get() instanceof CompletionActionPersistence) {
-			LogRunner.logger().log(Level.INFO, "Setting selected type to complete.");
+			LogRunner.logger().info("Setting selected type to complete.");
 			types.selected().set(COMPLETION_ACTION);
 		} else if (action.get() instanceof ExecutionActionPersistence) {
-			LogRunner.logger().log(Level.INFO, "Setting selected type to execute.");
+			LogRunner.logger().info("Setting selected type to execute.");
 			types.selected().set(EXECUTION_ACTION);
 		} else if (action.get() instanceof ModifyPlayerActionPersistence) {
-			LogRunner.logger().log(Level.INFO, "Setting selected type to modify.");
+			LogRunner.logger().info("Setting selected type to modify.");
 			types.selected().set(MOD_PLAYER_ACTION);
 		} else if (action.get() instanceof SaveActionPersistenceObject) {
-			LogRunner.logger().log(Level.INFO, "Setting selected type to save.");
+			LogRunner.logger().info("Setting selected type to save.");
 			types.selected().set(SAVE_ACTION);
 		} else if (action.get() instanceof ScriptedActionPersistenceObject) {
-			LogRunner.logger().log(Level.INFO, "Setting selected type to script.");
+			LogRunner.logger().info("Setting selected type to script.");
 			types.selected().set(SCRIPT_ACTION);
 		} else if (action.get() instanceof FinishActionPersistenceObject) {
-			LogRunner.logger().log(Level.INFO, "Setting selected type to finish.");
+			LogRunner.logger().info("Setting selected type to finish.");
 			types.selected().set(FINISH_ACTION);
 		}
 	}

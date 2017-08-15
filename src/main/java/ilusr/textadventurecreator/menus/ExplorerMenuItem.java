@@ -1,7 +1,6 @@
 package ilusr.textadventurecreator.menus;
 
 import java.util.List;
-import java.util.logging.Level;
 
 import ilusr.iroshell.dockarea.ICloseable;
 import ilusr.iroshell.services.ILayoutService;
@@ -52,7 +51,7 @@ public class ExplorerMenuItem extends CheckMenuItem implements IProviderListener
 	
 	private void initialize() {
 		super.setOnAction((e) -> {
-			LogRunner.logger().log(Level.INFO, "View -> Explorer Pressed.");
+			LogRunner.logger().info("View -> Explorer Pressed.");
 			clicked();
 		});
 		
@@ -64,7 +63,7 @@ public class ExplorerMenuItem extends CheckMenuItem implements IProviderListener
 		provider.addListener(this);
 		
 		if (provider.getTextAdventureProject() != null) {
-			LogRunner.logger().log(Level.INFO, "Text adventure is not null setting up explorer.");
+			LogRunner.logger().info("Text adventure is not null setting up explorer.");
 			setupTabFromLayout();
 		}
 		
@@ -75,14 +74,14 @@ public class ExplorerMenuItem extends CheckMenuItem implements IProviderListener
 
 	private void clicked() {
 		if (tabId != null && !tabId.isEmpty()) {
-			LogRunner.logger().log(Level.INFO, "Toggling off Explorer. Explorer view will be removed.");
+			LogRunner.logger().info("Toggling off Explorer. Explorer view will be removed.");
 			layoutService.removeTab(tabId);
 			tabId = null;
 			super.setSelected(false);
 			return;
 		}
 		
-		LogRunner.logger().log(Level.INFO, "Toggling on Explorer. Explorer will be added.");
+		LogRunner.logger().info("Toggling on Explorer. Explorer will be added.");
 		tabId = layoutService.addTab(BluePrintNames.Explorer);
 		tabContent = layoutService.getTabContent(tabId);
 		tabContent.addCloseListener(this);
@@ -106,7 +105,7 @@ public class ExplorerMenuItem extends CheckMenuItem implements IProviderListener
 
 	@Override
 	public void close() {
-		LogRunner.logger().log(Level.INFO, "Toggling off Explorer. Explorer tab closed.");
+		LogRunner.logger().info("Toggling off Explorer. Explorer tab closed.");
 		tabId = null;
 		tabContent.removeCloseListener(this);
 		tabContent = null;

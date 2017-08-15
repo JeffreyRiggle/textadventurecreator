@@ -2,7 +2,6 @@ package ilusr.textadventurecreator.views.player;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.logging.Level;
 
 import ilusr.core.url.InternalURLProvider;
 import ilusr.iroshell.services.IDialogService;
@@ -230,7 +229,7 @@ public class BodyPartModel {
 	 */
 	public void addCharacteristic() {
 		try {
-			LogRunner.logger().log(Level.INFO, "Adding characteristic to body part.");
+			LogRunner.logger().info("Adding characteristic to body part.");
 			CharacteristicPersistenceObject characteristic = new CharacteristicPersistenceObject();
 			bodyPart.addCharacteristic(characteristic);
 			characteristics.add(characteristic);
@@ -244,7 +243,7 @@ public class BodyPartModel {
 	 */
 	public void addFromLibrary() {
 		try {
-			LogRunner.logger().log(Level.INFO, "Attempting to find a characteristic for body.");
+			LogRunner.logger().info("Attempting to find a characteristic for body.");
 			CharacteristicFinderModel finder;
 			
 			if (player != null) {
@@ -260,7 +259,7 @@ public class BodyPartModel {
 					return;
 				}
 				
-				LogRunner.logger().log(Level.INFO, String.format("Adding found characteristic %s to body part.", finder.foundValue().objectName()));
+				LogRunner.logger().info(String.format("Adding found characteristic %s to body part.", finder.foundValue().objectName()));
 				player.addCharacteristic(finder.foundValue());
 				characteristics.add(finder.foundValue());
 			});

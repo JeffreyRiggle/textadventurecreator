@@ -2,7 +2,6 @@ package ilusr.textadventurecreator.shell;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 
 import ilusr.core.url.InternalURLProvider;
 import ilusr.iroshell.core.DockPosition;
@@ -77,7 +76,7 @@ public class ToolBarInitializer implements IInitialize {
 	
 	@Override
 	public void initialize() {
-		LogRunner.logger().log(Level.INFO, "Initializing the toolbar.");
+		LogRunner.logger().info("Initializing the toolbar.");
 		List<Node> commands = new ArrayList<Node>();
 		commands.add(new NewProjectCommand(projectManager, languageService));
 		commands.add(new OpenCommand(projectManager, languageService));

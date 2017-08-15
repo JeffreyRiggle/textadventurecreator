@@ -1,7 +1,6 @@
 package ilusr.textadventurecreator.views.player;
 
 import java.util.Map.Entry;
-import java.util.logging.Level;
 import java.util.List;
 import java.util.UUID;
 
@@ -360,7 +359,7 @@ public class PlayerModel {
 	 */
 	public void addAttribute() {
 		try {
-			LogRunner.logger().log(Level.INFO, "Adding attribute to player");
+			LogRunner.logger().info("Adding attribute to player");
 			AttributePersistenceObject attribute = new AttributePersistenceObject();
 			player.addAttribute(attribute);
 			attributes.add(attribute);
@@ -381,12 +380,12 @@ public class PlayerModel {
 					return;
 				}
 				
-				LogRunner.logger().log(Level.INFO, String.format("Adding attribute  %s to player", finder.foundValue().objectName()));
+				LogRunner.logger().info(String.format("Adding attribute  %s to player", finder.foundValue().objectName()));
 				player.addAttribute(finder.foundValue());
 				attributes.add(finder.foundValue());
 			});
 			
-			LogRunner.logger().log(Level.INFO, "Attempting to Add attribute to player from library");
+			LogRunner.logger().info("Attempting to Add attribute to player from library");
 			dialogService.displayModal(dialog);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -403,7 +402,7 @@ public class PlayerModel {
 	
 	/**
 	 * 
-	 * @return The characteristics assoicated with this player.
+	 * @return The characteristics associated with this player.
 	 */
 	public ObservableList<CharacteristicPersistenceObject> characteristics() {
 		return characteristics;
@@ -414,7 +413,7 @@ public class PlayerModel {
 	 */
 	public void addCharacteristic() {
 		try {
-			LogRunner.logger().log(Level.INFO, "Adding characteristic to player");
+			LogRunner.logger().info("Adding characteristic to player");
 			CharacteristicPersistenceObject characteristic = new CharacteristicPersistenceObject();
 			player.addCharacteristic(characteristic);
 			characteristics.add(characteristic);
@@ -435,12 +434,12 @@ public class PlayerModel {
 					return;
 				}
 				
-				LogRunner.logger().log(Level.INFO, String.format("Adding characteristic %s to player", finder.foundValue().objectName()));
+				LogRunner.logger().info(String.format("Adding characteristic %s to player", finder.foundValue().objectName()));
 				player.addCharacteristic(finder.foundValue());
 				characteristics.add(finder.foundValue());
 			});
 			
-			LogRunner.logger().log(Level.INFO, "Attempting to add characteristic to player from library item.");
+			LogRunner.logger().info("Attempting to add characteristic to player from library item.");
 			dialogService.displayModal(dialog);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -477,7 +476,7 @@ public class PlayerModel {
 			});
 			dialog.isValid().bind(model.valid());
 			
-			LogRunner.logger().log(Level.INFO, "Attempting to add body part to player");
+			LogRunner.logger().info("Attempting to add body part to player");
 			dialogService.displayModal(dialog, languageService.getValue(DisplayStrings.BODY_PART));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -496,12 +495,12 @@ public class PlayerModel {
 					return;
 				}
 				
-				LogRunner.logger().log(Level.INFO, String.format("Adding body part %s to player", finder.foundValue().objectName()));
+				LogRunner.logger().info(String.format("Adding body part %s to player", finder.foundValue().objectName()));
 				player.addBodyPart(finder.foundValue());
 				bodyParts.add(finder.foundValue());
 			});
 			
-			LogRunner.logger().log(Level.INFO, "Attempting to add body part to player from library");
+			LogRunner.logger().info("Attempting to add body part to player from library");
 			dialogService.displayModal(dialog);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -535,7 +534,7 @@ public class PlayerModel {
 			});
 			dialog.isValid().bind(viewer.valid());
 			
-			LogRunner.logger().log(Level.INFO, "Attempting to add equipment to player");
+			LogRunner.logger().info("Attempting to add equipment to player");
 			dialogService.displayModal(dialog, languageService.getValue(DisplayStrings.EQUIPMENT));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -572,7 +571,7 @@ public class PlayerModel {
 			});
 			dialog.isValid().bind(item.valid());
 			
-			LogRunner.logger().log(Level.INFO, "Attempting to add item to player");
+			LogRunner.logger().info("Attempting to add item to player");
 			dialogService.displayModal(dialog, languageService.getValue(DisplayStrings.ITEM));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -585,7 +584,7 @@ public class PlayerModel {
 	 */
 	public Callback<BodyPartPersistenceObject> getEditBodyPartAction() {
 		return (bodyPart) -> {
-			LogRunner.logger().log(Level.INFO, String.format("Editing body part %s", bodyPart.objectName()));
+			LogRunner.logger().info(String.format("Editing body part %s", bodyPart.objectName()));
 			BodyPartModel model = new BodyPartModel(bodyPart, libraryService, dialogService, player, languageService, dialogProvider, styleService, urlProvider);
 			
 			Dialog dialog = dialogProvider.create(new BodyPartViewer(model, languageService, styleService, urlProvider));
@@ -609,7 +608,7 @@ public class PlayerModel {
 	 */
 	public Callback<EquipPersistenceObject> getEditEquipmentAction() {
 		return (equip) -> {
-			LogRunner.logger().log(Level.INFO, "Editing equipment on player");
+			LogRunner.logger().info("Editing equipment on player");
 			EquipViewer viewer = new EquipViewer(dialogService, libraryService, player, equip, languageService, dialogProvider, styleService, urlProvider);
 			
 			Dialog dialog = dialogProvider.create(viewer);
@@ -625,7 +624,7 @@ public class PlayerModel {
 	 */
 	public Callback<InventoryItem> getEditInventoryAction() {
 		return (item) -> {
-			LogRunner.logger().log(Level.INFO, String.format("Editing item %s on player", item.getItem().itemName()));
+			LogRunner.logger().info(String.format("Editing item %s on player", item.getItem().itemName()));
 			
 			Dialog dialog = dialogProvider.create(new InventoryItemViewer(dialogService, item, libraryService, languageService, dialogProvider, styleService, urlProvider));
 			dialog.isValid().bind(item.valid());

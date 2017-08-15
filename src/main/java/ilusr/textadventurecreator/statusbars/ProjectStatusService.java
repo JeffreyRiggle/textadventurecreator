@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.logging.Level;
 
 import ilusr.logrunner.LogRunner;
 import javafx.beans.property.SimpleObjectProperty;
@@ -36,7 +35,7 @@ public class ProjectStatusService {
 	 */
 	public void addStatusItemToQueue(StatusItem item) {
 		synchronized(statusLock) {
-			LogRunner.logger().log(Level.INFO, String.format("Adding %s to status queue", item.displayText().get()));
+			LogRunner.logger().info(String.format("Adding %s to status queue", item.displayText().get()));
 			statusItems.add(item);
 			processItems();
 		}
@@ -48,7 +47,7 @@ public class ProjectStatusService {
 	 */
 	public void removeStatusItemFromQueue(StatusItem item) {
 		synchronized(statusLock) {
-			LogRunner.logger().log(Level.INFO, String.format("Removing %s from status queue", item.displayText().get()));
+			LogRunner.logger().info(String.format("Removing %s from status queue", item.displayText().get()));
 			statusItems.remove(item);
 			processItems();
 		}
@@ -64,7 +63,7 @@ public class ProjectStatusService {
 	
 	private void processItems() {
 		if (statusItems.size() == 0) {
-			LogRunner.logger().log(Level.INFO, "No remaining items to process.");
+			LogRunner.logger().info("No remaining items to process.");
 			return;
 		}
 		
@@ -76,7 +75,7 @@ public class ProjectStatusService {
 			return;
 		}
 		
-		LogRunner.logger().log(Level.INFO, String.format("Setting current item to %s", statusItems.get(0).displayText().get()));
+		LogRunner.logger().info(String.format("Setting current item to %s", statusItems.get(0).displayText().get()));
 		currentItem.set(statusItems.get(0));
 		currentItem.get().finished().addListener((v, o, n) -> {
 			if (n) {
@@ -84,13 +83,13 @@ public class ProjectStatusService {
 			}
 		});
 		
-		LogRunner.logger().log(Level.INFO, String.format("Running item %s", statusItems.get(0).displayText().get()));
+		LogRunner.logger().info(String.format("Running item %s", statusItems.get(0).displayText().get()));
 		currentItem.get().run();
 	}
 	
 	private void removeAndProcess() {
 		synchronized(statusLock) {
-			LogRunner.logger().log(Level.INFO, String.format("Removing finished item %s", currentItem.get().displayText().get()));
+			LogRunner.logger().info(String.format("Removing finished item %s", currentItem.get().displayText().get()));
 			statusItems.remove(currentItem.get());
 			
 			if (statusItems.size() != 0 || currentItem.get().postFinishLiveTime().get() == 0) {

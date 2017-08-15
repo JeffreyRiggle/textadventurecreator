@@ -3,7 +3,6 @@ package ilusr.textadventurecreator.views.converters;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
 
 import ilusr.core.datamanager.xml.XmlManager;
 import ilusr.core.io.XMLDocumentUtilities;
@@ -67,14 +66,14 @@ public class GameStateToTreeItemConverter implements ListItemConverter<GameState
 		removeButton.getStylesheets().add(getClass().getResource("TreeItemRemove.css").toExternalForm());
 		
 		removeButton.setOnAction((e) -> {
-			LogRunner.logger().log(Level.INFO, String.format("Removing game state %s", model.stateId().get()));
+			LogRunner.logger().info(String.format("Removing game state %s", model.stateId().get()));
 			treeItem.getParent().getChildren().remove(treeItem);
 			this.model.gameStates().remove(model);
 		});
 		
 		editButton.getStylesheets().add(getClass().getResource("TreeItemEdit.css").toExternalForm());
 		editButton.setOnAction((e) -> {
-			LogRunner.logger().log(Level.INFO, String.format("Editing game state %s", model.stateId().get()));
+			LogRunner.logger().info(String.format("Editing game state %s", model.stateId().get()));
 			addGameStateView(model);
 		});
 		

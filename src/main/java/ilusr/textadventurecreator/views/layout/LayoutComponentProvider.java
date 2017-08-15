@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
 
 import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.views.assets.AssetLoader;
@@ -34,7 +33,7 @@ public class LayoutComponentProvider {
 	
 	private void initialize() {
 		try {
-			LogRunner.logger().log(Level.INFO, "Initializing layout components.");
+			LogRunner.logger().info("Initializing layout components.");
 			LayoutStyle contentViewStyle = new LayoutStyle("ContentView", new StyleSelectorPersistenceObject());
 			contentViewStyle.addProperty("Background Color", new StylePropertyPersistenceObject(StyleType.Background, ""));
 			
@@ -115,7 +114,7 @@ public class LayoutComponentProvider {
 					new Image(AssetLoader.getResourceURL("consoleview.png").toExternalForm(), 32, 32, true, true),
 					consoleStyle));
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogRunner.logger().severe(e);
 		}
 	}
 	

@@ -3,6 +3,7 @@ package ilusr.textadventurecreator.views.player;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.language.DisplayStrings;
 import ilusr.textadventurecreator.language.ILanguageService;
 import ilusr.textadventurecreator.views.LanguageAwareString;
@@ -69,7 +70,7 @@ public class CharacteristicViewer extends PlayerDataView implements Initializabl
 		try {
 			loader.load();
 		} catch (Exception exception) {
-			exception.printStackTrace();
+			LogRunner.logger().severe(exception);
 		}
 	}
 

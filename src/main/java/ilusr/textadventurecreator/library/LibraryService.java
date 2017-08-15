@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.logging.Level;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerConfigurationException;
@@ -90,14 +89,14 @@ public class LibraryService implements ApplicationClosingListener, IInitialize {
 
 	@Override
 	public void initialize() {
-		LogRunner.logger().log(Level.INFO, "Initializing Library Service");
+		LogRunner.logger().info("Initializing Library Service");
 
 		textAdventureProvider.addListener((p) -> {
 			textAdventureChanged(p);
 		});
 
 		if (!settingsManager.getBooleanSetting(SettingNames.GLOBAL_LIBRARY, true)) {
-			LogRunner.logger().log(Level.INFO, "Global library disabled not loading global library file.");
+			LogRunner.logger().info("Global library disabled not loading global library file.");
 			return;
 		}
 
@@ -105,14 +104,14 @@ public class LibraryService implements ApplicationClosingListener, IInitialize {
 		currentLibraryPath = lib.getAbsolutePath();
 
 		if (lib.exists()) {
-			LogRunner.logger().log(Level.INFO, "Loading global library into Library Service.");
+			LogRunner.logger().info("Loading global library into Library Service.");
 			loadLibrary(lib.getAbsolutePath());
 		}
 	}
 
 	private void textAdventureChanged(TextAdventureProjectPersistence textAdventure) {
 		if (!settingsManager.getBooleanSetting(SettingNames.GAME_LIBRARY, false) || settingsManager.getBooleanSetting(SettingNames.GLOBAL_LIBRARY, true)) {
-			LogRunner.logger().log(Level.INFO, "Game Library turned off or global library turned on not refreshing library.");
+			LogRunner.logger().info("Game Library turned off or global library turned on not refreshing library.");
 			return;
 		}
 
@@ -120,7 +119,7 @@ public class LibraryService implements ApplicationClosingListener, IInitialize {
 		currentLibraryPath = lib.getAbsolutePath();
 
 		if (lib.exists()) {
-			LogRunner.logger().log(Level.INFO, String.format("Loading Library associated with %s.", textAdventure.getGameInfo().gameName()));
+			LogRunner.logger().info(String.format("Loading Library associated with %s.", textAdventure.getGameInfo().gameName()));
 			loadLibrary(lib.getAbsolutePath());
 			return;
 		}
@@ -144,14 +143,14 @@ public class LibraryService implements ApplicationClosingListener, IInitialize {
 			importAction(path, statusItem, callback);
 		});
 
-		LogRunner.logger().log(Level.INFO, String.format("Queueing up import of %s.", path));
+		LogRunner.logger().info(String.format("Queueing up import of %s.", path));
 		statusService.addStatusItemToQueue(statusItem);
 	}
 
 	private void importAction(String path, StatusItem statusItem, Callback<LibraryItem> callback) {
 		new Thread(() -> {
 			try {
-				LogRunner.logger().log(Level.INFO, String.format("Starting import of %s.", path));
+				LogRunner.logger().info(String.format("Starting import of %s.", path));
 				statusItem.progressAmount().set(.2);
 				XmlConfigurationManager manager = new XmlConfigurationManager(path);
 				statusItem.progressAmount().set(.4);
@@ -166,11 +165,11 @@ public class LibraryService implements ApplicationClosingListener, IInitialize {
 					callback.execute(item);
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
+				LogRunner.logger().severe(e);
 				statusItem.indicator().set(StatusIndicator.Error);
 			}
 
-			LogRunner.logger().log(Level.INFO, String.format("finished import of %s.", path));
+			LogRunner.logger().info(String.format("finished import of %s.", path));
 			statusItem.finished().set(true);
 		}).start();
 	}
@@ -185,7 +184,7 @@ public class LibraryService implements ApplicationClosingListener, IInitialize {
 				return;
 			}
 
-			LogRunner.logger().log(Level.INFO, String.format("Adding Library Item %s to service.", item.getLibraryName()));
+			LogRunner.logger().info(String.format("Adding Library Item %s to service.", item.getLibraryName()));
 			libraries.add(item);
 		}
 
@@ -205,14 +204,14 @@ public class LibraryService implements ApplicationClosingListener, IInitialize {
 			exportAction(path, statusItem, item, callback);
 		});
 
-		LogRunner.logger().log(Level.INFO, String.format("Queueing up export of Library Item %s.", item.getLibraryName()));
+		LogRunner.logger().info(String.format("Queueing up export of Library Item %s.", item.getLibraryName()));
 		statusService.addStatusItemToQueue(statusItem);
 	}
 
 	private void exportAction(String path, StatusItem statusItem, LibraryItem item, Runnable callback) {
 		new Thread(() -> {
 			try {
-				LogRunner.logger().log(Level.INFO, String.format("Exporting Library Item %s.", item.getLibraryName()));
+				LogRunner.logger().info(String.format("Exporting Library Item %s.", item.getLibraryName()));
 				statusItem.progressAmount().set(.2);
 				XmlConfigurationManager manager = new XmlConfigurationManager(path);
 				statusItem.progressAmount().set(.4);
@@ -222,7 +221,7 @@ public class LibraryService implements ApplicationClosingListener, IInitialize {
 				statusItem.progressAmount().set(1.0);
 				statusItem.indicator().set(StatusIndicator.Good);
 			} catch (Exception e) {
-				e.printStackTrace();
+				LogRunner.logger().severe(e);
 				statusItem.indicator().set(StatusIndicator.Error);
 			}
 
@@ -230,7 +229,7 @@ public class LibraryService implements ApplicationClosingListener, IInitialize {
 				callback.run();
 			}
 
-			LogRunner.logger().log(Level.INFO, String.format("Finished exporting Library Item %s.", item.getLibraryName()));
+			LogRunner.logger().info(String.format("Finished exporting Library Item %s.", item.getLibraryName()));
 			statusItem.finished().set(true);
 		}).start();
 	}
@@ -247,7 +246,7 @@ public class LibraryService implements ApplicationClosingListener, IInitialize {
 		synchronized(libraryLock) {
 			Optional<LibraryItem> libraryitem = libraries.stream().filter(i -> i.getLibraryName().equals(libraryName)).findFirst();
 			if (!libraryitem.isPresent()) {
-				LogRunner.logger().log(Level.INFO, String.format("Not exporting % since Library Item could not be found", libraryName));
+				LogRunner.logger().info(String.format("Not exporting % since Library Item could not be found", libraryName));
 				return;
 			}
 
@@ -257,7 +256,7 @@ public class LibraryService implements ApplicationClosingListener, IInitialize {
 		try {
 			exportLibrary(path, item, callback);
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogRunner.logger().severe(e);
 		}
 	}
 
@@ -281,7 +280,7 @@ public class LibraryService implements ApplicationClosingListener, IInitialize {
 				return;
 			}
 
-			LogRunner.logger().log(Level.INFO, String.format("Removing Library Item %s from service.", item.getLibraryName()));
+			LogRunner.logger().info(String.format("Removing Library Item %s from service.", item.getLibraryName()));
 			libraries.remove(item);
 		}
 
@@ -296,7 +295,7 @@ public class LibraryService implements ApplicationClosingListener, IInitialize {
 		synchronized(libraryLock) {
 			Optional<LibraryItem> libraryitem = libraries.stream().filter(i -> i.getLibraryName().equals(libraryName)).findFirst();
 			if (!libraryitem.isPresent()) {
-				LogRunner.logger().log(Level.INFO, String.format("Not removing Library Item %s from service since it could not be found", libraryName));
+				LogRunner.logger().info(String.format("Not removing Library Item %s from service since it could not be found", libraryName));
 				return;
 			}
 
@@ -312,17 +311,17 @@ public class LibraryService implements ApplicationClosingListener, IInitialize {
 	 */
 	public void loadLibrary(String path) {
 		try {
-			LogRunner.logger().log(Level.INFO, String.format("Loading library from path %s", path));
+			LogRunner.logger().info(String.format("Loading library from path %s", path));
 			XmlConfigurationManager manager = new XmlConfigurationManager(path);
 			manager.load();
 			loadLibrary((XmlConfigurationObject)manager.configurationObjects().get(0));
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogRunner.logger().severe(e);
 		}
 	}
 
 	private void loadLibrary(XmlConfigurationObject library) {
-		LogRunner.logger().log(Level.INFO, "Loading library from configuration object.");
+		LogRunner.logger().info("Loading library from configuration object.");
 		List<LibraryItem> items = getLibraryItems(library);
 
 		synchronized (libraryLock) {
@@ -368,7 +367,7 @@ public class LibraryService implements ApplicationClosingListener, IInitialize {
 	@Override
 	public void onClose() {
 		if (currentLibraryPath == null || currentLibraryPath.isEmpty()) {
-			LogRunner.logger().log(Level.INFO, "Application closed but there was nothing to save.");
+			LogRunner.logger().info("Application closed but there was nothing to save.");
 			return;
 		}
 
@@ -377,12 +376,12 @@ public class LibraryService implements ApplicationClosingListener, IInitialize {
 
 	private void save(String path) {
 		try {
-			LogRunner.logger().log(Level.INFO, String.format("Saving Library to path %s", path));
+			LogRunner.logger().info(String.format("Saving Library to path %s", path));
 			XmlConfigurationManager manager = new XmlConfigurationManager(path);
 			manager.addConfigurationObject(toConfigurationObject());
 			manager.save();
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogRunner.logger().severe(e);
 		}
 	}
 

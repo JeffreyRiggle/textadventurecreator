@@ -1,7 +1,5 @@
 package ilusr.textadventurecreator.settings;
 
-import java.util.logging.Level;
-
 import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.language.DisplayStrings;
 import ilusr.textadventurecreator.language.ILanguageService;
@@ -42,12 +40,12 @@ public class GeneralSettingsModel {
 	
 	private void initialize() {
 		hideLanding.addListener((v, o, n) -> {
-			LogRunner.logger().log(Level.INFO, String.format("Updating show landing to %s", n));
+			LogRunner.logger().info(String.format("Updating show landing to %s", n));
 			manager.setBooleanValue(SettingNames.LANDING, n);
 		});
 		
 		includeLayout.addListener((v, o, n) -> {
-			LogRunner.logger().log(Level.INFO, String.format("Updating persist layout to %s", n));
+			LogRunner.logger().info(String.format("Updating persist layout to %s", n));
 			manager.setBooleanValue(SettingNames.PERSIST_LAYOUT, n);
 		});
 	}

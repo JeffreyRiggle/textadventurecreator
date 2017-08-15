@@ -2,7 +2,6 @@ package ilusr.textadventurecreator.views.player;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.logging.Level;
 
 import ilusr.core.url.InternalURLProvider;
 import ilusr.iroshell.services.IDialogService;
@@ -210,7 +209,7 @@ public class ItemModel {
 	 */
 	public void addProperty() {
 		try {
-			LogRunner.logger().log(Level.INFO, "Adding property to item.");
+			LogRunner.logger().info("Adding property to item.");
 			PropertyPersistenceObject prop = new PropertyPersistenceObject();
 			item.addProperty(prop);
 			properties.add(prop);
@@ -231,12 +230,12 @@ public class ItemModel {
 				return;
 			}
 			
-			LogRunner.logger().log(Level.INFO, String.format("Adding property %s to item.", finder.foundValue().objectName()));
+			LogRunner.logger().info(String.format("Adding property %s to item.", finder.foundValue().objectName()));
 			item.addProperty(finder.foundValue());
 			properties.add(finder.foundValue());
 		});
 			
-		LogRunner.logger().log(Level.INFO, "Attempting to property to item from library.");
+		LogRunner.logger().info("Attempting to property to item from library.");
 		dialogService.displayModal(dialog);
 	}
 }

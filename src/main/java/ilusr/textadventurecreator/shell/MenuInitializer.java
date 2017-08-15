@@ -1,7 +1,5 @@
 package ilusr.textadventurecreator.shell;
 
-import java.util.logging.Level;
-
 import ilusr.core.url.InternalURLProvider;
 import ilusr.iroshell.core.LocationProvider;
 import ilusr.iroshell.menus.IMenuService;
@@ -116,7 +114,7 @@ public class MenuInitializer implements IInitialize {
 	
 	@Override
 	public void initialize() {
-		LogRunner.logger().log(Level.INFO, "Initializing menu items.");
+		LogRunner.logger().info("Initializing menu items.");
 		MenuItem newProj = new NewProjectMenuItem(projectManager, languageService);
 		
 		MenuItem open = new OpenMenuItem(projectManager, languageService);

@@ -2,7 +2,6 @@ package ilusr.textadventurecreator.debug;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 
 import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.language.DisplayStrings;
@@ -65,56 +64,56 @@ public class PlayerDebugModel {
 	
 	private void initialize() {
 		for(IAttribute attribute : player.attributes()) {
-			LogRunner.logger().log(Level.INFO, String.format("Adding attribute %s to player %s", attribute.name(), player.name()));
+			LogRunner.logger().info(String.format("Adding attribute %s to player %s", attribute.name(), player.name()));
 			attributes.add(new DebugNamedObjectModel(new DebugAttribute(attribute)));
 		}
 		
 		player.addAttributeChangeListener((a, r, c) -> {
-			LogRunner.logger().log(Level.INFO, String.format("Updating attributes on player %s", player.name()));
+			LogRunner.logger().info(String.format("Updating attributes on player %s", player.name()));
 			updateAttributes(a, r);
 		});
 		
 		for (ICharacteristic characteristic : player.characteristics()) {
-			LogRunner.logger().log(Level.INFO, String.format("Adding characteristic %s to player %s", characteristic.name(), player.name()));
+			LogRunner.logger().info( String.format("Adding characteristic %s to player %s", characteristic.name(), player.name()));
 			characteristics.add(new DebugNamedObjectModel(new DebugCharacteristic(characteristic)));
 		}
 		
 		player.addCharacteristicChangeListener((a, r, c) -> {
-			LogRunner.logger().log(Level.INFO, String.format("Updating characteristics on player %s", player.name()));
+			LogRunner.logger().info(String.format("Updating characteristics on player %s", player.name()));
 			updateCharacteristics(a, r);
 		});
 		
 		for (IBodyPart bodyPart : player.bodyParts()) {
-			LogRunner.logger().log(Level.INFO, String.format("Body Part %s to player %s", bodyPart.name(), player.name()));
+			LogRunner.logger().info(String.format("Body Part %s to player %s", bodyPart.name(), player.name()));
 			BodyPartDebugModel model = new BodyPartDebugModel(bodyPart, languageService);
 			bodyParts.add(model);
 			
 			IItem item = player.equipment().equipted(bodyPart);
 			
 			if (item != null) {
-				LogRunner.logger().log(Level.INFO, String.format("Adding equipt item %s to body part %s", item.name(), bodyPart.name()));
+				LogRunner.logger().info(String.format("Adding equipt item %s to body part %s", item.name(), bodyPart.name()));
 				EquipDebugModel eModel = new EquipDebugModel(model, new DebugItemModel(item, languageService));
 				equipment.add(eModel);
 			}
 		}
 		
 		player.addBodyPartChangeListener((a, r, c) -> {
-			LogRunner.logger().log(Level.INFO, String.format("Updating body parts on player %s", player.name()));
+			LogRunner.logger().info(String.format("Updating body parts on player %s", player.name()));
 			updateBodyParts(a, r);
 		});
 		
 		for (IItem item : player.inventory().items()) {
-			LogRunner.logger().log(Level.INFO, String.format("Adding item %s to player %s", item.name(), player.name()));
+			LogRunner.logger().info(String.format("Adding item %s to player %s", item.name(), player.name()));
 			items.add(new DebugItemModel(item, languageService));
 		}
 		
 		player.inventory().addItemChangeListener((a, r, c) -> {
-			LogRunner.logger().log(Level.INFO, String.format("Updating items on player %s", player.name()));
+			LogRunner.logger().info(String.format("Updating items on player %s", player.name()));
 			updateItems(a, r);
 		});
 		
 		player.equipment().addEquipmentChangeListener((a, r, c) -> {
-			LogRunner.logger().log(Level.INFO, String.format("Updating equipment on player %s", player.name()));
+			LogRunner.logger().info(String.format("Updating equipment on player %s", player.name()));
 			updateEquipment(a, c, r);
 		});
 	}
@@ -122,7 +121,7 @@ public class PlayerDebugModel {
 	private void updateAttributes(List<IAttribute> a, List<IAttribute> r) {
 		Platform.runLater(() -> {
 			for (IAttribute attribute : a) {
-				LogRunner.logger().log(Level.INFO, String.format("Adding attribute %s to player %s", attribute.name(), player.name()));
+				LogRunner.logger().info(String.format("Adding attribute %s to player %s", attribute.name(), player.name()));
 				DebugNamedObjectModel model = new DebugNamedObjectModel(new DebugAttribute(attribute));
 				model.added().set(true);
 				attributes.add(model);
@@ -131,7 +130,7 @@ public class PlayerDebugModel {
 			for (IAttribute attribute : r) {
 				for (DebugNamedObjectModel model : attributes) {
 					if (model.name().get().equals(attribute.name())) {
-						LogRunner.logger().log(Level.INFO, String.format("Setting attribute %s to removed on player %s", attribute.name(), player.name()));
+						LogRunner.logger().info(String.format("Setting attribute %s to removed on player %s", attribute.name(), player.name()));
 						model.removed().set(true);
 						break;
 					}
@@ -143,7 +142,7 @@ public class PlayerDebugModel {
 	private void updateCharacteristics(List<ICharacteristic> a, List<ICharacteristic> r) {
 		Platform.runLater(() -> {
 			for (ICharacteristic characteristic : a) {
-				LogRunner.logger().log(Level.INFO, String.format("Adding characteristic %s to player %s", characteristic.name(), player.name()));
+				LogRunner.logger().info(String.format("Adding characteristic %s to player %s", characteristic.name(), player.name()));
 				DebugNamedObjectModel model = new DebugNamedObjectModel(new DebugCharacteristic(characteristic));
 				model.added().set(true);
 				characteristics.add(model);
@@ -152,7 +151,7 @@ public class PlayerDebugModel {
 			for (ICharacteristic characteristic : r) {
 				for (DebugNamedObjectModel model : characteristics) {
 					if (model.name().get().equals(characteristic.name())) {
-						LogRunner.logger().log(Level.INFO, String.format("Setting characteristic %s to removed on player %s", characteristic.name(), player.name()));
+						LogRunner.logger().info(String.format("Setting characteristic %s to removed on player %s", characteristic.name(), player.name()));
 						model.removed().set(true);
 						break;
 					}
@@ -164,7 +163,7 @@ public class PlayerDebugModel {
 	private void updateBodyParts(List<IBodyPart> a, List<IBodyPart> r) {
 		Platform.runLater(() -> {
 			for (IBodyPart bodyPart : a) {
-				LogRunner.logger().log(Level.INFO, String.format("Adding body part %s to player %s", bodyPart.name(), player.name()));
+				LogRunner.logger().info(String.format("Adding body part %s to player %s", bodyPart.name(), player.name()));
 				BodyPartDebugModel model = new BodyPartDebugModel(bodyPart, languageService);
 				model.added().set(true);
 				bodyParts.add(model);
@@ -173,7 +172,7 @@ public class PlayerDebugModel {
 			for (IBodyPart bodyPart : r) {
 				for (BodyPartDebugModel model : bodyParts) {
 					if (model.name().get().equals(bodyPart.name())) {
-						LogRunner.logger().log(Level.INFO, String.format("Setting body part %s to removed on player %s", bodyPart.name(), player.name()));
+						LogRunner.logger().info(String.format("Setting body part %s to removed on player %s", bodyPart.name(), player.name()));
 						model.removed().set(true);
 						break;
 					}
@@ -185,7 +184,7 @@ public class PlayerDebugModel {
 	private void updateItems(List<IItem> a, List<IItem> r) {
 		Platform.runLater(() -> {
 			for (IItem item : a) {
-				LogRunner.logger().log(Level.INFO, String.format("Adding item %s to player %s", item.name(), player.name()));
+				LogRunner.logger().info(String.format("Adding item %s to player %s", item.name(), player.name()));
 				DebugItemModel model = new DebugItemModel(item, languageService);
 				model.added().set(true);
 				items.add(model);
@@ -194,7 +193,7 @@ public class PlayerDebugModel {
 			for (IItem item : r) {
 				for (DebugItemModel model : items) {
 					if (model.name().get().equals(item.name())) {
-						LogRunner.logger().log(Level.INFO, String.format("Setting item %s to removed on player %s", item.name(), player.name()));
+						LogRunner.logger().info(String.format("Setting item %s to removed on player %s", item.name(), player.name()));
 						model.removed().set(true);
 						break;
 					}
@@ -206,7 +205,7 @@ public class PlayerDebugModel {
 	private void updateEquipment(List<IEquiped> a, List<IEquiped> c, List<IEquiped> r) {
 		Platform.runLater(() -> {
 			for (IEquiped equiped : a) {
-				LogRunner.logger().log(Level.INFO, String.format("Adding equiped item %s to player %s", equiped.getItem().name(), player.name()));
+				LogRunner.logger().info(String.format("Adding equiped item %s to player %s", equiped.getItem().name(), player.name()));
 				EquipDebugModel model = new EquipDebugModel(new BodyPartDebugModel(equiped.getBodyPart(), languageService), new DebugItemModel(equiped.getItem(), languageService));
 				model.added().set(true);
 				equipment.add(model);
@@ -215,7 +214,7 @@ public class PlayerDebugModel {
 			for (IEquiped equiped : r) {
 				for (EquipDebugModel model : equipment) {
 					if (model.bodyPart().name().get().equals(equiped.getBodyPart().name())) {
-						LogRunner.logger().log(Level.INFO, String.format("Setting equiped body part %s to removed on player %s", model.bodyPart().name().get(), player.name()));
+						LogRunner.logger().info(String.format("Setting equiped body part %s to removed on player %s", model.bodyPart().name().get(), player.name()));
 						model.removed().set(true);
 						break;
 					}
@@ -228,7 +227,7 @@ public class PlayerDebugModel {
 						continue;
 					}
 					
-					LogRunner.logger().log(Level.INFO, String.format("Changing equiped item to %s for body part %s", equiped.getItem().name(), equiped.getBodyPart().name()));
+					LogRunner.logger().info(String.format("Changing equiped item to %s for body part %s", equiped.getItem().name(), equiped.getBodyPart().name()));
 					model.changed().set(true);
 					DebugItemModel item = new DebugItemModel(equiped.getItem(), languageService);
 					item.added().set(true);
@@ -332,7 +331,7 @@ public class PlayerDebugModel {
 	 * This will also remove removed attributes, characteristics, body parts, items and equipment.
 	 */
 	public void resetNotifications() {
-		LogRunner.logger().log(Level.INFO, String.format("Reseting change notifications on player %s", player.name()));
+		LogRunner.logger().info(String.format("Reseting change notifications on player %s", player.name()));
 		resetAttributes();
 		resetCharacteristics();
 		resetBodyParts();

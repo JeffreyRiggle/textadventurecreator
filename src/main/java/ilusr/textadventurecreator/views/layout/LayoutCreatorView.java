@@ -8,6 +8,7 @@ import ilusr.core.url.InternalURLProvider;
 import ilusr.iroshell.core.StyleUpdater;
 import ilusr.iroshell.services.IStyleContainerService;
 import ilusr.iroshell.services.IStyleWatcher;
+import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.style.StyledComponents;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -74,7 +75,7 @@ public class LayoutCreatorView extends AnchorPane implements Initializable, ISty
 		try {
 			loader.load();
 		} catch(Exception e) {
-			e.printStackTrace();
+			LogRunner.logger().severe(e);
 		}
 	}
 	

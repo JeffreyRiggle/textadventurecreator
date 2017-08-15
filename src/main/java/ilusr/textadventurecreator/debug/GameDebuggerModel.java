@@ -2,7 +2,6 @@ package ilusr.textadventurecreator.debug;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 
 import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.language.DisplayStrings;
@@ -60,7 +59,7 @@ public class GameDebuggerModel implements ICompletionListener {
 		gameStateManager.addCompletionListener(this);
 		
 		for (IPlayer player : gameStateManager.players()) {
-			LogRunner.logger().log(Level.INFO, String.format("Adding Player: %s", player.name()));
+			LogRunner.logger().info(String.format("Adding Player: %s", player.name()));
 			players.add(playerFactory.create(player));
 		}
 		
@@ -89,11 +88,11 @@ public class GameDebuggerModel implements ICompletionListener {
 	public <T> void completed(T data) {		
 		Platform.runLater(() -> {
 			for (PlayerDebugModel player : players) {
-				LogRunner.logger().log(Level.INFO, String.format("Reseting Notifications for player: %s", player.player().name()));
+				LogRunner.logger().info(String.format("Reseting Notifications for player: %s", player.player().name()));
 				player.resetNotifications();
 			}
 			
-			LogRunner.logger().log(Level.INFO, String.format("Game State completed with data: %s", ((GameStateCompletionData)data).completionData().toString()));
+			LogRunner.logger().info(String.format("Game State completed with data: %s", ((GameStateCompletionData)data).completionData().toString()));
 			currentGameState.set(statePrefix + ((GameStateCompletionData)data).completionData());
 		});
 	}

@@ -10,6 +10,7 @@ import ilusr.iroshell.core.StyleUpdater;
 import ilusr.iroshell.core.ViewSwitcher;
 import ilusr.iroshell.services.IStyleContainerService;
 import ilusr.iroshell.services.IStyleWatcher;
+import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.language.ILanguageService;
 import ilusr.textadventurecreator.style.StyledComponents;
 import ilusr.textadventurecreator.views.EditRemoveListCellFactory;
@@ -136,7 +137,7 @@ public class OptionView extends AnchorPane implements Initializable, IStyleWatch
 		try {
 			loader.load();
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogRunner.logger().severe(e);
 		}
 	}
 	

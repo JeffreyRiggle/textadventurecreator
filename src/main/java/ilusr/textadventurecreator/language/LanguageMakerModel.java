@@ -2,7 +2,6 @@ package ilusr.textadventurecreator.language;
 
 import java.io.File;
 import java.util.Optional;
-import java.util.logging.Level;
 
 import ilusr.core.io.FileUtilities;
 import ilusr.core.io.StreamUtilities;
@@ -61,7 +60,7 @@ public class LanguageMakerModel {
 	
 	private void initialize() {
 		try {
-			LogRunner.logger().log(Level.INFO, "loading langauge items from English language definition.");
+			LogRunner.logger().info("loading langauge items from English language definition.");
 			String content = StreamUtilities.getStreamContents(getClass().getResourceAsStream("enLanguage.txt"));
 			String[] values = content.split("\r\n");
 			for (String val : values) {
@@ -79,7 +78,7 @@ public class LanguageMakerModel {
 
 	private void readFromFile(File file) {
 		try {
-			LogRunner.logger().log(Level.INFO, String.format("Reading language from file: %s", file.getAbsolutePath()));
+			LogRunner.logger().info(String.format("Reading language from file: %s", file.getAbsolutePath()));
 			String content = FileUtilities.getFileContentWithReturns(file);
 			String[] values = content.split("\r\n");
 			for (String val : values) {
@@ -170,7 +169,7 @@ public class LanguageMakerModel {
 	 */
 	public void buildFile(String path) {
 		try {
-			LogRunner.logger().log(Level.INFO, String.format("Saving language to file: %s", path));
+			LogRunner.logger().info(String.format("Saving language to file: %s", path));
 			FileUtilities.saveToFile(path, createContent());
 		} catch (Exception e) {
 			e.printStackTrace();

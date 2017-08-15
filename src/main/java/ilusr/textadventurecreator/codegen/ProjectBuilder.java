@@ -1,7 +1,5 @@
 package ilusr.textadventurecreator.codegen;
 
-import java.util.logging.Level;
-
 import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.language.ILanguageService;
 import ilusr.textadventurecreator.shell.TextAdventureProjectPersistence;
@@ -34,14 +32,14 @@ public class ProjectBuilder {
 	 */
 	public void build(StatusItem item) {
 		if (!persistence.getIsStandAlone()) {
-			LogRunner.logger().log(Level.INFO, "Non-standalone game not building.");
+			LogRunner.logger().info("Non-standalone game not building.");
 			return;
 		}
 		
 		IProjectBuilder builder = null;
 		
 		if (!persistence.getIsDev()) {
-			LogRunner.logger().log(Level.INFO, "Non-dev game building as a java project.");
+			LogRunner.logger().info("Non-dev game building as a java project.");
 			builder = new JavaProjectBuilder(persistence, languageService);
 			builder.build(item);
 			return;
@@ -49,13 +47,12 @@ public class ProjectBuilder {
 		
 		switch (persistence.getLanguage()) {
 			case "Java":
-				LogRunner.logger().log(Level.INFO, "Building as a java project.");
+				LogRunner.logger().info("Building as a java project.");
 				builder = new JavaProjectBuilder(persistence, languageService);
 				break;
 			case "C++":
 			case "HTML":
-				LogRunner.logger().log(Level.INFO, "Unitended language selected.");
-				//TODO:
+				LogRunner.logger().info("Unitended language selected.");
 				break;
 		}
 		
