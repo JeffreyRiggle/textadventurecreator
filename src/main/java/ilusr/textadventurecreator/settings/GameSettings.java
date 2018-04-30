@@ -61,6 +61,10 @@ public class GameSettings extends AnchorPane implements Initializable {
 		startGameStateLabel.textProperty().bind(model.startGameStateText());
 		startGameState.setItems(model.firstGameState().list());
 		startGameState.valueProperty().bindBidirectional(model.firstGameState().selected());
+		
+		model.gameLoaded().addListener((obs, o, n) -> {
+			applySettingState(n);
+		});
 	}
 
 	private void applySettingState(boolean loaded) {
