@@ -131,14 +131,14 @@ public class WizardGameSettingsModelUnitTest {
 	
 	@Test
 	public void testSupportLanguages() {
-		assertEquals(1, model.supportedLanguages().list().size());
+		assertEquals(3, model.supportedLanguages().list().size());
 	}
 	
 	@Test
 	public void testSelectedSupportedLanguage() {
-		model.supportedLanguages().selected().set("Java");
-		assertEquals("Java", model.supportedLanguages().selected().get());
-		verify(project, times(1)).setLanguage("Java");
+		model.supportedLanguages().selected().set("Electron");
+		assertEquals("Electron", model.supportedLanguages().selected().get());
+		verify(project, times(1)).setLanguage("Electron");
 	}
 	
 	@Test

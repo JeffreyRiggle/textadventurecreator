@@ -50,9 +50,16 @@ public class ProjectBuilder {
 				LogRunner.logger().info("Building as a java project.");
 				builder = new JavaProjectBuilder(persistence, languageService);
 				break;
-			case "C++":
+			case "Electron":
+				LogRunner.logger().info("Building as electron project.");
+				builder = new ElectronProjectBuilder(persistence, languageService);
+				break;
 			case "HTML":
-				LogRunner.logger().info("Unitended language selected.");
+				LogRunner.logger().info("Building as electron project.");
+				builder = new HtmlProjectBuilder(persistence, languageService);
+				break;
+			default:
+				LogRunner.logger().info("Unintended language selected.");
 				break;
 		}
 		

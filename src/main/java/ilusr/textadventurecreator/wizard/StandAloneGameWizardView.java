@@ -98,9 +98,6 @@ public class StandAloneGameWizardView extends GameWizardView implements Initiali
 			model.supportedLanguages().selected().set(n);
 		});
 		
-		language.setDisable(!model.isDev().get());
-		languageLabel.setDisable(!model.isDev().get());
-		
 		model.isDev().addListener((v, o, n) -> {
 			language.setDisable(!n);
 			languageLabel.setDisable(!n);
