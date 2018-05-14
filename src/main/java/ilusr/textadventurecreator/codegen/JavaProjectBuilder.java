@@ -1,7 +1,6 @@
 package ilusr.textadventurecreator.codegen;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -26,7 +25,7 @@ import textadventurelib.persistence.TextAdventurePersistenceObject;
  * @author Jeff Riggle
  *
  */
-public class JavaProjectBuilder implements IProjectBuilder {
+public class JavaProjectBuilder extends BaseProjectBuilder {
 
 	private final String PROJECT_TITLE = "textadventure";
 	private final TextAdventureProjectPersistence persistence;
@@ -266,29 +265,6 @@ public class JavaProjectBuilder implements IProjectBuilder {
 		LogRunner.logger().info("Finished building project");
 		item.progressAmount().set(1.0);
 		item.indicator().set(StatusIndicator.Good);
-	}
-	
-	private int writeFileContent(File file, byte[] content) {
-		FileOutputStream out = null;
-		int retVal = 0;
-		try {
-			file.createNewFile();
-			out = new FileOutputStream(file);
-			out.write(content);
-		} catch (Exception e) {
-			e.printStackTrace();
-			retVal = -1;
-		} finally {
-			if (out == null) {
-				return -1;
-			}
-			
-			try {
-				out.close();
-			} catch (Exception e) { }
-		}
-		
-		return retVal;
 	}
 	
 	private void buildGameFile(File src, String sanitizedGameName) {
