@@ -63,11 +63,11 @@ public class ElectronProjectBuilder extends BaseProjectBuilder {
 		File packageFile = new File(project.getAbsoluteFile() + "/package.json");
 		writeFileContent(packageFile, String.format(ElectronProjectFileHelper.PACKAGEJSON, gameName, author).getBytes(Charset.forName("UTF-8")));
 
-		File publicPath = new File(projectLocation + "/project");
+		File publicPath = new File(projectLocation + "/public");
 		publicPath.mkdirs();
 		
-		File electronJS = new File(publicPath.getAbsoluteFile() + "/election.js");
-		writeFileContent(electronJS, String.format(ElectronProjectFileHelper.ELECTRONJS).getBytes(Charset.forName("UTF-8")));
+		File electronJS = new File(publicPath.getAbsoluteFile() + "/electron.js");
+		writeFileContent(electronJS, ElectronProjectFileHelper.ELECTRONJS.getBytes(Charset.forName("UTF-8")));
 		
 		File indexHTML = new File(publicPath.getAbsoluteFile() + "/index.html");
 		writeFileContent(indexHTML, String.format(ElectronProjectFileHelper.INDEXHTML, gameName).getBytes(Charset.forName("UTF-8")));
@@ -79,22 +79,22 @@ public class ElectronProjectBuilder extends BaseProjectBuilder {
 		srcPath.mkdirs();
 		
 		File appcss = new File(srcPath.getAbsoluteFile() + "/App.css");
-		writeFileContent(appcss, String.format(ElectronProjectFileHelper.APPCSS).getBytes(Charset.forName("UTF-8")));
+		writeFileContent(appcss, ElectronProjectFileHelper.APPCSS.getBytes(Charset.forName("UTF-8")));
 		
 		File appJS = new File(srcPath.getAbsoluteFile() + "/App.js");
-		writeFileContent(appJS, String.format(ElectronProjectFileHelper.APPJS).getBytes(Charset.forName("UTF-8")));
+		writeFileContent(appJS, ElectronProjectFileHelper.APPJS.getBytes(Charset.forName("UTF-8")));
 		
 		File appTestJS = new File(srcPath.getAbsoluteFile() + "/App.test.js");
-		writeFileContent(appTestJS, String.format(ElectronProjectFileHelper.APPTESTJS).getBytes(Charset.forName("UTF-8")));
+		writeFileContent(appTestJS, ElectronProjectFileHelper.APPTESTJS.getBytes(Charset.forName("UTF-8")));
 		
 		File indexcss = new File(srcPath.getAbsoluteFile() + "/index.css");
-		writeFileContent(indexcss, String.format(ElectronProjectFileHelper.INDEXCSS).getBytes(Charset.forName("UTF-8")));
+		writeFileContent(indexcss, ElectronProjectFileHelper.INDEXCSS.getBytes(Charset.forName("UTF-8")));
 		
 		File indexJS = new File(srcPath.getAbsoluteFile() + "/index.js");
-		writeFileContent(indexJS, String.format(ElectronProjectFileHelper.INDEXJS).getBytes(Charset.forName("UTF-8")));
+		writeFileContent(indexJS, ElectronProjectFileHelper.INDEXJS.getBytes(Charset.forName("UTF-8")));
 		
 		File rsw = new File(srcPath.getAbsoluteFile() + "/registerServiceWorker.js");
-		writeFileContent(rsw, String.format(ElectronProjectFileHelper.REGISTERSERVICEWORKERJS).getBytes(Charset.forName("UTF-8")));
+		writeFileContent(rsw, ElectronProjectFileHelper.REGISTERSERVICEWORKERJS.getBytes(Charset.forName("UTF-8")));
 	}
 	
 	private void compile(String projectLocation, StatusItem item) {

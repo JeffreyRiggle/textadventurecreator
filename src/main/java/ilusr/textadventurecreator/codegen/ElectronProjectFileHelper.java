@@ -103,18 +103,18 @@ public class ElectronProjectFileHelper {
 			"      manifest.json provides metadata used when your web app is added to the\r\n" +
 			"      homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/\r\n" +
 			"    -->\r\n" +
-			"    <link rel=\"manifest\" href=\"%PUBLIC_URL%/manifest.json\">\r\n" +
-			"    <link rel=\"shortcut icon\" href=\"%PUBLIC_URL%/favicon.ico\">\r\n" +
+			"    <link rel=\"manifest\" href=\"%%PUBLIC_URL%%/manifest.json\">\r\n" +
+			"    <link rel=\"shortcut icon\" href=\"%%PUBLIC_URL%%/favicon.ico\">\r\n" +
 			"    <!--\r\n" +
-			"      Notice the use of %PUBLIC_URL% in the tags above.\r\n" +
+			"      Notice the use of %%PUBLIC_URL%% in the tags above.\r\n" +
 			"      It will be replaced with the URL of the `public` folder during the build.\r\n" +
 			"      Only files inside the `public` folder can be referenced from the HTML.\r\n" +
 			"\r\n" +
-			"      Unlike \"/favicon.ico\" or \"favicon.ico\", \"%PUBLIC_URL%/favicon.ico\" will\r\n" +
+			"      Unlike \"/favicon.ico\" or \"favicon.ico\", \"%%PUBLIC_URL%%/favicon.ico\" will\r\n" +
 			"      work correctly both with client-side routing and a non-root public URL.\r\n" +
 			"      Learn how to configure a non-root public URL by running `npm run build`.\r\n" +
 			"    -->\r\n" +
-			"    <title>%1s$</title>\r\n" +
+			"    <title>%s</title>\r\n" +
 			"  </head>\r\n" +
 			"  <body>\r\n" +
 			"    <noscript>\r\n" +
@@ -134,8 +134,8 @@ public class ElectronProjectFileHelper {
 			"  </body>\r\n" +
 			"</html>";
 	public final static String MANIFESTJSON = "{\r\n" +
-			"  \"short_name\": \"%1s$\",\r\n" +
-			"  \"name\": \"%1s$\",\r\n" +
+			"  \"short_name\": \"%1$s\",\r\n" +
+			"  \"name\": \"%1$s\",\r\n" +
 			"  \"icons\": [\r\n" +
 			"    {\r\n" +
 			"      \"src\": \"favicon.ico\",\r\n" +
