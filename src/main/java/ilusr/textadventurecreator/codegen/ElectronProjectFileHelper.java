@@ -104,7 +104,7 @@ public class ElectronProjectFileHelper {
 			"      homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/\r\n" +
 			"    -->\r\n" +
 			"    <link rel=\"manifest\" href=\"%%PUBLIC_URL%%/manifest.json\">\r\n" +
-			"    <link rel=\"shortcut icon\" href=\"%%PUBLIC_URL%%/favicon.ico\">\r\n" +
+			"    <link rel=\"shortcut icon\" href=\"%%PUBLIC_URL%%/favicon.%2$s\">\r\n" +
 			"    <!--\r\n" +
 			"      Notice the use of %%PUBLIC_URL%% in the tags above.\r\n" +
 			"      It will be replaced with the URL of the `public` folder during the build.\r\n" +
@@ -114,7 +114,7 @@ public class ElectronProjectFileHelper {
 			"      work correctly both with client-side routing and a non-root public URL.\r\n" +
 			"      Learn how to configure a non-root public URL by running `npm run build`.\r\n" +
 			"    -->\r\n" +
-			"    <title>%s</title>\r\n" +
+			"    <title>%1$s</title>\r\n" +
 			"  </head>\r\n" +
 			"  <body>\r\n" +
 			"    <noscript>\r\n" +
@@ -138,7 +138,7 @@ public class ElectronProjectFileHelper {
 			"  \"name\": \"%1$s\",\r\n" +
 			"  \"icons\": [\r\n" +
 			"    {\r\n" +
-			"      \"src\": \"favicon.ico\",\r\n" +
+			"      \"src\": \"favicon.%2$s\",\r\n" +
 			"      \"sizes\": \"64x64 32x32 24x24 16x16\",\r\n" +
 			"      \"type\": \"image/x-icon\"\r\n" +
 			"    }\r\n" +
@@ -177,7 +177,7 @@ public class ElectronProjectFileHelper {
 			"  to { transform: rotate(360deg); }\r\n" +
 			"}\r\n";
 	public final static String APPJS = "import React, { Component } from 'react';\r\n" +
-			"import logo from './logo.svg';\r\n" +
+			"import logo from './logo.%s';\r\n" +
 			"import './App.css';\r\n" +
 			"\r\n" +
 			"import {TextAdventurePersistenceManager} from '../node_modules/text-adventure-lib/dist/main';\r\n" +

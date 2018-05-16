@@ -12,7 +12,6 @@ import ilusr.textadventurecreator.statusbars.StatusItem;
 
 public class ElectronProjectBuilder extends BaseProjectBuilder {
 
-	private final TextAdventureProjectPersistence persistence;
 	private final ILanguageService languageService;
 	
 	public ElectronProjectBuilder(TextAdventureProjectPersistence persistence, ILanguageService languageService) {
@@ -56,7 +55,9 @@ public class ElectronProjectBuilder extends BaseProjectBuilder {
 		
 		String gameName = persistence.getGameInfo().gameName();
 		String author = persistence.getGameInfo().creator();
-		
+		File originalIcon = new File(persistence.getIconLocation());
+		String extension = persistence.getIconLocation().substring(persistence.getIconLocation().lastIndexOf('.'));
+
 		File gitIgnoreFile = new File(project.getAbsoluteFile() + "/.gitignore");
 		writeFileContent(gitIgnoreFile, String.format(ElectronProjectFileHelper.GITIGNORE).getBytes(Charset.forName("UTF-8")));
 		
@@ -70,10 +71,10 @@ public class ElectronProjectBuilder extends BaseProjectBuilder {
 		writeFileContent(electronJS, ElectronProjectFileHelper.ELECTRONJS.getBytes(Charset.forName("UTF-8")));
 		
 		File indexHTML = new File(publicPath.getAbsoluteFile() + "/index.html");
-		writeFileContent(indexHTML, String.format(ElectronProjectFileHelper.INDEXHTML, gameName).getBytes(Charset.forName("UTF-8")));
+		writeFileContent(indexHTML, String.format(ElectronProjectFileHelper.INDEXHTML, gameName, extension).getBytes(Charset.forName("UTF-8")));
 		
 		File manifestJSON = new File(publicPath.getAbsoluteFile() + "/manifest.json");
-		writeFileContent(manifestJSON, String.format(ElectronProjectFileHelper.MANIFESTJSON, gameName).getBytes(Charset.forName("UTF-8")));
+		writeFileContent(manifestJSON, String.format(ElectronProjectFileHelper.MANIFESTJSON, gameName, extension).getBytes(Charset.forName("UTF-8")));
 		
 		File srcPath = new File(projectLocation + "/src");
 		srcPath.mkdirs();
@@ -82,7 +83,7 @@ public class ElectronProjectBuilder extends BaseProjectBuilder {
 		writeFileContent(appcss, ElectronProjectFileHelper.APPCSS.getBytes(Charset.forName("UTF-8")));
 		
 		File appJS = new File(srcPath.getAbsoluteFile() + "/App.js");
-		writeFileContent(appJS, ElectronProjectFileHelper.APPJS.getBytes(Charset.forName("UTF-8")));
+		writeFileContent(appJS, String.format(ElectronProjectFileHelper.APPJS, extension).getBytes(Charset.forName("UTF-8")));
 		
 		File appTestJS = new File(srcPath.getAbsoluteFile() + "/App.test.js");
 		writeFileContent(appTestJS, ElectronProjectFileHelper.APPTESTJS.getBytes(Charset.forName("UTF-8")));
@@ -95,6 +96,21 @@ public class ElectronProjectBuilder extends BaseProjectBuilder {
 		
 		File rsw = new File(srcPath.getAbsoluteFile() + "/registerServiceWorker.js");
 		writeFileContent(rsw, ElectronProjectFileHelper.REGISTERSERVICEWORKERJS.getBytes(Charset.forName("UTF-8")));
+		
+		try {
+			LogRunner.logger().info("Moving game icon.");
+			
+			File srcIcon = new File(String.format("%s/logo%s", srcPath.getAbsolutePath(), extension));
+			Files.copy(originalIcon.toPath(), srcIcon.toPath());
+			
+			File publicIcon = new File(String.format("%s/favicon%s", publicPath.getAbsolutePath(), extension));
+			Files.copy(originalIcon.toPath(), publicIcon.toPath());
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		buildGameFile(project, gameName, publicPath);
 	}
 	
 	private void compile(String projectLocation, StatusItem item) {

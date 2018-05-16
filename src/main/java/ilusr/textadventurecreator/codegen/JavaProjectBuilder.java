@@ -9,7 +9,6 @@ import ilusr.core.environment.EnvironmentUtilities;
 import ilusr.core.io.FileUtilities;
 import ilusr.core.io.ProcessHelpers;
 import ilusr.logrunner.LogRunner;
-import ilusr.persistencelib.configuration.XmlConfigurationManager;
 import ilusr.textadventurecreator.language.DisplayStrings;
 import ilusr.textadventurecreator.language.ILanguageService;
 import ilusr.textadventurecreator.shell.TextAdventureProjectPersistence;
@@ -17,8 +16,6 @@ import ilusr.textadventurecreator.statusbars.StatusIndicator;
 import ilusr.textadventurecreator.statusbars.StatusItem;
 import textadventurelib.persistence.GameStatePersistenceObject;
 import textadventurelib.persistence.OptionPersistenceObject;
-import textadventurelib.persistence.SaveActionPersistenceObject;
-import textadventurelib.persistence.TextAdventurePersistenceObject;
 
 /**
  * 
@@ -28,7 +25,6 @@ import textadventurelib.persistence.TextAdventurePersistenceObject;
 public class JavaProjectBuilder extends BaseProjectBuilder {
 
 	private final String PROJECT_TITLE = "textadventure";
-	private final TextAdventureProjectPersistence persistence;
 	private final ILanguageService languageService;
 	
 	/**
@@ -201,7 +197,7 @@ public class JavaProjectBuilder extends BaseProjectBuilder {
 		File assetHelper = new File(srcFile + "/assets/AssetLoader.java");
 		writeFileContent(assetHelper, String.format(JavaProjectFileHelper.ASSETLOADER, PROJECT_TITLE).getBytes(Charset.forName("UTF-8")));
 		
-		buildGameFile(srcFile, sanitizedGameName);
+		buildGameFile(srcFile, sanitizedGameName, new File(srcFile.getAbsolutePath() + "/assets/"));
 		
 		item.progressAmount().set(.6);
 		File gameApp = new File(src + "/" + sanitizedGameName + "/GameApp.java");
@@ -267,26 +263,6 @@ public class JavaProjectBuilder extends BaseProjectBuilder {
 		item.indicator().set(StatusIndicator.Good);
 	}
 	
-	private void buildGameFile(File src, String sanitizedGameName) {
-		try {
-			LogRunner.logger().info("Building game assets.");
-			File gameAssets = new File(src.getAbsolutePath() + "/assets/");
-			if (!gameAssets.exists()) {
-				gameAssets.mkdirs();
-			}
-			
-			moveGameMedia(persistence.getTextAdventure(), gameAssets);
-			exportGameStatesIfNeeded(persistence.getTextAdventure(), src.getAbsolutePath() + "/" + sanitizedGameName);
-			
-			XmlConfigurationManager man = new XmlConfigurationManager(src.getAbsolutePath() + "/" + sanitizedGameName + "/" + sanitizedGameName + ".xml");
-			persistence.prepareXml();
-			man.addConfigurationObject(persistence.getTextAdventure());
-			man.save();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
 	private String buildGameIcon(File src) {
 		String retVal = new String();
 		try {
@@ -327,63 +303,6 @@ public class JavaProjectBuilder extends BaseProjectBuilder {
 		}
 		
 		return retVal;
-	}
-	
-	private void moveGameMedia(TextAdventurePersistenceObject textAdventure, File assets) {
-		for (GameStatePersistenceObject gameState : textAdventure.gameStates()) {
-			if (gameState.layout().getLayoutContent() == null || gameState.layout().getLayoutContent().isEmpty()) {
-				continue;
-			}
-			
-			String newFile = tryCopyToAssets(gameState.layout().getLayoutContent(), assets);
-			if (!newFile.isEmpty()) {
-				LogRunner.logger().info(String.format("Moving layout file %s to %s", gameState.layout().getLayoutContent(), newFile));
-				gameState.layout().setLayoutContent(newFile);
-			}
-		}
-	}
-	
-	private String tryCopyToAssets(String original, File assets) {
-		String retVal = "";
-		try {
-			File originalFile = new File(original);
-			String newName = original.substring(original.lastIndexOf('/'));
-			File newMedia = new File(assets.getAbsolutePath() + newName);
-			Files.copy(originalFile.toPath(), newMedia.toPath());
-			retVal = newMedia.getAbsolutePath();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return retVal;
-	}
-	
-	private void exportGameStatesIfNeeded(TextAdventurePersistenceObject textAdventure, String path) {
-		boolean exportDefined = !textAdventure.gameStatesInline();
-		boolean shouldExport = false;
-		
-		for (GameStatePersistenceObject gameState : textAdventure.gameStates()) {
-			for (OptionPersistenceObject option : gameState.options()) {
-				if (!option.action().type().equals("Save")) {
-					continue;
-				}
-				
-				if (exportDefined) {
-					((SaveActionPersistenceObject)option.action()).gameStatesLocation(textAdventure.gameStatesLocation());
-				} else {
-					((SaveActionPersistenceObject)option.action()).gameStatesLocation("./save/gamestates.xml");
-					shouldExport = true;
-				}
-			}
-		}
-		
-		if (!shouldExport) {
-			LogRunner.logger().info("Not exporting game states.");
-			return;
-		}
-		
-		textAdventure.gameStatesInline(false);
-		textAdventure.gameStatesLocation(path + "/gamestates.xml");
 	}
 	
 	private String getExternalGameFileName() {
