@@ -39,6 +39,25 @@ public abstract class BaseProjectBuilder implements IProjectBuilder {
 		return retVal;
 	}
 	
+	protected String buildGameBackground(File src) {
+		String retVal = new String();
+		try {
+			if (!src.exists()) {
+				src.mkdirs();
+			}
+			
+			File originalIcon = new File(persistence.getBackgroundLocation());
+			File gameIcon = new File(String.format("%s/%s", src.getAbsolutePath(), originalIcon.getName()));
+			Files.copy(originalIcon.toPath(), gameIcon.toPath());
+			
+			retVal = gameIcon.getName();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return retVal;
+	}
+	
 	protected void buildGameFile(File src, String sanitizedGameName, File gameAssets) {
 		try {
 			LogRunner.logger().info("Building game assets.");
@@ -76,7 +95,14 @@ public abstract class BaseProjectBuilder implements IProjectBuilder {
 		String retVal = "";
 		try {
 			File originalFile = new File(original);
-			String newName = original.substring(original.lastIndexOf('/'));
+			
+			String newName = new String();
+			if (original.contains("/")) {
+				newName = original.substring(original.lastIndexOf('/'));
+			} else {
+				newName = original.substring(original.lastIndexOf('\\'));
+			}
+			
 			File newMedia = new File(assets.getAbsolutePath() + newName);
 			Files.copy(originalFile.toPath(), newMedia.toPath());
 			retVal = newMedia.getAbsolutePath();

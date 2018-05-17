@@ -79,11 +79,12 @@ public class ElectronProjectBuilder extends BaseProjectBuilder {
 		File srcPath = new File(projectLocation + "/src");
 		srcPath.mkdirs();
 		
+		String appbg = buildGameBackground(srcPath);
 		File appcss = new File(srcPath.getAbsoluteFile() + "/App.css");
-		writeFileContent(appcss, ElectronProjectFileHelper.APPCSS.getBytes(Charset.forName("UTF-8")));
+		writeFileContent(appcss, String.format(ElectronProjectFileHelper.APPCSS, appbg).getBytes(Charset.forName("UTF-8")));
 		
 		File appJS = new File(srcPath.getAbsoluteFile() + "/App.js");
-		writeFileContent(appJS, String.format(ElectronProjectFileHelper.APPJS, extension).getBytes(Charset.forName("UTF-8")));
+		writeFileContent(appJS, String.format(ElectronProjectFileHelper.APPJS, appbg).getBytes(Charset.forName("UTF-8")));
 		
 		File appTestJS = new File(srcPath.getAbsoluteFile() + "/App.test.js");
 		writeFileContent(appTestJS, ElectronProjectFileHelper.APPTESTJS.getBytes(Charset.forName("UTF-8")));

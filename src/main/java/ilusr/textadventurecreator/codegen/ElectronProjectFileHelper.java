@@ -149,35 +149,39 @@ public class ElectronProjectFileHelper {
 			"  \"background_color\": \"#ffffff\"\r\n" +
 			"}\r\n";
 	public final static String APPCSS = ".App {\r\n" +
-			"  text-align: center;\r\n" +
+			"  background: url('./%s') no-repeat;\r\n" +
+			"  background-size: 100%%;\r\n" +
+			"  min-height: 100vh;\r\n" +
+			"  min-width: 100%%;\r\n" +
 			"}\r\n" +
 			"\r\n" +
-			".App-logo {\r\n" +
-			"  animation: App-logo-spin infinite 20s linear;\r\n" +
-			"  height: 80px;\r\n" +
+			".Menu {\r\n" +
+			"  position: absolute;\r\n" +
+			"  top: 25%%;\r\n" +
+			"  left: 15%%;\r\n" +
+			"  width: 70%%;\r\n" +
+			"  list-style: none;\r\n" +
 			"}\r\n" +
 			"\r\n" +
-			".App-header {\r\n" +
-			"  background-color: #222;\r\n" +
-			"  height: 150px;\r\n" +
-			"  padding: 20px;\r\n" +
-			"  color: white;\r\n" +
+			".Menu li {\r\n" +
+			"  margin-top: 40px;\r\n" +
+			"  width: 100%%;\r\n" +
 			"}\r\n" +
 			"\r\n" +
-			".App-title {\r\n" +
-			"  font-size: 1.5em;\r\n" +
+			".Menu li button {\r\n" +
+			"  background: rgba(60,179,113, .6);\r\n" +
+			"  border: none;\r\n" +
+			"  width: 100%%;\r\n" +
+			"  height: 60px;\r\n" +
+			"  font-weight: bolder;\r\n" +
+			"  font-size: 24px;\r\n" +
 			"}\r\n" +
 			"\r\n" +
-			".App-intro {\r\n" +
-			"  font-size: large;\r\n" +
-			"}\r\n" +
-			"\r\n" +
-			"@keyframes App-logo-spin {\r\n" +
-			"  from { transform: rotate(0deg); }\r\n" +
-			"  to { transform: rotate(360deg); }\r\n" +
-			"}\r\n";
+			".Menu li button:hover {\r\n" +
+			"  background: rgba(60,179,213, .6);\r\n" +
+			"}";
 	public final static String APPJS = "import React, { Component } from 'react';\r\n" +
-			"import logo from './logo.%s';\r\n" +
+			"import './%s';\r\n" +
 			"import './App.css';\r\n" +
 			"\r\n" +
 			"import {TextAdventurePersistenceManager} from '../node_modules/text-adventure-lib/dist/main';\r\n" +
@@ -200,11 +204,10 @@ public class ElectronProjectFileHelper {
 			"  render() {\r\n" +
 			"    return (\r\n" +
 			"      <div className=\"App\">\r\n" +
-			"        <header className=\"App-header\">\r\n" +
-			"          <img src={logo} className=\"App-logo\" alt=\"logo\" />\r\n" +
-			"          <h1 className=\"App-title\">Welcome to React</h1>\r\n" +
-			"        </header>\r\n" +
-			"        <button onClick={this._loadGame.bind(this)}>Play</button>\r\n" +
+			"        <ul className=\"Menu\">\r\n" +
+			"          <li><button onClick={this._loadGame.bind(this)}>Play</button></li>\r\n" +
+			"          <li><button onClick={this._loadGame.bind(this)}>Load</button></li>\r\n" +
+			"        </ul>\r\n" +
 			"      </div>\r\n" +
 			"    );\r\n" +
 			"  }\r\n" +

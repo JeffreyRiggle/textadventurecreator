@@ -192,7 +192,7 @@ public class JavaProjectBuilder extends BaseProjectBuilder {
 		item.progressAmount().set(.4);
 		File srcFile = new File(src);
 		String gameIcon = buildGameIcon(srcFile);
-		String gameBackground = buildGameBackground(srcFile);
+		String gameBackground = buildGameBackground(new File(srcFile.getAbsolutePath() + "/assets/"));
 		
 		File assetHelper = new File(srcFile + "/assets/AssetLoader.java");
 		writeFileContent(assetHelper, String.format(JavaProjectFileHelper.ASSETLOADER, PROJECT_TITLE).getBytes(Charset.forName("UTF-8")));
@@ -275,26 +275,6 @@ public class JavaProjectBuilder extends BaseProjectBuilder {
 			File originalIcon = new File(persistence.getIconLocation());
 			String extension = persistence.getIconLocation().substring(persistence.getIconLocation().lastIndexOf('.'));
 			File gameIcon = new File(String.format("%s/gameicon%s", gameAssets.getAbsolutePath(), extension));
-			Files.copy(originalIcon.toPath(), gameIcon.toPath());
-			
-			retVal = gameIcon.getName();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return retVal;
-	}
-	
-	private String buildGameBackground(File src) {
-		String retVal = new String();
-		try {
-			File gameAssets = new File(src.getAbsolutePath() + "/assets/");
-			if (!gameAssets.exists()) {
-				gameAssets.mkdirs();
-			}
-			
-			File originalIcon = new File(persistence.getBackgroundLocation());
-			File gameIcon = new File(String.format("%s/%s", gameAssets.getAbsolutePath(), originalIcon.getName()));
 			Files.copy(originalIcon.toPath(), gameIcon.toPath());
 			
 			retVal = gameIcon.getName();
