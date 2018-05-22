@@ -75,8 +75,11 @@ public class ElectronProjectFileHelper {
 			"\r\n" +
 			"function createWindow() {\r\n" +
 			"  mainWindow = new BrowserWindow({width: 900, height: 680});\r\n" +
+			"  mainWindow.setMenu(null);\r\n" +
 			"  mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '/index.html')}`);\r\n" +
-			"  mainWindow.openDevTools();\r\n" +
+			"  if (isDev) {\r\n" +
+			"    mainWindow.openDevTools();\r\n" +
+			"  }\r\n" +
 			"  mainWindow.on('closed', () => mainWindow = null);\r\n" +
 			"}\r\n" +
 			"\r\n" +
@@ -150,9 +153,11 @@ public class ElectronProjectFileHelper {
 			"}\r\n";
 	public final static String APPCSS = ".App {\r\n" +
 			"  background: url('./%s') no-repeat;\r\n" +
-			"  background-size: 100%%;\r\n" +
+			"  background-size: cover;\r\n" +
 			"  min-height: 100vh;\r\n" +
+			"  height: 100%;\r\n" +
 			"  min-width: 100%%;\r\n" +
+			"  max-height: 100%%;" +
 			"}\r\n" +
 			"\r\n" +
 			".Menu {\r\n" +
