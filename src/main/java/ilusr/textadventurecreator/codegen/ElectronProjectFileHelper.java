@@ -7,17 +7,54 @@ public class ElectronProjectFileHelper {
 			"  \"private\": true,\r\n" +
 			" \"main\": \"public/electron.js\",\r\n" +
 			"  \"dependencies\": {\r\n" +
+			"    \"autoprefixer\": \"7.1.6\",\r\n" +
+			"    \"babel-core\": \"6.26.0\",\r\n" +
+			"    \"babel-eslint\": \"7.2.3\",\r\n" +
+			"    \"babel-jest\": \"20.0.3\",\r\n" +
+			"    \"babel-loader\": \"7.1.2\",\r\n" +
+			"    \"babel-preset-react-app\": \"^3.1.1\",\r\n" +
+			"    \"babel-runtime\": \"6.26.0\",\r\n" +
+			"    \"case-sensitive-paths-webpack-plugin\": \"2.1.1\",\r\n" +
+			"    \"chalk\": \"1.1.3\",\r\n" +
+			"    \"css-loader\": \"0.28.7\",\r\n" +
+			"    \"dotenv\": \"4.0.0\",\r\n" +
+			"    \"dotenv-expand\": \"4.2.0\",\r\n" +
 			"    \"electron-is-dev\": \"^0.3.0\",\r\n" +
+			"    \"eslint\": \"4.10.0\",\r\n" +
+			"    \"eslint-config-react-app\": \"^2.1.0\",\r\n" +
+			"    \"eslint-loader\": \"1.9.0\",\r\n" +
+			"    \"eslint-plugin-flowtype\": \"2.39.1\",\r\n" +
+			"    \"eslint-plugin-import\": \"2.8.0\",\r\n" +
+			"    \"eslint-plugin-jsx-a11y\": \"5.1.1\",\r\n" +
+			"    \"eslint-plugin-react\": \"7.4.0\",\r\n" +
+			"    \"extract-text-webpack-plugin\": \"3.0.2\",\r\n" +
+			"    \"file-loader\": \"^1.1.11\",\r\n" +
+			"    \"fs-extra\": \"3.0.1\",\r\n" +
+			"    \"html-webpack-plugin\": \"2.29.0\",\r\n" +
+			"    \"jest\": \"20.0.4\",\r\n" +
+			"    \"object-assign\": \"4.1.1\",\r\n" +
+			"    \"postcss-flexbugs-fixes\": \"3.2.0\",\r\n" +
+			"    \"postcss-loader\": \"2.0.8\",\r\n" +
+			"    \"promise\": \"8.0.1\",\r\n" +
+			"    \"raf\": \"3.4.0\",\r\n" +
+			"    \"raw-loader\": \"^0.5.1\",\r\n" +
 			"    \"react\": \"^16.3.2\",\r\n" +
+			"    \"react-dev-utils\": \"^5.0.1\",\r\n" +
 			"    \"react-dom\": \"^16.3.2\",\r\n" +
-			"    \"react-scripts\": \"1.1.4\",\r\n" +
-			"    \"text-adventure-lib\": \"https://github.com/JeffreyRiggle/text-adventure-lib\"\r\n" +
-			"  },\r\n" +
+			"    \"resolve\": \"1.6.0\",\r\n" +
+			"    \"style-loader\": \"0.19.0\",\r\n" +
+			"    \"sw-precache-webpack-plugin\": \"0.11.4\",\r\n" +
+			"    \"text-adventure-lib\": \"https://github.com/JeffreyRiggle/text-adventure-lib\",\r\n" +
+			"    \"url-loader\": \"0.6.2\",\r\n" +
+			"    \"webpack\": \"3.8.1\",\r\n" +
+			"    \"webpack-dev-server\": \"2.9.4\",\r\n" +
+			"    \"webpack-manifest-plugin\": \"1.3.2\",\r\n" +
+			"    \"whatwg-fetch\": \"2.0.3\"\r\n" +
+			"  }," +
 			"  \"scripts\": {\r\n" +
-			"   \"start\": \"react-scripts start\",\r\n" +
-			"   \"build\": \"react-scripts build\",\r\n" +
-			"   \"test\": \"react-scripts test --env=jsdom\",\r\n" +
-			"   \"eject\": \"react-scripts eject\",\r\n" +
+			"   \"start\": \"node scripts/start.js\",\r\n" +
+			"   \"build\": \"node scripts/build.js\",\r\n" +
+			"   \"test\": \"node scripts/test.js --env=jsdom\",\r\n" +
 			"   \"electron-dev\": \"concurrently \\\"yarn start\\\" \\\"wait-on http://localhost:3000 && electron .\\\"\",\r\n" +
 			"   \"pack\": \"build --dir\",\r\n" +
 			"   \"dist\": \"npm run build && build\"\r\n" +
@@ -40,7 +77,49 @@ public class ElectronProjectFileHelper {
 			"   \"electron\": \"^1.8.6\",\r\n" +
 			"   \"electron-builder\": \"^20.11.1\",\r\n" +
 			"   \"wait-on\": \"^2.1.0\"\r\n" +
-			" }\r\n" +
+			" },\r\n" +
+			"  \"jest\": {\r\n" +
+			"    \"collectCoverageFrom\": [\r\n" +
+			"      \"src/**/*.{js,jsx,mjs}\"\r\n" +
+			"    ],\r\n" +
+			"    \"setupFiles\": [\r\n" +
+			"      \"<rootDir>/config/polyfills.js\"\r\n" +
+			"    ],\r\n" +
+			"    \"testMatch\": [\r\n" +
+			"      \"<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs}\",\r\n" +
+			"      \"<rootDir>/src/**/?(*.)(spec|test).{js,jsx,mjs}\"\r\n" +
+			"    ],\r\n" +
+			"    \"testEnvironment\": \"node\",\r\n" +
+			"    \"testURL\": \"http://localhost\",\r\n" +
+			"    \"transform\": {\r\n" +
+			"      \"^.+\\\\.(js|jsx|mjs)$\": \"<rootDir>/node_modules/babel-jest\",\r\n" +
+			"      \"^.+\\\\.css$\": \"<rootDir>/config/jest/cssTransform.js\",\r\n" +
+			"      \"^(?!.*\\\\.(js|jsx|mjs|css|json)$)\": \"<rootDir>/config/jest/fileTransform.js\"\r\n" +
+			"    },\r\n" +
+			"    \"transformIgnorePatterns\": [\r\n" +
+			"      \"[/\\\\\\\\]node_modules[/\\\\\\\\].+\\\\.(js|jsx|mjs)$\"\r\n" +
+			"    ],\r\n" +
+			"    \"moduleNameMapper\": {\r\n" +
+			"      \"^react-native$\": \"react-native-web\"\r\n" +
+			"    },\r\n" +
+			"    \"moduleFileExtensions\": [\r\n" +
+			"      \"web.js\",\r\n" +
+			"      \"js\",\r\n" +
+			"      \"json\",\r\n" +
+			"      \"web.jsx\",\r\n" +
+			"      \"jsx\",\r\n" +
+			"      \"node\",\r\n" +
+			"      \"mjs\"\r\n" +
+			"    ]\r\n" +
+			"  },\r\n" +
+			"  \"babel\": {\r\n" +
+			"    \"presets\": [\r\n" +
+			"      \"react-app\"\r\n" +
+			"    ]\r\n" +
+			"  },\r\n" +
+			"  \"eslintConfig\": {\r\n" +
+			"    \"extends\": \"react-app\"\r\n" +
+			"  }" +
 			"}\r\n";
 	public final static String GITIGNORE = "# See https://help.github.com/ignore-files/ for more about ignoring files.\r\n" +
 			"\r\n" +
@@ -77,9 +156,6 @@ public class ElectronProjectFileHelper {
 			"  mainWindow = new BrowserWindow({width: 900, height: 680});\r\n" +
 			"  mainWindow.setMenu(null);\r\n" +
 			"  mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '/index.html')}`);\r\n" +
-			"  if (isDev) {\r\n" +
-			"    mainWindow.openDevTools();\r\n" +
-			"  }\r\n" +
 			"  mainWindow.on('closed', () => mainWindow = null);\r\n" +
 			"}\r\n" +
 			"\r\n" +
@@ -155,9 +231,9 @@ public class ElectronProjectFileHelper {
 			"  background: url('./%s') no-repeat;\r\n" +
 			"  background-size: cover;\r\n" +
 			"  min-height: 100vh;\r\n" +
-			"  height: 100%;\r\n" +
+			"  height: 100%%;\r\n" +
 			"  min-width: 100%%;\r\n" +
-			"  max-height: 100%%;" +
+			"  max-height: 100%%;\r\n" +
 			"}\r\n" +
 			"\r\n" +
 			".Menu {\r\n" +
@@ -186,13 +262,15 @@ public class ElectronProjectFileHelper {
 			"  background: rgba(60,179,213, .6);\r\n" +
 			"}";
 	public final static String APPJS = "import React, { Component } from 'react';\r\n" +
-			"import './%s';\r\n" +
+			"import './%1$s';\r\n" +
 			"import './App.css';\r\n" +
+			"import gameFile from '%2$s';\r\n" +
+			"import './images/assetLoader';\r\n" +
 			"\r\n" +
 			"import {TextAdventurePersistenceManager} from '../node_modules/text-adventure-lib/dist/main';\r\n" +
 			"import '../node_modules/text-adventure-lib/dist/styles.css';\r\n" +
 			"\r\n" +
-			"let persist = new TextAdventurePersistenceManager('<TextAdventure inlineLayouts=\"true\" inlinegamestate=\"true\" inlineplayers=\"true\"><Name ValueType=\"string\">SomeGame</Name><Transition><DisplayType/><MediaLocation ValueType=\"string\">./1306350803213.jpg</MediaLocation></Transition><CurrentGameState>Start</CurrentGameState><Players/><GameStates><GameState><StateId ValueType=\"string\">Start</StateId><LayoutInfo><LayoutID ValueType=\"string\"/><LayoutType ValueType=\"object\">TextAndContentWithButtonInput</LayoutType><LayoutContent ValueType=\"string\">./121573504941.jpg</LayoutContent></LayoutInfo><TextLog ValueType=\"string\">First Game State</TextLog><Options><Option><Triggers><Trigger type=\"Text\"><Parameters><Text ValueType=\"string\">continue</Text></Parameters></Trigger></Triggers><Action type=\"Completion\"><Parameters><CompletionData ValueType=\"string\">gs1</CompletionData></Parameters></Action></Option></Options><Timers/></GameState><GameState><StateId ValueType=\"string\">gs1</StateId><LayoutInfo><LayoutID ValueType=\"string\"/><LayoutType ValueType=\"object\">TextWithTextInput</LayoutType><LayoutContent ValueType=\"string\"/></LayoutInfo><TextLog ValueType=\"string\">This is game state1</TextLog><Options><Option><Triggers><Trigger type=\"Text\"><Parameters><Text ValueType=\"string\">continue</Text></Parameters></Trigger></Triggers><Action type=\"Completion\"><Parameters><CompletionData ValueType=\"string\">gs2</CompletionData></Parameters></Action></Option></Options><Timers/></GameState><GameState><StateId ValueType=\"string\">gs2</StateId><LayoutInfo><LayoutID ValueType=\"string\"/><LayoutType ValueType=\"object\">TextWithButtonInput</LayoutType><LayoutContent ValueType=\"string\"/></LayoutInfo><TextLog ValueType=\"string\">This is game state2</TextLog><Options><Option><Triggers><Trigger type=\"Text\"><Parameters><Text ValueType=\"string\">continue</Text></Parameters></Trigger></Triggers><Action type=\"Completion\"><Parameters><CompletionData ValueType=\"string\">gs3</CompletionData></Parameters></Action></Option></Options><Timers/></GameState><GameState><StateId ValueType=\"string\">gs3</StateId><LayoutInfo><LayoutID ValueType=\"string\"/><LayoutType ValueType=\"object\">TextAndContentWithTextInput</LayoutType><LayoutContent ValueType=\"string\">./1316702719037.jpg</LayoutContent></LayoutInfo><TextLog ValueType=\"string\">This is game state 3</TextLog><Options><Option><Triggers><Trigger type=\"Text\"><Parameters><Text ValueType=\"string\">continue</Text></Parameters></Trigger></Triggers><Action type=\"Completion\"><Parameters><CompletionData ValueType=\"string\">gs4</CompletionData></Parameters></Action></Option></Options><Timers/></GameState><GameState><StateId ValueType=\"string\">gs4</StateId><LayoutInfo><LayoutID ValueType=\"string\"/><LayoutType ValueType=\"object\">ContentOnly</LayoutType><LayoutContent ValueType=\"string\">./1316975297988.jpg</LayoutContent></LayoutInfo><TextLog ValueType=\"string\">Final Game State</TextLog><Options/><Timers><Timer type=\"Completion\"><Duration ValueType=\"object\">0</Duration><CompletionData/><Duration ValueType=\"object\">0</Duration><CompletionData/><Duration ValueType=\"object\">0</Duration><CompletionData/><Duration ValueType=\"object\">0</Duration><CompletionData/></Timer></Timers></GameState></GameStates><Layouts/><Buffer ValueType=\"int\">0</Buffer></TextAdventure>');\r\n" +
+			"let persist = new TextAdventurePersistenceManager(gameFile);\r\n" +
 			"\r\n" +
 			"class App extends Component {\r\n" +
 			"  _loadGame() {\r\n" +
@@ -228,10 +306,28 @@ public class ElectronProjectFileHelper {
 			"  ReactDOM.render(<App />, div);\r\n" +
 			"  ReactDOM.unmountComponentAtNode(div);\r\n" +
 			"});\r\n";
-	public final static String INDEXCSS = "body {\r\n" +
+	public final static String INDEXCSS = "html {\r\n" +
+			"  height: 100%;\r\n" +
+			"  width: 100%;\r\n" +
+			"  max-width: 100%;\r\n" +
+			"  max-height: 100%;\r\n" +
+			"}\r\n" +
+			"\r\n" +
+			"body {\r\n" +
 			"  margin: 0;\r\n" +
 			"  padding: 0;\r\n" +
 			"  font-family: sans-serif;\r\n" +
+			"  height: 100%;\r\n" +
+			"  width: 100%;\r\n" +
+			"  max-width: 100%;\r\n" +
+			"  max-height: 100%;\r\n" +
+			"}\r\n" +
+			"\r\n" +
+			"#root {\r\n" +
+			"  height: 100%;\r\n" +
+			"  width: 100%;\r\n" +
+			"  max-width: 100%;\r\n" +
+			"  max-height: 100%;\r\n" +
 			"}\r\n";
 	public final static String INDEXJS = "import React from 'react';\r\n" +
 			"import ReactDOM from 'react-dom';\r\n" +

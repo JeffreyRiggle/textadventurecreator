@@ -59,16 +59,20 @@ public abstract class BaseProjectBuilder implements IProjectBuilder {
 	}
 	
 	protected void buildGameFile(File src, String sanitizedGameName, File gameAssets) {
+		buildGameFile(src, sanitizedGameName, gameAssets, new String());
+	}
+	
+	protected void buildGameFile(File src, String sanitizedGameName, File gameAssets, String relativePath) {
 		try {
 			LogRunner.logger().info("Building game assets.");
 			if (!gameAssets.exists()) {
 				gameAssets.mkdirs();
 			}
 			
-			moveGameMedia(persistence.getTextAdventure(), gameAssets);
-			exportGameStatesIfNeeded(persistence.getTextAdventure(), src.getAbsolutePath() + "/" + sanitizedGameName);
+			moveGameMedia(persistence.getTextAdventure(), gameAssets, relativePath);
+			exportGameStatesIfNeeded(persistence.getTextAdventure(), src.getAbsolutePath());
 			
-			XmlConfigurationManager man = new XmlConfigurationManager(src.getAbsolutePath() + "/" + sanitizedGameName + "/" + sanitizedGameName + ".xml");
+			XmlConfigurationManager man = new XmlConfigurationManager(src.getAbsolutePath() + "/" + sanitizedGameName + ".xml");
 			persistence.prepareXml();
 			man.addConfigurationObject(persistence.getTextAdventure());
 			man.save();
@@ -77,7 +81,7 @@ public abstract class BaseProjectBuilder implements IProjectBuilder {
 		}
 	}
 	
-	private void moveGameMedia(TextAdventurePersistenceObject textAdventure, File assets) {
+	private void moveGameMedia(TextAdventurePersistenceObject textAdventure, File assets, String relativePath) {
 		for (GameStatePersistenceObject gameState : textAdventure.gameStates()) {
 			if (gameState.layout().getLayoutContent() == null || gameState.layout().getLayoutContent().isEmpty()) {
 				continue;
@@ -85,8 +89,8 @@ public abstract class BaseProjectBuilder implements IProjectBuilder {
 			
 			String newFile = tryCopyToAssets(gameState.layout().getLayoutContent(), assets);
 			if (!newFile.isEmpty()) {
-				LogRunner.logger().info(String.format("Moving layout file %s to %s", gameState.layout().getLayoutContent(), newFile));
-				gameState.layout().setLayoutContent(newFile);
+				String location = relativePath.isEmpty() ? newFile : relativePath + getFileName(newFile);
+				gameState.layout().setLayoutContent(location);
 			}
 		}
 	}
@@ -95,13 +99,7 @@ public abstract class BaseProjectBuilder implements IProjectBuilder {
 		String retVal = "";
 		try {
 			File originalFile = new File(original);
-			
-			String newName = new String();
-			if (original.contains("/")) {
-				newName = original.substring(original.lastIndexOf('/'));
-			} else {
-				newName = original.substring(original.lastIndexOf('\\'));
-			}
+			String newName = getFileName(original);
 			
 			File newMedia = new File(assets.getAbsolutePath() + newName);
 			Files.copy(originalFile.toPath(), newMedia.toPath());
@@ -111,6 +109,18 @@ public abstract class BaseProjectBuilder implements IProjectBuilder {
 		}
 		
 		return retVal;
+	}
+	
+	protected String getFileName(String file) {
+		String newName = new String();
+		
+		if (file.contains("/")) {
+			newName = file.substring(file.lastIndexOf('/'));
+		} else {
+			newName = "/" + file.substring(file.lastIndexOf('\\') + 1);
+		}
+		
+		return newName;
 	}
 	
 	private void exportGameStatesIfNeeded(TextAdventurePersistenceObject textAdventure, String path) {

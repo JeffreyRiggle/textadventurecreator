@@ -197,7 +197,12 @@ public class JavaProjectBuilder extends BaseProjectBuilder {
 		File assetHelper = new File(srcFile + "/assets/AssetLoader.java");
 		writeFileContent(assetHelper, String.format(JavaProjectFileHelper.ASSETLOADER, PROJECT_TITLE).getBytes(Charset.forName("UTF-8")));
 		
-		buildGameFile(srcFile, sanitizedGameName, new File(srcFile.getAbsolutePath() + "/assets/"));
+		File gamePath = new File(srcFile.getAbsolutePath() + "/" + sanitizedGameName);
+		if (!gamePath.exists()) {
+			gamePath.mkdirs();
+		}
+
+		buildGameFile(gamePath, sanitizedGameName, new File(srcFile.getAbsolutePath() + "/assets/"));
 		
 		item.progressAmount().set(.6);
 		File gameApp = new File(src + "/" + sanitizedGameName + "/GameApp.java");

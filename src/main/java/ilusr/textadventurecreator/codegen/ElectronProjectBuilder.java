@@ -4,7 +4,9 @@ import java.io.File;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 
+import ilusr.core.io.FileUtilities;
 import ilusr.logrunner.LogRunner;
+import ilusr.textadventurecreator.codegen.webfiles.WebResourceFileLoader;
 import ilusr.textadventurecreator.language.DisplayStrings;
 import ilusr.textadventurecreator.language.ILanguageService;
 import ilusr.textadventurecreator.shell.TextAdventureProjectPersistence;
@@ -64,6 +66,53 @@ public class ElectronProjectBuilder extends BaseProjectBuilder {
 		File packageFile = new File(project.getAbsoluteFile() + "/package.json");
 		writeFileContent(packageFile, String.format(ElectronProjectFileHelper.PACKAGEJSON, gameName, author).getBytes(Charset.forName("UTF-8")));
 
+		File configPath = new File(projectLocation + "/config");
+		configPath.mkdirs();
+		
+		File jestPath = new File(configPath.getAbsolutePath() + "/jest");
+		jestPath.mkdirs();
+		
+		File scriptPath = new File(projectLocation + "/scripts");
+		scriptPath.mkdirs();
+
+		WebResourceFileLoader loader = new WebResourceFileLoader();
+		try {
+			File cssTransform = new File(jestPath.getAbsolutePath() + "/cssTransform.js");
+			writeFileContent(cssTransform, FileUtilities.getFileContentWithReturns(loader.getResource("cssTransform.js")).getBytes(Charset.forName("UTF-8")));
+			
+			File fileTransform = new File(jestPath.getAbsolutePath() + "/fileTransform.js");
+			writeFileContent(fileTransform, FileUtilities.getFileContentWithReturns(loader.getResource("fileTransform.js")).getBytes(Charset.forName("UTF-8")));	
+			
+			File env = new File(configPath.getAbsolutePath() + "/env.js");
+			writeFileContent(env, FileUtilities.getFileContentWithReturns(loader.getResource("env.js")).getBytes(Charset.forName("UTF-8")));
+			
+			File paths = new File(configPath.getAbsolutePath() + "/paths.js");
+			writeFileContent(paths, FileUtilities.getFileContentWithReturns(loader.getResource("paths.js")).getBytes(Charset.forName("UTF-8")));
+			
+			File poly = new File(configPath.getAbsolutePath() + "/polyfills.js");
+			writeFileContent(poly, FileUtilities.getFileContentWithReturns(loader.getResource("polyfills.js")).getBytes(Charset.forName("UTF-8")));
+			
+			File wdev = new File(configPath.getAbsolutePath() + "/webpack.config.dev.js");
+			writeFileContent(wdev, FileUtilities.getFileContentWithReturns(loader.getResource("webpack.config.dev.js")).getBytes(Charset.forName("UTF-8")));
+			
+			File wprod = new File(configPath.getAbsolutePath() + "/webpack.config.prod.js");
+			writeFileContent(wprod, FileUtilities.getFileContentWithReturns(loader.getResource("webpack.config.prod.js")).getBytes(Charset.forName("UTF-8")));
+			
+			File wServer = new File(configPath.getAbsolutePath() + "/webpackDevServer.config.js");
+			writeFileContent(wServer, FileUtilities.getFileContentWithReturns(loader.getResource("webpackDevServer.config.js")).getBytes(Charset.forName("UTF-8")));
+			
+			File build = new File(scriptPath.getAbsolutePath() + "/build.js");
+			writeFileContent(build, FileUtilities.getFileContentWithReturns(loader.getResource("build.js")).getBytes(Charset.forName("UTF-8")));
+			
+			File start = new File(scriptPath.getAbsolutePath() + "/start.js");
+			writeFileContent(start, FileUtilities.getFileContentWithReturns(loader.getResource("start.js")).getBytes(Charset.forName("UTF-8")));
+			
+			File test = new File(scriptPath.getAbsolutePath() + "/test.js");
+			writeFileContent(test, FileUtilities.getFileContentWithReturns(loader.getResource("test.js")).getBytes(Charset.forName("UTF-8")));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		File publicPath = new File(projectLocation + "/public");
 		publicPath.mkdirs();
 		
@@ -83,8 +132,9 @@ public class ElectronProjectBuilder extends BaseProjectBuilder {
 		File appcss = new File(srcPath.getAbsoluteFile() + "/App.css");
 		writeFileContent(appcss, String.format(ElectronProjectFileHelper.APPCSS, appbg).getBytes(Charset.forName("UTF-8")));
 		
+		String gameFilePath = "./" + gameName + ".xml";
 		File appJS = new File(srcPath.getAbsoluteFile() + "/App.js");
-		writeFileContent(appJS, String.format(ElectronProjectFileHelper.APPJS, appbg).getBytes(Charset.forName("UTF-8")));
+		writeFileContent(appJS, String.format(ElectronProjectFileHelper.APPJS, appbg, gameFilePath).getBytes(Charset.forName("UTF-8")));
 		
 		File appTestJS = new File(srcPath.getAbsoluteFile() + "/App.test.js");
 		writeFileContent(appTestJS, ElectronProjectFileHelper.APPTESTJS.getBytes(Charset.forName("UTF-8")));
@@ -111,7 +161,25 @@ public class ElectronProjectBuilder extends BaseProjectBuilder {
 			e.printStackTrace();
 		}
 		
-		buildGameFile(project, gameName, publicPath);
+		File assets = new File(srcPath.getAbsolutePath() + "/images");
+		if (!assets.exists()) {
+			assets.mkdirs();
+		}
+		
+		buildGameFile(srcPath, gameName, assets, "./static/media");
+		buildAssetImport(assets);
+	}
+	
+	private void buildAssetImport(File assetPath) {
+		StringBuilder sb = new StringBuilder();
+		File[] assets = assetPath.listFiles();
+		
+		for (int i = 0; i < assets.length; i++) {
+			sb.append("import './" + assets[i].getName() + "';\r\n");
+		}
+		
+		File assetLoader = new File(assetPath.getAbsoluteFile() + "/assetLoader.js");
+		writeFileContent(assetLoader, sb.toString().getBytes(Charset.forName("UTF-8")));
 	}
 	
 	private void compile(String projectLocation, StatusItem item) {
