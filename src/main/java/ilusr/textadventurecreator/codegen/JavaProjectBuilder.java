@@ -6,7 +6,6 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 
 import ilusr.core.environment.EnvironmentUtilities;
-import ilusr.core.io.FileUtilities;
 import ilusr.core.io.ProcessHelpers;
 import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.language.DisplayStrings;
@@ -25,7 +24,6 @@ import textadventurelib.persistence.OptionPersistenceObject;
 public class JavaProjectBuilder extends BaseProjectBuilder {
 
 	private final String PROJECT_TITLE = "textadventure";
-	private final ILanguageService languageService;
 	
 	/**
 	 * 
@@ -139,26 +137,6 @@ public class JavaProjectBuilder extends BaseProjectBuilder {
 			e.printStackTrace();
 			item.indicator().set(StatusIndicator.Error);
 		}
-	}
-	
-	private void cleanTemp(String project, StatusItem item) {
-		LogRunner.logger().info("Cleaning up temp directory.");
-		item.displayText().set(languageService.getValue(DisplayStrings.CLEANING_UP));
-		item.indicator().set(StatusIndicator.Normal);
-		item.progressAmount().set(.0);
-		File proj = new File(project);
-		
-		File[] files = proj.listFiles();
-		int iter = 1;
-		
-		for (File file : files) {
-			FileUtilities.deleteDir(file);
-			item.progressAmount().set(iter / files.length);
-			iter++;
-		}
-		
-		proj.delete();
-		item.indicator().set(StatusIndicator.Good);
 	}
 	
 	private String getTempDir() {

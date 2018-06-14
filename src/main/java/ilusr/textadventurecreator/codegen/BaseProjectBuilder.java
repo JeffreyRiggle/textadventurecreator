@@ -4,9 +4,14 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.nio.file.Files;
 
+import ilusr.core.io.FileUtilities;
 import ilusr.logrunner.LogRunner;
 import ilusr.persistencelib.configuration.XmlConfigurationManager;
+import ilusr.textadventurecreator.language.DisplayStrings;
+import ilusr.textadventurecreator.language.ILanguageService;
 import ilusr.textadventurecreator.shell.TextAdventureProjectPersistence;
+import ilusr.textadventurecreator.statusbars.StatusIndicator;
+import ilusr.textadventurecreator.statusbars.StatusItem;
 import textadventurelib.persistence.GameStatePersistenceObject;
 import textadventurelib.persistence.OptionPersistenceObject;
 import textadventurelib.persistence.SaveActionPersistenceObject;
@@ -15,6 +20,7 @@ import textadventurelib.persistence.TextAdventurePersistenceObject;
 public abstract class BaseProjectBuilder implements IProjectBuilder {
 	
 	protected TextAdventureProjectPersistence persistence;
+	protected ILanguageService languageService;
 	
 	protected int writeFileContent(File file, byte[] content) {
 		FileOutputStream out = null;
@@ -149,5 +155,25 @@ public abstract class BaseProjectBuilder implements IProjectBuilder {
 		
 		textAdventure.gameStatesInline(false);
 		textAdventure.gameStatesLocation(path + "/gamestates.xml");
+	}
+	
+	protected void cleanTemp(String project, StatusItem item) {
+		LogRunner.logger().info("Cleaning up temp directory.");
+		item.displayText().set(languageService.getValue(DisplayStrings.CLEANING_UP));
+		item.indicator().set(StatusIndicator.Normal);
+		item.progressAmount().set(.0);
+		File proj = new File(project);
+		
+		File[] files = proj.listFiles();
+		int iter = 1;
+		
+		for (File file : files) {
+			FileUtilities.deleteDir(file);
+			item.progressAmount().set(iter / files.length);
+			iter++;
+		}
+		
+		proj.delete();
+		item.indicator().set(StatusIndicator.Good);
 	}
 }

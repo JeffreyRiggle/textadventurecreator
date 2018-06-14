@@ -1,20 +1,22 @@
 package ilusr.textadventurecreator.codegen;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 
+import ilusr.core.environment.EnvironmentUtilities;
 import ilusr.core.io.FileUtilities;
+import ilusr.core.io.ProcessHelpers;
 import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.codegen.webfiles.WebResourceFileLoader;
 import ilusr.textadventurecreator.language.DisplayStrings;
 import ilusr.textadventurecreator.language.ILanguageService;
 import ilusr.textadventurecreator.shell.TextAdventureProjectPersistence;
+import ilusr.textadventurecreator.statusbars.StatusIndicator;
 import ilusr.textadventurecreator.statusbars.StatusItem;
 
 public class ElectronProjectBuilder extends BaseProjectBuilder {
-
-	private final ILanguageService languageService;
 	
 	public ElectronProjectBuilder(TextAdventureProjectPersistence persistence, ILanguageService languageService) {
 		this.persistence = persistence;
@@ -54,9 +56,13 @@ public class ElectronProjectBuilder extends BaseProjectBuilder {
 		project.mkdirs();
 		
 		item.displayText().set(languageService.getValue(DisplayStrings.BUILDING));
+		item.indicator().set(StatusIndicator.Normal);
+		item.progressAmount().set(.1);
 		
 		String gameName = persistence.getGameInfo().gameName();
 		String author = persistence.getGameInfo().creator();
+		String description = persistence.getGameInfo().description();
+		
 		File originalIcon = new File(persistence.getIconLocation());
 		String extension = persistence.getIconLocation().substring(persistence.getIconLocation().lastIndexOf('.'));
 
@@ -64,8 +70,9 @@ public class ElectronProjectBuilder extends BaseProjectBuilder {
 		writeFileContent(gitIgnoreFile, String.format(ElectronProjectFileHelper.GITIGNORE).getBytes(Charset.forName("UTF-8")));
 		
 		File packageFile = new File(project.getAbsoluteFile() + "/package.json");
-		writeFileContent(packageFile, String.format(ElectronProjectFileHelper.PACKAGEJSON, gameName, author).getBytes(Charset.forName("UTF-8")));
+		writeFileContent(packageFile, String.format(ElectronProjectFileHelper.PACKAGEJSON, gameName, author, description).getBytes(Charset.forName("UTF-8")));
 
+		item.progressAmount().set(.2);
 		File configPath = new File(projectLocation + "/config");
 		configPath.mkdirs();
 		
@@ -74,6 +81,7 @@ public class ElectronProjectBuilder extends BaseProjectBuilder {
 		
 		File scriptPath = new File(projectLocation + "/scripts");
 		scriptPath.mkdirs();
+		item.progressAmount().set(.3);
 
 		WebResourceFileLoader loader = new WebResourceFileLoader();
 		try {
@@ -109,6 +117,7 @@ public class ElectronProjectBuilder extends BaseProjectBuilder {
 			
 			File test = new File(scriptPath.getAbsolutePath() + "/test.js");
 			writeFileContent(test, FileUtilities.getFileContentWithReturns(loader.getResource("test.js")).getBytes(Charset.forName("UTF-8")));
+			item.progressAmount().set(.4);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -125,6 +134,7 @@ public class ElectronProjectBuilder extends BaseProjectBuilder {
 		File manifestJSON = new File(publicPath.getAbsoluteFile() + "/manifest.json");
 		writeFileContent(manifestJSON, String.format(ElectronProjectFileHelper.MANIFESTJSON, gameName, extension).getBytes(Charset.forName("UTF-8")));
 		
+		item.progressAmount().set(.5);
 		File srcPath = new File(projectLocation + "/src");
 		srcPath.mkdirs();
 		
@@ -148,6 +158,8 @@ public class ElectronProjectBuilder extends BaseProjectBuilder {
 		File rsw = new File(srcPath.getAbsoluteFile() + "/registerServiceWorker.js");
 		writeFileContent(rsw, ElectronProjectFileHelper.REGISTERSERVICEWORKERJS.getBytes(Charset.forName("UTF-8")));
 		
+		item.progressAmount().set(.6);
+		
 		try {
 			LogRunner.logger().info("Moving game icon.");
 			
@@ -155,8 +167,10 @@ public class ElectronProjectBuilder extends BaseProjectBuilder {
 			Files.copy(originalIcon.toPath(), srcIcon.toPath());
 			
 			File publicIcon = new File(String.format("%s/favicon%s", publicPath.getAbsolutePath(), extension));
+			File publicIcon2 = new File(String.format("%s/fav%s", publicPath.getAbsolutePath(), extension));
 			Files.copy(originalIcon.toPath(), publicIcon.toPath());
-			
+			Files.copy(originalIcon.toPath(), publicIcon2.toPath());
+			item.progressAmount().set(.7);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -167,7 +181,9 @@ public class ElectronProjectBuilder extends BaseProjectBuilder {
 		}
 		
 		buildGameFile(srcPath, gameName, assets, "./static/media");
+		item.progressAmount().set(.8);
 		buildAssetImport(assets);
+		item.progressAmount().set(1.0);
 	}
 	
 	private void buildAssetImport(File assetPath) {
@@ -183,15 +199,69 @@ public class ElectronProjectBuilder extends BaseProjectBuilder {
 	}
 	
 	private void compile(String projectLocation, StatusItem item) {
-		
+		try {
+			item.displayText().set(languageService.getValue(DisplayStrings.COMPLILING));
+			item.indicator().set(StatusIndicator.Normal);
+			item.progressAmount().set(.1);
+			
+			Process proc = getCompileProcess(projectLocation);
+			
+			item.progressAmount().set(.5);
+			
+			if (proc == null) {
+				LogRunner.logger().info("Unable to build compile process!");
+				return;
+			}
+			
+			ProcessHelpers.handleProcessStreams(proc);
+			proc.waitFor();
+			
+			item.progressAmount().set(1.0);
+		} catch (Exception e) {
+			item.indicator().set(StatusIndicator.Error);
+		}
 	}
 	
-	private void shipCompiled(String projectLocation, StatusItem item, String gameName) {
+	private Process getCompileProcess(String projectLocation) throws IOException {
+		Process retVal = null;
 		
+		String driveLetter = projectLocation.substring(0, 2);
+		
+		if (EnvironmentUtilities.isWindows()) {
+			LogRunner.logger().info("Determined environment was windows. Building windows compile process.");
+			retVal = Runtime.getRuntime().exec(new String[] {"cmd", "/c", driveLetter + " && cd " + projectLocation + " && npm install && npm run dist"});
+		} else if (EnvironmentUtilities.isUnix()) {
+			LogRunner.logger().info("Determined environment was linux. Building linux compile process");
+			retVal = Runtime.getRuntime().exec(new String[] {"cd " + projectLocation + " && npm install && npm run dist"});
+		} else if (EnvironmentUtilities.isMac()) {
+			LogRunner.logger().info("Determined environment was mac. Building mac compile process");
+			retVal = Runtime.getRuntime().exec(new String[] {"cd " + projectLocation + " && npm install && npm run dist"});
+		}
+		
+		return retVal;
 	}
 	
-	private void cleanTemp(String location, StatusItem item) {
-		
+	private void shipCompiled(String location, StatusItem item, String gameName) {
+		item.displayText().set(languageService.getValue(DisplayStrings.MOVING_PROJECT));
+		item.indicator().set(StatusIndicator.Normal);
+		String appName = gameName + " Setup 0.1.0.exe";
+		File app = new File(location + "/dist/" + appName);
+		try {
+			item.progressAmount().set(.5);
+			File target = new File(persistence.getProjectLocation());
+			
+			if (!target.exists()) {
+				target.mkdirs();
+			}
+			
+			LogRunner.logger().info(String.format("Shipping compiled project to %s", target.getAbsolutePath().toString()));
+			Files.copy(app.toPath(), new File(target.getAbsolutePath() + "/" + appName).toPath());
+			item.progressAmount().set(1.0);
+			item.indicator().set(StatusIndicator.Good);
+		} catch (Exception e) {
+			e.printStackTrace();
+			item.indicator().set(StatusIndicator.Error);
+		}
 	}
 	
 	private String getTempDir() {

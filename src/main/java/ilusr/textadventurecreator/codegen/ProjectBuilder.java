@@ -38,12 +38,12 @@ public class ProjectBuilder {
 		
 		IProjectBuilder builder = null;
 		
-		if (!persistence.getIsDev()) {
+		/*if (!persistence.getIsDev()) {
 			LogRunner.logger().info("Non-dev game building as a java project.");
 			builder = new JavaProjectBuilder(persistence, languageService);
 			builder.build(item);
 			return;
-		}
+		}*/
 		
 		switch (persistence.getLanguage()) {
 			case "Java":

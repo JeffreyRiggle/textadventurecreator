@@ -2,9 +2,10 @@ package ilusr.textadventurecreator.codegen;
 
 public class ElectronProjectFileHelper {
 	public final static String PACKAGEJSON = "{\r\n" +
-			"  \"name\": \"%1$s\",\r\n" +
+			" \"name\": \"%1$s\",\r\n" +
 			" \"version\": \"0.1.0\",\r\n" +
-			"  \"private\": true,\r\n" +
+			" \"private\": true,\r\n" +
+			" \"description\": \"%3$s\",\r\n" + 
 			" \"main\": \"public/electron.js\",\r\n" +
 			"  \"dependencies\": {\r\n" +
 			"    \"autoprefixer\": \"7.1.6\",\r\n" +
@@ -70,13 +71,14 @@ public class ElectronProjectFileHelper {
 			"   },\r\n" +
 			"   \"directories\": {\r\n" +
 			"     \"buildResources\": \"public\"\r\n" +
-			"   }\r\n" +
+			"   },\r\n" +
+			"   \"extends\": \"react-cra\"\r\n" +
 			" },\r\n" +
 			" \"devDependencies\": {\r\n" +
-			"   \"concurrently\": \"^3.5.1\",\r\n" +
-			"   \"electron\": \"^1.8.6\",\r\n" +
-			"   \"electron-builder\": \"^20.11.1\",\r\n" +
-			"   \"wait-on\": \"^2.1.0\"\r\n" +
+			"   \"concurrently\": \"3.5.1\",\r\n" +
+			"   \"electron\": \"1.8.6\",\r\n" +
+			"   \"electron-builder\": \"20.15.1\",\r\n" +
+			"   \"wait-on\": \"2.1.0\"\r\n" +
 			" },\r\n" +
 			"  \"jest\": {\r\n" +
 			"    \"collectCoverageFrom\": [\r\n" +
@@ -119,7 +121,7 @@ public class ElectronProjectFileHelper {
 			"  },\r\n" +
 			"  \"eslintConfig\": {\r\n" +
 			"    \"extends\": \"react-app\"\r\n" +
-			"  }" +
+			"  }\r\n" +
 			"}\r\n";
 	public final static String GITIGNORE = "# See https://help.github.com/ignore-files/ for more about ignoring files.\r\n" +
 			"\r\n" +
@@ -183,7 +185,7 @@ public class ElectronProjectFileHelper {
 			"      homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/\r\n" +
 			"    -->\r\n" +
 			"    <link rel=\"manifest\" href=\"%%PUBLIC_URL%%/manifest.json\">\r\n" +
-			"    <link rel=\"shortcut icon\" href=\"%%PUBLIC_URL%%/favicon.%2$s\">\r\n" +
+			"    <link rel=\"shortcut icon\" href=\"%%PUBLIC_URL%%/favicon%2$s\">\r\n" +
 			"    <!--\r\n" +
 			"      Notice the use of %%PUBLIC_URL%% in the tags above.\r\n" +
 			"      It will be replaced with the URL of the `public` folder during the build.\r\n" +
@@ -217,7 +219,7 @@ public class ElectronProjectFileHelper {
 			"  \"name\": \"%1$s\",\r\n" +
 			"  \"icons\": [\r\n" +
 			"    {\r\n" +
-			"      \"src\": \"favicon.%2$s\",\r\n" +
+			"      \"src\": \"favicon%2$s\",\r\n" +
 			"      \"sizes\": \"64x64 32x32 24x24 16x16\",\r\n" +
 			"      \"type\": \"image/x-icon\"\r\n" +
 			"    }\r\n" +
