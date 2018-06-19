@@ -229,7 +229,7 @@ public class ElectronProjectFileHelper {
 			"  \"theme_color\": \"#000000\",\r\n" +
 			"  \"background_color\": \"#ffffff\"\r\n" +
 			"}\r\n";
-	public final static String APPCSS = ".App {\r\n" +
+	public final static String MAINPAGECSS = ".App {\r\n" +
 			"  background: url('./%s') no-repeat;\r\n" +
 			"  background-size: cover;\r\n" +
 			"  min-height: 100vh;\r\n" +
@@ -265,25 +265,51 @@ public class ElectronProjectFileHelper {
 			"}";
 	public final static String APPJS = "import React, { Component } from 'react';\r\n" +
 			"import './%1$s';\r\n" +
-			"import './App.css';\r\n" +
-			"import gameFile from '%2$s';\r\n" +
+			"import { MainPage } from './MainPage';\r\n" +
 			"import './images/assetLoader';\r\n" +
+			"\r\n" +
+			"class App extends Component {\r\n" +
+			"  render() {\r\n" +
+			"    return (\r\n" +
+			"      <MainPage/>\r\n" +
+			"    );\r\n" +
+			"  }\r\n" +
+			"}\r\n" +
+			"\r\n" +
+			"export default App;\r\n";
+	public final static String GAMEMANAGERJS = "import React from 'react';\r\n" +
+			"import ReactDOM from 'react-dom';\r\n" +
 			"\r\n" +
 			"import {TextAdventurePersistenceManager} from '../node_modules/text-adventure-lib/dist/main';\r\n" +
 			"import '../node_modules/text-adventure-lib/dist/styles.css';\r\n" +
+			"import gameFile from './%1$s';\r\n" +
+			"import './images/assetLoader';\r\n" +
+			"import { MainPage } from './MainPage';\r\n" +
 			"\r\n" +
 			"let persist = new TextAdventurePersistenceManager(gameFile);\r\n" +
 			"\r\n" +
-			"class App extends Component {\r\n" +
-			"  _loadGame() {\r\n" +
+			"function reloadApp() {\r\n" +
+			"    ReactDOM.render(<MainPage/>, document.getElementById('root'));\r\n" +
+			"};\r\n" +
+			"\r\n" +
+			"function startGame() {\r\n" +
 			"    persist.load();\r\n" +
 			"    let game = persist.textAdventure.convertToGameStateManager(document.getElementById('root'));\r\n" +
-			"    game.on(game.finishedEvent, this._reload.bind(this));\r\n" +
+			"    game.on(game.finishedEvent, reloadApp);\r\n" +
 			"    game.start();\r\n" +
-			"  }\r\n" +
+			"};\r\n" +
 			"\r\n" +
-			"  _reload() {\r\n" +
-			"    this.forceUpdate();\r\n" +
+			"export {\r\n" +
+			"    startGame\r\n" +
+			"};";
+	public final static String MAINPAGEJS = "import React, { Component } from 'react';\r\n" +
+			"import './MainPage.css';\r\n" +
+			"import {startGame} from './gameManager';\r\n" +
+			"\r\n" +
+			"export class MainPage extends Component {\r\n" +
+			"\r\n" +
+			"  _loadGame() {\r\n" +
+			"    startGame();\r\n" +
 			"  }\r\n" +
 			"\r\n" +
 			"  render() {\r\n" +
@@ -296,9 +322,7 @@ public class ElectronProjectFileHelper {
 			"      </div>\r\n" +
 			"    );\r\n" +
 			"  }\r\n" +
-			"}\r\n" +
-			"\r\n" +
-			"export default App;\r\n";
+			"}";
 	public final static String APPTESTJS = "import React from 'react';\r\n" +
 			"import ReactDOM from 'react-dom';\r\n" +
 			"import App from './App';\r\n" +

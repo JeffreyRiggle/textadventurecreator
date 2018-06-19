@@ -139,12 +139,18 @@ public class ElectronProjectBuilder extends BaseProjectBuilder {
 		srcPath.mkdirs();
 		
 		String appbg = buildGameBackground(srcPath);
-		File appcss = new File(srcPath.getAbsoluteFile() + "/App.css");
-		writeFileContent(appcss, String.format(ElectronProjectFileHelper.APPCSS, appbg).getBytes(Charset.forName("UTF-8")));
+		File appcss = new File(srcPath.getAbsoluteFile() + "/MainPage.css");
+		writeFileContent(appcss, String.format(ElectronProjectFileHelper.MAINPAGECSS, appbg).getBytes(Charset.forName("UTF-8")));
 		
 		String gameFilePath = "./" + gameName + ".xml";
 		File appJS = new File(srcPath.getAbsoluteFile() + "/App.js");
-		writeFileContent(appJS, String.format(ElectronProjectFileHelper.APPJS, appbg, gameFilePath).getBytes(Charset.forName("UTF-8")));
+		writeFileContent(appJS, String.format(ElectronProjectFileHelper.APPJS, appbg).getBytes(Charset.forName("UTF-8")));
+		
+		File gameManagerJS = new File(srcPath.getAbsoluteFile() + "/gameManager.js");
+		writeFileContent(gameManagerJS, String.format(ElectronProjectFileHelper.GAMEMANAGERJS, gameFilePath).getBytes(Charset.forName("UTF-8")));
+
+		File mainPageJS = new File(srcPath.getAbsoluteFile() + "/MainPage.js");
+		writeFileContent(mainPageJS, ElectronProjectFileHelper.MAINPAGEJS.getBytes(Charset.forName("UTF-8")));
 		
 		File appTestJS = new File(srcPath.getAbsoluteFile() + "/App.test.js");
 		writeFileContent(appTestJS, ElectronProjectFileHelper.APPTESTJS.getBytes(Charset.forName("UTF-8")));
