@@ -1,12 +1,12 @@
 package ilusr.textadventurecreator.codegen;
 
-public class ElectronProjectFileHelper extends WebProjectFileHelper {
+public class HtmlProjectFileHelper extends WebProjectFileHelper {
 	public final static String PACKAGEJSON = "{\r\n" +
-			" \"name\": \"%1$s\",\r\n" +
-			" \"version\": \"0.1.0\",\r\n" +
-			" \"private\": true,\r\n" +
-			" \"description\": \"%3$s\",\r\n" + 
-			" \"main\": \"public/electron.js\",\r\n" +
+			"  \"name\": \"%1$s\",\r\n" +
+			"  \"version\": \"0.1.0\",\r\n" +
+			"  \"private\": true,\r\n" +
+			"  \"description\": \"%2$s\",\r\n" +
+			"  \"main\": \"src/index.js\",\r\n" +
 			"  \"dependencies\": {\r\n" +
 			"    \"autoprefixer\": \"7.1.6\",\r\n" +
 			"    \"babel-core\": \"6.26.0\",\r\n" +
@@ -51,35 +51,14 @@ public class ElectronProjectFileHelper extends WebProjectFileHelper {
 			"    \"webpack-dev-server\": \"2.9.4\",\r\n" +
 			"    \"webpack-manifest-plugin\": \"1.3.2\",\r\n" +
 			"    \"whatwg-fetch\": \"2.0.3\"\r\n" +
-			"  }," +
+			"  },\r\n" +
 			"  \"scripts\": {\r\n" +
-			"   \"start\": \"node scripts/start.js\",\r\n" +
-			"   \"build\": \"node scripts/build.js\",\r\n" +
-			"   \"test\": \"node scripts/test.js --env=jsdom\",\r\n" +
-			"   \"electron-dev\": \"concurrently \\\"yarn start\\\" \\\"wait-on http://localhost:3000 && electron .\\\"\",\r\n" +
-			"   \"pack\": \"build --dir\",\r\n" +
-			"   \"dist\": \"npm run build && build\"\r\n" +
-			" },\r\n" +
-			" \"homepage\": \".\",\r\n" +
-			" \"author\": \"%2$s\",\r\n" +
-			" \"build\": {\r\n" +
-			"   \"appId\": \"%2$s.%1$s\",\r\n" +
-			"   \"productName\": \"%1$s\",\r\n" +
-			"   \"copyright\": \"Copyright © year ${author}\",\r\n" +
-			"   \"win\": {\r\n" +
-			"     \"icon\": \"./public/fav.png\"\r\n" +
-			"   },\r\n" +
-			"   \"directories\": {\r\n" +
-			"     \"buildResources\": \"public\"\r\n" +
-			"   },\r\n" +
-			"   \"extends\": \"react-cra\"\r\n" +
-			" },\r\n" +
-			" \"devDependencies\": {\r\n" +
-			"   \"concurrently\": \"3.5.1\",\r\n" +
-			"   \"electron\": \"1.8.6\",\r\n" +
-			"   \"electron-builder\": \"20.15.1\",\r\n" +
-			"   \"wait-on\": \"2.1.0\"\r\n" +
-			" },\r\n" +
+			"    \"start\": \"node scripts/start.js\",\r\n" +
+			"    \"build\": \"node scripts/build.js\",\r\n" +
+			"    \"test\": \"node scripts/test.js --env=jsdom\"\r\n" +
+			"  },\r\n" +
+			"  \"homepage\": \".\",\r\n" +
+			"  \"author\": \"%3$s\",\r\n" +
 			"  \"jest\": {\r\n" +
 			"    \"collectCoverageFrom\": [\r\n" +
 			"      \"src/**/*.{js,jsx,mjs}\"\r\n" +
@@ -122,35 +101,5 @@ public class ElectronProjectFileHelper extends WebProjectFileHelper {
 			"  \"eslintConfig\": {\r\n" +
 			"    \"extends\": \"react-app\"\r\n" +
 			"  }\r\n" +
-			"}\r\n";
-	public final static String ELECTRONJS = "const electron = require('electron');\r\n" +
-			"const app = electron.app;\r\n" +
-			"const BrowserWindow = electron.BrowserWindow;\r\n" +
-			"\r\n" +
-			"const path = require('path');\r\n" +
-			"const url = require('url');\r\n" +
-			"const isDev = require('electron-is-dev');\r\n" +
-			"\r\n" +
-			"let mainWindow;\r\n" +
-			"\r\n" +
-			"function createWindow() {\r\n" +
-			"  mainWindow = new BrowserWindow({width: 900, height: 680});\r\n" +
-			"  mainWindow.setMenu(null);\r\n" +
-			"  mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '/index.html')}`);\r\n" +
-			"  mainWindow.on('closed', () => mainWindow = null);\r\n" +
-			"}\r\n" +
-			"\r\n" +
-			"app.on('ready', createWindow);\r\n" +
-			"\r\n" +
-			"app.on('window-all-closed', () => {\r\n" +
-			"  if (process.platform !== 'darwin') {\r\n" +
-			"    app.quit();\r\n" +
-			"  }\r\n" +
-			"});\r\n" +
-			"\r\n" +
-			"app.on('activate', () => {\r\n" +
-			"  if (mainWindow === null) {\r\n" +
-			"    createWindow();\r\n" +
-			"  }\r\n" +
-			"});";
+			"}";
 }

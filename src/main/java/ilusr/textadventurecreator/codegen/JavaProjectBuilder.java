@@ -31,8 +31,7 @@ public class JavaProjectBuilder extends BaseProjectBuilder {
 	 * @param languageService A @see LanaugageService used to localize display strings.
 	 */
 	public JavaProjectBuilder(TextAdventureProjectPersistence persistence, ILanguageService languageService) {
-		this.persistence = persistence;
-		this.languageService = languageService;
+		super(persistence, languageService);
 	}
 	
 	@Override

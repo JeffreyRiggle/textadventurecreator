@@ -19,8 +19,7 @@ import ilusr.textadventurecreator.statusbars.StatusItem;
 public class ElectronProjectBuilder extends BaseProjectBuilder {
 	
 	public ElectronProjectBuilder(TextAdventureProjectPersistence persistence, ILanguageService languageService) {
-		this.persistence = persistence;
-		this.languageService = languageService;
+		super(persistence, languageService);
 	}
 	
 	@Override

@@ -19,8 +19,13 @@ import textadventurelib.persistence.TextAdventurePersistenceObject;
 
 public abstract class BaseProjectBuilder implements IProjectBuilder {
 	
-	protected TextAdventureProjectPersistence persistence;
-	protected ILanguageService languageService;
+	protected final TextAdventureProjectPersistence persistence;
+	protected final ILanguageService languageService;
+	
+	public BaseProjectBuilder(TextAdventureProjectPersistence persistence, ILanguageService languageService) {
+		this.persistence = persistence;
+		this.languageService = languageService;
+	}
 	
 	protected int writeFileContent(File file, byte[] content) {
 		FileOutputStream out = null;
