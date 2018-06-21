@@ -174,7 +174,8 @@ public abstract class BaseProjectBuilder implements IProjectBuilder {
 		
 		for (File file : files) {
 			FileUtilities.deleteDir(file);
-			item.progressAmount().set(iter / files.length);
+			double progress = iter / files.length;
+			item.progressAmount().set(progress);
 			iter++;
 		}
 		

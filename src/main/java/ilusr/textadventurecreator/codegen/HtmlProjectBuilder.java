@@ -270,7 +270,8 @@ public class HtmlProjectBuilder extends BaseProjectBuilder {
 		for (int i = 0; i < buildFiles.length; i++) {
 			File current = buildFiles[i];
 			Files.copy(current.toPath(), new File(target.getAbsolutePath() + "/" + current.getName()).toPath());
-			item.progressAmount().set(i / buildFiles.length);
+			double progress = i / buildFiles.length;
+			item.progressAmount().set(progress);
 			
 			if (current.isDirectory()) {
 				copyRelease(new File(target.getAbsolutePath() + "/" + current.getName()), current, item);
