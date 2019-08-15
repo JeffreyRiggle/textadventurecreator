@@ -20,9 +20,8 @@ import textadventurelib.persistence.DisplayType;
 public class GameSettingsModel {
 
 	private final String JAVA = "Java";
-	//TODO: Create support for these languages.
-	//private final String JAVASCRIPT = "JavaScript";
-	//private final String CPP = "C++";
+	private final String ELECTRON = "Electron";
+	private final String HTML = "HTML";
 	
 	private final MediaFinder mediaFinder;
 	
@@ -171,9 +170,8 @@ public class GameSettingsModel {
 		});
 		
 		supportedLanguages.list().add(JAVA);
-		//TODO: Create support for these languages.
-		//supportedLanguages.list().add(JAVASCRIPT);
-		//supportedLanguages.list().add(CPP);
+		supportedLanguages.list().add(ELECTRON);
+		supportedLanguages.list().add(HTML);
 		
 		supportedLanguages.selected().addListener((v, o, n) -> {
 			project.setLanguage(n);

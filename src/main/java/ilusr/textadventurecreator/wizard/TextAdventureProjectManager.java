@@ -128,7 +128,9 @@ public class TextAdventureProjectManager {
 
 	private void tryAddInitialGameState(TextAdventurePersistenceObject tav) {
 		try {
-			tav.addGameState(new GameStatePersistenceObject(languageService.getValue(DisplayStrings.START_STATE)));
+			String start = languageService.getValue(DisplayStrings.START_STATE);
+			tav.addGameState(new GameStatePersistenceObject(start));
+			tav.currentGameState(start);
 		} catch (Exception e) {
 			LogRunner.logger().severe(e);
 		}

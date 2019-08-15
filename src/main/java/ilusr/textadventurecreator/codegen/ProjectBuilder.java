@@ -38,21 +38,28 @@ public class ProjectBuilder {
 		
 		IProjectBuilder builder = null;
 		
-		if (!persistence.getIsDev()) {
+		/*if (!persistence.getIsDev()) {
 			LogRunner.logger().info("Non-dev game building as a java project.");
 			builder = new JavaProjectBuilder(persistence, languageService);
 			builder.build(item);
 			return;
-		}
+		}*/
 		
 		switch (persistence.getLanguage()) {
 			case "Java":
 				LogRunner.logger().info("Building as a java project.");
 				builder = new JavaProjectBuilder(persistence, languageService);
 				break;
-			case "C++":
+			case "Electron":
+				LogRunner.logger().info("Building as electron project.");
+				builder = new ElectronProjectBuilder(persistence, languageService);
+				break;
 			case "HTML":
-				LogRunner.logger().info("Unitended language selected.");
+				LogRunner.logger().info("Building as electron project.");
+				builder = new HtmlProjectBuilder(persistence, languageService);
+				break;
+			default:
+				LogRunner.logger().info("Unintended language selected.");
 				break;
 		}
 		
