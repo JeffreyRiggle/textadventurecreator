@@ -150,14 +150,14 @@ public class LandingPageModel {
 	 * Opens a web page for a tutorial.
 	 */
 	public void showTutorial() {
-		openWebPage("http://jriggletavcweb.s3-website.us-east-2.amazonaws.com/firstproject.html");
+		openWebPage("http://ilusr.com/textadventurecreator/FirstProject");
 	}
 	
 	/**
 	 * Opens a web page for more information about this application.
 	 */
 	public void showMore() {
-		openWebPage("http://jriggletavcweb.s3-website.us-east-2.amazonaws.com/");
+		openWebPage("http://ilusr.com/textadventurecreator");
 	}
 	
 	private void openWebPage(String url) {
