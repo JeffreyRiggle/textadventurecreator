@@ -3,6 +3,7 @@ package ilusr.textadventurecreator.views;
 import java.awt.Desktop;
 import java.net.URI;
 
+import ilusr.core.environment.EnvironmentUtilities;
 import ilusr.logrunner.LogRunner;
 import ilusr.textadventurecreator.language.DisplayStrings;
 import ilusr.textadventurecreator.language.ILanguageService;
@@ -161,7 +162,14 @@ public class LandingPageModel {
 	
 	private void openWebPage(String url) {
 		try {
-			if (Desktop.isDesktopSupported()) {
+			if (EnvironmentUtilities.isUnix()) {
+				if (Runtime.getRuntime().exec(new String[] { "which", "xdg-open" }).getInputStream().read() != -1) {
+                	Runtime.getRuntime().exec(new String[] { "xdg-open", url });
+            	} else {
+					LogRunner.logger().info("Unable to show page for linux machine.");
+				}
+			}
+			else if (Desktop.isDesktopSupported()) {
 				LogRunner.logger().info(String.format("Showing web page %s", url));
 				Desktop.getDesktop().browse(new URI(url));
 			} else {

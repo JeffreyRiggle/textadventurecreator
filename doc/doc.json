@@ -1,0 +1,16 @@
+{
+    "index": "About",
+    "pages": {
+        "About": "About.md",
+        "GameStates": "AboutGameStates.md",
+        "Players": "AboutPlayers.md",
+        "Libraries": "AboutLibraries.md",
+        "FirstProject": "FirstProject.md",
+        "Languages": "CustomLanguages.md",
+        "Debugging": "Debugging.md",
+        "Feedback": "Feedback.md",
+        "Mods": "Mods.md",
+        "Installation": "Installation.md",
+        "Technologies": "Technology.md"
+    }
+}
