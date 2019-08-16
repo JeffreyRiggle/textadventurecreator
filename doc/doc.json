@@ -2,14 +2,50 @@
     "index": "About",
     "pages": {
         "About": "About.md",
-        "GameStates": "AboutGameStates.md",
-        "Players": "AboutPlayers.md",
-        "Libraries": "AboutLibraries.md",
-        "FirstProject": "FirstProject.md",
-        "Languages": "CustomLanguages.md",
-        "Debugging": "Debugging.md",
-        "Feedback": "Feedback.md",
-        "Mods": "Mods.md",
+        "MainTopics": {
+            "displayName": "Key Concepts",
+            "type": "Header",
+            "children": [
+                {
+                    "displayName": "First Project",
+                    "file": "FirstProject.md"
+                },
+                {
+                    "displayName": "About Players",
+                    "file": "AboutPlayers.md"
+                },
+                {
+                    "displayName": "About Game States",
+                    "file": "AboutGameStates.md"
+                },
+                {
+                    "displayName": "Libraries",
+                    "file": "AboutLibraries.md"
+                }
+            ]
+        },
+        "Advanced": {
+            "displayName": "Advanced Topics",
+            "type": "Header",
+            "children": [
+                {
+                    "displayName": "Debugging",
+                    "file": "Debugging.md"
+                },
+                {
+                    "displayName": "Languages",
+                    "file": "Debugging.md"
+                },
+                {
+                    "displayName": "Feedback",
+                    "file": "Feedback.md"
+                },
+                {
+                    "displayName": "Mods",
+                    "file": "Mods.md"
+                }
+            ]
+        },
         "Installation": "Installation.md",
         "Technologies": "Technologies.md"
     }
