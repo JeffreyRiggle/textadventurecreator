@@ -109,7 +109,7 @@ public class LanguageSettingsModelUnitTest {
 	public void testEdit() {
 		File f = null;
 		try {
-			d = new File(System.getProperty("user.home") + "/ilusr/languages");
+			File d = new File(System.getProperty("user.home") + "/ilusr/languages");
 			if (!d.exists()) {
 				d.mkdirs();
 			}
