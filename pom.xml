@@ -4,7 +4,7 @@
 
   <groupId>com.ilusr</groupId>
   <artifactId>TextAdventureCreator</artifactId>
-  <version>2.0.0</version>
+  <version>2.0.${revision}</version>
   <packaging>jar</packaging>
 
   <name>TextAdventureCreator</name>
@@ -29,12 +29,12 @@
   	<dependency>
   		<groupId>com.ilusr.iroshell</groupId>
   		<artifactId>IROShell</artifactId>
-  		<version>2.0.3</version>
+  		<version>2.0.8</version>
   	</dependency>
   	<dependency>
     	<groupId>com.ilusr</groupId>
   		<artifactId>TextAdventureLib</artifactId>
-  		<version>2.0.1</version>
+  		<version>2.0.2</version>
   	</dependency>
     <dependency>
       <groupId>junit</groupId>
@@ -66,9 +66,9 @@
   </dependencies>
   <distributionManagement>
   	<repository>
-  		<id>jriggle-mvn-repo</id>
-  		<name>AWS Maven Repo</name>
-  		<url>https://s3.us-east-2.amazonaws.com/jriggle-mvn-repo/snapshot</url>
+  		<id>github</id>
+  		<name>Jeffrey Riggle Apache Maven Packages</name>
+  		<url>https://maven.pkg.github.com/JeffreyRiggle/textadventurecreator</url>
   	</repository>
   </distributionManagement>
   <build>

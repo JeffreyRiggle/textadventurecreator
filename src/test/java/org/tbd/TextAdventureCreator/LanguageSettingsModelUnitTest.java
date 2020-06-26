@@ -109,6 +109,11 @@ public class LanguageSettingsModelUnitTest {
 	public void testEdit() {
 		File f = null;
 		try {
+			File d = new File(System.getProperty("user.home") + "/ilusr/languages");
+			if (!d.exists()) {
+				d.mkdirs();
+			}
+
 			f = new File(System.getProperty("user.home") + "/ilusr/languages/ja-JPlanguage.txt");
 			f.createNewFile();
 		} catch (Exception e) {
