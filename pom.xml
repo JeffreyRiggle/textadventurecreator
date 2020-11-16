@@ -3,8 +3,8 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.ilusr</groupId>
-  <artifactId>TextAdventureCreator</artifactId>
-  <version>2.0.${revision}</version>
+  <artifactId>textadventurecreator</artifactId>
+  <version>2.0.0</version>
   <packaging>jar</packaging>
 
   <name>TextAdventureCreator</name>
@@ -28,18 +28,18 @@
 	</dependency>
   	<dependency>
   		<groupId>com.ilusr.iroshell</groupId>
-  		<artifactId>IROShell</artifactId>
-  		<version>2.0.8</version>
+  		<artifactId>iroshell</artifactId>
+  		<version>2.0.17</version>
   	</dependency>
   	<dependency>
     	<groupId>com.ilusr</groupId>
-  		<artifactId>TextAdventureLib</artifactId>
-  		<version>2.0.2</version>
+  		<artifactId>textadventurelib</artifactId>
+  		<version>2.0.11</version>
   	</dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.12</version>
+      <version>4.13.1</version>
       <scope>test</scope>
     </dependency>
     <dependency>
