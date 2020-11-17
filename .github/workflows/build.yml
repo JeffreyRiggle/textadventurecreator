@@ -27,6 +27,9 @@ jobs:
             - name: Build with Maven
               run: xvfb-run mvn test
 
+            - name: Install
+              run: xvfb-run mvn install
+
             - name: Generate Installer
               run: |
                 wget "https://repo1.maven.org/maven2/org/codehaus/izpack/izpack-standalone-compiler/4.3.5/izpack-standalone-compiler-4.3.5.jar"
