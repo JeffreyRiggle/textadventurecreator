@@ -29,11 +29,3 @@ jobs:
 
             - name: Install
               run: xvfb-run mvn install
-
-            - name: Generate Installer
-              run: |
-                wget "https://repo1.maven.org/maven2/org/codehaus/izpack/izpack-standalone-compiler/4.3.5/izpack-standalone-compiler-4.3.5.jar"
-                cp ./target/textadventurecreator-2.0.0.jar ./install/w64/textadventurecreator-2.0.0.jar
-                export APPLICATION_JAR="textadventurecreator-2.0.0.jar"
-                envsubst < ./install/w64/install.tmpl > ./install/w64/install.xml
-                java -jar izpack-standalone-compiler-4.3.5.jar ./install/w64/install.xml -b ./install/w64 -o ./install/install.jar -k standard

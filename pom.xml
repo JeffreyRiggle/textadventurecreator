@@ -13,6 +13,8 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	<izpack.version>5.0.9</izpack.version>
+	<izpack.staging>${project.build.directory}/staging</izpack.staging>
   </properties>
 
   <dependencies>
@@ -111,6 +113,25 @@
       		<argLine>-Dfile.encoding=UTF-8</argLine>
       	</configuration>
       </plugin>
+	  <plugin>
+	    <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>create-staging-area</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <tasks>
+                <copy todir="${izpack.staging}">
+                  <fileset dir="${basedir}/install"/>
+                </copy>
+              </tasks>
+            </configuration>
+          </execution>
+        </executions>
+	  </plugin>
     </plugins>
     <extensions>
     	<extension>
