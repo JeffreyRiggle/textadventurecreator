@@ -132,6 +132,29 @@
           </execution>
         </executions>
 	  </plugin>
+	  <plugin>
+	  	<artifactId>maven-dependency-plugin</artifactId>
+		<configuration>
+		  <excludeTransitive>false</excludeTransitive>
+		  <stripVersion>true</stripVersion>
+		  <overWriteReleases>true</overWriteReleases>
+		  <overWriteIfNewer>true</overWriteIfNewer>
+		</configuration>
+		<executions>
+		  <execution>
+		    <id>copy-product-dependencies</id>
+			<phase>prepare-package</phase>
+			<goals>
+			  <goal>copy-dependencies</goal>
+			</goals>
+			<configuration>
+			  <outputDirectory>${izpack.staging}/lib</outputDirectory>
+			  <excludeScope>system</excludeScope>
+			  <excludeGroupIds>org.codehaus.izpack</excludeGroupIds>
+			</configuration>
+		  </execution>
+		</executions>
+	  </plugin>
     </plugins>
     <extensions>
     	<extension>
