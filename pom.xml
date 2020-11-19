@@ -155,6 +155,30 @@
 		  </execution>
 		</executions>
 	  </plugin>
+	  <plugin>
+	  	<groupId>org.codehaus.izpack</groupId>
+		<artifactId>izpack-maven-plugin</artifactId>
+		<version>${izpack.version}</version>
+		<executions>
+		  <execution>
+		    <phase>package</phase>
+			<goals>
+			  <goal>izpack</goal>
+			</goals>
+			<configuration>
+			  <baseDir>${izpack.staging}</baseDir>
+			  <installFile>${basedir}/install/install.xml</installFile>
+			</configuration>
+		  </execution>
+		</executions>
+		<dependencies>
+		  <dependency>
+		    <groupId>org.codehaus.izpack</groupId>
+			<artifactId>izpack-panel</artifactId>
+			<version>${izpack.version}</version>
+		  </dependency>
+		</dependencies>
+	  </plugin>
     </plugins>
     <extensions>
     	<extension>

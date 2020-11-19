@@ -40,7 +40,6 @@
        The ids must be these ones if you want to use the LicencePanel and/or the InfoPanel.
    -->
     <resources>
-        <res src="shortcutSpec.xml" id="shortcutSpec.xml"/>
         <res src="ProcessPanel.Spec.xml" id="ProcessPanel.Spec.xml"/>
         <res id="LicencePanel.licence" src="Licence.txt"/>
         <res id="InfoPanel.info" src="Readme.txt"/>
@@ -57,7 +56,6 @@
         <panel classname="PacksPanel"/>
         <panel classname="InstallPanel"/>
         <panel classname="ProcessPanel"/>
-        <panel classname="ShortcutPanel"/>
         <panel classname="FinishPanel"/>
     </panels>
 
@@ -70,14 +68,14 @@
             <description>The base files</description>
             <file src="Readme.txt" targetdir=""/>
             <file src="Licence.txt" targetdir=""/>
-            <file src="textadventurecreator-2.0.0.jar" targetdir=""/>
+            <file src="../textadventurecreator-2.0.0.jar" targetdir=""/>
         </pack>
         <pack name="Creator" required="no">
             <description>The text adventure creator</description>
             <file src="Readme.txt" targetdir=""/>
             <file src="Licence.txt" targetdir=""/>
             <file src="TAVCreator.png" targetdir=""/>
-            <file src="textadventurecreator-2.0.0.jar" targetdir=""/>
+            <file src="../textadventurecreator-2.0.0.jar" targetdir=""/>
             <file src="finalize.bat" targetdir=""/>
             <fileset dir="extern/apache-maven-3.3.9" targetdir="/../Apache/Maven"/>
             <fileset dir="extern/ffmpeg" targetdir="/../ffmpeg"/>
