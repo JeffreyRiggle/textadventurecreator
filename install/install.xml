@@ -68,23 +68,12 @@
             <description>The base files</description>
             <file src="Readme.txt" targetdir=""/>
             <file src="Licence.txt" targetdir=""/>
-            <file src="../textadventurecreator-2.0.0.jar" targetdir=""/>
         </pack>
         <pack name="Creator" required="no">
             <description>The text adventure creator</description>
             <file src="Readme.txt" targetdir=""/>
             <file src="Licence.txt" targetdir=""/>
             <file src="TAVCreator.png" targetdir=""/>
-            <file src="../textadventurecreator-2.0.0.jar" targetdir=""/>
-            <file src="finalize.bat" targetdir=""/>
-            <fileset dir="extern/apache-maven-3.3.9" targetdir="/../Apache/Maven"/>
-            <fileset dir="extern/ffmpeg" targetdir="/../ffmpeg"/>
         </pack>
     </packs>
-    <natives>
-      <native type="izpack" name="ShellLink.dll"/>
-      <native type="3rdparty" name="COIOSHelper.dll" stage="both">
-          <os family="windows"/>
-      </native>
-    </natives>
 </izpack:installation>
