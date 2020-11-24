@@ -68,6 +68,7 @@
             <description>The base files</description>
             <file src="Readme.txt" targetdir=""/>
             <file src="Licence.txt" targetdir=""/>
+            <file src="textadventurecreator.jar" targetdir=""/>
         </pack>
         <pack name="Creator" required="no">
             <description>The text adventure creator</description>

@@ -133,6 +133,23 @@
         </executions>
 	  </plugin>
 	  <plugin>
+	    <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy-application</id>
+            <phase>package</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <tasks>
+				<copy file="${project.build.directory}/textadventurecreator-2.0.0.jar" toFile="${izpack.staging}/textadventurecreator.jar"/>
+              </tasks>
+            </configuration>
+          </execution>
+        </executions>
+	  </plugin>
+	  <plugin>
 	  	<artifactId>maven-dependency-plugin</artifactId>
 		<configuration>
 		  <excludeTransitive>false</excludeTransitive>
