@@ -143,7 +143,7 @@
             </goals>
             <configuration>
               <tasks>
-				<copy file="${project.build.directory}/textadventurecreator-2.0.0.jar" toFile="${izpack.staging}/textadventurecreator.jar"/>
+				<copy file="${project.build.directory}/textadventurecreator-${project.version}.jar" toFile="${izpack.staging}/textadventurecreator.jar"/>
               </tasks>
             </configuration>
           </execution>
