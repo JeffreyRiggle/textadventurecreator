@@ -50,6 +50,7 @@
        We indicate here which panels we want to use. The order will be respected.
    -->
     <panels>
+        <panel classname="com.ilusr.install.DependencyPanel" id="custompanel" />
         <panel classname="HelloPanel"/>
         <panel classname="LicencePanel"/>
         <panel classname="TargetPanel"/>

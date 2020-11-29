@@ -27,5 +27,9 @@ jobs:
             - name: Build with Maven
               run: xvfb-run mvn test
 
+            - name: Build panels
+              working-directory: installpanels
+              run: xvfb-run mvn install
+
             - name: Install
               run: xvfb-run mvn install
