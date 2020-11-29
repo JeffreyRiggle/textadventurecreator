@@ -24,6 +24,8 @@ import java.util.ArrayList;
 public class DependencyPanel extends IzPanel
 {
     private static final long serialVersionUID = 3257848774955905587L;
+    private MavenChecker mavenChecker;
+    private FFMPEGChecker ffmpegChecker;
 
     public DependencyPanel(Panel panel, InstallerFrame parent, GUIInstallData idata, Resources resources, Log log)
     {
@@ -33,13 +35,42 @@ public class DependencyPanel extends IzPanel
     public DependencyPanel(Panel panel, InstallerFrame parent, GUIInstallData idata, LayoutManager2 layout, Resources resources)
     {
         super(panel, parent, idata, layout, resources);
-        String welcomeText = "Checking system dependencies";
-        JLabel welcomeLabel = LabelFactory.create(welcomeText, parent.getIcons().get("host"), LEADING);
-        welcomeLabel.setName(GuiId.HELLO_PANEL_LABEL.id);
-        add(welcomeLabel, NEXT_LINE);
+        this.mavenChecker = new MavenChecker();
+        this.ffmpegChecker = new FFMPEGChecker();
+
+        this.evaluateMaven();
+        this.evaluateFFMPEG();
         add(IzPanelLayout.createParagraphGap());
 
         getLayoutHelper().completeLayout();
+    }
+
+    private void evaluateMaven()
+    {
+        String panelText;
+        if (this.mavenChecker.hasDependency()) {
+            panelText = "Maven has been installed";
+        } else {
+            panelText = "Maven is missing please install maven before continuing.";
+        }
+
+        JLabel mvnLabel = LabelFactory.create(panelText, parent.getIcons().get("host"), LEADING);
+        mvnLabel.setName(GuiId.HELLO_PANEL_LABEL.id);
+        add(mvnLabel, NEXT_LINE);
+    }
+
+    private void evaluateFFMPEG()
+    {
+        String panelText;
+        if (this.ffmpegChecker.hasDependency()) {
+            panelText = "FFMPEG has been installed";
+        } else {
+            panelText = "FFMPEG is missing please install maven before continuing.";
+        }
+
+        JLabel ffmpegLabel = LabelFactory.create(panelText, parent.getIcons().get("host"), LEADING);
+        ffmpegLabel.setName(GuiId.HELLO_PANEL_LABEL.id);
+        add(ffmpegLabel, NEXT_LINE);
     }
 
     public boolean isValidated()
