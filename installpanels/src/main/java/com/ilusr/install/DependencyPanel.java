@@ -13,7 +13,8 @@ import com.izforge.izpack.installer.gui.IzPanel;
 import com.izforge.izpack.installer.data.GUIInstallData;
 
 import javax.swing.*;
-import java.awt.*;
+import java.awt.LayoutManager2;
+import java.util.List;
 import java.util.ArrayList;
 
 /**
@@ -24,8 +25,7 @@ import java.util.ArrayList;
 public class DependencyPanel extends IzPanel
 {
     private static final long serialVersionUID = 3257848774955905587L;
-    private MavenChecker mavenChecker;
-    private FFMPEGChecker ffmpegChecker;
+    private List<DependencyChecker> checkers;
 
     public DependencyPanel(Panel panel, InstallerFrame parent, GUIInstallData idata, Resources resources, Log log)
     {
@@ -35,42 +35,29 @@ public class DependencyPanel extends IzPanel
     public DependencyPanel(Panel panel, InstallerFrame parent, GUIInstallData idata, LayoutManager2 layout, Resources resources)
     {
         super(panel, parent, idata, layout, resources);
-        this.mavenChecker = new MavenChecker();
-        this.ffmpegChecker = new FFMPEGChecker();
+        this.checkers = new ArrayList<>();
+        checkers.add(new MavenChecker());
+        checkers.add(new FFMPEGChecker());
 
-        this.evaluateMaven();
-        this.evaluateFFMPEG();
+        this.evaluateCheckers();
         add(IzPanelLayout.createParagraphGap());
 
         getLayoutHelper().completeLayout();
     }
 
-    private void evaluateMaven()
+    private void evaluateCheckers()
     {
-        String panelText;
-        if (this.mavenChecker.hasDependency()) {
-            panelText = "Maven has been installed";
-        } else {
-            panelText = "Maven is missing please install maven before continuing.";
+        for (DependencyChecker checker : this.checkers) {
+            String panelText;
+            if (checker.hasDependency()) {
+                panelText = checker.getInstalledText();
+            } else {
+                panelText = checker.getMissingText();
+            }
+
+            JLabel depLabel = LabelFactory.create(panelText, LEADING);
+            add(depLabel, NEXT_LINE);
         }
-
-        JLabel mvnLabel = LabelFactory.create(panelText, parent.getIcons().get("host"), LEADING);
-        mvnLabel.setName(GuiId.HELLO_PANEL_LABEL.id);
-        add(mvnLabel, NEXT_LINE);
-    }
-
-    private void evaluateFFMPEG()
-    {
-        String panelText;
-        if (this.ffmpegChecker.hasDependency()) {
-            panelText = "FFMPEG has been installed";
-        } else {
-            panelText = "FFMPEG is missing please install maven before continuing.";
-        }
-
-        JLabel ffmpegLabel = LabelFactory.create(panelText, parent.getIcons().get("host"), LEADING);
-        ffmpegLabel.setName(GuiId.HELLO_PANEL_LABEL.id);
-        add(ffmpegLabel, NEXT_LINE);
     }
 
     public boolean isValidated()
