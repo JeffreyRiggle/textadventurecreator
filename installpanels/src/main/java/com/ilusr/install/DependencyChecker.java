@@ -1,7 +1,9 @@
 package com.ilusr.install;
 
+import javax.swing.*;
+
 public interface DependencyChecker {
     public boolean hasDependency();
-    public String getMissingText();
-    public String getInstalledText();
+    public JComponent getMissingText();
+    public JComponent getInstalledText();
 }

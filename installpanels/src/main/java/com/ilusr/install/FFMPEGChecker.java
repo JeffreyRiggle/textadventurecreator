@@ -1,5 +1,8 @@
 package com.ilusr.install;
 
+import com.izforge.izpack.gui.LabelFactory;
+import javax.swing.*;
+
 public class FFMPEGChecker implements DependencyChecker {
     private final String missingText = "FFMPEG is missing please install maven before continuing.";
     private final String installedText = "FFMPEG has been installed";
@@ -15,11 +18,11 @@ public class FFMPEGChecker implements DependencyChecker {
         }
     }
 
-    public String getMissingText() {
-        return this.missingText;
+    public JComponent getMissingText() {
+        return LabelFactory.create(this.missingText);
     }
 
-    public String getInstalledText() {
-        return this.installedText;
+    public JComponent getInstalledText() {
+        return LabelFactory.create(this.installedText);
     }
 }

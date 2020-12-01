@@ -5,7 +5,6 @@ import com.izforge.izpack.api.data.Info;
 import com.izforge.izpack.api.data.Panel;
 import com.izforge.izpack.api.resource.Resources;
 import com.izforge.izpack.gui.IzPanelLayout;
-import com.izforge.izpack.gui.LabelFactory;
 import com.izforge.izpack.gui.LayoutConstants;
 import com.izforge.izpack.gui.log.Log;
 import com.izforge.izpack.installer.gui.InstallerFrame;
@@ -48,15 +47,14 @@ public class DependencyPanel extends IzPanel
     private void evaluateCheckers()
     {
         for (DependencyChecker checker : this.checkers) {
-            String panelText;
+            JComponent comp;
             if (checker.hasDependency()) {
-                panelText = checker.getInstalledText();
+                comp = checker.getInstalledText();
             } else {
-                panelText = checker.getMissingText();
+                comp = checker.getMissingText();
             }
 
-            JLabel depLabel = LabelFactory.create(panelText, LEADING);
-            add(depLabel, NEXT_LINE);
+            add(comp, NEXT_LINE);
         }
     }
 
