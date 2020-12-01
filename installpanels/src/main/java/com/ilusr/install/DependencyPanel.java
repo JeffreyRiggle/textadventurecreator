@@ -25,6 +25,7 @@ public class DependencyPanel extends IzPanel
 {
     private static final long serialVersionUID = 3257848774955905587L;
     private List<DependencyChecker> checkers;
+    private boolean valid;
 
     public DependencyPanel(Panel panel, InstallerFrame parent, GUIInstallData idata, Resources resources, Log log)
     {
@@ -46,11 +47,13 @@ public class DependencyPanel extends IzPanel
 
     private void evaluateCheckers()
     {
+        valid = true;
         for (DependencyChecker checker : this.checkers) {
             JComponent comp;
             if (checker.hasDependency()) {
                 comp = checker.getInstalledText();
             } else {
+                valid = false;
                 comp = checker.getMissingText();
             }
 
@@ -60,6 +63,6 @@ public class DependencyPanel extends IzPanel
 
     public boolean isValidated()
     {
-        return true;
+        return valid;
     }
 }
