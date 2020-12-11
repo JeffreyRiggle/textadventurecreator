@@ -6,6 +6,7 @@ import com.izforge.izpack.api.data.Panel;
 import com.izforge.izpack.api.resource.Resources;
 import com.izforge.izpack.gui.IzPanelLayout;
 import com.izforge.izpack.gui.LayoutConstants;
+import com.izforge.izpack.gui.LabelFactory;
 import com.izforge.izpack.gui.log.Log;
 import com.izforge.izpack.installer.gui.InstallerFrame;
 import com.izforge.izpack.installer.gui.IzPanel;
@@ -27,13 +28,11 @@ public class DependencyPanel extends IzPanel
     private List<DependencyChecker> checkers;
     private boolean valid;
 
-    public DependencyPanel(Panel panel, InstallerFrame parent, GUIInstallData idata, Resources resources, Log log)
-    {
+    public DependencyPanel(Panel panel, InstallerFrame parent, GUIInstallData idata, Resources resources, Log log) {
         this(panel, parent, idata, new IzPanelLayout(log), resources);
     }
 
-    public DependencyPanel(Panel panel, InstallerFrame parent, GUIInstallData idata, LayoutManager2 layout, Resources resources)
-    {
+    public DependencyPanel(Panel panel, InstallerFrame parent, GUIInstallData idata, LayoutManager2 layout, Resources resources) {
         super(panel, parent, idata, layout, resources);
         this.checkers = new ArrayList<>();
         checkers.add(new MavenChecker());
@@ -45,8 +44,7 @@ public class DependencyPanel extends IzPanel
         getLayoutHelper().completeLayout();
     }
 
-    private void evaluateCheckers()
-    {
+    private void evaluateCheckers() {
         valid = true;
         for (DependencyChecker checker : this.checkers) {
             JComponent comp;
@@ -59,10 +57,21 @@ public class DependencyPanel extends IzPanel
 
             add(comp, NEXT_LINE);
         }
+
+        if (valid) {
+            add(LabelFactory.create("All Dependencies are met."), NEXT_LINE);
+        }
     }
 
-    public boolean isValidated()
-    {
+    @Override()
+    protected boolean isValidated() {
         return valid;
+    }
+
+    @Override()
+    public void panelActivate() {
+        if (!valid) {
+            this.emitError("Missing Dependencies", "Dependencies are missing run prerequisite script and try again");
+        }
     }
 }
