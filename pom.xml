@@ -66,10 +66,10 @@
 		<version>11.0.2</version>
 	</dependency>
 	<dependency>
-			<groupId>com.ilusr.install</groupId>
-			<artifactId>install</artifactId>
-		    <version>1.0-SNAPSHOT</version>
-		  </dependency>
+		<groupId>com.ilusr.install</groupId>
+		<artifactId>install</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</dependency>
   </dependencies>
   <distributionManagement>
   	<repository>
