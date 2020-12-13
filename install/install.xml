@@ -19,6 +19,11 @@
         <summarylogfilepath>/installinfo/Summary.htm</summarylogfilepath>
     </info>
 
+    <natives>
+        <native type="izpack" name="ShellLink.dll"/>
+        <native type="izpack" name="ShellLink_x64.dll"/>
+    </natives>
+    
     <!--
        The gui preferences indication.
        Sets the installer window to 640x480. It will not be able to change the size.
@@ -40,7 +45,7 @@
        The ids must be these ones if you want to use the LicencePanel and/or the InfoPanel.
    -->
     <resources>
-        <res src="ProcessPanel.Spec.xml" id="ProcessPanel.Spec.xml"/>
+        <res src="shortcutSpec.xml" id="shortcutSpec.xml"/>
         <res id="LicencePanel.licence" src="Licence.txt"/>
         <res id="InfoPanel.info" src="Readme.txt"/>
     </resources>
@@ -56,7 +61,7 @@
         <panel classname="TargetPanel"/>
         <panel classname="PacksPanel"/>
         <panel classname="InstallPanel"/>
-        <panel classname="ProcessPanel"/>
+        <panel classname="ShortcutPanel"/>
         <panel classname="FinishPanel"/>
     </panels>
 
@@ -67,15 +72,15 @@
     <packs>
         <pack name="Player" required="yes">
             <description>The base files</description>
-            <file src="Readme.txt" targetdir=""/>
-            <file src="Licence.txt" targetdir=""/>
-            <file src="textadventurecreator.jar" targetdir=""/>
+            <file src="Readme.txt" targetdir="${INSTALL_PATH}"/>
+            <file src="Licence.txt" targetdir="${INSTALL_PATH}"/>
+            <file src="textadventurecreator.jar" targetdir="${INSTALL_PATH}"/>
         </pack>
         <pack name="Creator" required="no">
             <description>The text adventure creator</description>
-            <file src="Readme.txt" targetdir=""/>
-            <file src="Licence.txt" targetdir=""/>
-            <file src="TAVCreator.png" targetdir=""/>
+            <file src="Readme.txt" targetdir="${INSTALL_PATH}"/>
+            <file src="Licence.txt" targetdir="${INSTALL_PATH}"/>
+            <file src="TAVCreator.ico" targetdir="${INSTALL_PATH}"/>
         </pack>
     </packs>
 </izpack:installation>

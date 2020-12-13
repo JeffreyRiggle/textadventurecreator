@@ -71,7 +71,8 @@ public class DependencyPanel extends IzPanel
     @Override()
     public void panelActivate() {
         if (!valid) {
-            this.emitError("Missing Dependencies", "Dependencies are missing run prerequisite script and try again");
+            parent.lockNextButton();
+            this.emitError("Missing Dependencies", "Dependencies are missing run prerequisite script and try again.");
         }
     }
 }

@@ -23,7 +23,6 @@ public class FFMPEGChecker implements DependencyChecker {
         try {
             Process proc = getTestProcess();
             int res = proc.waitFor();
-            System.out.println(res);
             return res == 0;
         } catch (Exception e) {
             return false;

@@ -11,11 +11,11 @@
           applications="no"
           startMenu="yes"
           startup="no"
-          target="$INSTALL_PATH\TextAdventureCreator-1.2.0-SNAPSHOT.jar"
+          target="$INSTALL_PATH\textadventurecreator.jar"
           workingDirectory="$INSTALL_PATH"
           commandLine=""
           description="IDE for Text Adventures"
-          iconFile="$INSTALL_PATH\TAVCreator.png"
+          iconFile="$INSTALL_PATH\TAVCreator.ico"
           iconIndex="0"
           initialState="noShow">
         <createForPack name="Creator"/>
@@ -28,34 +28,6 @@
            startMenu="no"
            startup="no"
            target="$INSTALL_PATH\Uninstaller\creatoruninstaller.jar"
-           commandLine=""
-           iconFile="%SystemRoot%\system32\SHELL32.dll"
-           iconIndex="31"
-           description="Uninstall Text Adventure Creator">
-        <createForPack name="Creator"/>
-    </shortcut>
-    <shortcut
-          name="Text Adventure Player"
-          programGroup="yes"
-          desktop="yes"
-          applications="no"
-          startMenu="yes"
-          startup="no"
-          target="$INSTALL_PATH\TextAdventureMainApplication-1.2.0-SNAPSHOT.jar"
-          workingDirectory="$INSTALL_PATH"
-          commandLine=""
-          description="Text Adventure Host"
-          initialState="noShow">
-        <createForPack name="Creator"/>
-    </shortcut>
-    <shortcut
-           name="Text Adventure Player Uninstaller"
-           programGroup="yes"
-           desktop="no"
-           applications="no"
-           startMenu="no"
-           startup="no"
-           target="$INSTALL_PATH\Uninstaller\playeruninstaller.jar"
            commandLine=""
            iconFile="%SystemRoot%\system32\SHELL32.dll"
            iconIndex="31"

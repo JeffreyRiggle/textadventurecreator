@@ -1,5 +1,5 @@
 try {
-    fmpeg -version | Out-Null
+    ffmpeg -version | Out-Null
 
     $result = $?
     
