@@ -23,3 +23,6 @@ try {
 } catch {
     choco install maven
 }
+
+$mvnloc = (Get-Command mvn).Source
+cmd /c mklink "mvnlnk.lnk" $mvnloc
