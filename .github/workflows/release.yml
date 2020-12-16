@@ -1,0 +1,98 @@
+name: Release
+
+on: 
+    push:
+        branches:
+            - master
+
+jobs:
+    build:
+        name: Build
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v2
+
+            - name: Set up JDK
+              uses: actions/setup-java@v1
+              with:
+                java-version: '11'
+                java-package: 'jdk+fx'
+
+            - name: Setup Maven
+              env:
+                TOKEN: ${{ secrets.GITHUBTOKEN }}
+                USERNAME: JeffreyRiggle
+              run: |
+                envsubst < settings.tmpl > ~/.m2/settings.xml
+
+            - name: Build panels
+              working-directory: installpanels
+              run: xvfb-run mvn install
+
+            - name: Install
+              run: xvfb-run mvn package
+
+            - name: Create Release files
+              run: |
+                cp -r target/staging tavwin
+                rm tavwin/prereq.sh
+                rm tavwin/textadventurecreator.sh
+                zip -r tavwin.zip tavwin
+                cp -r target/staging tavub
+                rm tavub/Prereqsetup.ps1
+                rm tavub/textadventurecreator.bat
+                rm tavub/install.bat
+                zip -r tavub.zip tavub
+                tar -czvf tavub.tar.gz tavub
+
+            - name: Create Release
+              id: create_release
+              uses: actions/create-release@v1
+              env:
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                tag_name: 2.0.${{ github.run_number }}
+                release_name: Release 2.0.${{ github.run_number }}
+                body: |
+                  New release
+                draft: false
+                prerelease: false
+
+            - name: Upload windows zip
+              id: upload_windows_zip
+              uses: actions/upload-release-asset@v1
+              env:
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                upload_url: ${{ steps.create_release.outputs.upload_url }}
+                asset_path: ./tavwin.zip
+                asset_name: tavwin.zip
+                asset_content_type: application/zip
+
+            - name: Upload ubuntu tar
+              id: upload_ubuntu_tar
+              uses: actions/upload-release-asset@v1
+              env:
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                upload_url: ${{ steps.create_release.outputs.upload_url }}
+                asset_path: ./tavub.tar.gz
+                asset_name: tavub.tar.gz
+                asset_content_type: application/zip
+
+            - name: Upload ubuntu zip
+              id: upload_ubuntu_zip
+              uses: actions/upload-release-asset@v1
+              env:
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                upload_url: ${{ steps.create_release.outputs.upload_url }}
+                asset_path: ./tavub.zip
+                asset_name: tavub.zip
+                asset_content_type: application/zip
+
+            - name: Build Site
+              run: |
+                curl -XPOST -u "JeffreyRiggle:${{secrets.SITETOKEN}}" -H "Accept: application/vnd.github.everest-preview+json" -H "Content-Type: application/json" https://api.github.com/repos/JeffreyRiggle/my-site/dispatches --data '{"event_type": "release_site"}'
