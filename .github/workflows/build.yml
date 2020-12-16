@@ -24,5 +24,12 @@ jobs:
               run: |
                 envsubst < settings.tmpl > ~/.m2/settings.xml
 
+            - name: Build panels
+              working-directory: installpanels
+              run: xvfb-run mvn install
+
             - name: Build with Maven
               run: xvfb-run mvn test
+
+            - name: Install
+              run: xvfb-run mvn install

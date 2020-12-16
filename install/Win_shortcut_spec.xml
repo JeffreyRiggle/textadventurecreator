@@ -1,0 +1,35 @@
+<izpack:shortcuts version="5.0"
+                  xmlns:izpack="http://izpack.org/schema/shortcuts"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://izpack.org/schema/shortcuts http://izpack.org/schema/5.0/izpack-shortcuts-5.0.xsd">
+    <skipIfNotSupported/>
+    <programGroup defaultName="Illusioned Realms" location="applications"/>
+    <shortcut
+          name="Text Adventure Creator"
+          programGroup="yes"
+          desktop="yes"
+          applications="no"
+          startMenu="yes"
+          startup="no"
+          target="$INSTALL_PATH\textadventurecreator.bat"
+          workingDirectory="$INSTALL_PATH"
+          commandLine=""
+          description="IDE for Text Adventures"
+          iconFile="$INSTALL_PATH\TAVCreator.ico"
+          iconIndex="0"
+          initialState="noShow">
+    </shortcut>
+    <shortcut
+           name="Text Adventure Creator Uninstaller"
+           programGroup="yes"
+           desktop="no"
+           applications="no"
+           startMenu="no"
+           startup="no"
+           target="$INSTALL_PATH\Uninstaller\creatoruninstaller.jar"
+           commandLine=""
+           iconFile="%SystemRoot%\system32\SHELL32.dll"
+           iconIndex="31"
+           description="Uninstall Text Adventure Creator">
+    </shortcut>
+</izpack:shortcuts>

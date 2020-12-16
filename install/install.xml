@@ -1,0 +1,54 @@
+<izpack:installation version="5.0"
+                     xmlns:izpack="http://izpack.org/schema/installation"
+                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                     xsi:schemaLocation="http://izpack.org/schema/installation http://izpack.org/schema/5.0/izpack-installation-5.0.xsd">
+    <info>
+        <appname>Text Adventure Creator</appname>
+        <appversion>1.0</appversion>
+        <authors>
+            <author name="Jeffrey Riggle" email="JeffreyRiggle@gmail.com"/>
+        </authors>
+        <url>http://ilusr.com/textadventurecreator</url>
+        <javaversion>1.11</javaversion>
+        <run-privileged condition="izpack.windowsinstall.vista|izpack.macinstall"/>
+        <summarylogfilepath>/installinfo/Summary.htm</summarylogfilepath>
+    </info>
+    <natives>
+        <native type="izpack" name="ShellLink.dll"/>
+        <native type="izpack" name="ShellLink_x64.dll"/>
+    </natives>
+    <guiprefs width="640" height="480" resizable="yes"/>
+    <variables>
+        <variable name="DesktopShortcutCheckboxEnabled" value="true"/>
+    </variables>
+    <locale>
+        <langpack iso3="eng"/>
+    </locale>
+    <resources>
+        <res src="Win_shortcut_spec.xml" id="Win_shortcutSpec.xml"/>
+        <res src="Unix_shortcut_spec.xml" id="Unix_shortcutSpec.xml"/>
+        <res id="LicencePanel.licence" src="Licence.txt"/>
+        <res id="InfoPanel.info" src="Readme.txt"/>
+    </resources>
+    <panels>
+        <panel classname="HelloPanel"/>
+        <panel classname="com.ilusr.install.DependencyPanel" id="custompanel" />
+        <panel classname="LicencePanel"/>
+        <panel classname="TargetPanel"/>
+        <panel classname="PacksPanel"/>
+        <panel classname="InstallPanel"/>
+        <panel classname="ShortcutPanel"/>
+        <panel classname="FinishPanel"/>
+    </panels>
+    <packs>
+        <pack name="Player" required="yes">
+            <description>The base files</description>
+            <file src="Readme.txt" targetdir="${INSTALL_PATH}"/>
+            <file src="Licence.txt" targetdir="${INSTALL_PATH}"/>
+            <file src="textadventurecreator.jar" targetdir="${INSTALL_PATH}"/>
+            <file src="textadventurecreator.bat" targetdir="${INSTALL_PATH}"/>
+            <file src="textadventurecreator.sh" targetdir="${INSTALL_PATH}"/>
+            <file src="TAVCreator.ico" targetdir="${INSTALL_PATH}"/>
+        </pack>
+    </packs>
+</izpack:installation>

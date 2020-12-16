@@ -13,6 +13,8 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	<izpack.version>5.0.9</izpack.version>
+	<izpack.staging>${project.build.directory}/staging</izpack.staging>
   </properties>
 
   <dependencies>
@@ -63,6 +65,11 @@
 		<artifactId>javafx-swing</artifactId>
 		<version>11.0.2</version>
 	</dependency>
+	<dependency>
+		<groupId>com.ilusr.install</groupId>
+		<artifactId>install</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</dependency>
   </dependencies>
   <distributionManagement>
   	<repository>
@@ -111,6 +118,95 @@
       		<argLine>-Dfile.encoding=UTF-8</argLine>
       	</configuration>
       </plugin>
+	  <plugin>
+	    <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>create-staging-area</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <tasks>
+                <copy todir="${izpack.staging}">
+                  <fileset dir="${basedir}/install"/>
+                </copy>
+              </tasks>
+            </configuration>
+          </execution>
+        </executions>
+	  </plugin>
+	  <plugin>
+	    <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy-application</id>
+            <phase>package</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <tasks>
+				<copy file="${project.build.directory}/textadventurecreator-${project.version}.jar" toFile="${izpack.staging}/textadventurecreator.jar"/>
+              </tasks>
+            </configuration>
+          </execution>
+        </executions>
+	  </plugin>
+	  <plugin>
+	  	<artifactId>maven-dependency-plugin</artifactId>
+		<configuration>
+		  <excludeTransitive>false</excludeTransitive>
+		  <stripVersion>true</stripVersion>
+		  <overWriteReleases>true</overWriteReleases>
+		  <overWriteIfNewer>true</overWriteIfNewer>
+		</configuration>
+		<executions>
+		  <execution>
+		    <id>copy-product-dependencies</id>
+			<phase>prepare-package</phase>
+			<goals>
+			  <goal>copy-dependencies</goal>
+			</goals>
+			<configuration>
+			  <outputDirectory>${izpack.staging}/lib</outputDirectory>
+			  <excludeScope>system</excludeScope>
+			  <excludeGroupIds>org.codehaus.izpack</excludeGroupIds>
+			</configuration>
+		  </execution>
+		</executions>
+	  </plugin>
+	  <plugin>
+	  	<groupId>org.codehaus.izpack</groupId>
+		<artifactId>izpack-maven-plugin</artifactId>
+		<version>${izpack.version}</version>
+		<executions>
+		  <execution>
+		    <phase>package</phase>
+			<goals>
+			  <goal>izpack</goal>
+			</goals>
+			<configuration>
+			  <baseDir>${izpack.staging}</baseDir>
+			  <installFile>${basedir}/install/install.xml</installFile>
+			  <output>${izpack.staging}/install.jar</output>
+			</configuration>
+		  </execution>
+		</executions>
+		<dependencies>
+		  <dependency>
+		    <groupId>org.codehaus.izpack</groupId>
+			<artifactId>izpack-panel</artifactId>
+			<version>${izpack.version}</version>
+		  </dependency>
+		  <dependency>
+			<groupId>com.ilusr.install</groupId>
+			<artifactId>install</artifactId>
+		    <version>1.0-SNAPSHOT</version>
+		  </dependency>
+		</dependencies>
+	  </plugin>
     </plugins>
     <extensions>
     	<extension>
