@@ -12,6 +12,7 @@
           startMenu="yes"
           startup="no"
           target="$INSTALL_PATH\textadventurecreator.sh"
+          type="Application"
           workingDirectory="$INSTALL_PATH"
           commandLine=""
           description="IDE for Text Adventures"

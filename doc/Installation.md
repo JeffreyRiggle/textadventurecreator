@@ -7,3 +7,8 @@ On this install page download the tavwin.zip file. Once that is downloaded extra
 ![Windows Install](./image/wininstall.gif)
 
 ## Ubuntu
+On this install page download the tavub.zip file. Once that is downloaded extract the content anywhere. Right now this is less than an ideal process but you can run the prereq.sh file. Once that is done you can execute the program manually using the following command
+
+```sh
+java -jar textadventurecreator.jar
+```
