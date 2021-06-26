@@ -18,7 +18,6 @@
       <groupId>org.codehaus.izpack</groupId>
       <artifactId>izpack-compiler</artifactId>
       <version>${izpack.version}</version>
-      <scope>provided</scope>
     </dependency>
   </dependencies>
  <build>
