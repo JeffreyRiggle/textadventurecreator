@@ -10,7 +10,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <izpack.version>5.0.9</izpack.version>
+    <izpack.version>5.0.10</izpack.version>
   </properties>
 
   <dependencies>
