@@ -13,7 +13,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	<izpack.version>5.1.3</izpack.version>
+	<izpack.version>5.1.2</izpack.version>
 	<izpack.staging>${project.build.directory}/staging</izpack.staging>
   </properties>
 
@@ -82,7 +82,7 @@
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.0</version>
+        <version>3.8.1</version>
         <configuration>
           <release>11</release>
         </configuration>
@@ -208,12 +208,5 @@
 		</dependencies>
 	  </plugin>
     </plugins>
-    <extensions>
-    	<extension>
-    		<groupId>org.springframework.build</groupId>
-    		<artifactId>aws-maven</artifactId>
-    		<version>5.0.0.RELEASE</version>
-    	</extension>
-    </extensions>
   </build>
 </project>
