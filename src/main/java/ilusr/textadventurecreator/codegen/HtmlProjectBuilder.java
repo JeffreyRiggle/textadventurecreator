@@ -1,7 +1,6 @@
 package ilusr.textadventurecreator.codegen;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 
@@ -88,7 +87,6 @@ public class HtmlProjectBuilder extends BaseProjectBuilder {
 		scriptPath.mkdirs();
 		item.progressAmount().set(.3);
 
-		// TODO loader is not working
 		WebResourceFileLoader loader = new WebResourceFileLoader();
 		try {
 			File cssTransform = new File(jestPath.getAbsolutePath() + "/cssTransform.js");
@@ -227,6 +225,20 @@ public class HtmlProjectBuilder extends BaseProjectBuilder {
 		item.progressAmount().set(1.0);
 	}
 	
+	private Process createBashProcess(String projectLocation) throws IOException {
+		File buildScript = File.createTempFile("buildScript", null);
+		Writer sw = new OutputStreamWriter(new FileOutputStream(buildScript));
+		PrintWriter pw = new PrintWriter(sw);
+		pw.println("#!/bin/bash");
+		pw.println("cd " + projectLocation);
+		pw.println("npm install");
+		pw.println("npm run build");
+		pw.close();
+
+		ProcessBuilder pb = new ProcessBuilder("bash", buildScript.toString());
+		return pb.start();
+	}
+
 	private Process getCompileProcess(String projectLocation) throws IOException {
 		Process retVal = null;
 		
@@ -237,7 +249,7 @@ public class HtmlProjectBuilder extends BaseProjectBuilder {
 			retVal = Runtime.getRuntime().exec(new String[] {"cmd", "/c", driveLetter + " && cd " + projectLocation + " && npm install && npm run build"});
 		} else if (EnvironmentUtilities.isUnix()) {
 			LogRunner.logger().info("Determined environment was linux. Building linux compile process");
-			retVal = Runtime.getRuntime().exec(new String[] {"cd " + projectLocation + " && npm install && npm run build"});
+			retVal = createBashProcess(projectLocation);
 		} else if (EnvironmentUtilities.isMac()) {
 			LogRunner.logger().info("Determined environment was mac. Building mac compile process");
 			retVal = Runtime.getRuntime().exec(new String[] {"cd " + projectLocation + " && npm install && npm run build"});
