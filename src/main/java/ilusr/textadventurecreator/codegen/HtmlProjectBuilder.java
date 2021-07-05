@@ -233,6 +233,7 @@ public class HtmlProjectBuilder extends BaseProjectBuilder {
 		pw.println("cd " + projectLocation);
 		pw.println("npm install");
 		pw.println("npm run build");
+		pw.println("rm " + buildScript.toString());
 		pw.close();
 
 		ProcessBuilder pb = new ProcessBuilder("bash", buildScript.toString());
