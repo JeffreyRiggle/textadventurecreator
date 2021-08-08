@@ -45,7 +45,7 @@ public class ElectronProjectFileHelper extends WebProjectFileHelper {
 			"    \"resolve\": \"1.6.0\",\r\n" +
 			"    \"style-loader\": \"0.19.0\",\r\n" +
 			"    \"sw-precache-webpack-plugin\": \"0.11.4\",\r\n" +
-			"    \"@jeffriggle/text-adventure-lib\": \"1.0.1\",\r\n" +
+			"    \"@jeffriggle/text-adventure-lib\": \"1.0.4\",\r\n" +
 			"    \"url-loader\": \"0.6.2\",\r\n" +
 			"    \"webpack\": \"3.8.1\",\r\n" +
 			"    \"webpack-dev-server\": \"2.9.4\",\r\n" +
