@@ -85,37 +85,37 @@ public class ElectronProjectBuilder extends BaseProjectBuilder {
 		WebResourceFileLoader loader = new WebResourceFileLoader();
 		try {
 			File cssTransform = new File(jestPath.getAbsolutePath() + "/cssTransform.js");
-			writeFileContent(cssTransform, FileUtilities.getFileContentWithReturns(loader.getResource("cssTransform.js")).getBytes(Charset.forName("UTF-8")));
+			writeFileContent(cssTransform, loader.getResource("cssTransform.js"));
 			
 			File fileTransform = new File(jestPath.getAbsolutePath() + "/fileTransform.js");
-			writeFileContent(fileTransform, FileUtilities.getFileContentWithReturns(loader.getResource("fileTransform.js")).getBytes(Charset.forName("UTF-8")));	
+			writeFileContent(fileTransform, loader.getResource("fileTransform.js"));	
 			
 			File env = new File(configPath.getAbsolutePath() + "/env.js");
-			writeFileContent(env, FileUtilities.getFileContentWithReturns(loader.getResource("env.js")).getBytes(Charset.forName("UTF-8")));
+			writeFileContent(env, loader.getResource("env.js"));
 			
 			File paths = new File(configPath.getAbsolutePath() + "/paths.js");
-			writeFileContent(paths, FileUtilities.getFileContentWithReturns(loader.getResource("paths.js")).getBytes(Charset.forName("UTF-8")));
+			writeFileContent(paths, loader.getResource("paths.js"));
 			
 			File poly = new File(configPath.getAbsolutePath() + "/polyfills.js");
-			writeFileContent(poly, FileUtilities.getFileContentWithReturns(loader.getResource("polyfills.js")).getBytes(Charset.forName("UTF-8")));
+			writeFileContent(poly, loader.getResource("polyfills.js"));
 			
 			File wdev = new File(configPath.getAbsolutePath() + "/webpack.config.dev.js");
-			writeFileContent(wdev, FileUtilities.getFileContentWithReturns(loader.getResource("webpack.config.dev.js")).getBytes(Charset.forName("UTF-8")));
+			writeFileContent(wdev, loader.getResource("webpack.config.dev.js"));
 			
 			File wprod = new File(configPath.getAbsolutePath() + "/webpack.config.prod.js");
-			writeFileContent(wprod, FileUtilities.getFileContentWithReturns(loader.getResource("webpack.config.prod.js")).getBytes(Charset.forName("UTF-8")));
+			writeFileContent(wprod, loader.getResource("webpack.config.prod.js"));
 			
 			File wServer = new File(configPath.getAbsolutePath() + "/webpackDevServer.config.js");
-			writeFileContent(wServer, FileUtilities.getFileContentWithReturns(loader.getResource("webpackDevServer.config.js")).getBytes(Charset.forName("UTF-8")));
+			writeFileContent(wServer, loader.getResource("webpackDevServer.config.js"));
 			
 			File build = new File(scriptPath.getAbsolutePath() + "/build.js");
-			writeFileContent(build, FileUtilities.getFileContentWithReturns(loader.getResource("build.js")).getBytes(Charset.forName("UTF-8")));
+			writeFileContent(build, loader.getResource("build.js"));
 			
 			File start = new File(scriptPath.getAbsolutePath() + "/start.js");
-			writeFileContent(start, FileUtilities.getFileContentWithReturns(loader.getResource("start.js")).getBytes(Charset.forName("UTF-8")));
+			writeFileContent(start, loader.getResource("start.js"));
 			
 			File test = new File(scriptPath.getAbsolutePath() + "/test.js");
-			writeFileContent(test, FileUtilities.getFileContentWithReturns(loader.getResource("test.js")).getBytes(Charset.forName("UTF-8")));
+			writeFileContent(test, loader.getResource("test.js"));
 			item.progressAmount().set(.4);
 		} catch (Exception e) {
 			e.printStackTrace();

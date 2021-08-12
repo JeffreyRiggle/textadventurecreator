@@ -1,7 +1,6 @@
 package ilusr.textadventurecreator.codegen;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 
@@ -43,10 +42,16 @@ public class HtmlProjectBuilder extends BaseProjectBuilder {
 			return;
 		}
 		
-		compile(projectLocation, item);
-		shipCompiled(projectLocation, item, sanitizedGameName);
-		cleanTemp(projectLocation.substring(0, projectLocation.lastIndexOf('/')), item);
-		item.finished().set(true);
+		try {
+			compile(projectLocation, item);
+			shipCompiled(projectLocation, item, sanitizedGameName);
+			cleanTemp(projectLocation.substring(0, projectLocation.lastIndexOf('/')), item);	
+		} catch (Exception e) {
+			e.printStackTrace();
+			item.indicator().set(StatusIndicator.Error);
+		} finally {
+			item.finished().set(true);
+		}
 	}
 	
 	private void buildProject(String projectLocation, StatusItem item) {
@@ -85,37 +90,37 @@ public class HtmlProjectBuilder extends BaseProjectBuilder {
 		WebResourceFileLoader loader = new WebResourceFileLoader();
 		try {
 			File cssTransform = new File(jestPath.getAbsolutePath() + "/cssTransform.js");
-			writeFileContent(cssTransform, FileUtilities.getFileContentWithReturns(loader.getResource("cssTransform.js")).getBytes(Charset.forName("UTF-8")));
+			writeFileContent(cssTransform, loader.getResource("cssTransform.js"));
 			
 			File fileTransform = new File(jestPath.getAbsolutePath() + "/fileTransform.js");
-			writeFileContent(fileTransform, FileUtilities.getFileContentWithReturns(loader.getResource("fileTransform.js")).getBytes(Charset.forName("UTF-8")));	
+			writeFileContent(fileTransform, loader.getResource("fileTransform.js"));	
 			
 			File env = new File(configPath.getAbsolutePath() + "/env.js");
-			writeFileContent(env, FileUtilities.getFileContentWithReturns(loader.getResource("env.js")).getBytes(Charset.forName("UTF-8")));
+			writeFileContent(env, loader.getResource("env.js"));
 			
 			File paths = new File(configPath.getAbsolutePath() + "/paths.js");
-			writeFileContent(paths, FileUtilities.getFileContentWithReturns(loader.getResource("paths.js")).getBytes(Charset.forName("UTF-8")));
+			writeFileContent(paths, loader.getResource("paths.js"));
 			
 			File poly = new File(configPath.getAbsolutePath() + "/polyfills.js");
-			writeFileContent(poly, FileUtilities.getFileContentWithReturns(loader.getResource("polyfills.js")).getBytes(Charset.forName("UTF-8")));
+			writeFileContent(poly, loader.getResource("polyfills.js"));
 			
 			File wdev = new File(configPath.getAbsolutePath() + "/webpack.config.dev.js");
-			writeFileContent(wdev, FileUtilities.getFileContentWithReturns(loader.getResource("webpack.config.dev.js")).getBytes(Charset.forName("UTF-8")));
+			writeFileContent(wdev, loader.getResource("webpack.config.dev.js"));
 			
 			File wprod = new File(configPath.getAbsolutePath() + "/webpack.config.prod.js");
-			writeFileContent(wprod, FileUtilities.getFileContentWithReturns(loader.getResource("webpack.config.prod.js")).getBytes(Charset.forName("UTF-8")));
+			writeFileContent(wprod, loader.getResource("webpack.config.prod.js"));
 			
 			File wServer = new File(configPath.getAbsolutePath() + "/webpackDevServer.config.js");
-			writeFileContent(wServer, FileUtilities.getFileContentWithReturns(loader.getResource("webpackDevServer.config.js")).getBytes(Charset.forName("UTF-8")));
+			writeFileContent(wServer, loader.getResource("webpackDevServer.config.js"));
 			
 			File build = new File(scriptPath.getAbsolutePath() + "/build.js");
-			writeFileContent(build, FileUtilities.getFileContentWithReturns(loader.getResource("build.js")).getBytes(Charset.forName("UTF-8")));
+			writeFileContent(build, loader.getResource("build.js"));
 			
 			File start = new File(scriptPath.getAbsolutePath() + "/start.js");
-			writeFileContent(start, FileUtilities.getFileContentWithReturns(loader.getResource("start.js")).getBytes(Charset.forName("UTF-8")));
+			writeFileContent(start, loader.getResource("start.js"));
 			
 			File test = new File(scriptPath.getAbsolutePath() + "/test.js");
-			writeFileContent(test, FileUtilities.getFileContentWithReturns(loader.getResource("test.js")).getBytes(Charset.forName("UTF-8")));
+			writeFileContent(test, loader.getResource("test.js"));
 			item.progressAmount().set(.4);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -200,30 +205,41 @@ public class HtmlProjectBuilder extends BaseProjectBuilder {
 		writeFileContent(assetLoader, sb.toString().getBytes(Charset.forName("UTF-8")));
 	}
 	
-	private void compile(String projectLocation, StatusItem item) {
-		try {
-			item.displayText().set(languageService.getValue(DisplayStrings.COMPLILING));
-			item.indicator().set(StatusIndicator.Normal);
-			item.progressAmount().set(.1);
-			
-			Process proc = getCompileProcess(projectLocation);
-			
-			item.progressAmount().set(.5);
-			
-			if (proc == null) {
-				LogRunner.logger().info("Unable to build compile process!");
-				return;
-			}
-			
-			ProcessHelpers.handleProcessStreams(proc);
-			proc.waitFor();
-			
-			item.progressAmount().set(1.0);
-		} catch (Exception e) {
-			item.indicator().set(StatusIndicator.Error);
+	private void compile(String projectLocation, StatusItem item) throws Exception {
+		item.displayText().set(languageService.getValue(DisplayStrings.COMPLILING));
+		item.indicator().set(StatusIndicator.Normal);
+		item.progressAmount().set(.1);
+		
+		Process proc = getCompileProcess(projectLocation);
+		
+		item.progressAmount().set(.5);
+		
+		if (proc == null) {
+			LogRunner.logger().info("Unable to build compile process!");
+			return;
 		}
+		
+		ProcessHelpers.handleProcessStreams(proc);
+		proc.waitFor();
+		
+		item.progressAmount().set(1.0);
 	}
 	
+	private Process createBashProcess(String projectLocation) throws IOException {
+		File buildScript = File.createTempFile("buildScript", null);
+		Writer sw = new OutputStreamWriter(new FileOutputStream(buildScript));
+		PrintWriter pw = new PrintWriter(sw);
+		pw.println("#!/bin/bash");
+		pw.println("cd " + projectLocation);
+		pw.println("npm install");
+		pw.println("npm run build");
+		pw.println("rm " + buildScript.toString());
+		pw.close();
+
+		ProcessBuilder pb = new ProcessBuilder("bash", buildScript.toString());
+		return pb.start();
+	}
+
 	private Process getCompileProcess(String projectLocation) throws IOException {
 		Process retVal = null;
 		
@@ -234,35 +250,30 @@ public class HtmlProjectBuilder extends BaseProjectBuilder {
 			retVal = Runtime.getRuntime().exec(new String[] {"cmd", "/c", driveLetter + " && cd " + projectLocation + " && npm install && npm run build"});
 		} else if (EnvironmentUtilities.isUnix()) {
 			LogRunner.logger().info("Determined environment was linux. Building linux compile process");
-			retVal = Runtime.getRuntime().exec(new String[] {"cd " + projectLocation + " && npm install && npm run dist"});
+			retVal = createBashProcess(projectLocation);
 		} else if (EnvironmentUtilities.isMac()) {
 			LogRunner.logger().info("Determined environment was mac. Building mac compile process");
-			retVal = Runtime.getRuntime().exec(new String[] {"cd " + projectLocation + " && npm install && npm run dist"});
+			retVal = Runtime.getRuntime().exec(new String[] {"cd " + projectLocation + " && npm install && npm run build"});
 		}
 		
 		return retVal;
 	}
 	
-	private void shipCompiled(String location, StatusItem item, String gameName) {
+	private void shipCompiled(String location, StatusItem item, String gameName) throws IOException {
 		item.displayText().set(languageService.getValue(DisplayStrings.MOVING_PROJECT));
 		item.indicator().set(StatusIndicator.Normal);
 		File app = new File(location + "/build/");
-		try {
-			File target = new File(persistence.getProjectLocation());
-			
-			if (!target.exists()) {
-				target.mkdirs();
-			}
-			
-			LogRunner.logger().info(String.format("Shipping compiled project to %s", target.getAbsolutePath().toString()));
-			copyRelease(target, app, item);
-			
-			item.progressAmount().set(1.0);
-			item.indicator().set(StatusIndicator.Good);
-		} catch (Exception e) {
-			e.printStackTrace();
-			item.indicator().set(StatusIndicator.Error);
+		File target = new File(persistence.getProjectLocation());
+		
+		if (!target.exists()) {
+			target.mkdirs();
 		}
+		
+		LogRunner.logger().info(String.format("Shipping compiled project to %s with app %s", target.getAbsolutePath().toString(), app.getAbsolutePath().toString()));
+		copyRelease(target, app, item);
+		
+		item.progressAmount().set(1.0);
+		item.indicator().set(StatusIndicator.Good);
 	}
 	
 	private void copyRelease(File target, File buildDir, StatusItem item) throws IOException {

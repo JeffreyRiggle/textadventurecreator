@@ -128,8 +128,8 @@ public abstract class WebProjectFileHelper {
 	public final static String GAMEMANAGERJS = "import React from 'react';\r\n" +
 			"import ReactDOM from 'react-dom';\r\n" +
 			"\r\n" +
-			"import {TextAdventurePersistenceManager} from '../node_modules/text-adventure-lib/dist/main';\r\n" +
-			"import '../node_modules/text-adventure-lib/dist/styles.css';\r\n" +
+			"import {TextAdventurePersistenceManager} from '@jeffriggle/text-adventure-lib/dist/main';\r\n" +
+			"import '@jeffriggle/text-adventure-lib/dist/main.css';\r\n" +
 			"import gameFile from './%1$s';\r\n" +
 			"import './images/assetLoader';\r\n" +
 			"import { MainPage } from './MainPage';\r\n" +

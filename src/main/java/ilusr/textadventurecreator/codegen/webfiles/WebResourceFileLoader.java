@@ -1,10 +1,9 @@
 package ilusr.textadventurecreator.codegen.webfiles;
 
-import java.io.File;
-import java.net.URISyntaxException;
+import java.io.IOException;
 
 public class WebResourceFileLoader {
-	public File getResource(String file) throws URISyntaxException {
-		return new File(getClass().getResource(file).toURI().getSchemeSpecificPart());
+	public byte[] getResource(String file) throws IOException {
+		return getClass().getResourceAsStream(file).readAllBytes();
 	}
 }
