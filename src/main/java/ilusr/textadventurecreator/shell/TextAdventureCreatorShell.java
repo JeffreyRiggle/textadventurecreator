@@ -49,6 +49,10 @@ public class TextAdventureCreatorShell extends MainShell {
 	private String findInitialFile() {
 		String retVal = null;
 		
+		if (super.getParameters() == null) {
+			return retVal;
+		}
+
 		for (String parameter : super.getParameters().getUnnamed()) {
 			if (parameter.matches("(?i).*\\.txaml")) {
 				LogRunner.logger().info(String.format("Found file %s", parameter));
