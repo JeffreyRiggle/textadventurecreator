@@ -42,26 +42,24 @@ public class E2ETest extends ApplicationTest {
         });
     }
 
-    private NodeQuery waitFor(String query) throws Exception {
-        final NodeQuery[] result = new NodeQuery[1];
-        WaitForAsyncUtils.waitFor(120, TimeUnit.SECONDS, () -> {
-            try {
-                // TODO find a better way to do this.
-                NodeQuery res = from(targetWindow().getScene().getRoot()).lookup(query);
-                res.queryLabeled();
-                result[0] = res;
-                return true;
-            } catch (Exception e) {
-                return false;
-            }
-        });
-
-        return result[0];
-    }
-
     @Test
     public void should_show_landing_page() throws Exception {
         waitForStage("Text Adventure Creator");
-        Assertions.assertThat(waitFor("#tagLine").queryLabeled()).hasText("A visual IDE for text adventurers");
+        new LandingPage(this, targetWindow().getScene().getRoot()).assertTagLine();
     }
+
+    // Ideal test cases.
+    // 1. generate java game.
+    // 2. generate web game.
+    // 3. generate electron game.
+    // 4. create library.
+    // 5. import library.
+    // 6. debug a game.
+    // 7. load a mod
+    // 8. create a custom view
+    // 9. apply a theme
+    // 10. apply a language pack.
+    // 11. load an existing game file.
+
+    // TODO can a different test stage be created?
 }
