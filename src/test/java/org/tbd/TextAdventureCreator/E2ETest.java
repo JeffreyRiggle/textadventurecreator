@@ -48,6 +48,34 @@ public class E2ETest extends ApplicationTest {
         new LandingPage(this, targetWindow().getScene().getRoot()).assertTagLine();
     }
 
+    @Test
+    public void should_create_java_games() throws Exception {
+        waitForStage("Text Adventure Creator");
+        new LandingPage(this, targetWindow().getScene().getRoot())
+            .createProject()
+            .setGameName("Sample Java Game")
+            .setGameDescription("This is a test game!")
+            .setGameIconPath("/fix/me/foo.png")
+            .setGameCreator("Automation Tester")
+            .goForward()
+            .setStandAlone()
+            .goForward()
+            .finish();
+        // TODO
+        // 1. set project name
+        // 2. set description
+        // 3. set icon
+        // 4. set creator
+        // 5. press forward
+        // 6. press stand-alone
+        // 7. press forward
+        // 8. press finish?
+        // 9. create player
+        // 10. create game state.
+        // 11. create finish action.
+        // 12. generate game.
+        // 13. execute game.
+    }
     // Ideal test cases.
     // 1. generate java game.
     // 2. generate web game.
