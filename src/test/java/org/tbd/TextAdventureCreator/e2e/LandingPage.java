@@ -1,6 +1,8 @@
+import java.util.concurrent.TimeUnit;
 import java.util.List;
 
 import org.testfx.api.FxRobot;
+import org.testfx.util.WaitForAsyncUtils;
 import org.testfx.assertions.api.Assertions;
 
 import javafx.scene.Node;
@@ -15,17 +17,29 @@ public class LandingPage extends BasePage {
         Assertions.assertThat(waitForLabeled("#tagLine")).hasText("A visual IDE for text adventurers");
     }
 
+    private Node waitForWindow(List<Window> currentWindows) throws Exception {
+        final Node[] result = new Node[1];
+        WaitForAsyncUtils.waitFor(30, TimeUnit.SECONDS, () -> {
+            try {
+                for (Window win : robot.listWindows()) {
+                    if (!currentWindows.contains(win)) {
+                        result[0] = win.getScene().getRoot();
+                    }
+                }
+                return result[0] != null;
+            } catch (Exception e) {
+                return false;
+            }
+        });
+
+        return result[0];
+    }
+
     public CreateProjectWizard createProject() throws Exception {
         List<Window> currentWindows = robot.listWindows();
         robot.clickOn(waitForLabeled("#createProject"));
         // Find a better abstraction for this.
-        Node popup = null;
-        for (Window win : robot.listWindows()) {
-            if (!currentWindows.contains(win)) {
-                popup = win.getScene().getRoot();
-                break;
-            }
-        }
+        Node popup = waitForWindow(currentWindows);
         return new CreateProjectWizard(robot, popup);
     }
 }
