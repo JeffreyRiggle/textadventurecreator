@@ -56,10 +56,10 @@ public class E2ETest extends ApplicationTest {
             .setGameName("Sample Java Game")
             .setGameDescription("This is a test game!")
             .setGameIconPath("/fix/me/foo.png")
-            .setGameCreator("Automation Tester")
-            .goForward()
-            .setStandAlone()
-            .goForward();
+            .setGameCreator("Automation Tester");
+            //.goForward()
+            //.setStandAlone()
+            //.goForward();
             // .finish();
         // TODO
         // 1. set project name
