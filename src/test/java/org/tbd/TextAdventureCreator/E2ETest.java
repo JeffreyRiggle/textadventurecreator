@@ -59,8 +59,8 @@ public class E2ETest extends ApplicationTest {
             .setGameCreator("Automation Tester")
             .goForward()
             .setStandAlone()
-            .goForward()
-            .finish();
+            .goForward();
+            // .finish();
         // TODO
         // 1. set project name
         // 2. set description
