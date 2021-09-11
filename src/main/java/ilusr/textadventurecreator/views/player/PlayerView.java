@@ -209,6 +209,7 @@ public class PlayerView extends AnchorPane implements Initializable, IStyleWatch
 	private Node attributeAddTemplate() {
 		HBox root = new HBox(5);
 		Button add = new Button();
+		add.setId("listCellAdd");
 		add.getStylesheets().add(getClass().getResource("AddButton.css").toExternalForm());
 		add.setOnAction((e) -> { model.addAttribute(); });
 		
@@ -225,6 +226,7 @@ public class PlayerView extends AnchorPane implements Initializable, IStyleWatch
 		HBox root = new HBox(5);
 		Button add = new Button();
 		add.getStylesheets().add(getClass().getResource("AddButton.css").toExternalForm());
+		add.setId("listCellAdd");
 		add.setOnAction((e) -> { model.addCharacteristic(); });
 		
 		Button addL = new Button();
@@ -240,6 +242,7 @@ public class PlayerView extends AnchorPane implements Initializable, IStyleWatch
 		HBox root = new HBox(5);
 		Button add = new Button();
 		add.getStylesheets().add(getClass().getResource("AddButton.css").toExternalForm());
+		add.setId("listCellAdd");
 		add.setOnAction((e) -> { model.addBodyPart(); });
 		
 		Button addL = new Button();

@@ -61,8 +61,10 @@ public class RemoveListCell<T> extends ListCell<T> {
 		
 		remove = new Button();
 		remove.getStylesheets().add(getClass().getResource("RemoveButton.css").toExternalForm());
+		remove.setId("listCellRemove");
 		add = new Button();
 		add.getStylesheets().add(getClass().getResource("AddButton.css").toExternalForm());
+		add.setId("listCellAdd");
 	}
 	
 	/**

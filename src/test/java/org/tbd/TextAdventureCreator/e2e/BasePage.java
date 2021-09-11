@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.testfx.api.FxRobot;
@@ -7,6 +9,7 @@ import org.testfx.service.query.NodeQuery;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Labeled;
+import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -21,73 +24,52 @@ public abstract class BasePage {
     }
 
     protected Labeled waitForLabeled(String query) throws Exception {
-        final Labeled[] result = new Labeled[1];
-        WaitForAsyncUtils.waitFor(30, TimeUnit.SECONDS, () -> {
-            try {
-                NodeQuery res = robot.from(root).lookup(query);
-                result[0] = res.queryLabeled();
-                return true;
-            } catch (Exception e) {
-                return false;
-            }
-        });
+        return waitForType(query, root, Labeled.class);
+    }
 
-        return result[0];
+    protected ListView waitForListView(String query) throws Exception {
+        return waitForListView(query, root);
+    }
+
+    protected ListView waitForListView(String query, Node context) throws Exception {
+        return waitForType(query, context, ListView.class);
     }
 
     protected TextField waitForTextField(String query) throws Exception {
-        final TextField[] result = new TextField[1];
-        WaitForAsyncUtils.waitFor(30, TimeUnit.SECONDS, () -> {
-            try {
-                result[0] = robot.from(root).lookup(query).queryAs(TextField.class);
-                return true;
-            } catch (Exception e) {
-                return false;
-            }
-        });
+        return waitForTextField(query, root);
+    }
 
-        return result[0];
+    protected TextField waitForTextField(String query, Node context) throws Exception {
+        return waitForType(query, context, TextField.class);
     }
 
     protected TextArea waitForTextArea(String query) throws Exception {
-        final TextArea[] result = new TextArea[1];
-        WaitForAsyncUtils.waitFor(30, TimeUnit.SECONDS, () -> {
-            try {
-                result[0] = robot.from(root).lookup(query).queryAs(TextArea.class);
-                return true;
-            } catch (Exception e) {
-                return false;
-            }
-        });
-
-        return result[0];
+        return waitForType(query, root, TextArea.class);
     }
 
     protected Button waitForButton(String query) throws Exception {
-        final Button[] result = new Button[1];
-        WaitForAsyncUtils.waitFor(30, TimeUnit.SECONDS, () -> {
-            try {
-                result[0] = robot.from(root).lookup(query).queryButton();
-                return true;
-            } catch (Exception e) {
-                return false;
-            }
-        });
+        return waitForButton(query, root);
+    }
 
-        return result[0];
+    protected Button waitForButton(String query, Node context) throws Exception {
+        return waitForType(query, context, Button.class);
     }
 
     protected RadioButton waitForRadioButton(String query) throws Exception {
-        final RadioButton[] result = new RadioButton[1];
+        return waitForType(query, root, RadioButton.class);
+    }
+
+    private <T extends Node> T waitForType(String query, Node context, Class<T> cls) throws Exception {
+        final List<T> result = new ArrayList<T>(1);
         WaitForAsyncUtils.waitFor(30, TimeUnit.SECONDS, () -> {
             try {
-                result[0] = robot.from(root).lookup(query).queryAs(RadioButton.class);
+                result.add(robot.from(context).lookup(query).queryAs(cls));
                 return true;
             } catch (Exception e) {
                 return false;
             }
         });
 
-        return result[0];
+        return result.get(0);
     }
 }

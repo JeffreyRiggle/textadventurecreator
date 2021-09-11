@@ -63,9 +63,13 @@ public class E2ETest extends ApplicationTest {
             .goForward()
             .finish();
 
-        new GameState(this, root)
+        new GameStateView(this, root)
             .setTextLog("First game state");
-        new Explorer(this, root).createPlayer();
+        new Explorer(this, root).createPlayer()
+            .setPlayerName("Player1")
+            .addAttribute("DisplayName", "Foobar", "Players display name")
+            .addCharacteristic("HairColor", "Blue", "Players hair color")
+            .addBodyPart("Head", "Players head", new String[] { "HairColor" });
         // TODO
         // 1. set project name
         // 2. set description

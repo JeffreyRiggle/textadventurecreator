@@ -13,9 +13,9 @@ public class Explorer extends BasePage {
         robot.clickOn(robot.from(treeCell).lookup(".arrow").queryAs(Node.class));
     }
 
-    public Explorer createPlayer() throws Exception {
+    public PlayerView createPlayer() throws Exception {
         togglePlayers();
-        waitForButton("#addPlayer");
-        return this;
+        robot.clickOn(waitForButton("#addPlayer"));
+        return new PlayerView(robot, root);
     }
 }
