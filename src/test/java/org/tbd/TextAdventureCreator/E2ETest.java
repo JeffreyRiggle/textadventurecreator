@@ -51,7 +51,8 @@ public class E2ETest extends ApplicationTest {
     @Test
     public void should_create_java_games() throws Exception {
         waitForStage("Text Adventure Creator");
-        new LandingPage(this, targetWindow().getScene().getRoot())
+        var root = targetWindow().getScene().getRoot();
+        new LandingPage(this, root)
             .createProject()
             .setGameName("Sample Java Game")
             .setGameDescription("This is a test game!")
@@ -59,8 +60,12 @@ public class E2ETest extends ApplicationTest {
             .setGameCreator("Automation Tester")
             .goForward()
             .setStandAlone()
-            .goForward();
-            //.finish();
+            .goForward()
+            .finish();
+
+        new GameState(this, root)
+            .setTextLog("First game state");
+        new Explorer(this, root).createPlayer();
         // TODO
         // 1. set project name
         // 2. set description
