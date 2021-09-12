@@ -13,6 +13,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.Window;
 
 public abstract class BasePage {
     protected FxRobot robot;
@@ -71,5 +72,23 @@ public abstract class BasePage {
         });
 
         return result.get(0);
+    }
+
+    protected Node waitForWindow(List<Window> currentWindows) throws Exception {
+        final Node[] result = new Node[1];
+        WaitForAsyncUtils.waitFor(30, TimeUnit.SECONDS, () -> {
+            try {
+                for (Window win : robot.listWindows()) {
+                    if (!currentWindows.contains(win)) {
+                        result[0] = win.getScene().getRoot();
+                    }
+                }
+                return result[0] != null;
+            } catch (Exception e) {
+                return false;
+            }
+        });
+
+        return result[0];
     }
 }

@@ -1,7 +1,10 @@
+import java.util.List;
+
 import org.testfx.api.FxRobot;
 import org.testfx.assertions.api.Assertions;
 
 import javafx.scene.Node;
+import javafx.stage.Window;
 
 public class PlayerView extends BasePage {
     PlayerView(FxRobot robot, Node root) {
@@ -13,30 +16,33 @@ public class PlayerView extends BasePage {
         return this;
     }
 
-    private void addAndSetObjectValues(Node root, String name, String value, String description) throws Exception {
+    private void addAndSetObjectValues(Node root, NamedObject obj) throws Exception {
         robot.clickOn(waitForButton("#listCellAdd", root));
-        robot.clickOn(waitForTextField("#name", root)).write(name);
-        robot.clickOn(waitForTextField("#value", root)).write(value);
-        robot.clickOn(waitForTextField("#description", root)).write(description);
+        robot.clickOn(waitForTextField("#name", root)).write(obj.getName());
+        robot.clickOn(waitForTextField("#value", root)).write(obj.getValue());
+        robot.clickOn(waitForTextField("#description", root)).write(obj.getDescription());
     }
 
-    public PlayerView addAttribute(String name, String value, String description) throws Exception {
+    public PlayerView addAttribute(NamedObject obj) throws Exception {
         var listView = waitForListView("#attributes");
-        addAndSetObjectValues(listView, name, value, description);
+        addAndSetObjectValues(listView, obj);
         return this;
     }
 
-    public PlayerView addCharacteristic(String name, String value, String description) throws Exception {
+    public PlayerView addCharacteristic(NamedObject obj) throws Exception {
         var listView = waitForListView("#characteristics");
-        addAndSetObjectValues(listView, name, value, description);
+        addAndSetObjectValues(listView, obj);
         return this;
     }
 
-    public PlayerView addBodyPart(String name, String description, String[] characteristics) throws Exception {
+    public PlayerView addBodyPart(String name, String description, NamedObject[] characteristics) throws Exception {
         var listView = waitForListView("#bodyParts");
+        List<Window> currentWindows = robot.listWindows();
         robot.clickOn(waitForButton("#listCellAdd", listView));
-        // TODO open window and set stuff
-        // robot.clickOn(waitForTextField("#name", listView)).write(name);
+        Node popup = waitForWindow(currentWindows);
+        robot.clickOn(waitForTextField("#name", popup)).write(name);
+        robot.clickOn(waitForTextField("#description", popup)).write(description);
+        robot.clickOn(waitForButton("Ok", popup));
         return this;
     }
 }
