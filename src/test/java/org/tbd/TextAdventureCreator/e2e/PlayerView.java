@@ -42,6 +42,35 @@ public class PlayerView extends BasePage {
         Node popup = waitForWindow(currentWindows);
         robot.clickOn(waitForTextField("#name", popup)).write(name);
         robot.clickOn(waitForTextField("#description", popup)).write(description);
+
+        listView = waitForListView("#characteristics", popup);
+        for (var c : characteristics) {
+            addAndSetObjectValues(listView, c);
+        }
+
+        robot.clickOn(waitForButton("Ok", popup));
+        return this;
+    }
+
+    public PlayerView addItem(String name, String description, NamedObject[] properties) throws Exception {
+        var listView = waitForListView("#inventory");
+        List<Window> currentWindows = robot.listWindows();
+        robot.clickOn(waitForButton("#listCellAdd", listView));
+        Node popup = waitForWindow(currentWindows);
+        currentWindows = robot.listWindows();
+        robot.clickOn(waitForTextField("#amount", popup)).write("1");
+        robot.clickOn(waitForButton("New", popup));
+        Node itemPopup = waitForWindow(currentWindows);
+
+        robot.clickOn(waitForTextField("#name", itemPopup)).write(name);
+        robot.clickOn(waitForTextField("#description", itemPopup)).write(description);
+
+        listView = waitForListView("#properties", itemPopup);
+        for (var p : properties) {
+            addAndSetObjectValues(listView, p);
+        }
+
+        robot.clickOn(waitForButton("Ok", itemPopup));
         robot.clickOn(waitForButton("Ok", popup));
         return this;
     }

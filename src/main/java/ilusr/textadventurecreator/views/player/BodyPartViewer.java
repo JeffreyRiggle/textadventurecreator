@@ -115,6 +115,7 @@ public class BodyPartViewer extends PlayerDataView implements Initializable, ISt
 	private Node addTemplate() {
 		HBox root = new HBox(5);
 		Button add = new Button();
+		add.setId("listCellAdd");
 		add.getStylesheets().add(getClass().getResource("AddButton.css").toExternalForm());
 		add.setOnAction((e) -> { model.addCharacteristic(); });
 		

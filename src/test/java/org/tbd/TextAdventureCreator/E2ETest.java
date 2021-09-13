@@ -70,7 +70,8 @@ public class E2ETest extends ApplicationTest {
             .setPlayerName("Player1")
             .addAttribute(new NamedObject("DisplayName", "Foobar", "Players display name"))
             .addCharacteristic(hairCharacteristic)
-            .addBodyPart("Head", "Players head", new NamedObject[] { hairCharacteristic });
+            .addBodyPart("Head", "Players head", new NamedObject[] { hairCharacteristic })
+            .addItem("Hat", "Headgear", new NamedObject[] { new NamedObject("AC", "AC Value", "10" ) });
         // TODO
         // 1. set project name
         // 2. set description
