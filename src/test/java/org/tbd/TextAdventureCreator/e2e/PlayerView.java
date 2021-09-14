@@ -7,12 +7,15 @@ import javafx.scene.Node;
 import javafx.stage.Window;
 
 public class PlayerView extends BasePage {
+    private String playerName;
+
     PlayerView(FxRobot robot, Node root) {
         super(robot, root);
     }
 
     public PlayerView setPlayerName(String name) throws Exception {
         robot.clickOn(waitForTextField("#id")).write(name);
+        playerName = name;
         return this;
     }
 
@@ -72,6 +75,11 @@ public class PlayerView extends BasePage {
 
         robot.clickOn(waitForButton("Ok", itemPopup));
         robot.clickOn(waitForButton("Ok", popup));
+        return this;
+    }
+
+    public PlayerView focus() throws Exception {
+        robot.clickOn(waitForLabeled("Player " + playerName));
         return this;
     }
 }

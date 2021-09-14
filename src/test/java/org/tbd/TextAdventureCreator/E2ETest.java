@@ -64,7 +64,7 @@ public class E2ETest extends ApplicationTest {
             .finish();
 
         var hairCharacteristic = new NamedObject("HairColor", "Blue", "Players hair color");
-        new GameStateView(this, root)
+        var gameState = new GameStateView(this, root)
             .setTextLog("First game state");
         new Explorer(this, root).createPlayer()
             .setPlayerName("Player1")
@@ -72,6 +72,7 @@ public class E2ETest extends ApplicationTest {
             .addCharacteristic(hairCharacteristic)
             .addBodyPart("Head", "Players head", new NamedObject[] { hairCharacteristic })
             .addItem("Hat", "Headgear", new NamedObject[] { new NamedObject("AC", "AC Value", "10" ) });
+        gameState.focus();
         // TODO
         // 1. set project name
         // 2. set description
