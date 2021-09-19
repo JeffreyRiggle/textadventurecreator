@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 import org.junit.Test;
 import org.testfx.assertions.api.Assertions;
 import org.testfx.framework.junit.ApplicationTest;
+import org.testfx.util.DebugUtils;
 import org.testfx.util.WaitForAsyncUtils;
 import org.testfx.service.query.NodeQuery;
 
@@ -30,6 +31,16 @@ public class E2ETest extends ApplicationTest {
         stage.toFront();
     }
 
+    private void runTest(Callable<Void> callable, String testName) throws Exception {
+        try {
+            callable.call();
+        }
+        catch (Exception e) {
+            DebugUtils.saveScreenshot("testFailure_" + testName + ".png").apply(new StringBuilder());
+            throw e;
+        }
+    }
+
     private void waitForStage(String title) throws Exception {
         WaitForAsyncUtils.waitFor(120, TimeUnit.SECONDS, () -> {
             try {
@@ -44,35 +55,41 @@ public class E2ETest extends ApplicationTest {
 
     @Test
     public void should_show_landing_page() throws Exception {
-        waitForStage("Text Adventure Creator");
-        new LandingPage(this, targetWindow().getScene().getRoot()).assertTagLine();
+        runTest(() -> {
+            waitForStage("Text Adventure Creator");
+            new LandingPage(this, targetWindow().getScene().getRoot()).assertTagLine();
+            return null;
+        }, "showLandingPage");
     }
 
     @Test
     public void should_create_java_games() throws Exception {
-        waitForStage("Text Adventure Creator");
-        var root = targetWindow().getScene().getRoot();
-        new LandingPage(this, root)
-            .createProject()
-            .setGameName("Sample Java Game")
-            .setGameDescription("This is a test game!")
-            .setGameIconPath("/fix/me/foo.png")
-            .setGameCreator("Automation Tester")
-            .goForward()
-            .setStandAlone()
-            .goForward()
-            .finish();
+        runTest(() -> {
+            waitForStage("Text Adventure Creator");
+            var root = targetWindow().getScene().getRoot();
+            new LandingPage(this, root)
+                .createProject()
+                .setGameName("Sample Java Game")
+                .setGameDescription("This is a test game!")
+                .setGameIconPath("/fix/me/foo.png")
+                .setGameCreator("Automation Tester")
+                .goForward()
+                .setStandAlone()
+                .goForward()
+                .finish();
 
-        var hairCharacteristic = new NamedObject("HairColor", "Blue", "Players hair color");
-        var gameState = new GameStateView(this, root)
-            .setTextLog("First game state");
-        new Explorer(this, root).createPlayer()
-            .setPlayerName("Player1")
-            .addAttribute(new NamedObject("DisplayName", "Foobar", "Players display name"))
-            .addCharacteristic(hairCharacteristic)
-            .addBodyPart("Head", "Players head", new NamedObject[] { hairCharacteristic })
-            .addItem("Hat", "Headgear", new NamedObject[] { new NamedObject("AC", "AC Value", "10" ) });
-        gameState.focus();
+            var hairCharacteristic = new NamedObject("HairColor", "Blue", "Players hair color");
+            var gameState = new GameStateView(this, root)
+                .setTextLog("First game state. Greetings ");
+            new Explorer(this, root).createPlayer()
+                .setPlayerName("Player1")
+                .addAttribute(new NamedObject("DisplayName", "Foobar", "Players display name"))
+                .addCharacteristic(hairCharacteristic)
+                .addBodyPart("Head", "Players head", new NamedObject[] { hairCharacteristic })
+                .addItem("Hat", "Headgear", new NamedObject[] { new NamedObject("AC", "AC Value", "10" ) });
+            gameState.focus().createMacro();
+            return null;
+        }, "createJavaGame");
         // TODO
         // 1. set project name
         // 2. set description

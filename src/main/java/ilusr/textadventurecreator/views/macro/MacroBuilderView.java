@@ -106,6 +106,7 @@ public class MacroBuilderView extends AnchorPane implements Initializable, IStyl
 	
 	private void createComboBoxes() {
 		players = new ComboBox<String>();
+		players.setId("playersMacro");
 		
 		players.valueProperty().addListener((v, o, n) -> {
 			buildArea.getChildren().clear();
@@ -117,6 +118,7 @@ public class MacroBuilderView extends AnchorPane implements Initializable, IStyl
 		});
 		
 		selector = new ComboBox<String>();
+		selector.setId("selectorMacro");
 		selector.getItems().addAll(model.propertyTypes());
 		
 		selector.valueProperty().addListener((v, o, n) -> {
@@ -129,6 +131,7 @@ public class MacroBuilderView extends AnchorPane implements Initializable, IStyl
 		model.selectedPropertyType().bindBidirectional(selector.valueProperty());
 		
 		attributes = new ComboBox<String>();
+		attributes.setId("attributesMacro");
 		attributes.itemsProperty().set(model.attributes().list());
 		attributes.valueProperty().addListener((v, o, n) -> {
 			addPropertyNames();
@@ -136,6 +139,7 @@ public class MacroBuilderView extends AnchorPane implements Initializable, IStyl
 		});
 		
 		characteristics = new ComboBox<String>();
+		characteristics.setId("characteristicsMacro");
 		characteristics.itemsProperty().set(model.characteristics().list());
 		characteristics.valueProperty().addListener((v, o, n) -> { 
 			addPropertyNames(); 
@@ -143,6 +147,7 @@ public class MacroBuilderView extends AnchorPane implements Initializable, IStyl
 		});
 		
 		bodyPartOptions = new ComboBox<String>();
+		bodyPartOptions.setId("bodyPartOptionsMacro");
 		bodyPartOptions.itemsProperty().set(model.bodyPartOptions().list());
 		bodyPartOptions.valueProperty().addListener((v, o, n) -> {
 			boolean hasChars = buildArea.getChildren().contains(characteristics);
@@ -158,6 +163,7 @@ public class MacroBuilderView extends AnchorPane implements Initializable, IStyl
 		});
 		
 		bodyParts = new ComboBox<String>();
+		bodyParts.setId("bodyPartMacro");
 		bodyParts.itemsProperty().set(model.bodyParts().list());
 		bodyParts.valueProperty().addListener((v, o, n) -> { 
 			if (!buildArea.getChildren().contains(bodyPartOptions)) {
@@ -168,6 +174,7 @@ public class MacroBuilderView extends AnchorPane implements Initializable, IStyl
 		});
 		
 		itemOptions = new ComboBox<String>();
+		itemOptions.setId("itemOptionsMacro");
 		itemOptions.itemsProperty().set(model.itemOptions().list());
 		itemOptions.valueProperty().addListener((v, o, n) -> {
 			boolean hasProp = buildArea.getChildren().contains(properties);
@@ -183,6 +190,7 @@ public class MacroBuilderView extends AnchorPane implements Initializable, IStyl
 		});
 		
 		items = new ComboBox<String>();
+		items.setId("itemsMacro");
 		items.itemsProperty().set(model.items().list());
 		items.valueProperty().addListener((v, o, n) -> { 
 			if (!buildArea.getChildren().contains(itemOptions)) {
@@ -193,6 +201,7 @@ public class MacroBuilderView extends AnchorPane implements Initializable, IStyl
 		});
 		
 		properties = new ComboBox<String>();
+		properties.setId("propertiesMacro");
 		properties.itemsProperty().set(model.properties().list());
 		properties.valueProperty().addListener((v, o, n) -> { 
 			addPropertyNames();
@@ -200,6 +209,7 @@ public class MacroBuilderView extends AnchorPane implements Initializable, IStyl
 		});
 		
 		propertyNames = new ComboBox<String>();
+		properties.setId("propertynamesMacro");
 		propertyNames.itemsProperty().get().addAll(model.namedPropertyTypes());
 		model.selectedNamedProperty().bindBidirectional(propertyNames.valueProperty());
 		setupStyles();

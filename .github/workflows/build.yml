@@ -33,3 +33,17 @@ jobs:
 
             - name: Install
               run: xvfb-run mvn install
+
+            - name: Capture Failure
+              if: ${{ failure() }}
+              run: |
+                mkdir screencaps
+                find ./ -type f | grep -i testFailure.*.png$ | xargs -i cp {} screencaps
+                tar -czvf screencaps.tar.gz screencaps
+
+            - name: Upload failure artifacts
+              if: ${{ failure() }}
+              uses: actions/upload-artifact@v2
+              with:
+                name: testfx-test
+                path: screencaps.tar.gz
