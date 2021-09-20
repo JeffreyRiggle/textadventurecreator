@@ -37,13 +37,15 @@ jobs:
             - name: Capture Failure
               if: ${{ failure() }}
               run: |
-                mkdir screencaps
+                mkdir failure
+                mkdir failure/screencaps
+                cp -r ~/ilusr/Logging failure/logging
                 find ./ -type f | grep -i testFailure.*.png$ | xargs -i cp {} screencaps
-                tar -czvf screencaps.tar.gz screencaps
+                tar -czvf archive.tar.gz failure
 
             - name: Upload failure artifacts
               if: ${{ failure() }}
               uses: actions/upload-artifact@v2
               with:
-                name: testfx-test
-                path: screencaps.tar.gz
+                name: archive
+                path: archive.tar.gz
