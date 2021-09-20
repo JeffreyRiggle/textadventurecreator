@@ -40,7 +40,7 @@ jobs:
                 mkdir failure
                 mkdir failure/screencaps
                 cp -r ~/ilusr/Logging failure/logging
-                find ./ -type f | grep -i testFailure.*.png$ | xargs -i cp {} screencaps
+                find ./ -type f | grep -i testFailure.*.png$ | xargs -i cp {} failure/screencaps
                 tar -czvf archive.tar.gz failure
 
             - name: Upload failure artifacts
