@@ -44,7 +44,6 @@ public class E2ETest extends ApplicationTest {
     private void waitForStage(String title) throws Exception {
         WaitForAsyncUtils.waitFor(120, TimeUnit.SECONDS, () -> {
             try {
-                Thread.sleep(5000);
                 targetWindow(title);
                 window(title);
                 return true;
@@ -88,7 +87,7 @@ public class E2ETest extends ApplicationTest {
                 .addCharacteristic(hairCharacteristic)
                 .addBodyPart("Head", "Players head", new NamedObject[] { hairCharacteristic })
                 .addItem("Hat", "Headgear", new NamedObject[] { new NamedObject("AC", "AC Value", "10" ) });
-            gameState.focus().createMacro();
+            gameState.focus().createMacro().setPlayer("Player1");
             return null;
         }, "createJavaGame");
         // TODO

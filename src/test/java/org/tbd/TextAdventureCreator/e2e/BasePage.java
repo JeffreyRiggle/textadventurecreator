@@ -8,6 +8,7 @@ import org.testfx.service.query.NodeQuery;
 
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Labeled;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
@@ -25,7 +26,11 @@ public abstract class BasePage {
     }
 
     protected Labeled waitForLabeled(String query) throws Exception {
-        return waitForType(query, root, Labeled.class);
+        return waitForLabeled(query, root);
+    }
+
+    protected Labeled waitForLabeled(String query, Node context) throws Exception {
+        return waitForType(query, context, Labeled.class);
     }
 
     protected ListView waitForListView(String query) throws Exception {
@@ -54,6 +59,10 @@ public abstract class BasePage {
 
     protected Button waitForButton(String query, Node context) throws Exception {
         return waitForType(query, context, Button.class);
+    }
+
+    protected ComboBox waitForComboBox(String query) throws Exception {
+        return waitForType(query, root, ComboBox.class);
     }
 
     protected RadioButton waitForRadioButton(String query) throws Exception {

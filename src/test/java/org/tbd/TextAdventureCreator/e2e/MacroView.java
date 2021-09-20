@@ -1,7 +1,10 @@
+import java.util.List;
+
 import org.testfx.api.FxRobot;
 import org.testfx.assertions.api.Assertions;
 
 import javafx.scene.Node;
+import javafx.stage.Window;
 
 public class MacroView extends BasePage {
 
@@ -10,8 +13,10 @@ public class MacroView extends BasePage {
     }
 
     public MacroView setPlayer(String playerName) throws Exception {
-        // robot.clickOn(waitForComboBox("#playersMacro"));
-        robot.clickOn(waitForButton(playerName));
+        List<Window> currentWindows = robot.listWindows();
+        robot.clickOn(waitForComboBox("#playersMacro"));
+        Node popup = waitForWindow(currentWindows);
+        robot.clickOn(waitForLabeled(playerName, popup));
         return this;
     }
 
