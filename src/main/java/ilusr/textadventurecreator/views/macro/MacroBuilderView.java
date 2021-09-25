@@ -209,7 +209,7 @@ public class MacroBuilderView extends AnchorPane implements Initializable, IStyl
 		});
 		
 		propertyNames = new ComboBox<String>();
-		properties.setId("propertynamesMacro");
+		propertyNames.setId("propertynamesMacro");
 		propertyNames.itemsProperty().get().addAll(model.namedPropertyTypes());
 		model.selectedNamedProperty().bindBidirectional(propertyNames.valueProperty());
 		setupStyles();

@@ -87,7 +87,9 @@ public class E2ETest extends ApplicationTest {
                 .addCharacteristic(hairCharacteristic)
                 .addBodyPart("Head", "Players head", new NamedObject[] { hairCharacteristic })
                 .addItem("Hat", "Headgear", new NamedObject[] { new NamedObject("AC", "AC Value", "10" ) });
-            gameState.focus().createMacro().setPlayer("Player1");
+            gameState.focus().createMacro()
+                .setPlayer("Player1").setSelector("Attribute")
+                .setAttribute("DisplayName").setPropertyName("Value").build().ok();
             return null;
         }, "createJavaGame");
         // TODO
