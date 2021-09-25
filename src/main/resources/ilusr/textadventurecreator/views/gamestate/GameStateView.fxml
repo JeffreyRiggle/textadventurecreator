@@ -42,7 +42,7 @@
     		</rowConstraints>
     		<padding><Insets top="5" right="5" bottom="5" left="5"/></padding>
     		<Label fx:id="idLabel" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-			<TextField fx:id="id" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+			<TextField fx:id="gameStateId" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
 			
 			<Label fx:id="textLabel" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="2"/>
 			<VBox GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.columnSpan="2">

@@ -12,30 +12,23 @@ public class MacroView extends BasePage {
         super(robot, root);
     }
 
-    private void setComboById(String id, String target) throws Exception {
-        List<Window> currentWindows = robot.listWindows();
-        robot.clickOn(waitForComboBox(id));
-        Node popup = waitForWindow(currentWindows);
-        robot.clickOn(waitForLabeled(target, popup));
-    }
-
     public MacroView setPlayer(String playerName) throws Exception {
-        setComboById("#playersMacro", playerName);
+        setComboBySelector("#playersMacro", playerName);
         return this;
     }
 
     public MacroView setSelector(String selector) throws Exception {
-        setComboById("#selectorMacro", selector);
+        setComboBySelector("#selectorMacro", selector);
         return this;
     }
 
     public MacroView setAttribute(String attribute) throws Exception {
-        setComboById("#attributesMacro", attribute);
+        setComboBySelector("#attributesMacro", attribute);
         return this;
     }
 
     public MacroView setPropertyName(String propName) throws Exception {
-        setComboById("#propertynamesMacro", propName);
+        setComboBySelector("#propertynamesMacro", propName);
         return this;
     }
 

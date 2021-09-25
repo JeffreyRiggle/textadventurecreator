@@ -100,4 +100,11 @@ public abstract class BasePage {
 
         return result[0];
     }
+
+    protected void setComboBySelector(String selector, String target) throws Exception {
+        List<Window> currentWindows = robot.listWindows();
+        robot.clickOn(waitForComboBox(selector));
+        Node popup = waitForWindow(currentWindows);
+        robot.clickOn(waitForLabeled(target, popup));
+    }
 }

@@ -217,6 +217,7 @@ public class OptionView extends AnchorPane implements Initializable, IStyleWatch
 	private Node addTemplate() {
 		HBox root = new HBox(5);
 		Button add = new Button();
+		add.setId("listCellAdd");
 		add.getStylesheets().add(getClass().getResource("AddButton.css").toExternalForm());
 		add.setOnAction((e) -> { model.addTrigger(); });
 		

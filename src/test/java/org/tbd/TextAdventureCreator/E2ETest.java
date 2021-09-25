@@ -81,7 +81,8 @@ public class E2ETest extends ApplicationTest {
             var hairCharacteristic = new NamedObject("HairColor", "Blue", "Players hair color");
             var gameState = new GameStateView(this, root)
                 .setTextLog("First game state. Greetings ");
-            new Explorer(this, root).createPlayer()
+            var explorer = new Explorer(this, root);
+            explorer.createPlayer()
                 .setPlayerName("Player1")
                 .addAttribute(new NamedObject("DisplayName", "Foobar", "Players display name"))
                 .addCharacteristic(hairCharacteristic)
@@ -90,21 +91,27 @@ public class E2ETest extends ApplicationTest {
             gameState.focus().createMacro()
                 .setPlayer("Player1").setSelector("Attribute")
                 .setAttribute("DisplayName").setPropertyName("Value").build().ok();
+            var optionView = gameState.setLayout("TextWithButtonInput").addOption();
+            optionView.addTrigger().setType("Text").setText("Next Game State")
+                .setCaseSensitive(true).ok();
+            optionView.setAction("Complete").setCompletionData("GameState2").ok();
+            gameState.close();
+            gameState = explorer.createGameState().setGameStateName("GameState2")
+                .setTextLog("This is a second game state enter foo to continue");
+            optionView = gameState.addOption();
+            optionView.addTrigger().setType("Text").setText("foo").ok();
+            optionView.setAction("Complete").setCompletionData("GameState3").ok();
+            gameState.close();
+            gameState = explorer.createGameState().setGameStateName("GameState3")
+                .setTextLog("This is the final game state enter fin to end"); // TODO consider using image view here
+            optionView = gameState.addOption();
+            optionView.addTrigger().setType("Text").setText("fin").ok();
+            optionView.setAction("Finish Action").ok();
+
+            new ApplicationPage(this, root).generate();
             return null;
         }, "createJavaGame");
         // TODO
-        // 1. set project name
-        // 2. set description
-        // 3. set icon
-        // 4. set creator
-        // 5. press forward
-        // 6. press stand-alone
-        // 7. press forward
-        // 8. press finish?
-        // 9. create player
-        // 10. create game state.
-        // 11. create finish action.
-        // 12. generate game.
         // 13. execute game.
     }
     // Ideal test cases.

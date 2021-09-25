@@ -42,7 +42,7 @@ public class GameStateView extends AnchorPane implements Initializable, IStyleWa
 	private GridPane pane;
 	
 	@FXML
-	private TextField id;
+	private TextField gameStateId;
 	
 	@FXML
 	private TextArea textLog;
@@ -124,7 +124,7 @@ public class GameStateView extends AnchorPane implements Initializable, IStyleWa
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		hideContent();
-		id.textProperty().bindBidirectional(model.stateId());
+		gameStateId.textProperty().bindBidirectional(model.stateId());
 		textLog.textProperty().bindBidirectional(model.textLog());
 		model.textIndex().bind(textLog.caretPositionProperty());
 		layout.itemsProperty().set(model.layouts().list());
@@ -186,6 +186,7 @@ public class GameStateView extends AnchorPane implements Initializable, IStyleWa
 	private Node optionAddTemplate() {
 		HBox root = new HBox(5);
 		Button add = new Button();
+		add.setId("listCellAdd");
 		add.getStylesheets().add(getClass().getResource("AddButton.css").toExternalForm());
 		add.setOnAction((e) -> { model.addOption(); });
 		

@@ -26,3 +26,6 @@ hs_err_pid*
 
 # Install xml
 install/w64/install.xml
+
+# failure images
+testFailure_*.png
