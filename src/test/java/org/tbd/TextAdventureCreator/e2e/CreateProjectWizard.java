@@ -23,8 +23,18 @@ public class CreateProjectWizard extends BasePage {
         return this;
     }
 
+    public CreateProjectWizard setGameBackground(String path) throws Exception {
+        robot.clickOn(waitForTextField("#background")).write(path);
+        return this;
+    }
+
     public CreateProjectWizard setGameCreator(String creator) throws Exception {
         robot.clickOn(waitForTextField("#creator")).write(creator);
+        return this;
+    }
+
+    public CreateProjectWizard setLanguage(String language) throws Exception {
+        setComboBySelector("#language", language);
         return this;
     }
 

@@ -19,7 +19,7 @@ public class ApplicationPage extends BasePage {
         // Find a better abstraction for this.
         Node popup = waitForWindow(currentWindows);
         robot.clickOn(waitForLabeled("Generate", popup));
-        waitForLabeled("Cleaning up...");
+        waitForLabeled("Cleaning up...", root, 180);
         return this;
     }
 }

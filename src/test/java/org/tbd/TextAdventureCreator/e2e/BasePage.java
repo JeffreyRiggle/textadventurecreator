@@ -33,6 +33,10 @@ public abstract class BasePage {
         return waitForType(query, context, Labeled.class);
     }
 
+    protected Labeled waitForLabeled(String query, Node context, int timeout) throws Exception {
+        return waitForType(query, context, Labeled.class, timeout);
+    }
+
     protected ListView waitForListView(String query) throws Exception {
         return waitForListView(query, root);
     }
@@ -70,8 +74,12 @@ public abstract class BasePage {
     }
 
     private <T extends Node> T waitForType(String query, Node context, Class<T> cls) throws Exception {
+        return waitForType(query, context, cls, 30);
+    }
+
+    private <T extends Node> T waitForType(String query, Node context, Class<T> cls, int timeout) throws Exception {
         final List<T> result = new ArrayList<T>(1);
-        WaitForAsyncUtils.waitFor(30, TimeUnit.SECONDS, () -> {
+        WaitForAsyncUtils.waitFor(timeout, TimeUnit.SECONDS, () -> {
             try {
                 result.add(robot.from(context).lookup(query).queryAs(cls));
                 return true;
