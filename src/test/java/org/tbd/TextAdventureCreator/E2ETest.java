@@ -111,7 +111,6 @@ public class E2ETest extends ApplicationTest {
             optionView.setAction("Finish Action").ok();
 
             new ApplicationPage(this, root).generate();
-            Thread.sleep(30000);
             return null;
         }, "createJavaGame");
         // TODO
@@ -133,6 +132,7 @@ public class E2ETest extends ApplicationTest {
                 .goForward()
                 .setStandAlone()
                 .goForward()
+                .setGameBackground(System.getProperty("user.dir") + "/src/main/resources/ilusr/textadventurecreator/views/assets/splash.png")
                 .setLanguage("HTML")
                 .finish();
 
@@ -167,7 +167,6 @@ public class E2ETest extends ApplicationTest {
             optionView.setAction("Finish Action").ok();
 
             new ApplicationPage(this, root).generate();
-            Thread.sleep(30000);
             return null;
         }, "createJavaGame");
         // TODO
