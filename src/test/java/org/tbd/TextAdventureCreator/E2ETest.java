@@ -62,8 +62,6 @@ public class E2ETest extends ApplicationTest {
         }, "showLandingPage");
     }
 
-    /*
-    Java game generation is failing?
     @Test
     public void should_create_java_games() throws Exception {
         runTest(() -> {
@@ -78,6 +76,7 @@ public class E2ETest extends ApplicationTest {
                 .goForward()
                 .setStandAlone()
                 .goForward()
+                .setGameBackground(System.getProperty("user.dir") + "/src/main/resources/ilusr/textadventurecreator/views/assets/splash.png")
                 .finish();
 
             var hairCharacteristic = new NamedObject("HairColor", "Blue", "Players hair color");
@@ -116,7 +115,6 @@ public class E2ETest extends ApplicationTest {
         // TODO
         // 13. execute game.
     }
-    */
 
     @Test
     public void should_create_web_games() throws Exception {
