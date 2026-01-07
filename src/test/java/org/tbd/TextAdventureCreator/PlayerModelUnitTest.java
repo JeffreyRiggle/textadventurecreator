@@ -192,6 +192,10 @@ public class PlayerModelUnitTest {
 	
 	@Test
 	public void testAddCharacteristicFromLibrary() {
+		Dialog dialog = mock(Dialog.class);
+		when(dialog.isValid()).thenReturn(new SimpleBooleanProperty());
+		when(dialogProvider.create(any(), any())).thenReturn(dialog);
+
 		model.addCharacteristicFromLibrary();
 		verify(dialogService, times(1)).displayModal(any(Dialog.class));
 	}
@@ -228,6 +232,10 @@ public class PlayerModelUnitTest {
 	
 	@Test
 	public void testAddBodyPartFromLibrary() {
+		Dialog dialog = mock(Dialog.class);
+		when(dialog.isValid()).thenReturn(new SimpleBooleanProperty());
+		when(dialogProvider.create(any(), any())).thenReturn(dialog);
+
 		model.addBodyPartFromLibrary();
 		verify(dialogService, times(1)).displayModal(any(Dialog.class));
 	}

@@ -330,6 +330,10 @@ public class LibraryItemModelUnitTest {
 	@Test
 	public void testAddAction() {
 		assertEquals(0, model.actions().size());
+		Dialog dialog = mock(Dialog.class);
+		when(dialog.isValid()).thenReturn(new SimpleBooleanProperty());
+		when(dialogProvider.create(any(), any())).thenReturn(dialog);
+
 		model.getAddActionAction().handle(mock(ActionEvent.class));
 		verify(dialogService, times(1)).displayModal(any(Dialog.class));
 	}
@@ -337,6 +341,10 @@ public class LibraryItemModelUnitTest {
 	@Test
 	public void testEditAction() {
 		assertEquals(0, model.actions().size());
+		Dialog dialog = mock(Dialog.class);
+		when(dialog.isValid()).thenReturn(new SimpleBooleanProperty());
+		when(dialogProvider.create(any(), any())).thenReturn(dialog);
+
 		model.getEditActionAction().execute(mock(ActionPersistenceObject.class));
 		verify(actionViewFactory, times(1)).create(any(ActionModel.class), eq(new ArrayList<PlayerPersistenceObject>()));
 		verify(dialogService, times(1)).displayModal(any(Dialog.class));
@@ -400,6 +408,10 @@ public class LibraryItemModelUnitTest {
 	@Test
 	public void testAddLayout() {
 		assertEquals(0, model.layouts().size());
+		Dialog dialog = mock(Dialog.class);
+		when(dialog.isValid()).thenReturn(new SimpleBooleanProperty());
+		when(dialogProvider.create(any(), any())).thenReturn(dialog);
+
 		model.getAddLayoutAction().handle(mock(ActionEvent.class));
 		verify(dialogService, times(1)).displayModal(any(Dialog.class));
 	}
@@ -408,6 +420,9 @@ public class LibraryItemModelUnitTest {
 	public void testEditLayout() {
 		LayoutPersistenceObject layout = mock(LayoutPersistenceObject.class);
 		when(layout.getLayout()).thenReturn(mock(LayoutGridPersistenceObject.class));
+		Dialog dialog = mock(Dialog.class);
+		when(dialog.isValid()).thenReturn(new SimpleBooleanProperty());
+		when(dialogProvider.create(any(), any())).thenReturn(dialog);
 		
 		model.getEditLayoutAction().execute(layout);
 		verify(dialogService, times(1)).displayModal(any(Dialog.class));
